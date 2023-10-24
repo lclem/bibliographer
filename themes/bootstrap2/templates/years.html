@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block content %}
+<section id="content">
+<h1>Years</h1>
+<dl>
+{% for year in years %}
+    <a href="{{ SITEURL }}/{{ year.url }}">{{ year }}</a>
+{% endfor %}
+</dl>
+</section>
+{% endblock %}

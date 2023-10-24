@@ -1,9 +1,6 @@
 {% extends "base.html" %}
 {% block content_title %}{% endblock %}
-<main>
 {% block content %}
-Search: <input data-stork="sitesearch" />
-<div data-stork="sitesearch-output"></div>
 {% if articles %}
         {% for article in (articles_page.object_list if articles_page else articles) %}
         <div class="article">
@@ -13,7 +10,7 @@ Search: <input data-stork="sitesearch" />
                 <a class="btn primary xsmall" href="{{ SITEURL }}/{{ article.url }}">more ...</a>
                 </div> -->
         </div>
-        <hr />
+        <!-- <hr /> -->
         {% endfor %}
 {% endif %}
 
@@ -48,4 +45,3 @@ Search: <input data-stork="sitesearch" />
         {% endif %}
 {% endif %}
 {% endblock content %}
-</main>

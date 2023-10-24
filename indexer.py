@@ -40,7 +40,7 @@ def parsebib(root, bibfile):
         
         title = sanitise(fields['title'].value if 'title' in fields else "N/A")
         
-        year = fields['year'].value if 'year' in fields else "N/A"
+        year = fields['year'].value if 'year' in fields else "0"
 
         author = sanitise(fields['author'].value if 'author' in fields else "N/A")
         authors = author.split(" and ")
@@ -52,6 +52,7 @@ def parsebib(root, bibfile):
     return result
 
 for root, dirs, files in os.walk("./library"):
+    i = 0
     for dir in dirs:
         cwd = os.path.join(root, dir)
         with pushd(cwd):
@@ -60,8 +61,11 @@ for root, dirs, files in os.walk("./library"):
                 for file in files:
                     if file.endswith(".bib"):
                         bibfile = file # os.path.join(root, file)
-                        # print(f"{bibfile}")
-                        i = 0
+
+                        text_file = open(bibfile, "r")
+                        bibcontent = text_file.read()
+                        text_file.close()
+                        
                         for key, authors, title, year in parsebib("./", bibfile):
                             print(f"BIB {authors} - {title} - {year}")
 
@@ -73,14 +77,19 @@ for root, dirs, files in os.walk("./library"):
                             #         break
 
                             mdfile = os.path.join("", f"entry-{i}.md")
+#Date: {year}\n\
 
                             markdown = f"\
 Title: {title}\n\
 Year: {year}\n\
-Date: {year}\n\
 Authors: {'; '.join(authors)}\n\
+Bibfile: {os.path.join(cwd, bibfile)}\n\
 Key: {key}\n\
-Slug: {key}"
+Slug: {key}\n\n\
+\
+````{{verbatim}}\n\
+{bibcontent}\n\
+````"
                             #markdown = markdown + pdfline
                             text_file = open(mdfile, "w")
                             text_file.write(markdown)

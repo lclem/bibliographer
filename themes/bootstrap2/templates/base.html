@@ -7,6 +7,8 @@
     <meta name="description" content="">
     <meta name="author" content="{{ AUTHOR }}">
     <meta name="authors" content="{{ AUTHORS }}">
+    <meta name="year" content="{{ YEAR }}">
+    <meta name="bibfile" content="{{ BIBFILE }}">
 
     <!-- Le styles -->
     <link rel="stylesheet" href="{{ SITEURL }}/theme/css/bootstrap.min.css" type="text/css" />
@@ -82,14 +84,18 @@
                     <a href="{{ SITEURL }}/{{ cat.url }}">
 						<i class="icon-folder-open icon-large"></i>{{ cat }}
 					</a>
-                  </li>
+                </li>
               {% endfor %}
               {% endif %}
-
-                          <ul class="nav pull-right">
-                                <li><a href="{{ SITEURL }}/archives.html"><i class="icon-th-list"></i>Archives</a></li>
-                          </ul>
-
+              <ul class="nav pull-right">
+                <li>
+                  Search: <input data-stork="sitesearch" />
+                  <div data-stork="sitesearch-output"></div>
+                </li>
+              </ul>
+              <!-- <ul class="nav pull-right">
+                    <li><a href="{{ SITEURL }}/archives.html"><i class="icon-th-list"></i>Archives</a></li>
+              </ul> -->
             </ul>
             <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
           </div><!--/.nav-collapse -->
@@ -103,33 +109,15 @@
             {% block content %}
             {% endblock %}
         </div><!--/span-->
-
-                <div class="span3 well sidebar-nav" id="sidebar">
+        <!-- <div class="span3 well sidebar-nav" id="sidebar">
             {% include 'sidebar.html' %}
-        </div><!--/.well -->
-
+        </div> -->
+        <!--/.well -->
       </div><!--/row-->
 
       <hr>
 
-      <footer>
-        <address id="about">
-                Proudly powered by <a href="http://pelican.notmyidea.org/">Pelican <i class="icon-external-link"></i></a>,
-                                which takes great advantage of <a href="http://python.org">Python <i class="icon-external-link"></i></a>.
-        </address><!-- /#about -->
-
-        <p>The theme is from <a href="http://twitter.github.com/bootstrap/">Bootstrap from Twitter <i class="icon-external-link"></i></a>,
-                   and <a href="http://fortawesome.github.com/Font-Awesome/">Font-Awesome <i class="icon-external-link"></i></a>, thanks!</p>
-      </footer>
-
     </div><!--/.fluid-container-->
-
-    <!-- {% include 'analytics.html' %}
-    {% include 'piwik.html' %}
-    {% include 'disqus_script.html' %} -->
-
-    Search: <input data-stork="sitesearch" />
-    <div data-stork="sitesearch-output"></div>
 
     <!-- Le javascript -->
     <!-- Placed at the end of the document so the pages load faster -->

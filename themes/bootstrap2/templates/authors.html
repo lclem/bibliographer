@@ -1,2 +1,11 @@
-{% extends "index.html" %}
-{% block title %}{{ SITENAME }} - {{ authors }}{% endblock %}
+{% extends "base.html" %}
+{% block content %}
+<section id="content">
+<h1>Authors</h1>
+<dl>
+{% for author in authors %}
+    <a href="{{ SITEURL }}/{{ author.url }}"><i class="icon-user"></i>{{ author }}</a>
+{% endfor %}
+</dl>
+</section>
+{% endblock %}
