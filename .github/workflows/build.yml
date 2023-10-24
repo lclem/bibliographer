@@ -35,8 +35,11 @@ jobs:
     #- name: find
     #  run: sudo find / -name texlive
 
-    - name: install dependencies
-      run: pip3 install bibtexparser==2.0.0b3 pelican-search markdown stork-search
+    - name: install python dependencies
+      run: pip3 install bibtexparser==2.0.0b3 pelican-search markdown
+
+    - name: install stork
+      run: cargo install stork-search --locked
 
     - name: build website
       run: set -o xtrace && ./build.sh
