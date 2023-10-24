@@ -14,26 +14,6 @@ jobs:
       ACTIONS_ALLOW_UNSECURE_COMMANDS: true
 
     steps:
-    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - uses: actions/checkout@v2
-
-    - name : GITHUB CONTEXT
-      env:
-        GITHUB_CONTEXT: ${{ toJson(github) }}
-      run: echo "$GITHUB_CONTEXT"
-
-    - name: get commit message
-      run: |
-         echo ::set-env name=commitmsg::$(git log --format=%B -n 1 ${{ github.event.after }})
-
-    - name: show commit message
-      run : echo $commitmsg
-        
-    # - name: Update apt-get
-    #   run: sudo apt-get update
-
-    #- name: find
-    #  run: sudo find / -name texlive
 
     - name: install python dependencies
       run: pip3 install bibtexparser==2.0.0b3 pelican-search markdown
@@ -41,10 +21,25 @@ jobs:
     - name: install stork
       run: cargo install stork-search --locked
 
+    - name: checkout the repo
+      uses: actions/checkout@v2
+
+    - name: GITHUB CONTEXT
+      run: echo "$GITHUB_CONTEXT"
+      env:
+        GITHUB_CONTEXT: ${{ toJson(github) }}
+
+    - name: get commit message
+      run: |
+         echo ::set-env name=commitmsg::$(git log --format=%B -n 1 ${{ github.event.after }})
+
+    - name: show commit message
+      run : echo $commitmsg
+
     - name: build website
       run: set -o xtrace && ./build.sh
 
-    - name: Checkout the website repo
+    - name: checkout the website branch
       uses: actions/checkout@v2
       with:
         repository: 'lclem/bibliographer'
