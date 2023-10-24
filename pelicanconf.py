@@ -16,7 +16,8 @@ STORK_INPUT_OPTIONS = {
 }
 
 GITHUB_URL = 'http://github.com/lclem/bibliographer'
-GITHUB_EDIT_URL = GITHUB_URL + '/tree/main'
+GITHUB_VIEW_URL = GITHUB_URL + '/tree/main'
+GITHUB_EDIT_URL = GITHUB_URL + '/edit/main'
 REVERSE_CATEGORY_ORDER = True
 LOCALE = "C"
 DEFAULT_PAGINATION = 4

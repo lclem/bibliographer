@@ -1,0 +1,58 @@
+name: build website
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: [ubuntu-latest]
+    env:
+      ACTIONS_ALLOW_UNSECURE_COMMANDS: true
+
+    steps:
+    # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+    - uses: actions/checkout@v2
+
+    - name : GITHUB CONTEXT
+      env:
+        GITHUB_CONTEXT: ${{ toJson(github) }}
+      run: echo "$GITHUB_CONTEXT"
+
+    - name: get commit message
+      run: |
+         echo ::set-env name=commitmsg::$(git log --format=%B -n 1 ${{ github.event.after }})
+
+    - name: show commit message
+      run : echo $commitmsg
+        
+    # - name: Update apt-get
+    #   run: sudo apt-get update
+
+    #- name: find
+    #  run: sudo find / -name texlive
+
+    - name: install dependencies
+      run: pip3 install bibtexparser==2.0.0b3 pelican-search markdown stork-search
+
+    - name: build website
+      run: set -o xtrace && ./build.sh
+
+    - name: Checkout the website repo
+      uses: actions/checkout@v2
+      with:
+        repository: 'lclem/bibliographer'
+        path: './website/'
+        ref: 'web'
+        token: ${{ secrets.ACCESS_TOKEN }}
+
+    - name: copy website
+      run: rm -fr ./website/docs && mv ./docs ./website
+
+    - name: Commit website repo
+      uses: stefanzweifel/git-auto-commit-action@v4.1.6
+      with:
+        repository: './website/'
+        commit_message: update website, commit message was "${{ env.commitmsg }}"
