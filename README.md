@@ -1,1 +1,1 @@
-# bibliographer
+# [bibliographer](https://lclem.github.io/bibliographer/)
