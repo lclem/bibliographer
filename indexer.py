@@ -1,6 +1,7 @@
 import glob, os
 import contextlib
 import bibtexparser as parser
+import string
 
 @contextlib.contextmanager
 def pushd(new_dir):
@@ -10,6 +11,12 @@ def pushd(new_dir):
         yield
     finally:
         os.chdir(previous_dir)
+
+valid_characters = string.ascii_letters + string.digits + string.whitespace + '-'
+
+def sanitise(str):
+    result = "".join(c for c in str if c in valid_characters)
+    return result.encode('utf-8').decode("ascii", "ignore")
 
 def parsebib(root, bibfile):
     library = parser.parse_file(bibfile)
@@ -21,22 +28,28 @@ def parsebib(root, bibfile):
     #     f"\n\t{len(library.preambles)} preambles")
 
     # Comments have just one specific attribute
-    first_comment = library.comments[0]
-    first_comment.comment # The comment string
+    # first_comment = library.comments[0]
+    # first_comment.comment # The comment string
 
-    entry = library.entries[0]
-    author = entry.fields_dict['author'].value
-    title = entry.fields_dict['title'].value
-    year = entry.fields_dict['year'].value
+    result = []
+    for entry in library.entries:
+        fields = entry.fields_dict
+        # print(f"FIELDS: {fields}")
+        key = entry.key
+        key = key.encode('utf-8').decode("ascii", "ignore")
+        
+        title = sanitise(fields['title'].value if 'title' in fields else "N/A")
+        
+        year = fields['year'].value if 'year' in fields else "N/A"
+
+        author = sanitise(fields['author'].value if 'author' in fields else "N/A")
+        authors = author.split(" and ")
+
+        result.append((key, authors, title, year))
 
     # print(f"key {entry.key}, type {entry.entry_type}, fields {entry.fields_dict} \n")
 
-    # Each field of the entry is a `bibtexparser.model.Field` instance
-    first_field = entry.fields[0]
-    first_field.key # The field key, e.g. "author"
-    first_field.value # The field value, e.g. "Albert Einstein and Boris Johnson"
-
-    return author, title, year
+    return result
 
 for root, dirs, files in os.walk("./library"):
     for dir in dirs:
@@ -48,23 +61,29 @@ for root, dirs, files in os.walk("./library"):
                     if file.endswith(".bib"):
                         bibfile = file # os.path.join(root, file)
                         # print(f"{bibfile}")
-                        author, title, year = parsebib("./", bibfile)
-                        print(f"BIB {author} - {title} - {year}")
+                        i = 0
+                        for key, authors, title, year in parsebib("./", bibfile):
+                            print(f"BIB {authors} - {title} - {year}")
 
-                        pdfline = ""
-                        for pdffile in os.listdir("./"):
-                            if pdffile.endswith(".pdf"):
-                                print(f"PDF {pdffile}")
-                                pdfline = f"PDF: {os.path.join(cwd, pdffile)}"
-                                break
+                            # pdfline = ""
+                            # for pdffile in os.listdir("./"):
+                            #     if pdffile.endswith(".pdf"):
+                            #         print(f"PDF {pdffile}")
+                            #         pdfline = f"PDF: {os.path.join(cwd, pdffile)}"
+                            #         break
 
-                        mdfile = os.path.join("", "entry.md")
+                            mdfile = os.path.join("", f"entry-{i}.md")
 
-                        markdown = f"\
+                            markdown = f"\
 Title: {title}\n\
 Year: {year}\n\
-Author: {author}\n"
-                        markdown = markdown + pdfline
-                        text_file = open(mdfile, "w")
-                        text_file.write(markdown)
-                        text_file.close()
+Date: {year}\n\
+Authors: {'; '.join(authors)}\n\
+Key: {key}\n\
+Slug: {key}"
+                            #markdown = markdown + pdfline
+                            text_file = open(mdfile, "w")
+                            text_file.write(markdown)
+                            text_file.close()
+
+                            i = i + 1

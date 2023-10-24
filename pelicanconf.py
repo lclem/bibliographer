@@ -12,32 +12,35 @@ PATH = 'library'
 RELATIVE_URLS = True
 
 GITHUB_URL = 'http://github.com/lclem/bibliographer'
-#DISQUS_SITENAME = "blog-notmyidea"
 REVERSE_CATEGORY_ORDER = True
 LOCALE = "C"
 DEFAULT_PAGINATION = 4
 DEFAULT_DATE = (2012, 3, 2, 14, 1, 1)
 
-FEED_ALL_RSS = 'feeds/all.rss.xml'
-CATEGORY_FEED_RSS = 'feeds/{slug}.rss.xml'
+FEED_ALL_ATOM = None
+CATEGORY_FEED_ATOM = None
+TRANSLATION_FEED_ATOM = None
+AUTHOR_FEED_ATOM = None
+AUTHOR_FEED_RSS = None
 
-STORK_INPUT_OPTIONS = {
-    base_directory = PATH
-}
+# FEED_ALL_RSS = 'feeds/all.rss.xml'
+# CATEGORY_FEED_RSS = 'feeds/{slug}.rss.xml'
 
-LINKS = (('Biologeek', 'http://biologeek.org'),
-         ('Filyb', "http://filyb.info/"),
-         ('Libert-fr', "http://www.libert-fr.com"),
-         ('N1k0', "http://prendreuncafe.com/blog/"),
-         ('Tarek Ziadé', "http://ziade.org/blog"),
-         ('Zubin Mithra', "http://zubin71.wordpress.com/"),)
+# STORK_INPUT_OPTIONS = {
+#     base_directory: 'output'
+# }
 
-SOCIAL = (('twitter', 'http://twitter.com/ametaireau'),
-          ('lastfm', 'http://lastfm.com/user/akounet'),
-          ('github', 'http://github.com/ametaireau'),)
+# LINKS = (('Biologeek', 'http://biologeek.org'),
+#          ('Filyb', "http://filyb.info/"),
+#          ('Libert-fr', "http://www.libert-fr.com"),
+#          ('Zubin Mithra', "http://zubin71.wordpress.com/"),)
+
+# SOCIAL = (('twitter', 'http://twitter.com/ametaireau'),
+#           ('lastfm', 'http://lastfm.com/user/akounet'),
+#           ('github', 'http://github.com/ametaireau'),)
 
 # global metadata to all the contents
-DEFAULT_METADATA = {'yeah': 'it is'}
+# DEFAULT_METADATA = {'yeah': 'it is'}
 
 # path-specific metadata
 EXTRA_PATH_METADATA = {
@@ -67,6 +70,15 @@ ARTICLE_URL = 'posts/{date:%Y}/{date:%m}/{slug}/'
 ARTICLE_SAVE_AS = 'posts/{date:%Y}/{date:%m}/{slug}/index.html'
 
 # Custom Home page
-DIRECT_TEMPLATES = (('index', 'blog', 'tags', 'categories', 'archives'))
-PAGINATED_DIRECT_TEMPLATES = (('blog',))
+DIRECT_TEMPLATES = (('index', 'tags', 'categories', 'archives'))
+PAGINATED_DIRECT_TEMPLATES = (('articles',))
 TEMPLATE_PAGES = {'home.html': 'index.html',}
+
+# MARKDOWN = {
+#     'extension_configs': {
+#         'markdown.extensions.codehilite': {'css_class': 'highlight'},
+#         'markdown.extensions.extra': {},
+#         'markdown.extensions.meta': {},
+#     },
+#     'output_format': 'html5',
+# }
