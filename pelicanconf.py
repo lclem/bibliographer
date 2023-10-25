@@ -12,7 +12,7 @@ PATH = 'library'
 RELATIVE_URLS = False
 
 STORK_INPUT_OPTIONS = {
-    "html_selector": "nobr"
+    "html_selector": "nobr",
     "url_prefix": "/bibliographer"
 }
 
