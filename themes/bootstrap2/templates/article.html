@@ -13,11 +13,11 @@
                         </h1>
                 </header>
                 <div class="entry-content">
-                <div class="well">
-                        <main>{% include 'article_infos.html' %}</main>
+                        <div class="well">
+                                {% include 'article_infos.html' %}
+                        </div>
+                        {{ article.content }}
                 </div>
-                {{ article.content }}
-                </div><!-- /.entry-content -->
         </article>
 </section>
 {% endblock %}

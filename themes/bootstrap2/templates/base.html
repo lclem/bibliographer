@@ -33,11 +33,14 @@
       }
       .tag-4 {
         font-size: 6pt;
-     }
+      }
+      main {
+        
+      }
     </style>
-    <link href="{{ SITEURL }}/theme/css/bootstrap-responsive.min.css" rel="stylesheet">
-        <link href="{{ SITEURL }}/theme/css/font-awesome.css" rel="stylesheet">
 
+    <link href="{{ SITEURL }}/theme/css/bootstrap-responsive.min.css" rel="stylesheet">
+    <link href="{{ SITEURL }}/theme/css/font-awesome.css" rel="stylesheet">
     <link href="{{ SITEURL }}/theme/css/pygments.css" rel="stylesheet">
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -94,12 +97,8 @@
                   <div data-stork="sitesearch-output"></div>
                 </li>
               </ul>
-              <!-- <ul class="nav pull-right">
-                    <li><a href="{{ SITEURL }}/archives.html"><i class="icon-th-list"></i>Archives</a></li>
-              </ul> -->
             </ul>
-            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
-          </div><!--/.nav-collapse -->
+          </div>
         </div>
       </div>
     </div>
@@ -109,16 +108,10 @@
         <div class="span9" id="content">
             {% block content %}
             {% endblock %}
-        </div><!--/span-->
-        <!-- <div class="span3 well sidebar-nav" id="sidebar">
-            {% include 'sidebar.html' %}
-        </div> -->
-        <!--/.well -->
-      </div><!--/row-->
+        </div>
+      </div>
 
-      <hr>
-
-    </div><!--/.fluid-container-->
+    </div>
 
     <!-- Le javascript -->
     <!-- Placed at the end of the document so the pages load faster -->

@@ -12,15 +12,16 @@ PATH = 'library'
 RELATIVE_URLS = False
 
 STORK_INPUT_OPTIONS = {
+    "html_selector": "nobr"
     "url_prefix": "/bibliographer"
 }
 
-GITHUB_URL = 'http://github.com/lclem/bibliographer'
+GITHUB_URL = 'https://github.com/lclem/bibliographer'
 GITHUB_VIEW_URL = GITHUB_URL + '/tree/main'
 GITHUB_EDIT_URL = GITHUB_URL + '/edit/main'
 REVERSE_CATEGORY_ORDER = True
 LOCALE = "C"
-DEFAULT_PAGINATION = 4
+DEFAULT_PAGINATION = 5
 DEFAULT_DATE = (2012, 3, 2, 14, 1, 1)
 
 FEED_ALL_ATOM = None
@@ -52,7 +53,7 @@ STATIC_PATHS = [
     ]
 
 # custom page generated with a jinja2 template
-TEMPLATE_PAGES = {'pages/jinja2_template.html': 'jinja2_template.html'}
+# TEMPLATE_PAGES = {'pages/jinja2_template.html': 'jinja2_template.html'}
 
 # there is no other HTML content
 READERS = {'html': None}
@@ -64,7 +65,6 @@ ARTICLE_URL = 'posts/{date:%Y}/{date:%m}/{slug}/'
 ARTICLE_SAVE_AS = 'posts/{date:%Y}/{date:%m}/{slug}/index.html'
 
 # Custom Home page
-# DIRECT_TEMPLATES = (('index', 'tags', 'categories', 'archives'))
-DIRECT_TEMPLATES = ['archives', 'authors', 'years', 'index']
-PAGINATED_TEMPLATES = (('articles'))
-TEMPLATE_PAGES = {'home.html': 'archives.html'}
+# DIRECT_TEMPLATES = ['index']
+PAGINATED_TEMPLATES = {'index': 10}
+# TEMPLATE_PAGES = {'home.html': 'index.html'}
