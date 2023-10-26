@@ -63,7 +63,7 @@ for root, dirs, files in os.walk("./library"):
                         bibfile = file # os.path.join(root, file)
 
                         text_file = open(bibfile, "r")
-                        bibcontent = text_file.read()
+                        bibcontent = text_file.read().strip()
                         text_file.close()
                         
                         for key, authors, title, year in parsebib("./", bibfile):
@@ -94,7 +94,11 @@ Slug: {key}\n"
                             markdown += f"\
 ````{{verbatim}}\n\
 {bibcontent}\n\
-````"
+````\n\
+\
+<bib id=\"bib\">\
+{bibcontent}\
+</bib>"
 
                             text_file = open(mdfile, "w")
                             text_file.write(markdown)

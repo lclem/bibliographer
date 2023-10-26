@@ -18,9 +18,14 @@
         <span class="label">By</span>
         <a href="{{ SITEURL }}/{{ article.author.url }}"><i class="icon-user"></i>{{ article.author }}</a>
 {% endif %}
+<span class="label">Links</span>
 {% if article.pdffile %}
 <a href="{{ SITEURL }}/{{ article.pdffile }}">[pdf]</a>
 {% endif %}
-<!-- <a href="{{ SITEURL }}/{{ article.bibfile }}">[view bib]</a> -->
-<a href="{{ GITHUB_EDIT_URL }}/{{ article.bibfile }}">[edit bib]</a>
+<a href="javascript:copyBib()" onmouseout="outFunc()">[copy]</a>
+<a href="{{ SITEURL }}/{{ article.bibfile }}">[bib]</a>
+<a href="{{ GITHUB_EDIT_URL }}/{{ article.bibfile }}">[edit]</a>
+<div class="tooltip">Hover over me
+        <span class="tooltiptext" id="myTooltip">Tooltip text</span>
+</div>
 </footer>

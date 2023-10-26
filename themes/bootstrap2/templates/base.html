@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>{% block title %}{{ SITENAME }}{% endblock %}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="{{ AUTHOR }}">
     <meta name="authors" content="{{ AUTHORS }}">
@@ -35,8 +35,35 @@
         font-size: 6pt;
       }
       main {
-        
+
       }
+
+      bib {
+        display: none
+      }
+
+      /* .tooltip {
+        position: relative;
+        display: inline-block;
+        border-bottom: 1px dotted black;
+      }
+
+      .tooltip .tooltiptext {
+        visibility: hidden;
+        width: 120px;
+        background-color: black;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px 0;
+
+        position: absolute;
+        z-index: 1;
+      }
+
+      .tooltip:hover .tooltiptext {
+        visibility: visible;
+      } */
     </style>
 
     <link href="{{ SITEURL }}/theme/css/bootstrap-responsive.min.css" rel="stylesheet">
@@ -110,7 +137,6 @@
             {% endblock %}
         </div>
       </div>
-
     </div>
 
     <!-- Le javascript -->
@@ -120,6 +146,49 @@
     <script src="https://files.stork-search.net/releases/v1.5.0/stork.js"></script>
     <script>
         stork.register("sitesearch", "{{ SITEURL }}/search-index.st");
+    </script>
+
+    <script>
+      let text = document.getElementById('bib').innerHTML;
+
+      // navigator.permissions.query({ name: "write-on-clipboard" }).then((result) => {
+      //   if (result.state == "granted" || result.state == "prompt") {
+      //     alert("Write access granted!");
+      //   }
+      // });
+
+      const copyBib = async () => {
+        try {
+          await navigator.clipboard.writeText(text);
+
+          var tooltip = document.getElementById("myTooltip");
+          tooltip.innerHTML = "copied to clipboard!";
+          console.log('Content copied to clipboard');
+        } catch (err) {
+          tooltip.innerHTML = "error: "+ err;
+          console.error('Failed to copy: ', err);
+        }
+      }
+
+      function outFunc() {
+        var tooltip = document.getElementById("myTooltip");
+        tooltip.innerHTML = "Copy to clipboard";
+      }
+
+      // function copyBib() {
+      //   // Get the text field
+      //   var copyText = document.getElementById("bib").innerHTML;
+
+      //   // Select the text field
+      //   copyText.select();
+      //   copyText.setSelectionRange(0, 99999); // For mobile devices
+
+      //   // Copy the text inside the text field
+      //   navigator.clipboard.writeText(copyText.value);
+
+      //   // Alert the copied text
+      //   alert("Copied the text: " + copyText.value);
+      // }
     </script>
   </body>
 </html>
