@@ -69,11 +69,18 @@ for root, dirs, files in os.walk("./library"):
                         for key, authors, title, year in parsebib("./", bibfile):
                             print(f"BIB {authors} - {title} - {year}")
 
-                            pdffiles = ""
+                            pdffiles = []
                             for pdffile in os.listdir("./"):
                                 if pdffile.endswith(".pdf"):
                                     print(f"PDF {pdffile}")
-                                    pdffiles += f'Pdffile: {os.path.join(cwd, pdffile)}\n'
+                                    pdffiles.append(os.path.join(cwd, pdffile))
+
+                            pdffiles_str = ""
+                            if len(pdffiles) == 1: 
+                                    pdffiles_str += f'Pdffile: {pdffiles[0]}\n'
+                            elif len(pdffiles) > 1:
+                                for pdffile in pdffiles:
+                                    pdffiles_str += f'Pdffiles: {pdffile}\n'
 
                             mdfile = os.path.join("", f"entry-{i}.md")
 #Date: {year}\n\
@@ -84,15 +91,16 @@ Year: {year}\n\
 Authors: {'; '.join(authors)}\n\
 Bibfile: {os.path.join(cwd, bibfile)}\n\
 Key: {key}\n\
-Slug: {key}\n"
+Slug: {key}\n\
+engine: knitr\n"
 
                             if not len(pdffiles) == 0:
                                 # markdown += f"Pdffiles: {'; '.join(pdffiles)}\n"
-                                markdown += pdffiles
+                                markdown += pdffiles_str
 
                             markdown += "\n"
                             markdown += f"\
-````{{verbatim}}\n\
+````\n\
 {bibcontent}\n\
 ````\n\
 \

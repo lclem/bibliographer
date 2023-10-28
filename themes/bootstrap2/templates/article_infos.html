@@ -3,6 +3,10 @@
 <abbr class="published" title="{{ article.date.isoformat() }}">
         <i class="icon-calendar"></i>{{ article.locale_date }}
 </abbr> -->
+<p>
+        <span class="label">Title</span>
+        <a href="{{ SITEURL }}/{{ article.url }}"><nobr>{{ article.title }}</nobr></a>
+</p>
 <span class="label">Year</span>
 <a class="published" title="{{ article.year }}">
         <i class="icon-calendar"></i>{{ article.year }}
@@ -19,13 +23,14 @@
         <a href="{{ SITEURL }}/{{ article.author.url }}"><i class="icon-user"></i>{{ article.author }}</a>
 {% endif %}
 <span class="label">Links</span>
-{% if article.pdffile %}
-<a href="{{ SITEURL }}/{{ article.pdffile }}">[pdf]</a>
+{% if article.pdffiles %}
+        {% for pdffile in article.pdffiles %}
+                <a href="{{ SITEURL }}/{{ pdffile }}">[pdf{{loop.index}}]</a>
+        {% endfor %}
+{% elif article.pdffile %}
+        <a href="{{ SITEURL }}/{{ article.pdffile }}">[pdf]</a>
 {% endif %}
-<a href="javascript:copyBib()" onmouseout="outFunc()">[copy]</a>
+<a href="javascript:copyBib()">[copy]</a>
 <a href="{{ SITEURL }}/{{ article.bibfile }}">[bib]</a>
 <a href="{{ GITHUB_EDIT_URL }}/{{ article.bibfile }}">[edit]</a>
-<div class="tooltip">Hover over me
-        <span class="tooltiptext" id="myTooltip">Tooltip text</span>
-</div>
 </footer>
