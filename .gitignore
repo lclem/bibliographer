@@ -2,6 +2,9 @@
 output
 pelicanconf_local.py
 
+articles.bib.lst
+articles.bib.save
+
 #Python
 *.py[cod]
 
