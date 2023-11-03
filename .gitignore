@@ -1,6 +1,8 @@
 #Custom
 output
 pelicanconf_local.py
+._*
+*.lst
 
 articles.bib.lst
 articles.bib.save
