@@ -93,38 +93,35 @@
             <span class="icon-bar"></span>
           </a>
           <a class="brand" href="{{ SITEURL }}/index.html">{{ SITENAME }} {% if SITESUBTITLE %} <strong>{{ SITESUBTITLE }}</strong>{% endif %}</a>
+          <div class="container-fluid">
+            Search: <input data-stork="sitesearch" />
+          </div>
           <div class="nav-collapse">
             <ul class="nav">
               {% for title, link in MENUITEMS %}
-                  <li><a href="{{ link }}">{{ title }}</a></li>
+                <li><a href="{{ link }}">{{ title }}</a></li>
               {% endfor %}
               {% if DISPLAY_PAGES_ON_MENU %}
               {% for page in pages %}
                 <li><a href="{{ SITEURL }}/{{ page.url }}">{{ page.title }}</a></li>
               {% endfor %}
-                          <li class="divider-vertical"></li>
+              <li class="divider-vertical"></li>
               {% endif %}
               {% if DISPLAY_CATEGORIES_ON_MENU %}
               {% for cat, null in categories %}
-                  <li {% if cat == category %}class="active"{% endif %}>
-                    <a href="{{ SITEURL }}/{{ cat.url }}">
-						<i class="icon-folder-open icon-large"></i>{{ cat }}
-					</a>
+                <li {% if cat == category %}class="active"{% endif %}>
+                  <a href="{{ SITEURL }}/{{ cat.url }}">
+						        <i class="icon-folder-open icon-large"></i>{{ cat }}
+					        </a>
                 </li>
               {% endfor %}
               {% endif %}
-              <ul class="nav pull-right">
-                <li>
-                  Search: <input data-stork="sitesearch" />
-                  <div data-stork="sitesearch-output"></div>
-                </li>
-              </ul>
             </ul>
           </div>
         </div>
       </div>
     </div>
-
+    <div data-stork="sitesearch-output"></div>
     <div class="container-fluid">
       <div class="row">
         <div class="span9" id="content">
