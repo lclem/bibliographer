@@ -56,7 +56,11 @@ def parsebib(root, bibfile):
         for i in range(0, len(authors)):
             authors[i] = normalise_author(authors[i])
 
-        result.append((key, authors, title, year))
+        date_added = fields['date-added'].value if 'date-added' in fields else ""
+        date_modified = fields['date-modified'].value if 'date-modified' in fields else ""
+        doi = fields['DOI'].value if 'DOI' in fields else ""
+
+        result.append((key, authors, title, year, date_added, date_modified, doi))
 
     # print(f"RES: {result}")
     return result
@@ -76,9 +80,15 @@ for root, dirs, files in os.walk("./library/entries"):
                         text_file = open(bibfile, "r")
                         bibcontent = text_file.read().strip()
                         text_file.close()
+
+                        biblines = bibcontent.split("\n")
+                        for j in range(0, len(biblines)):
+                            biblines[j] = "    " + biblines[j]
+
+                        bibcontent = "\n".join(biblines)
                         
-                        for key, authors, title, year in parsebib("./", bibfile):
-                            print(f"BIB {authors} - {title} - {year}")
+                        for key, authors, title, year, date_added, date_modified, doi in parsebib("./", bibfile):
+                            print(f"BIB {authors} - {title}")
 
                             pdffiles = []
                             for pdffile in os.listdir("./"):
@@ -100,6 +110,9 @@ Title: {title}\n\
 Year: {year}\n\
 Authors: {'; '.join(authors)}\n\
 Bibfile: {os.path.join(cwd, bibfile)}\n\
+{'Date: ' + date_added if date_added != '' else ''}\n\
+{'Modified: ' + date_modified if date_modified != '' else ''}\n\
+{'DOI: ' + doi if doi != '' else ''}\n\
 Key: {key}\n\
 Slug: {key}\n\
 engine: knitr\n"
@@ -110,10 +123,9 @@ engine: knitr\n"
 
                             markdown += "\n"
                             markdown += f"\
-````\n\
+    :::bibtex\n\
 {bibcontent}\n\
-````\n\
-\
+\n\
 <bib id=\"bib\">\
 {bibcontent}\
 </bib>"
