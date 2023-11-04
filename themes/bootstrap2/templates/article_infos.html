@@ -12,8 +12,8 @@
         <i class="icon-calendar"></i>{{ article.year }}
 </a>
 {% if article.authors %}
-        <nobr>
         <span class="label">By</span>
+        <nobr>
                 {% for author in article.authors %}
                         <a href="{{ SITEURL }}/{{ author.url }}"><i class="icon-user"></i>{{ author }}</a>
                 {% endfor %}
@@ -22,14 +22,17 @@
         <span class="label">By</span>
         <a href="{{ SITEURL }}/{{ article.author.url }}"><i class="icon-user"></i>{{ article.author }}</a>
 {% endif %}
-<span class="label">Links</span>
+<!-- <span class="label">Key</span> -->
+<a hidden><nobr>{{ article.key }}</nobr></a>
+<span class="label">PDF</span>
 {% if article.pdffiles %}
         {% for pdffile in article.pdffiles %}
-                <a href="{{ SITEURL }}/{{ pdffile }}">[pdf{{loop.index}}]</a>
+        [<a href="{{ SITEURL }}/{{ pdffile }}">pdf</a> | <a href="pdfefile:///SyncedFolders/bibliographer/{{ pdffile }}">pdfe</a>]
         {% endfor %}
 {% elif article.pdffile %}
-        <a href="{{ SITEURL }}/{{ article.pdffile }}">[pdf]</a>
+        [<a href="{{ SITEURL }}/{{ article.pdffile }}">pdf</a> | <a href="pdfefile:///SyncedFolders/bibliographer/{{ article.pdffile }}">pdfe</a>]
 {% endif %}
+<span class="label">BIB</span>
 <a href="javascript:copyBib()">[copy]</a>
 <a href="{{ SITEURL }}/{{ article.bibfile }}">[bib]</a>
 <a href="{{ GITHUB_EDIT_URL }}/{{ article.bibfile }}">[edit]</a>

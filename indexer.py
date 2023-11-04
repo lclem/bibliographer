@@ -12,11 +12,16 @@ def pushd(new_dir):
     finally:
         os.chdir(previous_dir)
 
-valid_characters = string.ascii_letters + string.digits + string.whitespace + '-'
+valid_characters = string.ascii_letters + string.digits + string.whitespace + '-,;:ł'
 
 def sanitise(str):
     result = "".join(c for c in str if c in valid_characters)
     return result.encode('utf-8').decode("ascii", "ignore")
+
+def normalise_author(author):
+    names = author.split(", ")
+    names = names[1:] + [names[0]]
+    return " ".join(names)
 
 def parsebib(root, bibfile):
     library = parser.parse_file(bibfile)
@@ -34,24 +39,33 @@ def parsebib(root, bibfile):
     result = []
     for entry in library.entries:
         fields = entry.fields_dict
-        # print(f"FIELDS: {fields}")
+
+        print(f"FIELDS: {fields}")
+        # print(f"key {entry.key}, type {entry.entry_type}, fields {entry.fields_dict} \n")
+
         key = entry.key
         key = key.encode('utf-8').decode("ascii", "ignore")
         
-        title = sanitise(fields['title'].value if 'title' in fields else "N/A")
+        title = sanitise(fields['Title'].value if 'Title' in fields else "N/A")
         
-        year = fields['year'].value if 'year' in fields else "0"
+        year = fields['Year'].value if 'Year' in fields else "0"
 
-        author = sanitise(fields['author'].value if 'author' in fields else "N/A")
+        author = sanitise(fields['Author'].value if 'Author' in fields else "N/A")
         authors = author.split(" and ")
 
-        result.append((key, authors, title, year))
+        for i in range(0, len(authors)):
+            authors[i] = normalise_author(authors[i])
 
-    # print(f"key {entry.key}, type {entry.entry_type}, fields {entry.fields_dict} \n")
+        date_added = fields['date-added'].value if 'date-added' in fields else ""
+        date_modified = fields['date-modified'].value if 'date-modified' in fields else ""
+        doi = fields['DOI'].value if 'DOI' in fields else ""
 
+        result.append((key, authors, title, year, date_added, date_modified, doi))
+
+    # print(f"RES: {result}")
     return result
 
-for root, dirs, files in os.walk("./library"):
+for root, dirs, files in os.walk("./library/entries"):
     i = 0
     for dir in dirs:
         cwd = os.path.join(root, dir)
@@ -61,13 +75,20 @@ for root, dirs, files in os.walk("./library"):
                 for file in files:
                     if file.endswith(".bib"):
                         bibfile = file # os.path.join(root, file)
+                        # print(f"FILE {bibfile}")
 
                         text_file = open(bibfile, "r")
                         bibcontent = text_file.read().strip()
                         text_file.close()
+
+                        biblines = bibcontent.split("\n")
+                        for j in range(0, len(biblines)):
+                            biblines[j] = "    " + biblines[j]
+
+                        bibcontent = "\n".join(biblines)
                         
-                        for key, authors, title, year in parsebib("./", bibfile):
-                            print(f"BIB {authors} - {title} - {year}")
+                        for key, authors, title, year, date_added, date_modified, doi in parsebib("./", bibfile):
+                            print(f"BIB {authors} - {title}")
 
                             pdffiles = []
                             for pdffile in os.listdir("./"):
@@ -84,12 +105,15 @@ for root, dirs, files in os.walk("./library"):
 
                             mdfile = os.path.join("", f"entry-{i}.md")
 #Date: {year}\n\
-
+                            NEWLINE = "\n"
                             markdown = f"\
 Title: {title}\n\
 Year: {year}\n\
 Authors: {'; '.join(authors)}\n\
 Bibfile: {os.path.join(cwd, bibfile)}\n\
+{'Date: ' + date_added + NEWLINE if date_added != '' else ''}\
+{'Modified: ' + date_modified + NEWLINE if date_modified != '' else ''}\
+{'DOI: ' + doi + NEWLINE if doi != '' else ''}\
 Key: {key}\n\
 Slug: {key}\n\
 engine: knitr\n"
@@ -100,10 +124,9 @@ engine: knitr\n"
 
                             markdown += "\n"
                             markdown += f"\
-````\n\
+    :::bibtex\n\
 {bibcontent}\n\
-````\n\
-\
+\n\
 <bib id=\"bib\">\
 {bibcontent}\
 </bib>"
