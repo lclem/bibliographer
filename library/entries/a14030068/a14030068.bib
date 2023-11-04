@@ -1,0 +1,20 @@
+
+@Article{         a14030068,
+  Author        = "Niehren, Joachim and Sakho, Momar",
+  Abstract      = "We consider the problem of determinizing and minimizing automata for nested words in practice. For this we compile the nested regular expressions (NREs) from the usual XPath benchmark to nested word automata (NWAs). The determinization of these NWAs, however, fails to produce reasonably small automata. In the best case, huge deterministic NWAs are produced after few hours, even for relatively small NREs of the benchmark. We propose a different approach to the determinization of automata for nested words. For this, we introduce stepwise hedge automata (SHAs) that generalize naturally on both (stepwise) tree automata and on finite word automata. We then show how to determinize SHAs, yielding reasonably small deterministic automata for the NREs from the XPath benchmark. The size of deterministic SHAs automata can be reduced further by a novel minimization algorithm for a subclass of SHAs. In order to understand why the new approach to determinization and minimization works so nicely, we investigate the relationship between NWAs and SHAs further. Clearly, deterministic SHAs can be compiled to deterministic NWAs in linear time, and conversely NWAs can be compiled to nondeterministic SHAs in polynomial time. Therefore, we can use SHAs as intermediates for determinizing NWAs, while avoiding the huge size increase with the usual determinization algorithm for NWAs. Notably, the NWAs obtained from the SHAs perform bottom-up and left-to-right computations only, but no top-down computations. This NWA behavior can be distinguished syntactically by the (weak) single-entry property, suggesting a close relationship between SHAs and single-entry NWAs. In particular, it turns out that the usual determinization algorithm for NWAs behaves well for single-entry NWAs, while it quickly explodes without the single-entry property. Furthermore, it is known that the class of deterministic multi-module single-entry NWAs enjoys unique minimization. The subclass of deterministic SHAs to which our novel minimization algorithm applies is different though, in that we do not impose multiple modules. As further optimizations for reducing the sizes of the constructed SHAs, we propose schema-based cleaning and symbolic representations based on apply-else rules that can be maintained by determinization. We implemented the optimizations and report the experimental results for the automata constructed for the XPathMark benchmark.",
+  article-number= "68",
+  date-added    = "2021-07-27 12:22:18 +0200",
+  date-modified = "2021-07-27 12:22:18 +0200",
+  DOI           = "10.3390/a14030068",
+  ISSN          = "1999-4893",
+  Journal       = "Algorithms",
+  Number        = "3",
+  Title         = "Determinization and Minimization of Automata for Nested Words Revisited",
+  URL           = "https://www.mdpi.com/1999-4893/14/3/68",
+  Volume        = "14",
+  Year          = "2021",
+  bdsk-url-1    = "https://www.mdpi.com/1999-4893/14/3/68",
+  bdsk-url-2    = "https://doi.org/10.3390/a14030068",
+  File          = "Determinization and Minimization of Automata for Nested Words Revisited - algorithms-14-00068-v3.pdf",
+  file-2        = "Determinization and Minimization of Automata for Nested Words Revisited - 0.pdf"
+}
