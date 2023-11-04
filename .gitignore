@@ -4,8 +4,13 @@ pelicanconf_local.py
 ._*
 *.lst
 
+articles.bib
+articles-small.bib
+articles.bib.new.bib
 articles.bib.lst
 articles.bib.save
+
+getpdf.err
 
 #Python
 *.py[cod]
