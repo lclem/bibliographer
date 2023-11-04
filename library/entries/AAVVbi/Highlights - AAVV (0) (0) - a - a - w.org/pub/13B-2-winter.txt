@@ -1,0 +1,3 @@
+We offer a coalgebraic perspective on the k-regular sequences. For any k >= 1 and semiring S, the set of sequences with output in S is the carrier of a final coalgebra. This allows us to give a coalgebraic characterization of the k-regular sequences. Using an isomorphism based on a bijective numeration system, we thus obtain a structural correspondence between S-rational series over k nonterminals, and k-regular sequences with output in S. We will furthermore discuss a connection with sequences definable by divide and conquer recurrences.
+
+  

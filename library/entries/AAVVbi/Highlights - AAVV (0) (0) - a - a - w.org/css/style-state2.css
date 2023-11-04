@@ -1,0 +1,816 @@
+
+/*----------------------------------------------------------*/
+/*----------------------------------------------------------*/
+/* ---------------- Medium-size page -----------------------*/
+/*----------------------------------------------------------*/
+/*----------------------------------------------------------*/
+
+/* container A2 - first white */
+#containerA.state2 {
+	width: 100%;
+	background-color: white;
+}
+
+#containerA.state2 .wrapper {
+	max-width: 1000px;
+	margin: 0 auto;
+}
+
+#containerA.state2 p {
+	font-size: 18px;
+}
+
+#containerA.state2 #logo {
+	display: inline-block;
+	vertical-align: top;
+	padding-left: 20px;
+	margin-left: 50px;
+	margin-right: 120px;
+	max-width: 360px;
+	padding-bottom: 40px;
+	}
+
+#containerA.state2 hr {
+	border: 0;
+	margin: 0px auto;
+	height: 1px;
+	background-color: black;
+	width: 94%;
+	}
+	
+#containerA.state2 #logo img {
+	display: inline-block;
+	vertical-align: top;
+	width: 100%;
+	}
+
+#containerA.state2 .cline-black {
+	width: 40px;
+	height: 115px;
+	margin-top: 80px;
+	background-image: url('../images/cline-black.jpg');
+	background-position: top right;
+	background-repeat: repeat;
+	display: inline-block;
+	vertical-align: top;
+	display: none;
+	}
+	
+#containerA.state2 #conAdate {
+	display: inline-block;
+	vertical-align: top;
+	margin-top: 30px;
+	margin-right: 100px;
+	margin-left: 14%;
+	margin-bottom: 40px;
+	}
+
+/* container MENU ---------------------------- Menu white */	
+
+#containerMENU.state2 {
+	width: 100%;
+	background-color: white;
+	padding-bottom: 10px;
+	padding-top: 10px;
+	top: 0px;
+	position: fixed;
+	z-index: 99;
+}
+
+#containerMENU.state2.notfixednow  {
+	position: static!important;
+}
+
+#containerMENU.state2 .wrapper {
+	max-width: 1260px;
+	margin: 0 auto;
+}
+
+#containerMENU.state2 .wrapper.notfixednow  {
+	position: static!important;
+}
+
+#containerMENU.state2 .wrapper .menu-name {
+	text-align: center;
+	margin: auto;
+	height: 25px;
+	display: block;
+}
+
+#containerMENU.state2 .wrapper .menu-name.hidden {
+	height: 0px;
+	overflow: hidden;
+}
+
+#containerMENU.state2 .wrapper .menu-image {
+	text-align: center;
+	margin: auto;
+	display: block;
+	background-image: url('../images/menu-bg.png');
+	background-repeat: no-repeat;
+	background-position: center 0px;
+	height: 44px;
+	width: 64px;
+	cursor: pointer;
+	margin-top: 0px;
+	-webkit-transition: all 0.3s ease-in-out;
+	-moz-transition: all 0.3s ease-in-out;
+	-o-transition: all 0.3s ease-in-out;
+	-ms-transition: all 0.3s ease-in-out;
+	transition: all 0.3s ease-in-out;
+}
+
+#containerMENU.state2 .wrapper .menu-image-visible {
+	background-position: center -52px;
+	height: 44px;
+}
+
+#containerMENU.state2 .wrapper ul {
+	display: block;
+	overflow:hidden;
+	height: 0px;
+	margin: auto;
+	text-align: center;
+}
+
+#containerMENU.state2 .wrapper ul.main-menu-visible {
+	height: auto;
+}
+
+#containerMENU.state2 .wrapper ul li {
+	display: block;
+	padding: 5px 20px 5px 20px;
+}
+
+#containerMENU.state2 .wrapper a:link {
+		color: #555555;
+	}
+#containerMENU.state2 .wrapper a:hover {
+		color: #000000;
+	}	
+#containerMENU.state2 #unregister input {
+	top: 0;
+	left: -80px;
+}
+
+/* container B2 - orange */	
+#containerB.state2 {
+	width: 100%;
+	min-height: 30px;
+	background-color: #ffa028;
+}
+
+#containerB.state2 .wrapper {
+	max-width: 1000px;
+	margin: 0 auto;
+}
+
+#containerB.state2 .first-text {
+	display: block;
+	vertical-align: top;
+	padding-top: 40px;
+	padding-bottom: 40px;
+	margin-left: 14%;
+	margin-right: 14%;
+	}
+	
+#containerB.state2 .second-text {
+	display: block;
+	vertical-align: top;
+	padding-top: 20px;
+	padding-bottom: 40px;
+	margin-left: 14%;
+	margin-right: 14%;
+	}
+	
+#containerB.state2 .cline-white {
+	width: 100px;
+	height: 293px;
+	margin: 20px 20px 20px 15px;
+	background-image: url('../images/cline-white.jpg');
+	background-position: top right;
+	background-repeat: repeat;
+	display: inline-block;
+	vertical-align: top;
+	display: none;
+	}
+	
+#containerB.state2 .cline-white-horiz {
+	height: 42px;
+	width: 94%;
+	margin: 0px auto;
+	background-image: url('../images/cline-white-horiz.jpg');
+	background-position: top center;
+	background-repeat: repeat;
+	display: block;
+	vertical-align: top;
+	}
+
+/* container C2 - black */
+
+#containerC.state2 {
+	width: 100%;
+	min-height: 30px;
+	background-color: black;
+}
+
+#containerC.state2 .wrapper {
+	max-width: 1000px;
+	margin: 0 auto;
+}
+
+#containerC.state2 .main-text {
+	color: white;
+	width: 33%;
+	display: inline-block;
+	vertical-align: top;
+	margin-top: 40px;
+	margin-bottom: 40px;
+	margin-left: 3%;
+	margin-right: 3%;
+}
+
+#containerC.state2 h2 {
+	font-size: 16px;
+}
+
+#containerC.state2 .first-text {
+	margin-left: 14%;
+}
+
+#containerC.state2 .second-text {
+	margin-right: 14%;
+}
+
+#containerC.state2 .third-text {
+	margin-left: 14%;
+	margin-top: 0px;
+}
+
+#containerC.state2 .fourth-text {
+	margin-right: 14%;
+	margin-top: 0px;
+}
+
+/* container D2 - second white */
+
+#containerD.state2 {
+	width: 100%;
+	min-height: 30px;
+	background-color: white;
+}
+
+#containerD.state2 .wrapper {
+	max-width: 1000px;
+	margin: 0 auto;
+}
+
+#containerD.state2 h1 {
+	font-size: 22px;
+	color: #ffa028;
+	line-height: 1em;
+}
+
+#containerD.state2 .main-text {
+	margin-bottom: 0px;
+	width: 33%;
+	color: black;
+	display: inline-block;
+	vertical-align: top;
+	margin-top: 40px;
+	margin-left: 3%;
+	margin-right: 3%;
+}
+
+#containerD.state2 h2 {
+	font-size: 16px;
+}
+
+#containerD.state2 .event-info {
+	font-size: 14px;
+}
+
+#containerD.state2 hr {
+	margin: 0px auto;
+	margin-top: 30px;
+	width: 94%;
+	}
+
+#containerD.state2 p {
+	font-size: 14px;
+}
+
+#containerD.state2 .first-text {
+	margin-left: 14%;
+}
+
+#containerD.state2 .second-text {
+	margin-right: 14%;
+}
+
+#containerD.state2 .third-text {
+	margin-left: 14%;
+	margin-top: 10px;
+}
+
+#containerD.state2 .fourth-text {
+	margin-right: 14%;
+	margin-top: 10px;
+}
+
+#containerD.state2 .cline-black {
+	display: none;
+	}
+
+
+/* container E2 - third white */
+
+#containerE.state2 {
+	width: 100%;
+	min-height: 30px;
+	background-color: white;
+}
+
+#containerE.state2 .main-text {
+	width: 33%;
+	color: black;
+	display: inline-block;
+	vertical-align: top;
+	margin-top: 40px;
+	margin-bottom: 40px;
+	margin-left: 3%;
+	margin-right: 3%;
+} 
+
+#containerE.state2 .wrapper {
+	max-width: 1000px;
+	margin: 0 auto;
+}
+
+#containerE.state2 h2 {
+	font-size: 16px;
+}
+
+#containerE.state2 .first-text {
+	margin-left: 14%;
+}
+
+#containerE.state2 .second-text {
+	margin-right: 14%;
+}
+
+#containerE.state2 .third-text {
+	margin-left: 14%;
+	margin-top: 0px;
+}
+
+#containerE.state2 .fourth-text {
+	margin-right: 14%;
+	margin-top: 0px;
+}	
+	
+/* container F ------------------------- SUBMISSIONS orange */
+#containerF.state2 {
+	width: 100%;
+	min-height: 30px;
+	background-color: #ffa028;
+}
+
+#containerF.state2 .wrapper {
+	max-width: 1260px;
+	margin: 0 auto;
+}
+
+#containerF.state2 .first-text {
+	display: block;
+	vertical-align: top;
+	padding-bottom: 40px;
+	margin-left: 14%;
+	margin-right: 14%;
+	}
+
+#containerF.state2 h3 {
+	font-size: 16px;
+	text-transform: uppercase;
+	font-family: open_sans_extraboldregular;
+}	
+	
+#containerF.state2 .second-text {
+	display: block;
+	vertical-align: top;
+	padding-bottom: 40px;
+	margin-left: 14%;
+	margin-right: 14%;
+	}	
+	
+#containerF.state2 .page-header h2 {
+	display: inline-block;
+	vertical-align: top;
+	margin: 20px 14% 20px 14%;
+	padding: 10px 0px 10px 0px;
+	background-position: top left;
+	background-repeat: no-repeat;
+}	
+	
+#containerF.state2 .cline-white {
+	width: 100px;
+	height: 293px;
+	margin: 20px 20px 20px 20px;
+	background-image: url('../images/cline-white.jpg');
+	background-position: top right;
+	background-repeat: repeat;
+	display: inline-block;
+	vertical-align: top;
+	}
+	
+#containerF.state2 .cline-white-horiz {
+	height: 42px;
+	width: 94%;
+	margin: 0px auto;
+	background-image: url('../images/cline-white-horiz.jpg');
+	background-position: top center;
+	background-repeat: repeat;
+	display: block;
+	vertical-align: top;
+	}
+	
+/* container G ----------------------------- Registration black */
+#containerG.state2 {
+    color: white;
+	width: 100%;
+	min-height: 30px;
+	background-color: black;
+}
+
+#containerG.state2 .wrapper {
+	max-width: 1260px;
+	margin: 0 auto;
+}
+
+#containerG.state2 h2 {
+	color: #ffffff;
+}
+
+#containerG.state2 .first-text {
+	display: block;
+	vertical-align: top;
+	padding-bottom: 60px;
+	margin-left: 14%;
+	margin-right: 14%;
+	}
+
+#containerG.state2 h3 {
+	font-size: 16px;
+	text-transform: uppercase;
+	font-family: open_sans_extraboldregular;
+}
+
+#containerG.state2 .second-text {
+        color: white;
+	display: block;
+	vertical-align: top;
+	padding-bottom: 40px;
+	margin-left: 14%;
+	margin-right: 14%;
+	}
+	
+
+#containerG.state2 .second-text p{
+	padding-right: 40px;
+	}	
+
+#containerG.state2 .register-form {
+	width: 100%;
+}
+
+#containerG.state2 .register-form p {
+	color:#ffffff;
+}
+
+#containerG.state2 .register-form label {
+	color: #ffffff;
+	display: block;
+	margin-bottom: 15px;
+}
+
+#containerG.state2 .register-form label#label-fee-disabled {
+	color: #888888;
+}
+
+#containerG.state2 .register-form .reg-form-text{
+	width: 96%;
+	background-color: black;
+	margin-bottom: 15px;
+	border: 1px solid white;
+	outline: 0px solid white;
+	color: white;
+	padding: 5px 2%;
+}
+
+#containerG.state2 .register-form .reg-form-submit {
+	float: right;
+	margin-right: -1px;
+	font-family: open_sans_extraboldregular;
+	background-color: #ffa028;
+	color: #000000;
+	border: 1px solid #ffa028;
+	outline: 0px solid black;
+	cursor: pointer;
+	padding: 1px 14px;
+}
+
+#containerG.state2 .register-form .reg-form-submit:hover {
+	color: white;
+	border: 1px solid black;
+}
+	
+#containerG.state2 .second-text .first-column{
+	color: white;
+	display: block;
+	vertical-align: top;
+	padding-bottom: 40px;
+	margin-left: 0px;
+	margin-right: 0px;
+}
+
+#containerG.state2 .second-text .first-column p{
+	padding-right: 0px;
+}
+
+#containerG.state2 .second-text .second-column{
+	color: white;
+	display: block;
+	vertical-align: top;
+	padding-bottom: 40px;
+	margin-left: 0px;
+	margin-right: 0px;
+}
+
+#containerG.state2 .second-text .second-column p{
+	padding-right: 0px;
+}
+
+#containerG.state2 .page-header h2 {
+	display: inline-block;
+	vertical-align: top;
+	margin: 20px 14% 20px 14%;
+	padding: 10px 0px 10px 0px;
+	background-position: top left;
+	background-repeat: no-repeat;
+}
+
+
+/* container H ------------------------- Program white */
+
+#containerH.state2 {
+	width: 100%;
+	min-height: 30px;
+	background-color: white;
+}
+
+#containerH.state2 .wrapper {
+	max-width: 1000px;
+	margin: 0 auto;
+	padding-bottom: 2em;
+}
+
+
+#containerH.state2 .page-header h2 {
+	display: inline-block;
+	vertical-align: top;
+	margin: 20px 14% 0 14%;
+	padding: 10px 0 0 0;
+	background-position: top left;
+	background-repeat: no-repeat;
+}
+
+#containerH.state2 .main-text {
+	margin-bottom: 0;
+	width: 75%;
+	color: black;
+	display: inline-block;
+	vertical-align: top;
+	margin-top: 0;
+	margin-left: 3%;
+	margin-right: 3%;
+	bottom: 0;
+}
+
+
+
+#containerH.state2 .event-info {
+	font-size: 14px;
+}
+
+
+#containerH.state2 p {
+	font-size: 14px;
+}
+
+#containerH.state2 .full-text {
+	display: block;
+	vertical-align: top;
+	padding-bottom: 0;
+	margin-top: 20px;
+	margin-bottom: 10px;
+	margin-left: 14%;
+	margin-right: 14%;
+}
+
+#containerH.state2 .first-text {
+	display: block;
+	vertical-align: top;
+	padding-bottom: 0;
+	margin-bottom: 0;
+	margin-left: 14%;
+	margin-right: 14%;
+	}
+
+#containerH.state2 .second-text {
+	display: block;
+	vertical-align: top;
+	padding-bottom: 0;
+	margin-bottom: 0;
+	margin-left: 14%;
+	margin-right: 14%;
+}
+
+#containerH.state2 .second-text p{
+	padding-right: 40px;
+}	
+
+#containerH.state2 .cline-black {
+	display: none;
+}
+
+
+/* container I ------------------------- Call for papers orange */	
+#containerI.state2 {
+	width: 100%;
+	min-height: 30px;
+	background-color: #ffa028;
+}
+
+#containerI.state2 .wrapper {
+	max-width: 1260px;
+	margin: 0 auto;
+}
+
+#containerI.state2 .first-text {
+	display: block;
+	vertical-align: top;
+	padding-bottom: 40px;
+	margin-left: 14%;
+	margin-right: 14%;
+	}
+
+#containerI.state2 h3 {
+	font-size: 16px;
+	text-transform: uppercase;
+	font-family: open_sans_extraboldregular;
+}	
+	
+#containerI.state2 .second-text {
+	display: block;
+	vertical-align: top;
+	padding-bottom: 40px;
+	margin-left: 14%;
+	margin-right: 14%;
+	}	
+	
+#containerI.state2 .page-header h2 {
+	display: inline-block;
+	vertical-align: top;
+	margin: 20px 14% 20px 14%;
+	padding: 10px 0px 10px 0px;
+	background-position: top left;
+	background-repeat: no-repeat;
+}	
+	
+#containerI.state2 .cline-white {
+	width: 100px;
+	height: 293px;
+	margin: 20px 20px 20px 20px;
+	background-image: url('../images/cline-white.jpg');
+	background-position: top right;
+	background-repeat: repeat;
+	display: inline-block;
+	vertical-align: top;
+	}
+	
+#containerI.state2 .cline-white-horiz {
+	height: 42px;
+	width: 94%;
+	margin: 0px auto;
+	background-image: url('../images/cline-white-horiz.jpg');
+	background-position: top center;
+	background-repeat: repeat;
+	display: block;
+	vertical-align: top;
+	}
+
+/* container SPONSORS ---------------------- sponsors white*/
+#containerSPONSORS.state2 {
+	width: 100%;
+	min-height: 30px;
+	background-color: #ffffff;
+}
+
+#containerSPONSORS.state2 .wrapper {
+	max-width: 1260px;
+	margin: 0 auto;
+}
+
+#containerSPONSORS.state2 .wrapper h4{
+	margin-bottom: 20px;
+}
+
+#containerSPONSORS.state2 .main-sponsor {
+	margin-left: 0px;
+	display: block;
+	text-align: center;
+	margin-bottom: 20px;
+}
+
+#containerSPONSORS.state2 .main-sponsor img {
+	height: 140px;
+	display: inline-block;
+	padding: 20px 40px;
+}
+
+#containerSPONSORS.state2 .sponsors {
+	margin-left: 0px;
+	display: block;
+	text-align: center;
+	margin-bottom: 30px;
+}
+
+#containerSPONSORS.state2 .sponsors img {
+	height: 50px;
+	display: inline-block;
+	padding: 10px 15px 10px 15px;
+}
+
+#containerSPONSORS.state2 .page-header h2 {
+	display: inline-block;
+	vertical-align: top;
+	margin: 20px 14% 20px 14%;
+	padding: 10px 0px 10px 0px;
+	background-position: top left;
+	background-repeat: no-repeat;
+}		
+	
+/* container FOOTER 2 - white third*/
+#containerFOOTER.state2 {
+	width: 100%;
+	min-height: 30px;
+	background-color: #9baaaa;
+}
+
+#containerFOOTER.state2 .wrapper {
+	max-width: 1000px;
+	margin: 0 auto;
+}
+
+#containerFOOTER.state2 .main-text {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	color: white;
+	width: 33%;
+	display: inline-block;
+	vertical-align: top;
+	margin-left: 3%;
+	margin-right: 3%;
+}
+
+#containerFOOTER.state2 h2 {
+	font-size: 16px;
+}
+
+#containerFOOTER.state2 a {
+	color: white;
+	text-decoration: underline;
+}
+
+#containerFOOTER.state2 .first-text {
+	margin-left: 14%;
+	margin-bottom: 0px;
+}
+
+#containerFOOTER.state2 .second-text {
+	margin-right: 14%;
+	margin-bottom: 0px;
+	
+}
+
+#containerFOOTER.state2 .third-text {
+	margin-left: 14%;
+	margin-top: 0px;
+}
+
+#containerFOOTER.state2 .fourth-text {
+	margin-right: 14%;
+	margin-top: 0px;
+}
+
+

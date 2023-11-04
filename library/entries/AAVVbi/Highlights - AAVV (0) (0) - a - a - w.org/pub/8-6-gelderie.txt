@@ -1,0 +1,12 @@
+When studying games played on finite arenas, the arena is given
+explicitly, hiding the underlying structure of the arena. We study games
+where the global arena is a product of several smaller, constituent
+arenas. We investigate how these ``global games'' can be solved by
+playing ``component games'' on the constituent arenas. To this end, we
+introduce two kinds of products of arenas. Moreover, we define a
+suitable notion of strategy composition and show how, for the first
+notion of product, winning strategies in reachability games can be
+composed from winning strategies in games on the constituent arenas. For
+the second kind of product, the complexity of solving the global game
+shows that a general composition theorem is equivalent to proving Pspace
+= Exptime.

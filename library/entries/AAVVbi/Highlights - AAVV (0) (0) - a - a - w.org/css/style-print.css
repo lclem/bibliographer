@@ -1,0 +1,433 @@
+
+
+/* Reset CSS */
+
+
+
+/*-------------------------- CSS -------------------------------*/
+
+body {
+	width: 100%;
+	font-family: open_sansregular;
+	font-size: 10pt;
+	background-color: white;
+	}
+
+h1 {
+	text-transform: uppercase;
+	font-family: open_sans_extraboldregular;
+		}	
+	
+h2 {
+	text-transform: uppercase;
+	font-family: open_sans_extraboldregular;
+		}
+		
+/*----------------------------------------------------------*/
+/*----------------------------------------------------------*/	
+/* -------------------- Full-size page -----------------------*/
+/*----------------------------------------------------------*/	
+/*----------------------------------------------------------*/
+
+/* container A1 - first white */
+#containerA.state1 {
+	width: 100%;
+	padding-bottom: 4em;
+}
+
+#containerA.state1 hr {
+	display: none;
+	}
+
+#containerA.state1 .wrapper {
+	margin: 0 auto;
+}
+
+#containerA.state1 #logo {
+	display: inline-block;
+	vertical-align: top;
+	margin-left: 2cm;
+	margin-right: 2cm;
+	margin-bottom: 4cm;
+	position: relative;
+	}
+	
+#containerA.state1 #logo img {
+	display: inline-block;
+	vertical-align: top;
+	position: absolute;
+	top: 0;
+	}
+
+#containerA.state1 .cline-black {
+    display: none;
+	}
+
+#containerA.state1 p,h2 {
+	font-size: 10pt;
+}
+	
+#containerA.state1 #conAdate {
+	display: inline-block;
+	vertical-align: top right;
+	margin-top: 0;
+	padding-left: 1cm;
+	padding-right: 0;
+	margin-right: 0;
+	font-size: 10pt;
+	}
+	
+	a:link {
+		color: #555555;
+	}
+	a:visited {
+		color: #333333;
+	}	
+
+/* container MENU ---------------------------- Menu white */	
+
+#containerMENU {
+    display: none;
+}
+
+	
+/* container B1 - orange */	
+#containerB.state1 {
+	width: 100%;
+	background-color: white;
+}
+
+#containerB.state1 .wrapper {
+	margin: 0 auto;
+	width: 100%;
+}
+
+#containerB.state1 .first-text {
+	display: inline-block;
+	vertical-align: top;
+	width: 50%;
+	margin-top: 1cm;
+	padding-right: 5%;
+	margin-bottom: 1cm;
+	left: 0;
+	}
+	
+#containerB.state1 .second-text {
+	display: inline-block;
+	vertical-align: top;
+	width: 45%;
+	margin-top: 1cm;
+	margin-bottom: 1cm;
+	}	
+	
+#containerB.state1 .cline-white {
+    display:none;
+	}
+	
+
+/* container C1 - black */
+
+#containerC.state1 {
+	width: 100%;
+	min-height: 30px;
+	background-color: black;
+}
+
+#containerC.state1 .wrapper {
+	max-width: 1260px;
+	margin: 0 auto;
+}
+
+#containerC.state1 .main-text {
+	color: white;
+	width: 18%;
+	display: inline-block;
+	vertical-align: top;
+	margin-top: 40px;
+	margin-bottom: 40px;
+	padding-left: 1%;
+	paddings-right: 1%;
+	padding-left: 0;
+}
+
+#containerC.state1 h2 {
+	font-size: 16px;
+}
+
+#containerC.state1 .first-text {
+	margin-left: 1em;
+}
+
+#containerC.state1 .fourth-text {
+	margin-right: 0;
+
+}
+
+/* container D1 - second white */
+
+#containerD.state1 {
+    display: none;
+}
+
+
+/* container E1 - third white */
+
+#containerE.state1 {
+	width: 100%;
+	min-height: 30px;
+	background-color: white;
+}
+
+#containerE.state1 .main-text {
+	width: 21%;
+	color: black;
+	display: inline-block;
+	vertical-align: top;
+	margin-top: 40px;
+	margin-bottom: 40px;
+	margin-left: 2%;
+	margin-right: 2%;
+} 
+
+#containerE.state1 .wrapper {
+	margin: 0 auto;
+}
+
+#containerE.state1 h2 {
+	font-size: 16px;
+}
+
+#containerE.state1 .first-text {
+}
+
+#containerE.state1 .fourth-text {
+}	
+	
+/* container F ------------------------- SUBMISSIONS orange */
+#containerF.state1 {
+    display:none;
+}
+	
+/* container G ----------------------------- Registration black */
+#containerG.state1 {
+    display:none;
+}
+
+
+/* container H ------------------------- Program white */
+
+#containerH.state1 {
+	width: 100%;
+}
+
+#containerH.state1 .wrapper {
+	margin: 0 auto;
+	margin-bottom: 1cm;
+	margin-top: 1cm;
+
+}
+
+#containerH.state1 h1 {
+	font-size: 14pt;
+	line-height: 1em;
+}
+
+
+#containerH.state1 hr {
+	}
+
+#containerH.state1 .main-text {
+	margin-bottom: 0px;
+	width: 100%;
+	color: black;
+	display: inline-block;
+	vertical-align: top;
+	margin-top: .25cm;
+	margin-left: 0;
+	margin-right: 0;
+}
+
+#containerH.state1 h2 {
+	font-size: 12pt;
+}
+
+#containerH.state1 h3 {
+	font-size: 10pt;
+	text-transform: uppercase;
+	font-family: open_sans_extraboldregular;
+}	
+
+#containerH.state1 .event-info {
+	font-size: 10pt;
+}
+
+#containerH.state1 p {
+	font-size: 10pt;
+}
+
+#containerH.state1 .first-text {
+	display: inline-block;
+	vertical-align: top;
+	width: 45%;
+	margin-right: 5%;
+	margin-bottom: 1em;
+}
+
+
+#containerH.state1 .second-text {
+	display: inline-block;
+	vertical-align: top;
+	width: 45%;
+	padding-bottom: .1em;
+	}	
+
+#containerH.state1 .fourth-text {
+}
+
+#containerH.state1 .page-header h2 {
+	display: inline-block;
+	vertical-align: top;
+}
+
+#containerH.state1 .cline-black {
+    display:none;
+	}
+
+#containerH.state1 .break {
+        margin-top:1em;
+        margin-bottom:1em;
+	margin-left: 0;
+	display: inline-block;
+	width: 100%;
+}
+
+#containerH.state1 .session{
+        margin-top:1em;
+        margin-bottom:1em;
+	margin-left: 0;
+	font-variant: small-caps;
+	background: Gainsboro;
+	font-family: open_sans_extraboldregular;
+
+}
+
+#containerH.state1 .abstract p{
+    padding-right: 0;
+    margin-bottom: .5em;
+}
+
+#containerH.state1 .abstract ol {
+    margin-left: 1em; 
+    padding-left: 1em; 
+    list-style: decimal;
+}
+#containerH.state1 .abstract ol > li {
+    position: relative; 
+    margin:0 0 0 0; 
+    padding:0 0; 
+}
+
+#containerH.state1 .paper{
+    dispaly: inline;
+        margin-top:.25em;
+        margin-bottom:.25em;
+}
+
+#containerH.state1 .paper:before{
+    content: "\2022";
+}
+
+#containerH.state1 .time{
+    display: inline-block;
+    font-size: small;
+    padding-left: 3px;
+    padding-right: 5px;
+    min-width: 6em;
+    text-align: right;
+}
+
+#containerH.state1 .time .start{
+    }
+
+#containerH.state1 .time .end{
+    }
+
+#containerH.state1 .paper .time .end{
+    display:none;
+    }
+
+#containerH.state1 .time .end:before{
+    content: "\2013";
+    }
+
+#containerH.state1 .paper .time{
+    display: none;
+}
+
+
+#containerH.state1 .authors {;
+	font-variant: normal;
+}
+
+#containerH.state1 .title {
+        font-style: italic;
+	font-variant: normal;
+	display: inline-block;
+	text-indent: 0;
+}
+
+#containerH.state1 .session .title {
+        font-style: italic;
+	font-variant: normal;
+	display: inline-block;
+	text-indent: 0;
+}
+
+
+/* container I ------------------------- Call for papers orange */	
+#containerI.state1 {
+    display:none;
+}
+
+/* container SPONSORS ---------------------- sponsors white*/
+#containerSPONSORS.state1 {
+	width: 100%;
+}
+
+#containerSPONSORS.state1 .wrapper {
+	margin: 0 auto;
+}
+
+#containerSPONSORS.state1 .main-sponsor {
+	display: inline-block;
+	vertical-align: top;
+	margin-left: 0;
+}
+
+#containerSPONSORS.state1 .main-sponsor img {
+    margin-left: 0px;
+	display: inline-block;
+}
+
+#containerSPONSORS.state1 .sponsors {
+	margin-left: 0px;
+	Display: inline-block;
+	vertical-align: top;
+}
+
+#containerSPONSORS.state1 .sponsors img {
+	height: 50px;
+	display: inline-block;
+}
+
+#containerSPONSORS.state1 .page-header h2 {
+	display: inline-block;
+	vertical-align: top;
+	margin-left: 0;
+	display: none;
+}	
+	
+/* container FOOTER 1 ---------------- footer grey*/
+#containerFOOTER.state1 {
+    display: none;
+}

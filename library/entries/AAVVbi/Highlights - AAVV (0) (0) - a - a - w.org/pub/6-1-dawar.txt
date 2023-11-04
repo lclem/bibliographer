@@ -1,0 +1,8 @@
+We study queries on graphs (and other relational structures) defined
+by families of Boolean circuits that are invariant under permutations of
+the vertices.  In particular, we study circuits that are symmetric,
+that is, circuits whose invariance is explicitly witnessed by
+automorphisms of the circuit induced by the permutation of their
+inputs.  We show a close connection between queries defined on
+structures by uniform families of symmetric circuits and definability
+in fixed-point logics.

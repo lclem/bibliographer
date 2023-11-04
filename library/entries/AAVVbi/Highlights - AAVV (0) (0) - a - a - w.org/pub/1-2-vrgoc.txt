@@ -1,0 +1,2 @@
+With the recent resurgence of graph data model several languages for querying such data have been proposed. Traditionally these languages concentrated on querying topological properties while largely ignoring the actual data stored in the graph. In this presentation we will highlight how adding features that enable querying both data and
+topology affects the languages used to extract information from graph databases.

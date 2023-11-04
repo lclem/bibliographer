@@ -1,0 +1,5 @@
+Title : From ATL Tableaux to Alternating Automata
+
+In a global context of formal specification, a theoritecal question is : as for LTL, is it possible to construct an automaton from a tableau-based decision procedure for ATL (Alternating-time Temporal Logic)? To answer that question, we propose a new way of constructing a specific kind of alternating tree automaton, the so called joker automaton, from the construction of the tableau-based decision procedure for ATL [Goranko,Shkatov/2009]. This new automaton recognize all models of a formulae without restrictions on the moves of agents. 
+
+

@@ -1,0 +1,3 @@
+In this talk, we introduce two properties for logical sentences using arbitrary numerical predicates: the Straubing property and the Crane Beach property. 
+Both properties state that formulae defining simple languages do not need to use arbitrary complicated predicates, where simple either means regular or with a neutral letter.
+We restrict our attention to monadic predicates, and show that both properties hold in a strong syntactical sense.

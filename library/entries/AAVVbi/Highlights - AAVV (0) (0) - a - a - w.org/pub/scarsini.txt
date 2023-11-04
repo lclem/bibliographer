@@ -1,0 +1,15 @@
+Although mixed extensions of ﬁnite games always admit equilibria, this
+is not the case for countable games, the best-known example being Wald’s
+pick-the-larger-integer game. Several authors have provided conditions for the
+existence of equilibria in inﬁnite games. These conditions are
+typically of topological nature and are not applicable to countable
+games. Here we establish
+an existence result for the equilibrium of countable games when the strategy
+sets are a countable group and the payoﬀs are functions of the group operation.
+In order to obtain the existence of equilibria, ﬁnitely additive mixed
+strategies
+have to be allowed. This creates a problem of selection of a product measure of
+mixed strategies. We propose a family of such selections and prove existence of
+an equilibrium that does not depend on the selection. As a byproduct we show
+that if ﬁnitely additive mixed strategies are allowed, then Wald’s game admits
+an equilibrium.

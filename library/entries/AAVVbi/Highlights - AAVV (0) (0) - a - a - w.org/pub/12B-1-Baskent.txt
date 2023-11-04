@@ -1,0 +1,5 @@
+What is game theoretical negation?
+Can Bașkent
+(IHPST, Paris)
+
+In this talk, I will give a game semantics for a paraconsistent logic, and define a paraconsistent "win" - parallel to the paraconsistent understanding of truth.

@@ -1,0 +1,320 @@
+<!doctype html>
+<html lang="en" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:svg="http://www.w3.org/2000/svg">
+<head>
+    <meta charset="utf-8" /> <meta name="viewport"
+    content="width=1000" /> <meta name="apple-mobile-web-app-capable"
+    content="yes" />
+    <title>Complexity Classes Beyond Elementary</title>
+    <meta name="description" content="Slides of a talk delivered at
+    Highlights 2013"/>
+    <meta name="author" content="Sylvain Schmitz" />
+    <!--<link href="http://fonts.googleapis.com/css?family=Open+Sans:regular,semibold,italic,italicsemibold|PT+Sans:400,700,400italic,700italic|PT+Serif:400,700,400italic,700italic" rel="stylesheet" />-->
+    <link href="css/impress.css" rel="stylesheet" />
+    <link href="css/fgcc.css" rel="stylesheet" />
+    <link href="css/steps.css" rel="stylesheet" />
+    <link rel="shortcut icon" href="favicon.png" />
+    <link rel="apple-touch-icon" href="apple-touch-icon.png" />
+</head>
+<body class="impress-not-supported">
+<!-- For example this fallback message is only visible when there is
+    `impress-not-supported` class on body.  -->
+<aside class="fallback-message">
+    <p>If this message persists, it means that your
+    browser <b>doesn't support the features required</b> by
+    <a href="https://github.com/bartaz/impress.js">impress.js</a>, so
+    you are presented with a simplified version of this
+    presentation.</p>
+    <p>For the best experience please use the
+    latest <b>Chrome</b>, <b>Safari</b> or <b>Firefox</b> browser.</p>
+</aside>
+<article id="impress" class="impress-speaker">
+    <header id="titlepage" class="step slide" data-x="-10000"
+     data-scale="10">
+        <h1>Complexity Classes Beyond Elementary</h1>
+        <h2>Sylvain Schmitz</h2>
+        <h3>LSV, ENS Cachan &amp; CNRS &amp; INRIA</h3>
+        <h4><a href="http://highlights-conference.org/">Highlights
+        2013</a>, September 19, 2013</h4>
+        <a href="http://www.lsv.ens-cachan.fr/Projects/anr-reachard/"><img src="reachard.png" alt="ReacHard logo"/></a>
+        <aside class="speaker">
+          <h3>Speaker Notes</h3>
+          <p>
+            This is
+            an <a href="http://www.w3.org/TR/html51/">HTML5</a>
+            slideshow based on
+            the <a href="https://github.com/bartaz/impress.js/">impress.js</a>
+            demo (with a few extras).
+          </p>
+          <ul>
+            <li class="hint">Use the space bar or the arrow keys to
+              navigate.</li>
+            <li>Pressing <kbd>s</kbd> toggles these speaker
+            notes on and off.</li>
+            <li>Hit <kbd>home</kbd> to restart the presentation,
+            and <kbd>end</kbd> to see the overview.</li>
+          </ul>
+        </aside>
+    </header>
+    <section id="hhgg" class="slide step" data-scale="10">
+      <h2 class="only-titlepage only-hhgg only-panic">Hitchhiker's Guide to Galactic Complexity</h2>
+      <h3 id="panic" class="step">Don't panic</h3>
+        <aside class="speaker">
+          <p>
+            When I thought about it I found my original title a bit
+            too conservative...
+          </p>
+          <p>
+            The nice thing about this one is that I can write <q>Don't
+            panic</q> in large, friendly letters.
+          </p>
+        </aside>
+    </section>
+    <section class="step" id="cc" data-scale="1" data-y="2900" data-x="500">
+      <div style="position: relative; top: 2em"
+           class="only-cc only-master only-PH">
+        <h2>Complexity Classes</h2>
+        <ul>
+          <li><em>classify</em> problems</li>
+          <li class="step" id="master">
+            <em>master</em> problems and <em>reductions</em>
+          </li>
+          <li class="step" id="PH"><em>hierarchies</em></li>
+        </ul>
+      </div>
+      <svg version="1.2" width="800" height="500" viewBox="0 250 800 500" 
+           id="p_np" class="only-cc only-master only-PH only-poly only-exp">
+        <path d="M300,500 C300,300 600,300 600,500" id="pathP"/>
+        <path d="M130,500 C130,220 610,220 610,500" id="pathNP"/>
+        <path d="M290,500 C290,220 770,220 770,500" id="pathcoNP"/>
+      </svg>
+      <div class="only-cc only-master">
+        <p id="Ptime"
+           style="position:absolute;left:470px;top:400px">$\CC{P}$</p>
+        <p id="NPtime"
+           style="position:absolute;left:230px;top:400px">$\CC{NP}$</p>
+        <p id="coNPtime"
+           style="position:absolute;left:625px;top:400px">$\text{co-NP}$</p>
+      </div>
+    <svg version="1.2" width="800" height="500" viewBox="0 250 800 500" 
+         class="only-master">
+      <defs>
+        <marker id="Triangle"
+                viewBox="0 0 10 10" refX="0" refY="5" 
+                markerUnits="strokeWidth"
+                markerWidth="4" markerHeight="3"
+                orient="auto">
+          <path d="M 0 0 L 10 5 L 0 10 z" />
+        </marker>
+      </defs>
+      <path d="M260,330 L320,320"
+            style="stroke:#669900" marker-end="url(#Triangle)"/>
+      <circle cx="260" cy="330" r="10" id="c3sat"/>
+      <circle cx="320" cy="320" r="10" id="csat"/>
+      <circle cx="400" cy="400" r="10" id="ctae"/>
+    </svg>
+    <div class="only-master alert-master"
+         style="font-family:sans-serif;font-size:40%">
+      <p id="sat" style="position:absolute;top:335px;left:255px">SAT</p>
+      <p id="tsat" style="position:absolute;top:320px;left:315px">3SAT</p>
+      <p id="tae" style="position:absolute;top:460px;left:390px">Tree Automata Emptiness</p>   
+    </div>
+      <div class="only-PH only-poly only-exp">
+        <p id="Ptime"
+           style="position:absolute;left:470px;top:400px">$\CC{P}$</p>
+        <p id="sigma1p"
+           style="position:absolute;left:230px;top:400px">$\Sigma_1^p$</p>
+        <p id="pi1p"
+           style="position:absolute;left:645px;top:400px">$\Pi_1^p$</p>
+      </div>
+    </section>
+
+    <section class="step" id="poly" data-scale="1" data-y="2900"
+             data-x="500">
+      <div class="only-poly only-exp">
+        <p id="pi2p" style="position:absolute;top:200px;left:806px">$\Pi_2^p$</p>
+        <p id="sigma2p" style="position:absolute;top:200px;left:112px">$\Sigma_2^p$</p>
+        <p id="delta2p" style="position:absolute;top:140px;left:460px">$\Delta_2^p$</p>
+      </div>
+      <svg version="1.2" width="900" height="500" viewBox="0 122 900 500" 
+           id="phierarchy" class="only-poly only-exp">
+        <path d="M0,500 C0,50 800,50 800,500"/>
+        <path d="M100,500 C100,50 900,50 900,500"/>
+      </svg>
+      <div class="only-poly only-exp">
+        <p id="polyhierarchy"
+        style="position:absolute;top:-100px;left:452px">$\CC{PH}\\~~\vdots$</p>
+        <p id="pspace"
+        style="position:absolute;top:-175px;left:420px;color:#669900">$\CC{PSpace}$</p>
+      </div>
+      <svg version="1.2" width="1600" height="1000" viewBox="0 0 800 500" 
+           class="only-poly only-exp"
+           style="left:-300px;top:-580px">
+        <path d="M150,500 C150,150 650,150 650,500"/>
+        <path d="M100,500 C100,100 700,100 700,500" style="stroke:#669900"/>
+      </svg>
+    </section>
+
+    <section class="step" id="exp" data-scale="2" data-y="2500"
+             data-x="500">
+      <div class="only-exp only-recursive">
+        <p id="expname" style="position:absolute;left:425px;top:70px">$\CC{EXP}$</p>
+        <p id="nexpname" style="position:absolute">$\CC{NEXP}$</p>
+        <p id="conexpname" style="position:absolute;left:720px">$\text{co-NEXP}$</p>
+        <p id="expspace" style="position:absolute;left:380px;top:-120px">$\CC{ExpSpace}$</p>
+      </div>
+      <svg version="1.2" width="1800" height="1100" viewBox="0 150 800 500" 
+           id="phierarchy" class="only-exp only-recursive"
+           style="left:-540px;top:-345px">
+        <path d="M300,500 C300,280 600,280 600,500"/>
+        <path d="M130,500 C130,220 610,220 610,500"/>
+        <path d="M290,500 C290,220 770,220 770,500"/>
+        <path d="M100,500 C100,150 800,150 800,500"/>
+      </svg>
+    </section>
+    <section id="recursive" class="step" data-x="400" data-y="800"
+             data-scale="5">
+        <p id="r" style="position:relative;top:-170px;left:60px" class="only-recursive only-pbs only-move only-fgh only-fgh2 only-fgcc">$\CC{R}$</p>
+        <p id="elem" style="position:relative;left:325px;top:180px" class="only-recursive only-pbs only-move only-fgh">$\CC{Elementary}$</p> 
+        <p style="position:relative;left:430px;top:150px" class="only-recursive">$\vdots$</p>
+      <svg version="1.2" viewBox="0 0 800 500" width="800" height="500"
+           class="only-recursive only-pbs only-move only-fgh hclasses">
+        <path d="M220,500 C220,320 580,320 580,500" id="lelem"/>
+        <path d="M0,500 C0,0 800,0 800,500"/>
+      </svg>
+      <div id="pbs" class="step" style="position:absolute;left:-6px;top:-5px">
+        <p>Lossy Channel System Reach. <span id="lcs">LCS</span></p>
+        <p>Safety MTL Sat. <span id="smtl">SMTL</p>
+        <p>Lossy Counter Machine Reach. <span id="lcm">LCM</span></p>
+        <p>MTL Finite Sat. <span id="fmtl">FMTL</span></p>
+        <p>Post Embedding Problems <span id="pep">PEP</span></p>
+        <p>WS1S Sat. <span id="ws1s">WS1S</span></p>
+        <p>Equivalence of SF Exprs. <span id="sfeq">SFEq</span></p>
+        <p>&beta;-Equ. of Simply-Typed &lambda; Terms <span id="lbeq">S&lambda;Eq</span></p>
+      </div>
+      <svg version="1.2" viewBox="0 0 800 500" width="800" height="500"
+           class="only-move only-pbs hclasses">
+      <circle cx="304" cy="205" r="5" id="clcs"/>
+      <circle cx="360" cy="195" r="5" id="cfmtl"/>
+      <circle cx="446" cy="195" r="5" id="cpep"/>
+      <circle cx="500" cy="290" r="5" id="csmtl"/>
+      <circle cx="548" cy="310" r="5" id="clcm"/>
+      <circle cx="408" cy="358" r="5" id="cws1s"/>
+      <circle cx="444" cy="361" r="5" id="csfeq"/>
+      <circle cx="474" cy="367" r="5" id="clbeq"/>
+      </svg>
+      <div id="move" class="step"></div>
+    </section>
+    <section id="fgh" class="step" data-x="600" data-y="100">
+      <h2 style="font-size: 110%">Extended Grzegorczyk Hierarchy</h2>
+      <p class="bib">[Löb &amp; Wainer, 1970]</p>
+      <p style="position:relative; left:-2.3em;font-size:85%">
+        $\begin{aligned}
+        F_0(x)&\eqdef x+1 
+        & \!\!\!\!\!\!F_1(x)&=2x+1\\
+        F_{\alpha+1}(x)&\eqdef F^{x+1}_\alpha(x)
+        &\!\!\!\!\!\!F_2(x)&=2^{x+1}(x+1)-1\\
+        F_\lambda(x)&\eqdef F_{\lambda_x}(x)
+        &\!\!\!\!\!\!F_3(x)&\text{ non elementary}\\
+        &&\!\!\!\!\!\!F_\omega(x)&\text{ Ackermannian}\end{aligned}\\\begin{aligned}
+        \FGH{\alpha}&\eqdef\bigcup_{c<\omega}\CC{FDTime}\left(F_\alpha^c(n)\right)\\
+        \FGH{<\alpha}&\eqdef\bigcup_{\beta<\alpha}\FGH{\beta}
+        \end{aligned}$</p>
+    </section>
+    <section id="fgh2" class="step" data-x="400" data-y="800"
+             data-scale="5">
+      <div class="only-fgh2" style="font-size:75%">
+      <p id="MR" style="position:relative;top:-67px;left:205px">$\CC{Multiply-Recursive}=\FGH{<\omega^\omega}^\ast$</p>
+      <p id="PR" style="position:relative;top:55px;left:201px">$\CC{Primitive-Recursive}=\FGH{<\omega}^\ast$</p>
+      <p id="F2" style="position:relative;top:145px;left:291px">$\CC{Elementary}=\FGH{2}^\ast$</p>
+      </div>
+    <svg version="1.2" viewBox="0 0 800 500" width="800" height="500"
+         class="only-fgh2 hclasses">
+        <circle cx="304" cy="205" r="5" id="clcs"/>
+        <circle cx="360" cy="195" r="5" id="cfmtl"/>
+        <circle cx="446" cy="195" r="5" id="cpep"/>
+        <circle cx="500" cy="290" r="5" id="csmtl"/>
+        <circle cx="548" cy="310" r="5" id="clcm"/>
+        <circle cx="408" cy="358" r="5" id="cws1s"/>
+        <circle cx="444" cy="361" r="5" id="csfeq"/>
+        <circle cx="474" cy="367" r="5" id="clbeq"/>
+        <path d="M220,500 C220,320 580,320 580,500"/>
+        <path d="M0,500 C0,0 800,0 800,500"/>
+        <path d="M150,500 C150,210 650,210 650,500"/>
+        <path d="M80,500 C80,100 720,100 720,500"/>
+      </svg>
+    </section>
+    <section id="fgcc" class="step" data-x="400" data-y="800"
+             data-scale="5">
+      <svg version="1.2" viewBox="0 0 800 500" width="800" height="500"
+           class="only-fgcc only-end hclasses">
+        <circle cx="304" cy="205" r="5" id="clcs"/>
+        <circle cx="360" cy="195" r="5" id="cfmtl"/>
+        <circle cx="446" cy="195" r="5" id="cpep"/>
+        <circle cx="500" cy="290" r="5" id="csmtl"/>
+        <circle cx="548" cy="310" r="5" id="clcm"/>
+        <circle cx="408" cy="358" r="5" id="cws1s"/>
+        <circle cx="444" cy="361" r="5" id="csfeq"/>
+        <circle cx="474" cy="367" r="5" id="clbeq"/>
+        <path d="M220,500 C220,320 580,320 580,500" style="stroke:#444"/>
+        <path d="M0,500 C0,0 800,0 800,500"/>
+        <path d="M150,500 C150,210 650,210 650,500" style="stroke:#444"/>
+        <path d="M80,500 C80,100 720,100 720,500" style="stroke:#444"/>
+        <path d="M200,500 C200,300 600,300 600,500" style="stroke:#669900"/>
+        <path d="M130,500 C130,190 670,190 670,500" style="stroke:#669900"/>
+        <path d="M60,500 C60,80 740,80 740,500" style="stroke:#669900"/>
+      </svg>
+      <div class="only-fgcc only-end" style="color:#669900">
+      <p id="Foo" style="position:relative;top:-110px;left:320px">$\CC{HAck}\eqdef\FC{\omega^\omega}$</p>
+      <p id="Fo" style="position:relative;top:-10px;left:330px">$\CC{Ack}\eqdef\FC{\omega}$</p>
+      <p id="F3" style="position:relative;top:90px;left:300px">$\CC{Tower}\eqdef\FC{3}$</p>
+      </div>
+    </section>
+    <section id="end" class="slide step" data-x="10000"
+             data-scale="10">
+      <h2>Fast-Growing Complexity Classes</h2>
+      <p style="text-align: center;padding:
+      1em">$\FC{\alpha}\eqdef\bigcup_{p\in\FGH{\lt\alpha}}\!\!\CC{DTime}\left(F_\alpha(p(n))\right)$</p>
+      <ul>
+        <li class="step" id="closure"><em>completeness</em> for reductions in
+        $\FGH{\lt\alpha}$</li>
+        <li class="step" id="strict"><em>strict</em> hierarchy</li>
+        <li>many examples, using wqo <em>length function
+        theorems</em> for upper bounds</li>
+      </ul>
+      <p class="step uncover" id="notes" style="text-align:center">
+        <a href="http://cel.archives-ouvertes.fr/cel-00727025">http://cel.archives-ouvertes.fr/cel-00727025</a>
+      </p>
+    </section>
+</article>
+
+<script>
+if ("ontouchstart" in document.documentElement) { 
+    document.querySelector(".hint").innerHTML = "<p>Tap on the left or right to navigate</p>";
+}
+</script>
+
+<!-- MathJAX
+See http://docs.mathjax.org/en/latest/tex.html.
+-->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+  tex2jax: {
+    inlineMath: [ ['$','$'], ['\\(','\\)'] ]
+  },
+  TeX: {
+    Macros: {
+      FGH: ["\\mathscr{F}_{\\!#1}",1],
+      FC: ["\\mathbf{F}_{\\!#1}",1],
+      CC: ["\\text{#1}",1],
+      eqdef: "="
+    }
+  }
+  });
+</script>
+<script type="text/javascript"
+  src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+<script src="js/impress.js"></script>
+<script>impress().init();</script>
+</body>
+</html>
+

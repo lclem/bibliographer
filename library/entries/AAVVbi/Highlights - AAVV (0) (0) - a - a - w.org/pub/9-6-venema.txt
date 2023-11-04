@@ -1,0 +1,17 @@
+Game bisimulations between basic positions
+
+Yde Venema
+
+Acceptance games and evaluation games provide examples of parity games
+in which some positions can be singled out as being *basic*, in the sense
+that (1) matches proceed in *rounds*, moving from one basic position to 
+another, and (2) when determining the winner of an infinite match, only 
+the basic positions matter.
+
+We introduce a notion of bisimulation between two such games that 
+combines Pauly's bisimulation between extensive strategic games, with a 
+combinatorial part for the parity condition.
+
+Applications include the proof of complementation lemmas in automata
+theory.
+

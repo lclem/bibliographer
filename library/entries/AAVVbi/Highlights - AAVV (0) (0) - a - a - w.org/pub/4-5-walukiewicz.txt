@@ -1,0 +1,4 @@
+We prove that the positive fragment of minimal first-order
+intuitionistic logic is not of elementary complexity. The proof
+uses an automata-theoretic approach taking advantage of
+the computational power of alternation.

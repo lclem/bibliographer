@@ -1,0 +1,100 @@
+<!--
+  == For your convenience, this form can be processed by EasyChair
+  == automatically. You can fill out this form offline and then upload it
+  == to EasyChair. Several review forms can be uploaded simultaneously.
+  == You can modify your reviews as many times as you want.
+  == 
+  == When filling out the review form please mind the following rules:
+  == 
+  == (1) Blocks such as this are comments. EasyChair will ignore them.
+  ==     Do not write any text into these blocks as it will be ignored.
+  ==     You can add comments to the review form or remove them.
+  == (2) Write only into the tags where instructed. Do not modify any
+  ==     tags and attributes, or the review will become unusable and will
+  ==     be rejected by EasyChair.
+  -->
+<review id="2880738::1406909"
+        submission="11"
+        title="Liveness in L/U-Parametric Timed Automata"
+        authors="Étienne André,
+                 Didier Lime"
+        pc_member="Slawomir Lasota">
+<field id="369869" name="Overall evaluation">
+  <score>
+  <!--
+    == Select your choice from the options below and write its number below,
+    == before the </score> tag.
+    ==
+    == 3 strong accept
+    == 2 accept
+    == 1 weak accept
+    == 0 borderline paper
+    == -1 weak reject
+    == -2 reject
+    == -3 strong reject
+    -->
+    
+  </score>
+</field>
+<field id="369870" name="Reviewer's confidence">
+  <score>
+  <!--
+    == Select your choice from the options below and write its number below,
+    == before the </score> tag.
+    ==
+    == 5 (expert)
+    == 4 (high)
+    == 3 (medium)
+    == 2 (low)
+    == 1 (none)
+    -->
+    
+  </score>
+</field>
+<!--     Review     -->
+<field id="369872" name="Review">
+  <!--
+    == Please provide a detailed review, including justification for your
+    == scores. This field is required unless you add an attachment.
+    -->
+  <text required="required">
+  <!--
+    == Enter the text for the field
+    ==   Review
+    == below. This field is required.
+    -->
+
+
+
+
+
+
+  </text>
+</field>
+<field id="369873" name="Confidential remarks for the program committee">
+  <!--
+    == If you wish to add any remarks intended only for PC members please
+    == write them below. These remarks will only be seen by the PC members
+    == having access to reviews for this submission. They <b>will not be
+    == sent to the authors</b>. This field is optional.
+    -->
+  <text optional="optional">
+  <!--
+    == Enter the text for the field
+    ==   Confidential remarks for the program committee
+    == below. This field is optional.
+    -->
+
+
+
+
+
+
+  </text>
+</field>
+<reviewer>
+  <first_name> Lorenzo </first_name>
+  <last_name>  Clemente </last_name>
+  <email> clementelorenzo@gmail.com </email>
+</reviewer>
+</review>

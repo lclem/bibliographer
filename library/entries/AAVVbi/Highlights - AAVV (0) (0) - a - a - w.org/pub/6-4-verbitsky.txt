@@ -1,0 +1,15 @@
+Bounds for the quantifier depth in two-variable logics
+
+Christoph Berkholz, Andreas Krebs, and Oleg Verbitsky
+
+Given structures $G$ and $H$ and a first-order formula $F$
+over the same vocabulary, we say that $F$ distinguishes $G$ from $H$
+if $F$ is true on $G$ but false on $H$. 
+By alternation depth of $F$ we mean
+the maximum length of a sequence of nested alternating quantifiers in $F$.
+Obviously, this parameter is bounded from above by the quantifier depth of $F$.
+We will examine the maximum alternation depth and quantifier depth needed 
+to distinguish two structures in two-variable first-order logic and its fragments.
+Lower bounds for the quantifier depth in the existential-positive fragment
+have applications to analysis of the computational complexity of Arc Consistency testing,
+one of the most popular heuristics for the constraint satisfaction problem.

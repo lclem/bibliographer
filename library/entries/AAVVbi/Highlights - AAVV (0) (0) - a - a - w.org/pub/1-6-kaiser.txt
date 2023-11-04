@@ -1,0 +1,9 @@
+In machine learning there is an inherent trade-off between the efficiency of
+the learning algorithm and the expressiveness of the hypothesis that one is
+allowed to learn. Even though this trade-off is present in almost every machine
+learning task, it is hard to capture formally and still often resolved based
+on instinct and experience. We propose using parametrized logical formulas
+to represent hypotheses and then exploit propositional solvers for efficient
+learning and results from descriptive complexity to get expressiveness
+guarantees. This allows a more systematic study of the above trade-off and,
+as we show on a few examples, it is applicable to practical learning tasks.

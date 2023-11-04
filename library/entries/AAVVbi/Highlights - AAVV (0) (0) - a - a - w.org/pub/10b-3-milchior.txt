@@ -1,0 +1,8 @@
+In this talk, we are interested by expressivity of automaton
+reading a base b r-tuple of natural numbers. 
+
+It is well known that those automaton recognize b-recognizable set.
+We will study how to decide, in polynomial time if the set recognized
+by an automaton is definable a smaller structure as \FO[+] or
+\FO[<,\moda], and how to compute a formula in this structure that
+accepts this set.

@@ -1,0 +1,3 @@
+Expressive completeness, which is one of the themes in this field of research, compares the power of these logics to fragments of first-order logic over some class of frames. If logic is as expressive as first order logic, as logic US (with connectives Until, Since) is shown to be, it is as powerful as possible. It can express the same statements, but in a more concise and readable way.
+
+In this presentation I will show a method of proving expressive completeness of a temporal logic by the use of games. This will be demonstrated on example of a temporal logic with connectives Future and Past.

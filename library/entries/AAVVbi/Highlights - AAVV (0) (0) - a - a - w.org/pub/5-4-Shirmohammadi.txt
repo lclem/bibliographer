@@ -1,0 +1,16 @@
+Markov Decision Processes (MDPs) are 1-1/2 player stochastic games.
+The player tries to maximize the probability to satisfy an objective.
+Traditionally, the  objective of the player  is expressed 
+as a set  of desired sequences of states 
+ visited during the game.
+Recently, MDPs are viewed as generators of probability distributions 
+over states, and objectives are defined as sets of sequences of probability distributions. 
+We study synchronizing objectives that require that some state tend to
+accumulate all the probability mass. 
+We consider three winning modes: sure, almost-sure and limit-sure.
+ 
+
+
+
+   
+

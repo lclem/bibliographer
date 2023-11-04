@@ -1,0 +1,53 @@
+/* uncover */
+.uncover-titlepage, .uncover-hhgg, .uncover-panic, .uncover-cc, .uncover-master,
+.uncover-PH, .uncover-poly, .uncover-exp, .uncover-recursive, .uncover-pbs,
+.uncover-move, .uncover-fgh, .uncover-fgh2, .uncover-fgcc, .uncover-end { 
+    opacity: 0.3;
+}
+
+.impress-on-titlepage .uncover-titlepage, .impress-on-hhgg .uncover-hhgg,
+.impress-on-panic .uncover-panic, .impress-on-cc .uncover-cc,
+.impress-on-master .uncover-master, .impress-on-PH .uncover-PH,
+.impress-on-poly .uncover-poly, .impress-on-exp .uncover-exp,
+.impress-on-recursive .uncover-recursive, .impress-on-pbs .uncover-pbs,
+.impress-on-move .uncover-move, .impress-on-fgh .uncover-fgh,
+.impress-on-fgh2 .uncover-fgh2, .impress-on-fgcc .uncover-fgcc,
+.impress-on-end .uncover-end { 
+    opacity: 1.0!important; 
+}
+
+/* alert */
+.alert-titlepage, .alert-hhgg, .alert-panic, .alert-cc, .alert-master,
+.alert-PH, .alert-poly, .alert-exp, .alert-recursive, .alert-pbs,
+.alert-move, .alert-fgh, .alert-fgh2, .alert-fgcc, .alert-end { 
+    color: inherit;
+}
+
+.impress-on-titlepage .alert-titlepage, .impress-on-hhgg .alert-hhgg,
+.impress-on-panic .alert-panic, .impress-on-cc .alert-cc,
+.impress-on-master .alert-master, .impress-on-PH .alert-PH,
+.impress-on-poly .alert-poly, .impress-on-exp .alert-exp,
+.impress-on-recursive .alert-recursive, .impress-on-pbs .alert-pbs,
+.impress-on-move .alert-move, .impress-on-fgh .alert-fgh,
+.impress-on-fgh2 .alert-fgh2, .impress-on-fgcc .alert-fgcc,
+.impress-on-end .alert-end { 
+    color: #669900!important;
+}
+
+/* only */
+.only-titlepage, .only-hhgg, .only-panic, .only-cc, .only-master,
+.only-PH, .only-poly, .only-exp, .only-recursive, .only-pbs,
+.only-move, .only-fgh, .only-fgh2, .only-fgcc, .only-end { 
+    opacity: 0;
+}
+
+.impress-on-titlepage .only-titlepage, .impress-on-hhgg .only-hhgg,
+.impress-on-panic .only-panic, .impress-on-cc .only-cc,
+.impress-on-master .only-master, .impress-on-PH .only-PH,
+.impress-on-poly .only-poly, .impress-on-exp .only-exp,
+.impress-on-recursive .only-recursive, .impress-on-pbs .only-pbs,
+.impress-on-move .only-move, .impress-on-fgh .only-fgh,
+.impress-on-fgh2 .only-fgh2, .impress-on-fgcc .only-fgcc,
+.impress-on-end .only-end { 
+    opacity: 1.0!important; 
+}

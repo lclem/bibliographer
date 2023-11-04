@@ -1,0 +1,4 @@
+We discuss expressivity issues concerning the epistemic mu-calculus with 
+synchronous and perfect recall semantics w.r.t. games with partial observation, 
+alternating temporal logics with incomplete observation, and an extension of the 
+monadic second-order logic on trees. 

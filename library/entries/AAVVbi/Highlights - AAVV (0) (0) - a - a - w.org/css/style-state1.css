@@ -1,0 +1,1186 @@
+
+/* Reset CSS */
+
+@font-face {
+    font-family: 'open_sansbold';
+    src: url('font/opensans-bold-webfont.eot');
+    src: url('font/opensans-bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('font/opensans-bold-webfont.woff') format('woff'),
+         url('font/opensans-bold-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'open_sansregular';
+    src: url('font/opensans-regular-webfont.eot');
+    src: url('font/opensans-regular-webfont.eot?#iefix') format('embedded-opentype'),
+         url('font/opensans-regular-webfont.woff') format('woff'),
+         url('font/opensans-regular-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+@font-face {
+    font-family: 'open_sans_extraboldregular';
+    src: url('font/opensans-extrabold-webfont.eot');
+    src: url('font/opensans-extrabold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('font/opensans-extrabold-webfont.woff') format('woff'),
+         url('font/opensans-extrabold-webfont.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, font, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+	background: transparent;
+	border: 0;
+	margin: 0;
+	padding: 0;
+	vertical-align: baseline;
+}
+
+a {
+  text-decoration: none;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	/* clear: both; */
+	font-weight: normal;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote {
+	quotes: none;
+}
+blockquote:before, blockquote:after {
+	content: '';
+	content: none;
+}
+del {
+	text-decoration: line-through;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+a img {
+	border: none;
+}
+
+
+
+/*-------------------------- CSS -------------------------------*/
+
+body {
+	width: 100%;
+	background-color: #9BAAAA;
+	font-family: open_sansregular;
+	font-size: 15px;
+	}
+
+h1 {
+	text-transform: uppercase;
+	font-family: open_sans_extraboldregular;
+		}	
+	
+h2 {
+	text-transform: uppercase;
+	font-family: open_sans_extraboldregular;
+}
+input[type=submit]{
+	cursor: pointer;
+}
+
+#register {
+	cursor: pointer;
+}
+#register_box {
+	display: none;
+	position: fixed;
+	right: 50px;
+	top: 100px;
+	width: 300px;
+	height: 200px;
+	padding: 30px;
+	z-index: 100;
+	background-color: #f6f7f7;
+	box-shadow: 4px 4px 10px rgba(0,0,0,0.3);
+	box-sizing: border-box;
+	-moz-box-sizing:border-box;
+}
+#register_box .x {
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	right: 10px;
+	top: 10px;
+	background-image: url('../images/x.gif');
+	background-size: 100%;
+	cursor: pointer;
+}
+#register_box p {
+	margin-bottom: 10px;
+}
+#register_box span {
+	display: inline-block;
+	width: 100px;
+}
+#register_box input[type=text],#register_box input[type=password] {
+	width: 240px;
+}
+#register_box input[type=submit] {
+	background-color: black;
+	color: white;
+	border: 0;
+	padding: 3px 6px;
+	margin: 0;
+	width: 60px;
+	left: 184px;
+	display: block;
+	position: relative;
+}
+
+/*----------------------------------------------------------*/
+/*----------------------------------------------------------*/	
+/* -------------------- Full-size page -----------------------*/
+/*----------------------------------------------------------*/	
+/*----------------------------------------------------------*/
+
+/* containerA A1 - first white */
+#containerA.state1 {
+	width: 100%;
+	background-color: white;
+	padding-bottom: 50px;
+}
+
+#containerA.state1 hr {
+	display: none;
+	}
+
+#containerA.state1 .wrapper {
+	max-width: 1260px;
+	margin: 0 auto;
+}
+
+#containerA.state1 p {
+	font-size: 18px;
+}
+
+#containerA.state1 #logo {
+	display: inline-block;
+	vertical-align: top;
+	margin-left: 135px;
+	margin-right: 0px;
+	width: 30%;
+	max-width: 360px;
+	position: relative;
+	}
+	
+#containerA.state1 #logo img {
+	display: inline-block;
+	vertical-align: top;
+	width: 360px;
+	position: absolute;
+	top: 0px;
+	left: -65px;
+	}
+
+#containerA.state1 .cline-black {
+	width: 40px;
+	margin-right: 20px;
+	margin-left: 80px;
+	height: 115px;
+	margin-top: 80px;
+	background-image: url('../images/cline-black.jpg');
+	background-position: top right;
+	background-repeat: repeat;
+	display: inline-block;
+	vertical-align: top;
+	}
+	
+#containerA.state1 #conAdate {
+	display: inline-block;
+	vertical-align: top;
+	width: 30%;
+	max-width: 430px;
+	margin-top: 70px;
+	}
+	
+	a:link {
+		color: #555555;
+	}
+	a:visited {
+		color: #333333;
+	}
+
+/* container MENU ---------------------------- Menu white */	
+
+#containerMENU.state1 {
+	width: 100%;
+	background-color: white;
+	padding-bottom: 10px;
+	padding-top: 10px;
+	top: 0px;
+	position: fixed;
+	z-index: 99;
+}
+
+#containerMENU.state1.notfixednow  {
+	position: static!important;
+}
+
+#menu-fixed-hack.state1{
+	height: 0px;
+}
+
+#containerMENU.state1 .wrapper {
+	max-width: 1260px;
+	margin: 0 auto;
+}
+
+#containerMENU.state1 .wrapper .menu-name {
+	display: none;
+}
+
+#containerMENU.state1 .wrapper .menu-image {
+	display: none;
+}
+
+#containerMENU.state1 .wrapper ul {
+	display: block;
+	margin: 0px 120px 0px 120px;
+}
+
+#containerMENU.state1 .wrapper ul li {
+	display: inline-block;
+	padding: 10px;
+}
+
+#containerMENU.state1 .wrapper a:link {
+		color: #555555;
+	}
+#containerMENU.state1 .wrapper a:hover {
+		color: #000000;
+	}	
+#containerMENU .signout {
+	display: inline-block;
+	background-color: black;
+	color: white;
+	padding: 0px 5px 0px 5px;
+	border: 0;
+	font-family: 'open_sansregular';
+	font-size: 15px;
+	text-transform: uppercase;
+	vertical-align: bottom;
+}
+#containerMENU #logged_name {
+	color: #ffa028;
+	padding: 10px 10px 10px 25px;
+	cursor: pointer;
+	background-image: url('../images/expander.png');
+	background-repeat: no-repeat;
+	background-size: 20px 15px;
+	background-position: 0 15px;
+}
+#containerMENU #logged_name.expanded {
+	background-image: url('../images/expander_expanded.png');
+}
+#containerMENU #unregister {
+	padding: 0;
+	display: none;
+	position: relative;
+}
+#containerMENU #unregister form {
+	display: inline;
+}
+#containerMENU #unregister input {
+	position: absolute;
+	cursor: pointer;
+}
+#containerMENU.state1 #unregister input {
+	top: 20px;
+	left: 25px;
+}
+	
+/* container B1 - orange */	
+#containerB.state1 {
+	width: 100%;
+	min-height: 30px;
+	background-color: #ffa028;
+}
+
+#containerB.state1 .wrapper {
+	max-width: 1260px;
+	margin: 0 auto;
+}
+
+*#containerB.state1 .first-text {
+	display: inline-block;
+	vertical-align: top;
+	width: 30%;
+	max-width: 360px;
+	margin-top: 40px;
+	margin-bottom: 40px;
+	}
+	
+#containerB.state1 .second-text {
+	display: inline-block;
+	vertical-align: top;
+	width: 40%;
+	max-width: 430px;
+	margin-top: 40px;
+	margin-bottom: 40px;
+	}	
+	
+#containerB.state1 .cline-white {
+	width: 100px;
+	height: 293px;
+	margin: 20px 20px 20px 20px;
+	background-image: url('../images/cline-white.jpg');
+	background-position: top right;
+	background-repeat: repeat;
+	display: inline-block;
+	vertical-align: top;
+	}
+	
+#containerB.state1 .cline-white-horiz {
+	display: none;
+	}
+
+/* container C1 - black */
+
+#containerC.state1 {
+	width: 100%;
+	min-height: 30px;
+	background-color: black;
+}
+
+#containerC.state1 .wrapper {
+	max-width: 1260px;
+	margin: 0 auto;
+}
+
+#containerC.state1 .main-text {
+	color: white;
+	width: 18%;
+	max-width: 210px;
+	display: inline-block;
+	vertical-align: top;
+	margin-top: 40px;
+	margin-bottom: 40px;
+	margin-left: 0;
+	margin-right: 40px;
+}
+
+#containerC.state1 h2 {
+	font-size: 16px;
+}
+
+#containerC.state1 .first-text {
+	margin-left: 140px;
+}
+
+#containerC.state1 .fourth-text {
+	margin-right: 0;
+
+}
+
+/* container D1 - second white */
+
+#containerD.state1 {
+	width: 100%;
+	min-height: 30px;
+	background-color: white;
+}
+
+#containerD.state1 .wrapper {
+	max-width: 1260px;
+	margin: 0 auto;
+}
+
+#containerD.state1 h1 {
+	font-size: 22px;
+	color: #ffa028;
+	line-height: 1em;
+}
+
+#containerD.state1 hr {
+	display: none;
+	}
+
+#containerD.state1 .main-text {
+	margin-bottom: 0px;
+	width: 21.5%;
+	max-width: 250px;
+	color: black;
+	display: inline-block;
+	vertical-align: top;
+	margin-top: 40px;
+	margin-left: 0;
+	margin-right: 0;
+}
+
+#containerD.state1 h2 {
+	font-size: 16px;
+}
+
+#containerD.state1 .event-info {
+	font-size: 14px;
+}
+
+#containerD.state1 p {
+	font-size: 14px;
+}
+
+#containerD.state1 .first-text {
+}
+
+#containerD.state1 .fourth-text {
+	max-width: 210px;
+}
+
+#containerD.state1 .cline-black {
+	width: 20px;
+	height: 50px;
+	margin-left: 95px;
+	margin-top: 20px;
+	margin-right: 20px;
+	background-image: url('../images/cline-black.jpg');
+	background-position: top right;
+	background-repeat: repeat;
+	display: inline-block;
+	vertical-align: top;
+	}
+
+
+/* container E1 - third white */
+
+#containerE.state1 {
+	width: 100%;
+	min-height: 30px;
+	background-color: white;
+}
+
+#containerE.state1 .main-text {
+	width: 21.5%;
+	max-width: 250px;
+
+	color: black;
+	display: inline-block;
+	vertical-align: top;
+	margin-top: 40px;
+	margin-bottom: 40px;
+	margin-left: 0;
+	margin-right: 0;
+} 
+
+#containerE.state1 .wrapper {
+	max-width: 1260px;
+	margin: 0 auto;
+}
+
+#containerE.state1 h2 {
+	font-size: 16px;
+}
+
+#containerE.state1 .first-text {
+	margin-left: 140px;
+}
+
+#containerE.state1 .fourth-text {
+}	
+	
+/* container F ------------------------- SUBMISSIONS orange */
+#containerF.state1 {
+	width: 100%;
+	min-height: 30px;
+	background-color: #ffa028;
+}
+
+#containerF.state1 .wrapper {
+	max-width: 1260px;
+	margin: 0 auto;
+}
+
+#containerF.state1 .first-text {
+	display: inline-block;
+	vertical-align: top;
+	width: 39%;
+	max-width: 460px;
+	margin-bottom: 40px;
+	margin-left: 140px;
+	margin-right: 40px;
+	}
+
+#containerF.state1 h3 {
+	font-size: 16px;
+	text-transform: uppercase;
+	font-family: open_sans_extraboldregular;
+}	
+	
+#containerF.state1 .second-text {
+	display: inline-block;
+	vertical-align: top;
+	width: 43%;
+	max-width: 500px;
+	margin-bottom: 40px;
+	}	
+	
+#containerF.state1 .page-header h2 {
+	display: inline-block;
+	vertical-align: top;
+	margin: 20px 90px 20px 70px;
+	padding: 10px 50px 10px 70px;
+	background-image: url('../images/cline-black-ovl.png');
+	background-position: top left;
+	background-repeat: no-repeat;
+}	
+	
+#containerF.state1 .cline-white {
+	width: 100px;
+	height: 293px;
+	margin: 20px 20px 20px 20px;
+	background-image: url('../images/cline-white.jpg');
+	background-position: top right;
+	background-repeat: repeat;
+	display: inline-block;
+	vertical-align: top;
+	}
+	
+#containerF.state1 .cline-white-horiz {
+	display: none;
+	}
+	
+/* container G ----------------------------- Registration black */
+#containerG.state1 {
+	width: 100%;
+	min-height: 30px;
+	background-color: black;
+	color: white;
+}
+
+#containerG.state1 .wrapper {
+	max-width: 1260px;
+	margin: 0 auto;
+}
+
+#containerG.state1 h2 {
+	color: #ffffff;
+}
+
+#containerG.state1 .first-text {
+	display: inline-block;
+	vertical-align: top;
+	width: 39%;
+	max-width: 460px;
+	margin-bottom: 40px;
+	margin-left: 140px;
+	margin-right: 40px;
+	}
+
+#containerG.state1 h3 {
+	font-size: 16px;
+	text-transform: uppercase;
+	font-family: open_sans_extraboldregular;
+}	
+	
+#containerG.state1 .register-form {
+	width: 100%;
+}
+
+#containerG.state1 .register-form p {
+	color:#ffffff;
+}
+
+#containerG.state1 .register-form label {
+	color: #ffffff;
+	display: block;
+	margin-bottom: 15px;
+}
+
+#containerG.state1 .register-form label#label-fee-disabled {
+	color: #888888;
+}
+
+#containerG.state1 .register-form .reg-form-text{
+	width: 96%;
+	background-color: black;
+	margin-bottom: 15px;
+	border: 1px solid white;
+	outline: 0px solid white;
+	color: white;
+	padding: 5px 2%;
+}
+
+#containerG.state1 .register-form .reg-form-submit {
+	float: right;
+	margin-right: -1px;
+	font-family: open_sans_extraboldregular;
+	background-color: #ffa028;
+	color: #000000;
+	border: 1px solid #ffa028;
+	outline: 0px solid black;
+	cursor: pointer;
+	padding: 1px 14px;
+}
+
+#containerG.state1 .register-form .reg-form-submit:hover {
+	color: white;
+	border: 1px solid black;
+}
+
+	
+#containerG.state1 .second-text {
+        color: white;
+	display: inline-block;
+	vertical-align: top;
+	width: 40%;
+	max-width: 500px;
+	padding-bottom: 40px;
+	}	
+
+#containerG.state1 .second-text p{
+	padding-right: 40px;
+	}	
+
+
+#containerG.state1 .second-text .first-column{
+	color: white;
+	width: 50%;
+	max-width: 250px;
+	display: inline-block;
+	vertical-align: top;
+	margin-left: 0;
+	margin-right: 0;
+}
+
+#containerG.state1 .second-text .first-column p{
+	padding-right: 40px;
+}
+
+#containerG.state1 .second-text .second-column{
+	color: white;
+	width: 50%;
+	max-width: 250px;
+	display: inline-block;
+	vertical-align: top;
+	margin-left: 0;
+	margin-right: 0;
+}
+
+#containerG.state1 .second-text .second-column p{
+	padding-right: 40px;
+}
+
+#containerG.state1 .page-header h2 {
+	display: inline-block;
+	vertical-align: top;
+	margin: 20px 90px 20px 70px;
+	padding: 10px 50px 10px 70px;
+	background-image: url('../images/cline-white-ovl.png');
+	background-position: top left;
+	background-repeat: no-repeat;
+}
+
+
+/* container H ------------------------- Program white */
+
+#containerH.state1 {
+	width: 100%;
+	min-height: 30px;
+	background-color: white;
+}
+
+#containerH.state1 .wrapper {
+	max-width: 1260px;
+	margin: 0 auto;
+	padding-bottom: 30px;
+	padding-top: 30px;
+
+}
+
+#containerH.state1 .page-header h2 {
+	display: inline-block;
+	vertical-align: top;
+	margin: 20px 90px 0px 70px;
+	padding: 10px 50px 0 70px;
+	background-image: url('../images/cline-black-ovl.png');
+	background-position: top left;
+	background-repeat: no-repeat;
+}
+
+
+#containerH.state1 hr {
+	display: none;
+	}
+
+#containerH.state1 .main-text {
+	margin-bottom: 0px;
+	width: 80%;
+	color: black;
+	display: inline-block;
+	vertical-align: top;
+	margin-top: 10px;
+	margin-left: 0;
+	margin-right: 0;
+}
+
+#containerH.state1 h2 {
+	//font-size: 16px;
+}
+
+#containerH h3 {
+	font-size: 16px;
+	text-transform: uppercase;
+	font-family: 'open_sans_extraboldregular';
+}	
+
+#containerH.state1 .event-info {
+	font-size: 14px;
+}
+
+#containerH.state1 p {
+	font-size: 14px;
+}
+
+#containerH.state1 .full-text {
+	display: block;
+	vertical-align: top;
+	width: 83%;
+	max-width: 1005px;
+	margin-top: 20px;
+	margin-bottom: 10px;
+	margin-left: 140px;
+}
+#containerH.state1 .columned {
+	-moz-column-count: 2;
+    -moz-column-gap: 40px;
+    -webkit-column-count: 2;
+    -webkit-column-gap: 40px;
+    column-count: 2;
+    column-gap: 40px;
+}
+
+#containerH.state1 .first-text {
+	display: inline-block;
+	vertical-align: top;
+	width: 39%;
+	max-width: 460px;
+	margin-bottom: 10px;
+	margin-left: 140px;
+	margin-right: 40px;
+}
+
+
+#containerH.state1 .second-text {
+	display: inline-block;
+	vertical-align: top;
+	width: 40%;
+	max-width: 500px;
+	padding-bottom: 10px;
+	}	
+
+#containerH.state1 .fourth-text {
+	max-width: 210px;
+}
+
+
+#containerH.state1 .cline-black {
+	width: 20px;
+	height: 50px;
+	margin-left: 95px;
+	margin-top: 40px;
+	margin-bottom: 40px;
+	margin-right: 20px;
+	background-image: url('../images/cline-black.jpg');
+	background-position: top right;
+	background-repeat: repeat;
+	display: inline-block;
+	vertical-align: top;
+	}
+
+#containerH .break {
+	background-color: #e2e7e7;
+}
+
+#containerH .session {
+	background-color: #ffa028;
+}
+
+#containerH .type {
+	font-family: 'open_sans_extraboldregular';
+}
+
+#containerH .author-and-title,#containerH .paper {
+	margin-top: 0!important;
+	margin-bottom: 0!important;
+	padding: 10px 0 10px 0;
+}
+
+#containerH .expander {
+	display: inline-block;
+	width: 20px;
+	height: 15px;
+	margin: 0 10px 0 0;
+	background-image: url('../images/expander.png');
+	background-repeat: no-repeat;
+	background-size: 100%;
+	vertical-align: bottom;
+	cursor: pointer;
+}
+#containerH .expander.expanded {
+	background-image: url('../images/expander_expanded.png');
+}
+#containerH .paper.own .expander.expanded {
+	background-image: url('../images/expander_expanded_white.png');
+}
+#containerH .submit-check {
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	margin: 0 10px 12px 5px;
+	border-radius: 8px;
+	background-color: white;
+	background-image: url('../images/preview.gif');
+	background-repeat: no-repeat;
+	background-size: 100%;
+	vertical-align: bottom;
+	opacity: 0;
+}
+#containerH .highlighted {
+	background-color: #f6f7f7;
+}
+#containerH .authors {
+	font-variant: normal;
+}
+#containerH .authors:after{
+    content: "\003A";
+}
+
+#containerH .title {
+    font-style: italic;
+	font-variant: normal;
+	display: inline-block;
+	text-indent: 0;
+}
+
+#containerH .session .title {
+    font-style: italic;
+	font-variant: normal;
+}
+
+
+#containerH .paper{
+    display: inline;
+    margin-top:5px;
+    margin-bottom:10px;
+}
+#containerH .paper.own{
+	background-color: black;
+	color: white;
+	padding-bottom: 5px;
+	margin-top: 10px!important;
+}
+#containerH .paper h4{
+	font-family: 'open_sans_extraboldregular';
+	margin: 0 0 5px 10px;
+}
+#containerH .time{
+    display: inline-block;
+    padding-left: 7px;
+    padding-right: 5px;
+}
+
+#containerH .time .start{
+}
+
+#containerH .time .end{
+}
+
+#containerH .paper .time .end{
+    display:none;
+}
+
+#containerH .time .end:before{
+    content: "\2013";
+}
+
+#containerH .paper .time .end{
+    display: none;
+}
+#containerH .slides-and-speaker {
+	display: block;
+	margin-bottom: 10px;
+	font-family: 'open_sansregular';
+}
+#containerH .slides-and-speaker a,#containerH input[type="submit"] {
+	display: inline-block;
+	background-color: black;
+	border-color: #9baaaa;
+	color: white;
+	padding: 0px 5px 0px 5px;
+	border: 0;
+	font-family: 'open_sansregular';
+	font-size: 15px;
+	text-transform: uppercase;
+	vertical-align: bottom;
+}
+#containerH input[type="submit"] {
+	margin-bottom: 10px;
+	
+}
+#containerH textarea {
+	font-family: 'open_sansregular';
+	width: 80%;
+	height: 35px;
+	background-color: #f6f7f7;
+	border-color: #9baaaa;
+	color: #9baaaa;
+	vertical-align: bottom;
+	margin: 10px 5px 10px 0;
+	resize: none;
+}
+
+#containerH .abstract{
+	height: 0;
+	overflow: hidden;
+	margin-top: 0!important;
+	margin-bottom: 0!important;
+	padding: 0 20px 0 20px;
+	box-sizing:border-box;
+	-moz-box-sizing:border-box;
+}
+#containerH .abstract.own{
+	height: auto;
+	background-color: black;
+	color: white;
+	padding: 0 20px 20px 20px;
+}
+#containerH .abstract.own .review_summary {
+	display: inline-block;
+	color: #9baaaa;
+	margin: 0 0 20px 0;
+}
+#containerH .abstract h4{
+    display: inline;
+	color: #9baaaa;
+	font-family: 'open_sans_extraboldregular';
+}
+
+#containerH .abstract.own .comments {
+	margin-left: 10px;
+}
+#containerH .abstract.own .comments hr{
+	display: block;
+	width: 100%;
+	height: 1px;
+	border: 0;
+	background-color: #9baaaa;
+	margin: 10px 0 10px 0;
+}
+#containerH .abstract p{
+    padding-right: 0;
+    margin-bottom: .5em;
+	margin-top: 0!important;
+}
+
+#containerH .abstract ol {
+    margin-left: 1em; 
+    padding-left: 1em; 
+    list-style: decimal;
+}
+#containerH .abstract ol > li {
+    position: relative; 
+    margin:0 0 0 0; 
+    padding:0 0; 
+}
+
+
+
+
+/* container I ------------------------- Call for papers orange */	
+#containerI.state1 {
+	width: 100%;
+	min-height: 30px;
+	background-color: #ffa028;
+}
+
+#containerI.state1 .wrapper {
+	max-width: 1260px;
+	margin: 0 auto;
+}
+
+#containerI.state1 .first-text {
+	display: inline-block;
+	vertical-align: top;
+	width: 39%;
+	max-width: 460px;
+	margin-bottom: 40px;
+	margin-left: 140px;
+	margin-right: 40px;
+	}
+
+#containerI.state1 h3 {
+	font-size: 16px;
+	text-transform: uppercase;
+	font-family: open_sans_extraboldregular;
+}	
+	
+#containerI.state1 .second-text {
+	display: inline-block;
+	vertical-align: top;
+	width: 43%;
+	max-width: 500px;
+	margin-bottom: 40px;
+	}	
+	
+#containerI.state1 .page-header h2 {
+	display: inline-block;
+	vertical-align: top;
+	margin: 20px 90px 20px 70px;
+	padding: 10px 50px 10px 70px;
+	background-image: url('../images/cline-black-ovl.png');
+	background-position: top left;
+	background-repeat: no-repeat;
+}	
+	
+
+#containerI.state1 p {
+    padding-top: .5em;
+    padding-bottom: .5em;
+}
+
+#containerI.state1 h2 {
+    padding-top: .5em;
+}
+
+#containerI.state1 li:before{
+    content: "\2022 ";
+    padding-right: 5px;
+}
+
+
+#containerI.state1 li {
+    display: inline-block;
+    padding-bottom: .5em;
+}
+
+#containerI.state1 h3 {
+    padding-top: .5em;
+}
+
+#containerI.state1 .cline-white {
+	width: 100px;
+	height: 293px;
+	margin: 20px 20px 20px 20px;
+	background-image: url('../images/cline-white.jpg');
+	background-position: top right;
+	background-repeat: repeat;
+	display: inline-block;
+	vertical-align: top;
+	}
+	
+#containerI.state1 .cline-white-horiz {
+	display: none;
+	}
+
+/* container SPONSORS ---------------------- sponsors white*/
+#containerSPONSORS.state1 {
+	width: 100%;
+	min-height: 30px;
+	background-color: #ffffff;
+}
+
+#containerSPONSORS.state1 .wrapper {
+	max-width: 1260px;
+	margin: 0 auto;
+}
+
+#containerSPONSORS.state1 .main-sponsor {
+	margin-left: 140px;
+	display: inline-block;
+	vertical-align: top;
+}
+
+#containerSPONSORS.state1 .main-sponsor img {
+	height: 140px;
+	display: inline-block;
+	padding: 20px 40px;
+}
+
+#containerSPONSORS.state1 .sponsors {
+	margin-left: 0px;
+	display: inline-block;
+	vertical-align: top;
+	max-width: 710px;
+}
+
+#containerSPONSORS.state1 .sponsors img {
+	height: 50px;
+	display: inline-block;
+	padding: 30px 15px;
+}
+
+#containerSPONSORS.state1 .page-header h2 {
+	display: inline-block;
+	vertical-align: top;
+	margin: 20px 90px 20px 70px;
+	padding: 10px 50px 10px 70px;
+	background-image: url('../images/cline-black-ovl.png');
+	background-position: top left;
+	background-repeat: no-repeat;
+}	
+	
+/* container FOOTER 1 ---------------- footer grey*/
+#containerFOOTER.state1 {
+	width: 100%;
+	min-height: 30px;
+	background-color: #9baaaa;
+}
+
+#containerFOOTER.state1 .wrapper {
+	max-width: 1260px;
+	margin: 0 auto;
+}
+
+#containerFOOTER.state1 .main-text {
+	margin-top: 20px;
+	margin-bottom: 20px;
+	color: white;
+	width: 21.5%;
+	max-width: 250px;
+	display: inline-block;
+	vertical-align: top;
+	margin-left: 0;
+	margin-right: 0;
+}
+
+#containerFOOTER.state1 h2 {
+	font-size: 16px;
+}
+
+#containerFOOTER.state1 a {
+	color: white;
+	text-decoration: underline;
+}
+
+#containerFOOTER.state1 .first-text {
+	margin-left: 140px;
+}
+
+#containerFOOTER.state1 .fourth-text {
+}

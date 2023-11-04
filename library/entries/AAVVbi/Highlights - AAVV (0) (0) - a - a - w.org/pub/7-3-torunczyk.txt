@@ -1,0 +1,16 @@
+We describe a general framework for static verification of systems
+that base their decisions upon queries to databases. The database is
+specified using constraints, typically a schema, and is not modified
+during a run of the system. The system is equipped with  a finite
+number of registers for storing intermediate information from the
+database and the specification consists of a transition table described 
+using quantifier-free formulas that can query either the database or the registers.
+
+Our main result concerns systems querying XML databases -- modeled as
+data trees -- using quantifier-free formulas with predicates such as
+the descendant axis or comparison of data values.  
+
+Our technique is based on the notion of amalgamation and is quite
+general. For instance it also applies to relational databases (with
+an optimal \pspace algorithm).
+

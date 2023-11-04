@@ -1,0 +1,6 @@
+We prove that the determinacy of Gale-Stewart games whose winning sets are accepted by real-time 1-counter Büchi automata is equivalent 
+to the determinacy of (effective) analytic Gale-Stewart games which is known to be a large cardinal assumption. 
+Using some results of set theory we prove that one can effectively construct a 1-counter Büchi automaton A  such that: 
+(1) There exists a model of ZFC in which Player 1 has a winning strategy in the Gale-Stewart  game G(L(A)); 
+but the winning strategies cannot be recursive and not even hyperarithmetical. 
+(2) There exists a model of ZFC in which the Gale-Stewart  game is not determined. 

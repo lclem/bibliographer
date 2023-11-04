@@ -1,0 +1,15 @@
+Expressiveness modulo bisimilarity: a coalgebraic perspective
+
+Yde Venema
+
+Janin and Walukiewicz showed that the modal mu-calculus MC is the 
+bisimulation-invariant fragment of monadic second-order logic MSO. 
+Their proof uses parity automata with a transition map defined in 
+terms of monadic first-order logic. We decompose their proof in
+three parts:
+(1) automata-theoretic characterizations of MSO and MC respectively,
+(2) a simple model-theoretic characterization of the identity-free
+fragment of monadic first-order logic, and
+(3) a coalgebraic result, stating that the second result propagates 
+from the `one-step level' to the level of full fixpoint logics.
+

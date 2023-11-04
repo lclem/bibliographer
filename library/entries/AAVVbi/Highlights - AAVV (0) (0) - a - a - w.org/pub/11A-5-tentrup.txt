@@ -1,0 +1,4 @@
+We present the first proof system for Coordination Logic (CL). CL provides a logical representation for the distributed realizability problem and extends the game-based temporal logics with quantification over strategies under incomplete information. 
+The proof system is based on a reduction from CL to its decidable fragment.
+We propose a compositional proof rule which splits a given CL formula into two parts, a decidable CL formula and another, simplified, CL formula. Applying the rule repeatedly transforms the original CL formula into a collection of decidable CL formulas.
+Our proof system is a complete framework for the synthesis of distributed systems.

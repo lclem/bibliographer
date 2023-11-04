@@ -1,0 +1,8 @@
+ATLsc is a powerful formalism for reasoning about multi-agent systems; it is a
+natural variant of the semantics of the logic ATL, as defined by Alur,
+Henzinger and Kupferman. Using a translation into QCTL (CTL extended with
+quantification over atomic propositions), we prove that ATLsc satisfiability
+is decidable when satisfiability is restricted to turn-based games, or when
+the set of moves allowed to the players in advance. On the other hand, when
+strategy quantification is restricted to memoryless strategies, satisfiability
+is undecidable in all considered cases.

@@ -1,0 +1,14 @@
+This work addresses, and proposes a solution to, the problem of the
+validity of weighted automata in which epsilon-transitions may result in
+infinite summations.
+
+With a topological approach, a definition of validity is taken that insures
+that any closure algorithm will succeed on every valid weighted automaton.
+This definition is stable with respect to natural transformations of
+automata.
+
+Validity is shown to be decidable when weights are taken in Q or R. The
+corresponding algorithm is implemented in the VAUCANSON platform.  The
+problem remains open in general.
+
+

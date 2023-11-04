@@ -1,0 +1,1 @@
+We extend the notion of invariant elementary definability to a variety of different graph representations, including those that strictly extend the power of first-order logic with an arbitrary linear order.

@@ -1,0 +1,1 @@
+One counter net is a one counter automaton without possibility of testing 0 value. We proved that solving the simulation problem for one counter nets is P-SPACE complete.

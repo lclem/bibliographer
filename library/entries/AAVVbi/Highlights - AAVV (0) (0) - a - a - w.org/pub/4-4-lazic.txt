@@ -1,0 +1,13 @@
+Metric temporal logic (MTL) is one of the most prominent specification
+formalisms for real-time systems. Over infinite timed words, full MTL
+is undecidable, but satisfiability for its safety fragment was proved
+decidable several years ago. The problem is also known to be
+equivalent to a fair termination problem for a class of channel
+machines with insertion errors. However, the complexity has remained
+elusive, except for a non-elementary lower bound. Via another
+equivalent problem, namely termination for a class of rational
+relations, we show that satisfiability for safety MTL is not primitive
+recursive, yet is Ackermannian, i.e., among the simplest non-primitive
+recursive problems. This is surprising since decidability was
+originally established using Higman's Lemma, suggesting a much higher
+non-multiply recursive complexity.

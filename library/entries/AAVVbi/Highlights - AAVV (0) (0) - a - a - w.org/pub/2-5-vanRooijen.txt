@@ -1,0 +1,10 @@
+We discuss the separation problem for regular
+  languages. We give a Ptime algorithm to check whether two
+  given regular languages are separable by a piecewise testable
+  language, that is, whether a $\mathcal{B}\Sigma_1(<)$ sentence can
+  witness that the languages are disjoint. If this
+  is possible, we express a separator by saturating one of the
+  original languages by a suitable congruence. Following the same line,
+  we show that one can also decide whether two regular languages can
+  be separated by an unambiguous (i.e. $FO^2(<)$-definable) language, albeit with a higher
+  complexity.

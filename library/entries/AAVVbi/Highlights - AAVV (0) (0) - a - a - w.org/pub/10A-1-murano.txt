@@ -1,0 +1,9 @@
+In multi-agent games, a recent contribution is given by Strategy Logic (SL), 
+a powerful formalism that allows to reason explicitly about strategies as first order objects. 
+The price to pay for the high expressiveness of SL is that it admits non-behavioral strategies, 
+i.e., a choice of an agent in a play may depend on choices made in another counterfactual play. 
+As the latter moves are unpredictable, these strategies cannot be synthesized in practice.
+
+In this talk, we introduce two maximal syntactical fragments of SL admitting behavioral strategies only. 
+As a consequence, we show that the model-checking problem for both fragments is solvable in 2EXPTIME, 
+as it is for the subsumed ATL*.

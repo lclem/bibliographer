@@ -1,0 +1,2 @@
+The premise of this talk is that in order to obtain realistic decision plans for Markov Decision Processes (or other decision-theoretic models) it is useful to consider solution concepts that are as discriminating as possible, by exploiting as much as possible the information provided in the model.
+Hence, we propose novel solution concepts for MDPs, obtained by lexicographically composing different risk attitudes, ranging from absolutely risk-averse, or pessimistic, to risk-seeking, or optimistic, in an order that depends on the application domain.

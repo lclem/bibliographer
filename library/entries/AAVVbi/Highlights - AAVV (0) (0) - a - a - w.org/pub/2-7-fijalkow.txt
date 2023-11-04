@@ -1,0 +1,5 @@
+In this talk, I will discuss some recent developments about boundedness games. They are two-player games played over graphs, featuring counters. The first player's objective is to satisfy a parity condition and that the counter values are bounded.
+A lot of questions are open: what is the algorithmic complexity of deciding the winner, and does there always exist finite-memory winning strategies?
+In particular, as shown by Thomas Colcombet, proving the existence of finite-memory winning strategies for (some) boundedness games is the last missing item to prove the decidability of cost-MSO over infinite trees. 
+
+I will give an overview of where we stand now and what are the next challenges.

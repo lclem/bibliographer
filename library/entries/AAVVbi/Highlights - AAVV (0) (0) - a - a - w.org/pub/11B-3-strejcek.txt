@@ -1,0 +1,10 @@
+Some applications of linear temporal logic (LTL) require to translate
+formulae of the logic to deterministic omega-automata. There are currently
+two translators producing deterministic automata: ltl2dstar working for the
+whole LTL and Rabinizer applicable to LTL(F,G) which is the LTL fragment
+using only modalities F and G.  We present a new translation to
+deterministic Rabin automata via alternating automata and deterministic
+transition-based generalized Rabin automata. Our translation applies to a
+fragment that is strictly larger than LTL(F,G). Experimental results show
+that our algorithm can produce significantly smaller automata compared to
+Rabinizer and ltl2dstar, especially for more complex LTL formulae.

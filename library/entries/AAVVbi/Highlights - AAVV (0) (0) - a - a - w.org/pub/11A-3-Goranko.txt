@@ -1,0 +1,4 @@
+Combining quantitative and qualitative strategic reasoning in concurrent multi-player games
+Nils Bulling and Valentin Goranko
+
+We propose a logical modeling framework, combining a game-theoretic study of the abilities of players to achieve quantitative objectives in multi-player games (optimizing payoffs or preferences on outcomes) with a logical analysis of the abilities of players for achieving qualitative objectives (reaching or maintaining game states with desired properties). We enrich concurrent game models with payoffs for the normal form games associated with each state of the model and propose a quantitative extension of the logic ATL* enabling combination of quantitative and qualitative reasoning.

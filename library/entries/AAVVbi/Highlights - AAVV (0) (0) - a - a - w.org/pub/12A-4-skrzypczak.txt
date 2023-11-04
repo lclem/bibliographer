@@ -1,0 +1,2 @@
+A nondeterministic automaton is unambiguous if it has at most one accepting run on every input. The class of languages recognisable by unambiguous tree automata is still not well-understood. In this paper we show the following complexity collapse: if A is an unambiguous Buchi tree automaton then L(A) is recognisable by a weak alternating automaton. We present also some extensions of this result. To our best knowledge this is the first parity index collapse that exploits unambiguity of an automaton.
+  

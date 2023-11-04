@@ -1,0 +1,3 @@
+Modal logic is called "elementary" if it is considered over class of frames definable by a first-order formula. Different formulae lead to different logics, and many of them find their applications in computer science. 
+The aim of the Highlights conference talk is to present a wide picture of the latest research on the satisfiability problem of elementary modal logics. 
+The talk will provide all the necessarily definitions, discuss the motivation, summarise the recent research papers on this topic, and discuss some open problems. 

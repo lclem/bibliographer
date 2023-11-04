@@ -1,0 +1,3 @@
+Borel determinacy says that all infinite-tree win-lose two-player games have a Nash equilibrium provided that the winning sets of the players are Borel. This talk generalises it and shows that all infinite-tree multi-outcome multi-player games have a Nash equilibrium provided that the outcome function is "Borel measurable" and that the player preferences have no infinite ascending chains.
+
+open access to the article at http://lmcs-online.org/ojs/viewarticle.php?id=985&layout=abstract&iid=39

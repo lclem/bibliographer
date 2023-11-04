@@ -1,0 +1,2 @@
+In this work, we focus on control of Markov decision processes with non-negative real-valued costs. We develop an algorithm to design a control strategy that guarantees the satisfaction of a correctness specification expressed as a formula of Linear Temporal Logic, while at the same time minimizing the expected average cost between two consecutive satisfactions of a desired property. The existing solutions to this problem in control theory are sub-optimal. By leveraging ideas from automata-based model checking and game theory, we provide an optimal solution. 
+

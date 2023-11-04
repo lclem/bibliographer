@@ -1,0 +1,6 @@
+We study the effects of the addition of an equivalence relation to one of the most representative 
+interval temporal logics, namely, the logic ABBbar of Allen's relations "meets", "begun by", and "begins".
+We first prove that the satisfiability problem for the resulting logic ABBbar-sim remains decidable 
+over finite linear orders, but it becomes nonprimitive recursive, while decidability is lost over $\bbN$.
+Then, we show that ABBbar-sim is expressive enough to define $\omega{S}$-regular languages.
+  

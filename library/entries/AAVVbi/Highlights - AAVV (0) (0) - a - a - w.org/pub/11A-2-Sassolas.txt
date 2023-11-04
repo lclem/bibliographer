@@ -1,0 +1,5 @@
+Iterated admissibility is a well-known and important concept in classical game theory, e.g. to determine rational behaviors in multi-player matrix games.
+As recently shown by Berwanger, this concept can be soundly extended to infinite games played on graphs with omega-regular objectives.
+In this talk, we study the algorithmic properties of this concept for such games.
+We settle the exact complexity of natural decision problems on the set of strategies that survive iterated elimination of dominated strategies.
+As a byproduct of our construction, we obtain automata which recognize all the possible outcomes of such strategies.

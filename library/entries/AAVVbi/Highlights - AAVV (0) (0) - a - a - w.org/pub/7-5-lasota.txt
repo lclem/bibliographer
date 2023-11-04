@@ -1,0 +1,8 @@
+title: A machine-independent characterization of timed languages
+
+abstract:
+We use a variant of sets with atoms (known also as nominal sets) as a framework suitable 
+for stating and proving the following two results on timed automata. The first result 
+is a machine-independent characterization of languages of deterministic timed automata,
+a la Myhill-Nerode Theorem. As our second result we define a class of automata
+that slightly extends timed automata and is effectively closed under minimization.

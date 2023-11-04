@@ -1,0 +1,9 @@
+Two-player zero-sum games on finite automata are a classical metaphor
+for controller synthesis. An extension of this model to time-critical
+systems are two-player games on priced timed automata. For those
+games, the optimal reachability synthesis problem asks to compute a
+strategy (for one of the players) that guarantees to reach a given
+target with a total cost satisfying some optimality constraint. While,
+some versions of this problem have already been showed undecidable, we
+propose to complete the global picture by studying other variants
+(such as the timed-bounded version).

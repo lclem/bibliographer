@@ -1,0 +1,5 @@
+Distance automata are automata weighted over the semiring (N U {+infinity},min,+) that compute functions from words to N U {+infinity}.
+It is known that testing f<g (i-e for all word w, f(w)<g(w)) is an undecidable problem for f,g computed by distance automata.
+I will give an approximation of this problem that is decidable: an algorithm which, given e>0 and two functions f,g computed by distance automata, answers ``yes'' if f<g, ``no'' if there
+is w such that f(w)>(1+e)g(w), and may answer ``yes'' or ``no'' in all other cases. 
+This is a joint work with Thomas Colcombet.

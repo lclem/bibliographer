@@ -1,0 +1,5 @@
+A two-way transducer is a finite state sequential machine with a two-way input tape and a one-way output tape. 
+It computes a partial function from words over an alphabet to another set of words. 
+Similarly, a MSO-definable function over words is defined as interpretations of linear graphs through logic.
+A  result by Engelfriet and Hoogeboom proved the equivalence of the two models.
+I will recall the definition of both models, and state an extension of this result between the natural subclass of aperiodic two-way transducers and the first-order definable functions.

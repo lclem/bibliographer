@@ -1,0 +1,7 @@
+We study Gaifman and Hanf locality of an extension of first-order logic with modulo p counting quantifiers
+(FO+MODp, for short) with arbitrary numerical predicates. We require that the validity of formulas is
+independent of the particular interpretation of the numerical predicates and refer to such formulas as
+arb-invariant formulas. We give a detailed picture of locality and non-locality properties of arb-
+invariant FO+MODp.
+
+  

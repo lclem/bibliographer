@@ -1,0 +1,7 @@
+CTL* formulas can be enriched to express relations between variables whose value can range in a chosen
+concrete domain. 
+Chosen the appropriate domain one can express quantitative properties that ordinary CTL^* formulas
+can only approximate through abstraction. We can refer directly to concrete values and describe how they 
+change in time. 
+In this talk we show that satisfiability for CTL* with equality-, order-, and modulo-
+constraints over the Z is decidable

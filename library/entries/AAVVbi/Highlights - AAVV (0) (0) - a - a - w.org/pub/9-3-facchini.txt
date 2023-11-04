@@ -1,0 +1,11 @@
+Game or not Game?
+
+
+Alessandro Facchini, Filip Murlak and Michal Skrzypczak
+University of Warsaw 
+\{facchini,fmurlak,mskrzypczak\}@mimuw.edu.pl
+
+Abstract:
+Recently the present authors have shown that both the non-deterministic and the alternating Rabin-Mostowski index problems are decidable for languages recognisable by so-called game automata, which can be seen as the closure of deterministic ones under complementation and composition. 
+
+In order to be able to claim decidability of the index problem for a given subclass of regular languages, one should however prove that membership in is decidable too. In this talk we show that membership in the class of languages recognizable by game automata is decidable.

@@ -1,0 +1,9 @@
+FO Model Checking of Interval Graphs
+
+We study the computational complexity of the model checking problem for the
+first order (FO) logic on interval graphs, i.e., interscetion graphs of
+intervals on the real line. As the main result we show that for n-vertex
+interval graphs this problem can be solved in time O(n log n) if we take
+intervals with lengths from a fixed finite set. On the other hand, we show
+that this is no longer true once the interval lengths taken from any set
+that is dense in some open subset.

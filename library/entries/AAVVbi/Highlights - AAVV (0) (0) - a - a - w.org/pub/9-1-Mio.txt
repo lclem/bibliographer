@@ -1,0 +1,4 @@
+Speaker: Matteo Mio
+Title: "Game Semantics for Probabilistic mu-Calculi"
+Abstract:
+I will introduce a novel class of two-player games, called "Two-Player Stochastic meta-Parity Games", which are used in my PhD Thesis to give Game Semantics to expressive probabilistic-variants of the Modal mu-Calculus. This new class of games is proven to be "determined". I will discuss some of the technical aspects of the proof. 

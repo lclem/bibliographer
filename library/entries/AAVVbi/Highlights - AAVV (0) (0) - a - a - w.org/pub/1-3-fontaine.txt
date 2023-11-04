@@ -1,0 +1,4 @@
+Unions of acyclic conjunctive queries (CQs) can be evaluated in linear time, as opposed to arbitrary CQs, for which the evaluation problem is NP-complete. It is known that evaluation of semantically acyclic unions of CQs - i.e., unions of CQs that are equivalent to a union of acyclic ones - is tractable.
+
+We study the notion of semantic acyclicity in the context of graph databases and unions of conjunctive regular path queries (UCRPQs). We prove that checking whether a UCRPQ is semantically acyclic is decidable in 2ExpSpace and is ExpSpace-hard. We show that evaluation of semantically acyclic UCRPQs is fixed-parameter tractable.
+  

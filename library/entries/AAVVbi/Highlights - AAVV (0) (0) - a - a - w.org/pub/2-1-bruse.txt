@@ -1,0 +1,8 @@
+Guarded normal form requires occurrences of fixpoint variables in a μ-calculus-
+formula to occur under the scope of a modal operator. The literature contains guarded
+transformations that effectively bring a μ-calculus-formula into guarded normal form. We
+show that the known guarded transformations can cause an exponential blowup in formula
+size, contrary to existing claims of polynomial behaviour. We also show that any poly-
+nomial guarded transformation for μ-calculus-formulas in the more relaxed vectorial form
+gives rise to a polynomial solution algorithm for parity games, the existence of which is an
+open problem.

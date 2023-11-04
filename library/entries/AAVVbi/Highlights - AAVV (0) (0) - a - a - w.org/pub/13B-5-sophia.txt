@@ -1,0 +1,3 @@
+We describe the role epistemic reasoning can play in concurrency theory. The idea of using modalities as programming constructs has been largely unexplored. We add epistemic and spatial modalities as part of the programming language, not just as part of the meta-language to reason about protocols. 
+
+We introduce spatial and epistemic process calculi to reason about information and knowledge distributed among agents in a system. We give domain-theoretic structures to represent this information, operational and denotational means to reason about possibly infinite behavior, and  compact versions of infinite objects to simulate public announcement.

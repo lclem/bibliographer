@@ -1,0 +1,11 @@
+Stochastic games provide a powerful framework to model fundamental
+problems in the design and analysis of stochastic reactive
+systems. While this connection is well understood, and several results
+have enriched the framework, there is a wealth of research questions
+that are open, including some long-standing ones (such as the
+complexity of perfect-information stochastic reachability games). In
+this talk, I will survey some recent results for general model of
+stochastic games and related models. The talk is based on several
+papers, and presents an overview of recent results based on joint
+works with several co-authors, as well as results from other
+researchers. 

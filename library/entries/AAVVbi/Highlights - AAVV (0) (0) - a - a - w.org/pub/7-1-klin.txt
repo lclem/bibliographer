@@ -1,0 +1,2 @@
+We study Turing machines over sets with atoms, also known as nominal sets.
+Our main result is that deterministic machines are weaker than nondeterministic ones; in particular, P!=NP in sets with atoms. Our main construction is closely related to the Cai-Fuerer-Immerman graphs used in descriptive complexity theory.

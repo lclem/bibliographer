@@ -1,0 +1,5 @@
+Reductions via representation
+
+If we take the complexity of a property to mean the difficulty of determining when it holds, 'simple` reductions provide a way to organise properties in terms of their complexity. In a topological space, the notion of Wadge reducibility is obtained by interpreting 'simple` as continuous. While on the Cantor space this gives a nice and useful hierarchy on the Borel sets, on the real line, for example, Wadge reducibility gives no hierarchy at all. 
+
+We define a notion of reducibility for second countable T0 topological spaces, based on admissible representations, which always semi-wellorders the Borel sets.

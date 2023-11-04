@@ -1,0 +1,5 @@
+In this paper, we make a general study of the concept of promptness in parity
+games that allows to put under a unique theoretical framework several of the
+cited variants along with new ones.
+Also, we describe simple polynomial reductions from all these conditions to
+either Buchi or parity games, which simplify all previous known procedures.

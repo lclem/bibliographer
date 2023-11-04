@@ -1,0 +1,4 @@
+We consider TPTL(Z) and MTL(Z) whose semantics are based on nonmonotonic data words in which every point is assigned a natural number as its weight. We define a weighted version of the EF game on MTL. Using these games, we prove the following:
+1. TPTL(Z) is strictly more expressive than MTL(Z).
+2. The until hierarchy and the constant hierarchy are strict for MTL(Z).
+3. It is undecidable whether a given TPTL(Z) formula can be expressed in MTL(Z).

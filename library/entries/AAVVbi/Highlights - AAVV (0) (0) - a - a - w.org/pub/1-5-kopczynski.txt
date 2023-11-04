@@ -1,0 +1,8 @@
+For a formula $\phi$ over a signature including predicates $P_1...P_k$,
+we define the image of $\phi$ as the set of tuples $(n_1...n_k)$ such that
+there is a model of $\phi$ where exactly $n_i$ elements satisfy $P_i$. For example,
+if each author has written exactly 2 papers, and each paper has exactly 3 authors, then
+2*total number of authors=3*total number of authors. This can be seen as a
+generalization of the well known notion of a spectrum. Our main result is that,
+for formulae of FO2C, spectra and images are definable in
+Presburger arithmetic, and thus semilinear (and closed under complement). 

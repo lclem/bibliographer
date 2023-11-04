@@ -1,0 +1,11 @@
+From Rabin's tree theorem, one can infer that the monadic second order
+theory of the lexicographic order on any regular language is
+decidable. The same holds for deterministic context-free languages
+since they belong to Caucal's hierarchy. When dropping determinism,
+not even the first-order theory remains decidable (\'Esik \&
+Carayol). This talk demonstrates that undecidability occurs already for
+\begin{itemize}
+\item small fragments of first-order logic and
+\item 1-counter automata that are very close to being deterministic.
+\end{itemize}
+

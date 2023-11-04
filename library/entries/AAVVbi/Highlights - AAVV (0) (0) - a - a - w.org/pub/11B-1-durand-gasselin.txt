@@ -1,0 +1,12 @@
+Automatic structures are relational structures whose domain can be
+presented as a regular language and predicates as synchronously
+regular relations.  The main result on automatic structures is an
+explicit algorithm to build an automaton that accepts any
+first-order relation, relying on the correspondance between logical
+connectives and classical operations over automata.
+
+In general, building this automaton is non-elementary, but for some
+automatic structures with elementary first-order theory, we show that
+this construction has a complexity close to that of the logic.
+
+

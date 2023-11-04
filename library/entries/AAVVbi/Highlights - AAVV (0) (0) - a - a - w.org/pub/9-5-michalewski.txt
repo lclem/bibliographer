@@ -1,0 +1,4 @@
+Title: Regular languages of infinite trees of low Borel complexity
+Author: Henryk Michalewski
+
+M. Bojańczyk and T. Place proved that for a regular language of infinite trees it is decidable if it is a boolean combination of open sets. The class of Delta^0_2 sets consists of sets which are simultaneously F_sigma and G_delta. Every boolean combination of open sets belongs to the class Delta^0_2. I will present a small modification of the result of M. Bojańczyk and T. Place. Namely, provide an algorithm to decide whether a given regular language of infinite trees belongs to the class \Delta^0_2.

@@ -1,0 +1,12 @@
+In several branches of computer sciences, automata are often used to
+describe computational behaviours. Among those developments, automata
+equipped with resource devices, e.g. a finite-memory or local
+registers, and languages over infinite alphabets are collecting more
+and more attentions. In this talk, we would like to discuss a possible
+general theory for those resource-handling automata from the point of
+nominal regular expressions. As already published works, we shall
+present the laywered-technique and the Kleene-style theorem. On top,
+as our ongoing work, by comparing possible actions (labels) on
+transitions, we will provide how those actions differentiate their
+language-recognisability and show the automata-hierarchy of languages
+over infinite alphabets.

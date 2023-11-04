@@ -1,0 +1,8 @@
+Decision problems with a non-elementary complexity occur naturally in
+logic, combinatorics, formal language, verification, etc., with
+complexities ranging from simple towers of exponentials to
+Ackermannian and beyond.  Somewhat surprisingly, we lack the
+definitions of classes and reductions that would allow to state
+completeness results at such high complexities.  We introduce a
+hierarchy of fast-growing complexity classes and discuss its
+suitability for completeness statements of non-elementary problems.

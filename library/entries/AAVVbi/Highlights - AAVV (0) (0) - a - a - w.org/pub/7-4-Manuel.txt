@@ -1,0 +1,8 @@
+We introduce and explore various fragments of $\mu$-calculus on data words. We show that full $\mu$-calculus is undecidable,
+but its $\nu$-fragment is decidable by reduction to data automata. We disclose two subclasses of the $\nu$-fragment
+that enjoy the further property of being closed under negation, namely the class of  Bounded Reversal (BR)
+and the class of Bounded Mode Alternation (BMA). The latter is contained in the former class and 
+is already sufficiently expressive for capturing several logics studied in the literature like $\fotwo$ 
+and Data-LTL. We then characterize these two fragments as cascades of suitably defined transducer models. 
+We finally prove the separation of BMA from BR using a novel paradigm of circuits and prove hierarchy theorems 
+for BMA, Data-LTL and $\fotwo$.
