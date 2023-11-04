@@ -1,0 +1,23 @@
+
+@Article{         10.1145/3418583,
+  Author        = "Liu, Peizun and Wahl, Thomas and Reps, Thomas",
+  Abstract      = "A classical result by Ramalingam about synchronization-sensitive interprocedural program analysis implies that reachability for concurrent threads running recursive procedures is undecidable. A technique proposed by Qadeer and Rehof, to bound the number of context switches allowed between the threads, leads to an incomplete solution that is, however, believed to catch ``most bugs'' in practice, as errors tend to occur within few contexts. The question of whether the technique can also prove the absence of bugs at least in some cases has remained largely open.Toward closing this gap, we introduce in this article the generic verification paradigm of observation sequences for resource-parameterized programs. Such a sequence observes how increasing the resource parameter affects the reachability of states satisfying a given property. The goal is to show that increases beyond some ``cutoff'' parameter value have no impact on the reachability---the sequence has converged. This allows us to conclude that the property holds for all parameter values.We applied this paradigm to the context-unbounded program analysis problem, choosing the resource to be the number of permitted thread context switches. The result is a partially correct interprocedural reachability analysis technique for concurrent shared-memory programs. Our technique may not terminate but is able to both refute and prove context-unbounded safety for such programs. We demonstrate the effectiveness and efficiency of the technique using a variety of benchmark programs. The safe instances cannot be proved safe by earlier, context-bounded methods.",
+  Address       = "New York, NY, USA",
+  articleno     = "16",
+  date-added    = "2020-12-14 09:12:47 +0100",
+  date-modified = "2020-12-14 09:12:47 +0100",
+  DOI           = "10.1145/3418583",
+  ISSN          = "0164-0925",
+  issue_date    = "December 2020",
+  Journal       = "ACM Trans. Program. Lang. Syst.",
+  Keywords      = "Interprocedural analysis, concurrency, recursion, stack, context bound",
+  Month         = "December",
+  Number        = "4",
+  numpages      = "34",
+  Publisher     = "Association for Computing Machinery",
+  Title         = "Interprocedural Context-Unbounded Program Analysis Using Observation Sequences",
+  URL           = "https://doi.org/10.1145/3418583",
+  Volume        = "42",
+  Year          = "2020",
+  bdsk-url-1    = "https://doi.org/10.1145/3418583"
+}
