@@ -1,0 +1,1131 @@
+<!DOCTYPE HTML>
+<html lang="en-gb" class="no-js">
+    <head>
+        <meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=2.5,user-scalable=yes">
+    <meta name="citation_publisher" content="Springer, Cham"/>
+    <meta name="citation_title" content="A Formally Verified Static Analysis Framework for Compositional Contracts"/>
+    <meta name="citation_doi" content="10.1007/978-3-030-54455-3_42"/>
+    <meta name="citation_language" content="en"/>
+    <meta name="citation_abstract_html_url" content="https://link.springer.com/chapter/10.1007/978-3-030-54455-3_42"/>
+    <meta name="citation_fulltext_html_url" content="https://link.springer.com/chapter/10.1007/978-3-030-54455-3_42"/>
+    <meta name="citation_pdf_url" content="https://link.springer.com/content/pdf/10.1007%2F978-3-030-54455-3_42.pdf"/>
+    <meta name="citation_springer_api_url" content="http://api.springer.com/metadata/pam?q=doi:10.1007/978-3-030-54455-3_42&amp;api_key="/>
+    <meta name="citation_firstpage" content="599"/>
+    <meta name="citation_lastpage" content="619"/>
+    <meta name="citation_author" content="Fritz Henglein"/>
+    <meta name="citation_author_institution" content="University of Copenhagen"/>
+    <meta name="citation_author_institution" content="Deon Digital"/>
+    <meta name="citation_author_email" content="henglein@di.ku.dk"/>
+    <meta name="citation_author" content="Christian Kjær Larsen"/>
+    <meta name="citation_author_institution" content="University of Copenhagen"/>
+    <meta name="citation_author" content="Agata Murawska"/>
+    <meta name="citation_author_institution" content="University of Copenhagen"/>
+    <meta name="citation_author_institution" content="Deon Digital"/>
+    <meta name="dc.identifier" content="10.1007/978-3-030-54455-3_42"/>
+    <meta name="format-detection" content="telephone=no"/>
+    <meta name="description" content="A (commercial or financial) contract is a mutual agreement to exchange resources such as money, goods and services amongst multiple parties. It expresses which actions may, must and must not be..."/>
+    <meta name="twitter:card" content="summary"/>
+    <meta name="twitter:title" content="A Formally Verified Static Analysis Framework for Compositional Contra"/>
+    <meta name="twitter:image" content="https://static-content.springer.com/cover/book/978-3-030-54455-3.jpg"/>
+    <meta name="twitter:image:alt" content="Content cover image"/>
+    <meta name="twitter:site" content="SpringerLink"/>
+    <meta name="twitter:description" content="A (commercial or financial) contract is a mutual agreement to exchange resources such as money, goods and services amongst multiple parties. It expresses which actions may, must and must not be..."/>
+    <meta name="citation_inbook_title" content="Financial Cryptography and Data Security"/>
+    <meta name="citation_publication_date" content="2020/02/14"/>
+    <meta name="citation_conference_series_id" content="springer/fc"/>
+    <meta name="citation_conference_title" content="International Conference on Financial Cryptography and Data Security"/>
+    <meta name="citation_conference_sequence_num" content="24"/>
+    <meta name="citation_conference_abbrev" content="FC"/>
+    <meta property="og:title" content="A Formally Verified Static Analysis Framework for Compositional Contracts"/>
+    <meta property="og:type" content="Paper"/>
+    <meta property="og:url" content="https://link.springer.com/chapter/10.1007/978-3-030-54455-3_42"/>
+    <meta property="og:image" content="https://static-content.springer.com/cover/book/978-3-030-54455-3.jpg"/>
+    <meta property="og:site_name" content="SpringerLink"/>
+    <meta property="og:description" content="A (commercial or financial) contract is a mutual agreement to exchange resources such as money, goods and services amongst multiple parties. It expresses which actions may, must and must not be..."/>
+
+        <title>A Formally Verified Static Analysis Framework for Compositional Contracts | SpringerLink</title>
+        <link rel="canonical" href="https://link.springer.com/chapter/10.1007/978-3-030-54455-3_42"/>
+        <link rel="shortcut icon" href="/springerlink-static/1946221364/images/favicon/favicon.ico">
+<link rel="icon" sizes="16x16 32x32 48x48" href="/springerlink-static/1946221364/images/favicon/favicon.ico">
+<link rel="icon" sizes="16x16" type="image/png" href="/springerlink-static/1946221364/images/favicon/favicon-16x16.png">
+<link rel="icon" sizes="32x32" type="image/png" href="/springerlink-static/1946221364/images/favicon/favicon-32x32.png">
+<link rel="icon" sizes="48x48" type="image/png" href="/springerlink-static/1946221364/images/favicon/favicon-48x48.png">
+<link rel="apple-touch-icon" href="/springerlink-static/1946221364/images/favicon/app-icon-iphone@3x.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/springerlink-static/1946221364/images/favicon/ic_launcher_hdpi.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/springerlink-static/1946221364/images/favicon/app-icon-ipad.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/springerlink-static/1946221364/images/favicon/app-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/springerlink-static/1946221364/images/favicon/app-icon-iphone@2x.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/springerlink-static/1946221364/images/favicon/ic_launcher_xxhdpi.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/springerlink-static/1946221364/images/favicon/app-icon-ipad@2x.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/springerlink-static/1946221364/images/favicon/app-icon-iphone@3x.png">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="/springerlink-static/1946221364/images/favicon/ic_launcher_xxhdpi.png">
+        <link rel="dns-prefetch" href="//fonts.gstatic.com">
+<link rel="dns-prefetch" href="//fonts.googleapis.com">
+<link rel="dns-prefetch" href="//google-analytics.com">
+<link rel="dns-prefetch" href="//www.google-analytics.com">
+<link rel="dns-prefetch" href="//www.googletagservices.com">
+<link rel="dns-prefetch" href="//www.googletagmanager.com">
+<link rel="dns-prefetch" href="//static-content.springer.com">
+        <link rel="stylesheet" href="/springerlink-static/1946221364/css/basic.css" media="screen">
+<link rel="stylesheet" href="/springerlink-static/1946221364/css/styles.css" class="js-ctm" media="only screen and (-webkit-min-device-pixel-ratio:0) and (min-color-index:0), (-ms-high-contrast: none), only all and (min--moz-device-pixel-ratio:0) and (min-resolution: 3e1dpcm)">
+<link rel="stylesheet" href="/springerlink-static/1946221364/css/print.css" media="print">
+
+
+        <script>
+    (function () {
+        if ( typeof window.CustomEvent === "function" ) return;
+        window.CustomEvent = function ( event, params ) {
+            params = params || { bubbles: false, cancelable: false, detail: null };
+            var evt = document.createEvent( 'CustomEvent' );
+            evt.initCustomEvent( event, params.bubbles, params.cancelable, params.detail );
+            return evt;
+        }
+    })();
+</script>
+
+<script>
+    (function() {
+        if (!!document.documentElement.dataset) return;
+
+        Object.defineProperty(Element.prototype, 'dataset', {
+            get: function() {
+                var element = this;
+                var attributes = this.attributes;
+                var map = {};
+
+                for (var i = 0; i < attributes.length; i++) {
+                    var attribute = attributes[i];
+
+                    if (attribute && attribute.name && (/^data-\w[\w-]*$/).test(attribute.name)) {
+                        var name = attribute.name;
+                        var value = attribute.value;
+
+                        var propName = name.substr(5).replace(/-./g, function (prop) {
+                            return prop.charAt(1).toUpperCase();
+                        });
+
+                        Object.defineProperty(map, propName, {
+                            enumerable: true,
+                            get: function() {
+                                return this.value;
+                            }.bind({value: value || ''}),
+                            set: function setter(name, value) {
+                                if (typeof value !== 'undefined') {
+                                    this.setAttribute(name, value);
+                                } else {
+                                    this.removeAttribute(name);
+                                }
+                            }.bind(element, name)
+                        });
+                    }
+                }
+
+                return map;
+            }
+        });
+    })();
+</script>
+
+
+
+    <script type="text/javascript">
+        window.Krux||((Krux=function(){Krux.q.push(arguments);}).q=[]);
+        var dataLayer = [{
+                'GA Key':"UA-26408784-1",
+                'Features':["leaderboardadverts","eventtracker"],
+                'Event Category':"Conference Paper",
+                'Open Access':"N",
+                'Labs':"Y",
+                'DOI':"10.1007/978-3-030-54455-3_42",
+                'hasAccess':"N",
+                'Full HTML':"N",
+                'Has Body':"Y",
+                'Static Hash':"1946221364",
+                'Has Preview':"N",
+                'user':{"license":{"businessPartnerID":[],"businessPartnerIDString":""}},
+                'content':{"serial":{"eissn":"1611-3349","pissn":"0302-9743"},"book":{"seriesTitle":"Lecture Notes in Computer Science","eisbn":"978-3-030-54455-3","pisbn":"978-3-030-54454-6","bookProductType":"Proceedings","seriesId":"558","title":"Financial Cryptography and Data Security","doi":"10.1007/978-3-030-54455-3"},"attributes":{"deliveryPlatform":"bunsen"},"chapter":{"doi":"10.1007/978-3-030-54455-3_42"},"category":{"pmc":{"primarySubject":"Computer Science","primarySubjectCode":"I","secondarySubjects":{"1":"Cryptology","2":"Computer Systems Organization and Communication Networks","3":"Data Structures and Information Theory","4":"Systems and Data Security"},"secondarySubjectCodes":{"1":"I28020","2":"I13006","3":"I15009","4":"I28060"}},"sucode":"SUCO11645"},"type":"ConferencePaper"},
+                'Access Type':"noaccess",
+                'Page':"chapter",
+                'Bpids':"",
+                'Bpnames':"",
+                'SubjectCodes':"SCI, SCI28020, SCI13006, SCI15009, SCI28060",
+                'session':{"authentication":{"loginStatus":"N"},"attributes":{"edition":"academic"}},
+                'eventTrackerBaseUrl':"https://event-tracker.springernature.com",
+                'Country':"PL",
+                'ConferenceSeriesId':"fc",
+                'VG Wort Identifier':"pw-vgzm.415900-10.1007-978-3-030-54455-3",
+
+                    'doi': "10.1007-978-3-030-54455-3_42",
+                    'pmc': ["I","I28020","I13006","I15009","I28060"],
+                    'BPID': ["1"],
+                    'ksg': Krux.segments,
+                    'kuid': Krux.uid,
+
+        }];
+    </script>
+
+<script type="text/javascript" src="/springerlink-static/1946221364/js/jquery-3.3.1.min.js"></script>
+
+<script>
+    (function() {
+        function deleteCookie (name, domain) {
+            document.cookie = encodeURIComponent(name) +
+                '=' +
+                ';path=/' +
+                ';domain=' + domain +
+                ';expires=Thu, 01 Jan 1970 00:00:00 GMT';
+        }
+
+        var consentCookieParts = ('; ' + document.cookie).split('; OptanonConsent=');
+
+        if (consentCookieParts.length > 1) {
+            consentCookieParts.shift(); // remove redundant first part from the split array
+
+            // onetrust can set the same cookie multiple times with different domain specificities
+            for (let i=0; i<consentCookieParts.length; i++) {
+                var otCookieGroups = consentCookieParts[i].split('&groups=').pop().split('&').shift();
+
+                if (otCookieGroups.indexOf('C0001') === -1) {
+                    deleteCookie('OptanonConsent', window.location.host);
+                    deleteCookie('OptanonAlertBoxClosed', window.location.host);
+                }
+            }
+        }
+    })();
+</script>
+
+<script>
+    (function(w,d,t) {
+        function cc() {
+            var h = w.location.host, id;
+            if (h === 'link.springer.com' || h === 'local-link.springer.com' || h === 'link-qa.springer.com') { id = '4f53bc14-4ee3-45bd-9935-e3d2b6b2a543'}
+            if (h === 'rd.springer.com' || h === 'local-rd.springer.com' || h === 'rd-qa.springer.com') { id = 'ee0bb2c1-7bb6-4b9a-bbfe-41fc45438f37'}
+            var e = d.createElement(t),
+                s = d.getElementsByTagName(t)[0];
+            if (id) {
+                e.src = 'https://cdn.cookielaw.org/scripttemplates/otSDKStub.js';
+                e.setAttribute('data-domain-script', id);
+            } else {
+                e.src = '/static/js/lib/cookie-consent.min.js';
+                e.setAttribute('data-consent', h);
+            }
+            s.parentNode.insertBefore(e, s);
+        }
+        w.google_tag_manager ? cc() : window.addEventListener('gtm_loaded', function() {cc()});
+    })(window,document,'script');
+</script>
+<script>
+    function OptanonWrapper() {
+        window.dataLayer.push({ event:'OneTrustGroupsUpdated' });
+        document.activeElement.blur();
+    }
+</script>
+
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;
+
+            j.addEventListener('load', function() {
+                var _ge = new CustomEvent('gtm_loaded', {bubbles: true});
+                d.dispatchEvent(_ge);
+            });
+
+            f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-WCF9Z9');</script>
+
+
+    </head>
+    <body>
+        <noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-WCF9Z9"
+                      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+    <div class="skip-to">
+    <a class="skip-to__link pseudo-focus" href="#main-content">Skip to main content</a>
+</div>
+        <div class="page-wrapper">
+            <noscript>
+    <div class="nojs-banner u-interface">
+        <p>This service is more advanced with JavaScript available</p>
+    </div>
+</noscript>
+                        <div id="leaderboard" class="leaderboard u-hide" data-google-ad="leaderboard">
+            <div class="leaderboard__wrapper">
+                <p class="leaderboard__label">Advertisement</p>
+                <button class="leaderboard__hide" title="Hide this advertisement"  data-track="click" data-track-action="Hide advertisement" data-track-label="">Hide</button>
+                <div id="doubleclick-leaderboard-ad" class="leaderboard__ad u-pt-24"></div>
+            </div>
+        </div>
+
+
+                <header id="header" class="header">
+        <div class="header__content">
+            <div class="header__menu-container">
+                    <a id="logo" class="site-logo" href="/" title="Go to homepage">
+            <picture>
+    <source type="image/svg+xml" srcset="/springerlink-static/1946221364/images/svg/springerlink.svg">
+    <img class="site-logo__springer" src="/springerlink-static/1946221364/images/png/springerlink.png" alt="SpringerLink" width="148" height="30" data-test="springer-logo">
+</picture>
+
+    </a>
+
+
+                    <nav id="search-container" class="u-inline-block">
+                        <div class="search">
+                            <div class="search__content">
+                                <form class="u-form-single-input u-system" action="/search" method="get" role="search">
+    <label for="search-springerlink">Search SpringerLink</label>
+    <div class="u-relative">
+        <input id="search-springerlink" name="query" type="text" autocomplete="off" value="">
+        <input class="u-hide-text" type="submit" value="Submit" title="Submit">
+        <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" class="u-vertical-align-absolute" focusable="false" aria-hidden="true" role="presentation">
+            <path d="M12.82 11.972a.607.607 0 01.007.856.611.611 0 01-.856-.006L9.45 10.3A5.798 5.797 0 010 5.798 5.798 5.797 0 1110.3 9.45zm-7.022-1.205A4.97 4.97 0 105.797.83a4.97 4.97 0 000 9.939z" fill-rule="evenodd"/>
+        </svg>
+    </div>
+</form>
+                            </div>
+                        </div>
+                    </nav>
+
+                    <nav class="nav-container">
+    <div class="global-nav__wrapper">
+        <div class="search-button">
+            <a class="search-button__label" href="#search-container">
+                <span class="search-button__title">Search</span>
+                <svg class="u-vertical-align-absolute" xmlns="http://www.w3.org/2000/svg" height="22" width="22" focusable="false" aria-hidden="true" role="presentation">
+                    <path fill-rule="evenodd" d="M21.697 20.261a1.028 1.028 0 01.01 1.448 1.034 1.034 0 01-1.448-.01l-4.267-4.267A9.812 9.811 0 010 9.812a9.812 9.811 0 1117.43 6.182zM9.812 18.222A8.41 8.41 0 109.81 1.403a8.41 8.41 0 000 16.82z"/>
+                </svg>
+            </a>
+        </div>
+
+        <ul class="global-nav" data-component="SV.Menu" data-title="Navigation menu" data-text="Menu">
+            <li>
+                <a href="/">
+                    <span class="u-overflow-ellipsis">Home</span>
+                </a>
+            </li>
+
+                <li class="global-nav__logged-out">
+                    <a class="test-login-link" href="//link.springer.com/signup-login?previousUrl=https%3A%2F%2Flink.springer.com%2Fchapter%2F10.1007%252F978-3-030-54455-3_42">
+                        <span class="u-overflow-ellipsis">Log in</span>
+                    </a>
+                </li>
+
+        </ul>
+    </div> 
+</nav> 
+            </div>
+
+        </div>
+    </header>
+
+            
+            <main id="main-content" class="main-wrapper main-wrapper--no-gradient" tabindex="-1">
+                <div class="main-container uptodate-recommendations-off">
+                    <aside class="main-sidebar-left">
+                        <div class="main-sidebar-left__content">
+                            <div class="cover-image test-cover" itemscope>
+                                    <a class="test-cover-link" href="/book/10.1007/978-3-030-54455-3">
+        <span class="u-screenreader-only">Financial Cryptography and Data Security</span>
+        <img class="test-cover-image" src="https://media.springernature.com/w306/springer-static/cover/book/978-3-030-54455-3.jpg" itemprop="image" alt=""/>
+    </a>
+
+
+                            </div>
+                        </div>
+                    </aside>
+                    <div class="main-body" data-role="NavigationContainer">
+                        
+
+
+
+                        <article class="main-body__content">
+                            <div xmlns="http://www.w3.org/1999/xhtml" class="FulltextWrapper"><div class="ArticleHeader main-context"><div id="enumeration" class="enumeration">    <div>
+        <a data-test="ConfSeriesLink" href="/conference/fc">
+            <span data-test="ConfSeriesName"> International Conference on Financial Cryptography and Data Security</span>
+        </a>
+    </div>
+<p class="test-LocationInConferenceProceeding icon--meta-keyline"><span data-test="ConferenceAcronym">FC 2020</span>: <span class="BookTitle"><a href="/book/10.1007/978-3-030-54455-3" data-track="click" data-track-action="Book title" data-track-label="">Financial Cryptography and Data Security</a></span><span class="page-numbers-info">
+                pp 599-619</span><span class="u-inline-block u-ml-4"> |
+                <a href="#citeas" data-track="click" data-track-action="Cite as link" data-track-label="Enumeration section">Cite as</a></span></p></div><div class="MainTitleSection"><h1 class="ChapterTitle" lang="en">A Formally Verified Static Analysis Framework for Compositional Contracts</h1></div><div class="authors u-clearfix" data-component="SpringerLink.Authors"><ul class="u-interface u-inline-list authors__title" data-role="AuthorsNavigation"><li><span>Authors</span></li><li><a href="#authorsandaffiliations" data-track="click" data-track-action="Authors and affiliations tab" data-track-label="">Authors and affiliations</a></li></ul><div class="authors__list" data-role="AuthorsList"><ul class="test-contributor-names"><li itemscope="" itemtype="http://schema.org/Person" class="u-mb-2 u-pt-4 u-pb-4" itemprop="author"><span itemprop="name" class="authors__name">Fritz Henglein</span><span class="author-information"><span class="authors__contact"><a href="mailto:henglein@di.ku.dk" title="henglein@di.ku.dk" itemprop="email" data-track="click" data-track-action="Email author" data-track-label=""><img src="/springerlink-static/images/svg/email.svg" height="24" width="24" alt="Email author" /></a></span></span></li><li itemscope="" itemtype="http://schema.org/Person" class="u-mb-2 u-pt-4 u-pb-4" itemprop="author"><span itemprop="name" class="authors__name">Christian Kjær Larsen</span></li><li itemscope="" itemtype="http://schema.org/Person" class="u-mb-2 u-pt-4 u-pb-4" itemprop="author"><span itemprop="name" class="authors__name">Agata Murawska</span></li></ul></div></div><div class="main-context__container" data-component="SpringerLink.ArticleMetrics"><div class="main-context__column"><span><span class="test-render-category">Conference paper</span></span><div class="article-dates"><span class="article-dates__label">First Online: </span><span class="article-dates__first-online"><time datetime="2020-08-07">07 August 2020</time></span></div></div><div class="main-context__column">    <ul id="book-metrics" class="article-metrics u-sansSerif">
+            <li class="article-metrics__item">
+                     <span class="test-metric-count article-metrics__views">314</span>
+                     <span class="test-metric-name article-metrics__label">Downloads</span>
+            </li>
+    </ul>
+</div></div><span id="test-SeriesTitle" class="vol-info">
+                Part of the
+                <a class="gtm-book-series-link" href="/bookseries/558">Lecture Notes in Computer Science</a>
+                book series (LNCS, volume 12063)</span></div><section class="Abstract" id="Abs1" tabindex="-1" lang="en"><h2 class="Heading">Abstract</h2><p id="Par1" class="Para">A (commercial or financial) contract is a mutual agreement to exchange resources such as money, goods and services amongst multiple parties. It expresses which actions may, must and must not be performed by its parties at which time, location and under which other conditions.</p><p id="Par2" class="Para">We present a general framework for statically analyzing <em class="EmphasisTypeItalic ">digital contracts</em>, formal specifications of contracts, expressed in <em class="EmphasisTypeItalic ">Contract Specification Language</em> (CSL). Semantically, a CSL contract classifies traces of events into compliant (complete and successful) and noncompliant (incomplete or manifestly breached) ones.</p><p id="Par3" class="Para">Our analysis framework is based on compositional abstract interpretation, which soundly approximates the set of traces a contract denotes by an abstract value in a lattice. The framework is parameterized by a lattice and an interpretation of contract primitives and combinators, satisfying certain requirements. It treats recursion by unrestricted unfolding. Employing Schmidt’s natural semantics approach, we interpret our inference system coinductively to account for infinite derivation trees, and prove their abstract interpretation sound.</p><p id="Par4" class="Para">Finally, we show some example applications: participation analysis (who is possibly involved in a transfer to whom; who does definitely participate in a contract) and fairness analysis (bounds on how much is gained by each participant under any compliant execution of the contract).</p><p id="Par5" class="Para">The semantics of CSL, the abstract interpretation framework and its correctness theorem, and the example analyses as instances of the abstract interpretation framework have all been mechanized in the Coq proof assistant.</p></section><div class="note test-pdf-link" id="cobranding-and-download-availability-text"><div id="chapter_no_access_banner">This is a preview of subscription content, <a id="test-login-banner-link" href="/signup-login?previousUrl=https%3A%2F%2Flink.springer.com%2Fchapter%2F10.1007%252F978-3-030-54455-3_42" data-track="click" data-track-action="Preview banner - Log in" data-track-label="">log in</a> to check access.</div></div><div class="article-actions--inline" id="article-actions--inline" data-component="article-actions--inline"></div><section id="Notes" class="Section1 RenderAsSection1"><h2 class="Heading">Notes</h2><div class="content"><section><h3 class="Heading">Acknowledgements</h3><p class="SimplePara">We would like to thank the anonymous referees for their critical and helpful comments.</p><p class="SimplePara">This work has been facilitated by financial support from Deon Digital and Innovation Fund Denmark for the project <em class="EmphasisTypeItalic ">Formal verification for formal contracts</em> under contract number 7092-00003B.</p></section></div></section><section class="Section1 RenderAsSection1" id="Bib1" tabindex="-1"><h2 class="Heading">References</h2><div class="content"><ol class="BibliographyWrapper"><li class="Citation"><div class="CitationNumber">1.</div><div class="CitationContent" id="CR1">Amani, S., Bégel, M., Bortin, M., Staples, M.: Towards verifying Ethereum smart contract bytecode in Isabelle/HOL. In: Proceedings of the 7th ACM SIGPLAN International Conference on Certified Programs and Proofs, pp. 66–77. ACM (2018)<span class="Occurrences"><span class="Occurrence OccurrenceGS"><a target="_blank" rel="noopener" class="google-scholar-link gtm-reference" data-reference-type="Google Scholar" href="https://scholar.google.com/scholar?q=Amani%2C%20S.%2C%20B%C3%A9gel%2C%20M.%2C%20Bortin%2C%20M.%2C%20Staples%2C%20M.%3A%20Towards%20verifying%20Ethereum%20smart%20contract%20bytecode%20in%20Isabelle%2FHOL.%20In%3A%20Proceedings%20of%20the%207th%20ACM%20SIGPLAN%20International%20Conference%20on%20Certified%20Programs%20and%20Proofs%2C%20pp.%2066%E2%80%9377.%20ACM%20%282018%29"><span><span>Google Scholar</span></span></a></span></span></div></li><li class="Citation"><div class="CitationNumber">2.</div><div class="CitationContent" id="CR2">Andersen, J., Bahr, P., Henglein, F., Hvitved, T.: Domain-specific languages for enterprise systems. In: Margaria, T., Steffen, B. (eds.) ISoLA 2014. LNCS, vol. 8802, pp. 73–95. Springer, Heidelberg (2014). <span class="ExternalRef"> <a target="_blank" rel="noopener" href="https://doi.org/10.1007/978-3-662-45234-9_6"><span class="RefSource">https://doi.org/10.1007/978-3-662-45234-9_6</span></a></span><span class="Occurrences"><span class="Occurrence OccurrenceDOI"><a class="gtm-reference" data-reference-type="CrossRef" target="_blank" rel="noopener" href="https://doi.org/10.1007/978-3-662-45234-9_6"><span><span>CrossRef</span></span></a></span><span class="Occurrence OccurrenceGS"><a target="_blank" rel="noopener" class="google-scholar-link gtm-reference" data-reference-type="Google Scholar" href="http://scholar.google.com/scholar_lookup?title=Domain-specific%20languages%20for%20enterprise%20systems&amp;author=J.%20Andersen&amp;author=P.%20Bahr&amp;author=F.%20Henglein&amp;author=T.%20Hvitved&amp;pages=73-95&amp;publication_year=2014"><span><span>Google Scholar</span></span></a></span></span></div></li><li class="Citation"><div class="CitationNumber">3.</div><div class="CitationContent" id="CR3">Andersen, J., Elsborg, E., Henglein, F., Simonsen, J.G., Stefansen, C.: Compositional specification of commercial contracts. In: ISoLA (Preliminary Proceedings), 30 October 2004, pp. 103–110 (2004)<span class="Occurrences"><span class="Occurrence OccurrenceGS"><a target="_blank" rel="noopener" class="google-scholar-link gtm-reference" data-reference-type="Google Scholar" href="https://scholar.google.com/scholar?q=Andersen%2C%20J.%2C%20Elsborg%2C%20E.%2C%20Henglein%2C%20F.%2C%20Simonsen%2C%20J.G.%2C%20Stefansen%2C%20C.%3A%20Compositional%20specification%20of%20commercial%20contracts.%20In%3A%20ISoLA%20%28Preliminary%20Proceedings%29%2C%2030%20October%202004%2C%20pp.%20103%E2%80%93110%20%282004%29"><span><span>Google Scholar</span></span></a></span></span></div></li><li class="Citation"><div class="CitationNumber">4.</div><div class="CitationContent" id="CR4">Andersen, J., Elsborg, E., Henglein, F., Simonsen, J.G., Stefansen, C.: Compositional specification of commercial contracts. STTT <strong class="EmphasisTypeBold ">8</strong>(6), 485–516 (2006). <span class="ExternalRef"> <a target="_blank" rel="noopener" href="https://doi.org/10.1007/s10009-006-0010-1"><span class="RefSource">https://doi.org/10.1007/s10009-006-0010-1</span></a></span><span class="Occurrences"><span class="Occurrence OccurrenceDOI"><a class="gtm-reference" data-reference-type="CrossRef" target="_blank" rel="noopener" href="https://doi.org/10.1007/s10009-006-0010-1"><span><span>CrossRef</span></span></a></span><span class="Occurrence OccurrenceGS"><a target="_blank" rel="noopener" class="google-scholar-link gtm-reference" data-reference-type="Google Scholar" href="http://scholar.google.com/scholar_lookup?title=Compositional%20specification%20of%20commercial%20contracts&amp;author=J.%20Andersen&amp;author=E.%20Elsborg&amp;author=F.%20Henglein&amp;author=JG.%20Simonsen&amp;author=C.%20Stefansen&amp;journal=STTT&amp;volume=8&amp;issue=6&amp;pages=485-516&amp;publication_year=2006&amp;doi=10.1007%2Fs10009-006-0010-1"><span><span>Google Scholar</span></span></a></span></span></div></li><li class="Citation"><div class="CitationNumber">5.</div><div class="CitationContent" id="CR5">Annenkov, D., Elsman, M.: Certified compilation of financial contracts. In: Proceedings of the 20th International Symposium on Principles and Practice of Declarative Programming, PPDP 2018, pp. 5:1–5:13. ACM, New York (2018)<span class="Occurrences"><span class="Occurrence OccurrenceGS"><a target="_blank" rel="noopener" class="google-scholar-link gtm-reference" data-reference-type="Google Scholar" href="https://scholar.google.com/scholar?q=Annenkov%2C%20D.%2C%20Elsman%2C%20M.%3A%20Certified%20compilation%20of%20financial%20contracts.%20In%3A%20Proceedings%20of%20the%2020th%20International%20Symposium%20on%20Principles%20and%20Practice%20of%20Declarative%20Programming%2C%20PPDP%202018%2C%20pp.%205%3A1%E2%80%935%3A13.%20ACM%2C%20New%20York%20%282018%29"><span><span>Google Scholar</span></span></a></span></span></div></li><li class="Citation"><div class="CitationNumber">6.</div><div class="CitationContent" id="CR6">Annenkov, D., Nielsen, J.B., Spitters, B.: Towards a smart contract verification framework in Coq. In: Proceedings of the 9th ACM SIGPLAN International Conference on Certified Proofs and Programs (CPP) (2020)<span class="Occurrences"><span class="Occurrence OccurrenceGS"><a target="_blank" rel="noopener" class="google-scholar-link gtm-reference" data-reference-type="Google Scholar" href="https://scholar.google.com/scholar?q=Annenkov%2C%20D.%2C%20Nielsen%2C%20J.B.%2C%20Spitters%2C%20B.%3A%20Towards%20a%20smart%20contract%20verification%20framework%20in%20Coq.%20In%3A%20Proceedings%20of%20the%209th%20ACM%20SIGPLAN%20International%20Conference%20on%20Certified%20Proofs%20and%20Programs%20%28CPP%29%20%282020%29"><span><span>Google Scholar</span></span></a></span></span></div></li><li class="Citation"><div class="CitationNumber">7.</div><div class="CitationContent" id="CR7">Bahr, P., Berthold, J., Elsman, M.: Certified symbolic management of financial multi-party contracts. In: Proceedings of the ACM International Conference on Functional Programming (ICFP), August 2015. SIGPLAN Not. <strong class="EmphasisTypeBold ">50</strong>(9), 315–327<span class="Occurrences"><span class="Occurrence OccurrenceGS"><a target="_blank" rel="noopener" class="google-scholar-link gtm-reference" data-reference-type="Google Scholar" href="https://scholar.google.com/scholar?q=Bahr%2C%20P.%2C%20Berthold%2C%20J.%2C%20Elsman%2C%20M.%3A%20Certified%20symbolic%20management%20of%20financial%20multi-party%20contracts.%20In%3A%20Proceedings%20of%20the%20ACM%20International%20Conference%20on%20Functional%20Programming%20%28ICFP%29%2C%20August%202015.%20SIGPLAN%20Not.%2050%289%29%2C%20315%E2%80%93327"><span><span>Google Scholar</span></span></a></span></span></div></li><li class="Citation"><div class="CitationNumber">8.</div><div class="CitationContent" id="CR8">Bartoletti, M., Zunino, R.: Verifying liquidity of bitcoin contracts. Cryptology ePrint Archive, Report 2018/1125 (2018). <span class="ExternalRef"><a target="_blank" rel="noopener" href="https://eprint.iacr.org/2018/1125"><span class="RefSource">https://eprint.iacr.org/2018/1125</span></a></span><span class="Occurrences"></span></div></li><li class="Citation"><div class="CitationNumber">9.</div><div class="CitationContent" id="CR9">Benton, N., Hur, C.-K., Kennedy, A.J., McBride, C.: Strongly typed term representations in Coq. J. Autom. Reason. <strong class="EmphasisTypeBold ">49</strong>(2), 141–159 (2012). <span class="ExternalRef"> <a target="_blank" rel="noopener" href="https://doi.org/10.1007/s10817-011-9219-0"><span class="RefSource">https://doi.org/10.1007/s10817-011-9219-0</span></a></span><span class="Occurrences"><span class="Occurrence OccurrenceAMSID"><a class="gtm-reference" data-reference-type="MathSciNet" target="_blank" rel="noopener" href="http://www.ams.org/mathscinet-getitem?mr=2950749"><span><span>MathSciNet</span></span></a></span><span class="Occurrence OccurrenceDOI"><a class="gtm-reference" data-reference-type="CrossRef" target="_blank" rel="noopener" href="https://doi.org/10.1007/s10817-011-9219-0"><span><span>CrossRef</span></span></a></span><span class="Occurrence OccurrenceZLBID"><a class="gtm-reference" data-reference-type="MATH" target="_blank" rel="noopener" href="http://www.emis.de/MATH-item?1269.68041"><span><span>zbMATH</span></span></a></span><span class="Occurrence OccurrenceGS"><a target="_blank" rel="noopener" class="google-scholar-link gtm-reference" data-reference-type="Google Scholar" href="http://scholar.google.com/scholar_lookup?title=Strongly%20typed%20term%20representations%20in%20Coq&amp;author=N.%20Benton&amp;author=C-K.%20Hur&amp;author=AJ.%20Kennedy&amp;author=C.%20McBride&amp;journal=J.%20Autom.%20Reason.&amp;volume=49&amp;issue=2&amp;pages=141-159&amp;publication_year=2012&amp;doi=10.1007%2Fs10817-011-9219-0"><span><span>Google Scholar</span></span></a></span></span></div></li><li class="Citation"><div class="CitationNumber">10.</div><div class="CitationContent" id="CR10">Bhargavan, K., et al.: Formal verification of smart contracts. In: Proceedings of the 2016 ACM Workshop on Programming Languages and Analysis for Security-PLAS 2016, pp. 91–96 (2016)<span class="Occurrences"><span class="Occurrence OccurrenceGS"><a target="_blank" rel="noopener" class="google-scholar-link gtm-reference" data-reference-type="Google Scholar" href="https://scholar.google.com/scholar?q=Bhargavan%2C%20K.%2C%20et%20al.%3A%20Formal%20verification%20of%20smart%20contracts.%20In%3A%20Proceedings%20of%20the%202016%20ACM%20Workshop%20on%20Programming%20Languages%20and%20Analysis%20for%20Security-PLAS%202016%2C%20pp.%2091%E2%80%9396%20%282016%29"><span><span>Google Scholar</span></span></a></span></span></div></li><li class="Citation"><div class="CitationNumber">11.</div><div class="CitationContent" id="CR11">Chatterjee, K., Goharshady, A.K., Velner, Y.: Quantitative analysis of smart contracts. CoRR, abs/1801.03367 (2018)<span class="Occurrences"><span class="Occurrence OccurrenceGS"><a target="_blank" rel="noopener" class="google-scholar-link gtm-reference" data-reference-type="Google Scholar" href="https://scholar.google.com/scholar?q=Chatterjee%2C%20K.%2C%20Goharshady%2C%20A.K.%2C%20Velner%2C%20Y.%3A%20Quantitative%20analysis%20of%20smart%20contracts.%20CoRR%2C%20abs%2F1801.03367%20%282018%29"><span><span>Google Scholar</span></span></a></span></span></div></li><li class="Citation"><div class="CitationNumber">12.</div><div class="CitationContent" id="CR12">Chen, X., Park, D., Roşu, G.: A language-independent approach to smart contract verification. In: Margaria, T., Steffen, B. (eds.) ISoLA 2018. LNCS, vol. 11247, pp. 405–413. Springer, Cham (2018). <span class="ExternalRef"> <a target="_blank" rel="noopener" href="https://doi.org/10.1007/978-3-030-03427-6_30"><span class="RefSource">https://doi.org/10.1007/978-3-030-03427-6_30</span></a></span><span class="Occurrences"><span class="Occurrence OccurrenceDOI"><a class="gtm-reference" data-reference-type="CrossRef" target="_blank" rel="noopener" href="https://doi.org/10.1007/978-3-030-03427-6_30"><span><span>CrossRef</span></span></a></span><span class="Occurrence OccurrenceGS"><a target="_blank" rel="noopener" class="google-scholar-link gtm-reference" data-reference-type="Google Scholar" href="http://scholar.google.com/scholar_lookup?title=A%20language-independent%20approach%20to%20smart%20contract%20verification&amp;author=X.%20Chen&amp;author=D.%20Park&amp;author=G.%20Ro%C5%9Fu&amp;pages=405-413&amp;publication_year=2018"><span><span>Google Scholar</span></span></a></span></span></div></li><li class="Citation"><div class="CitationNumber">13.</div><div class="CitationContent" id="CR13">DAML: Digital Asset Modelling Language. <span class="ExternalRef"><a target="_blank" rel="noopener" href="https://daml.com/"><span class="RefSource">https://daml.com/</span></a></span><span class="Occurrences"></span></div></li><li class="Citation"><div class="CitationNumber">14.</div><div class="CitationContent" id="CR14">Deon Digital: CSL Language Guide. <span class="ExternalRef"><a target="_blank" rel="noopener" href="https://deondigital.com/docs/v0.39.0/"><span class="RefSource">https://deondigital.com/docs/v0.39.0/</span></a></span><span class="Occurrences"></span></div></li><li class="Citation"><div class="CitationNumber">15.</div><div class="CitationContent" id="CR15">Egelund-Müller, B., Elsman, M., Henglein, F., Ross, O.: Automated execution of financial contracts on blockchains. Bus. Inf. Syst. Eng. <strong class="EmphasisTypeBold ">59</strong>(6), 457–467 (2017). <span class="ExternalRef"> <a target="_blank" rel="noopener" href="https://doi.org/10.1007/s12599-017-0507-z"><span class="RefSource">https://doi.org/10.1007/s12599-017-0507-z</span></a></span><span class="Occurrences"><span class="Occurrence OccurrenceDOI"><a class="gtm-reference" data-reference-type="CrossRef" target="_blank" rel="noopener" href="https://doi.org/10.1007/s12599-017-0507-z"><span><span>CrossRef</span></span></a></span><span class="Occurrence OccurrenceGS"><a target="_blank" rel="noopener" class="google-scholar-link gtm-reference" data-reference-type="Google Scholar" href="http://scholar.google.com/scholar_lookup?title=Automated%20execution%20of%20financial%20contracts%20on%20blockchains&amp;author=B.%20Egelund-M%C3%BCller&amp;author=M.%20Elsman&amp;author=F.%20Henglein&amp;author=O.%20Ross&amp;journal=Bus.%20Inf.%20Syst.%20Eng.&amp;volume=59&amp;issue=6&amp;pages=457-467&amp;publication_year=2017&amp;doi=10.1007%2Fs12599-017-0507-z"><span><span>Google Scholar</span></span></a></span></span></div></li><li class="Citation"><div class="CitationNumber">16.</div><div class="CitationContent" id="CR16">Harz, D., Knottenbelt, W.J.: Towards safer smart contracts: a survey of languages and verification methods. CoRR, abs/1809.09805 (2018)<span class="Occurrences"><span class="Occurrence OccurrenceGS"><a target="_blank" rel="noopener" class="google-scholar-link gtm-reference" data-reference-type="Google Scholar" href="https://scholar.google.com/scholar?q=Harz%2C%20D.%2C%20Knottenbelt%2C%20W.J.%3A%20Towards%20safer%20smart%20contracts%3A%20a%20survey%20of%20languages%20and%20verification%20methods.%20CoRR%2C%20abs%2F1809.09805%20%282018%29"><span><span>Google Scholar</span></span></a></span></span></div></li><li class="Citation"><div class="CitationNumber">17.</div><div class="CitationContent" id="CR17">Henglein, F.: Smart digital contracts: algebraic foundations for resource accounting. Oregon Programming Languages Summer School (OPLSS), Smart Digital Contracts, Lecture 2, June 2019<span class="Occurrences"><span class="Occurrence OccurrenceGS"><a target="_blank" rel="noopener" class="google-scholar-link gtm-reference" data-reference-type="Google Scholar" href="https://scholar.google.com/scholar?q=Henglein%2C%20F.%3A%20Smart%20digital%20contracts%3A%20algebraic%20foundations%20for%20resource%20accounting.%20Oregon%20Programming%20Languages%20Summer%20School%20%28OPLSS%29%2C%20Smart%20Digital%20Contracts%2C%20Lecture%202%2C%20June%202019"><span><span>Google Scholar</span></span></a></span></span></div></li><li class="Citation"><div class="CitationNumber">18.</div><div class="CitationContent" id="CR18">Henglein, F.: Smart digital contracts: contract specification and life-cycle management. Oregon Programming Languages Summer School (OPLSS), Smart Digital Contracts, Lecture 3, June 2019<span class="Occurrences"><span class="Occurrence OccurrenceGS"><a target="_blank" rel="noopener" class="google-scholar-link gtm-reference" data-reference-type="Google Scholar" href="https://scholar.google.com/scholar?q=Henglein%2C%20F.%3A%20Smart%20digital%20contracts%3A%20contract%20specification%20and%20life-cycle%20management.%20Oregon%20Programming%20Languages%20Summer%20School%20%28OPLSS%29%2C%20Smart%20Digital%20Contracts%2C%20Lecture%203%2C%20June%202019"><span><span>Google Scholar</span></span></a></span></span></div></li><li class="Citation"><div class="CitationNumber">19.</div><div class="CitationContent" id="CR19">Henglein, F.: Smart digital contracts: introduction. Oregon Programming Languages Summer School (OPLSS), Smart Digital Contracts, Lecture 1, June 2019<span class="Occurrences"><span class="Occurrence OccurrenceGS"><a target="_blank" rel="noopener" class="google-scholar-link gtm-reference" data-reference-type="Google Scholar" href="https://scholar.google.com/scholar?q=Henglein%2C%20F.%3A%20Smart%20digital%20contracts%3A%20introduction.%20Oregon%20Programming%20Languages%20Summer%20School%20%28OPLSS%29%2C%20Smart%20Digital%20Contracts%2C%20Lecture%201%2C%20June%202019"><span><span>Google Scholar</span></span></a></span></span></div></li><li class="Citation"><div class="CitationNumber">20.</div><div class="CitationContent" id="CR20">Henglein, F., Larsen, K.F., Simonsen, J.G., Stefansen, C.: POETS: process-oriented event-driven transaction systems. J. Log. Algebraic Program. <strong class="EmphasisTypeBold ">78</strong>(5), 381–401 (2009)<span class="Occurrences"><span class="Occurrence OccurrenceDOI"><a class="gtm-reference" data-reference-type="CrossRef" target="_blank" rel="noopener" href="https://doi.org/10.1016/j.jlap.2008.08.007"><span><span>CrossRef</span></span></a></span><span class="Occurrence OccurrenceGS"><a target="_blank" rel="noopener" class="google-scholar-link gtm-reference" data-reference-type="Google Scholar" href="http://scholar.google.com/scholar_lookup?title=POETS%3A%20process-oriented%20event-driven%20transaction%20systems&amp;author=F.%20Henglein&amp;author=KF.%20Larsen&amp;author=JG.%20Simonsen&amp;author=C.%20Stefansen&amp;journal=J.%20Log.%20Algebraic%20Program.&amp;volume=78&amp;issue=5&amp;pages=381-401&amp;publication_year=2009"><span><span>Google Scholar</span></span></a></span></span></div></li><li class="Citation"><div class="CitationNumber">21.</div><div class="CitationContent" id="CR21">Henriksen, T., Serup, N., Elsman, M., Henglein, F., Oancea, C.: Futhark: purely functional GPU-programming with nested parallelism and in-place array updates. In: Proceedings of the ACM SIGPLAN Conference on Programming Language Design and Implementation (PLDI), Barcelona, Spain, June 2017, pp. 556–571. ACM (2017). HIPEAC Best Paper Award<span class="Occurrences"><span class="Occurrence OccurrenceGS"><a target="_blank" rel="noopener" class="google-scholar-link gtm-reference" data-reference-type="Google Scholar" href="https://scholar.google.com/scholar?q=Henriksen%2C%20T.%2C%20Serup%2C%20N.%2C%20Elsman%2C%20M.%2C%20Henglein%2C%20F.%2C%20Oancea%2C%20C.%3A%20Futhark%3A%20purely%20functional%20GPU-programming%20with%20nested%20parallelism%20and%20in-place%20array%20updates.%20In%3A%20Proceedings%20of%20the%20ACM%20SIGPLAN%20Conference%20on%20Programming%20Language%20Design%20and%20Implementation%20%28PLDI%29%2C%20Barcelona%2C%20Spain%2C%20June%202017%2C%20pp.%20556%E2%80%93571.%20ACM%20%282017%29.%20HIPEAC%20Best%20Paper%20Award"><span><span>Google Scholar</span></span></a></span></span></div></li><li class="Citation"><div class="CitationNumber">22.</div><div class="CitationContent" id="CR22">Hildenbrandt, E., et al.: KEVM: a complete semantics of the ethereum virtual machine. In: Proceedings of the 31st IEEE Computer Security Foundations Symposium (CSF) (2018)<span class="Occurrences"><span class="Occurrence OccurrenceGS"><a target="_blank" rel="noopener" class="google-scholar-link gtm-reference" data-reference-type="Google Scholar" href="https://scholar.google.com/scholar?q=Hildenbrandt%2C%20E.%2C%20et%20al.%3A%20KEVM%3A%20a%20complete%20semantics%20of%20the%20ethereum%20virtual%20machine.%20In%3A%20Proceedings%20of%20the%2031st%20IEEE%20Computer%20Security%20Foundations%20Symposium%20%28CSF%29%20%282018%29"><span><span>Google Scholar</span></span></a></span></span></div></li><li class="Citation"><div class="CitationNumber">23.</div><div class="CitationContent" id="CR23">Hvitved, T.: A survey of formal languages for contracts. In: Fourth Workshop on Formal Languages and Analysis of Contract-Oriented Software (FLACOS 2010), pp. 29–32 (2010)<span class="Occurrences"><span class="Occurrence OccurrenceGS"><a target="_blank" rel="noopener" class="google-scholar-link gtm-reference" data-reference-type="Google Scholar" href="https://scholar.google.com/scholar?q=Hvitved%2C%20T.%3A%20A%20survey%20of%20formal%20languages%20for%20contracts.%20In%3A%20Fourth%20Workshop%20on%20Formal%20Languages%20and%20Analysis%20of%20Contract-Oriented%20Software%20%28FLACOS%202010%29%2C%20pp.%2029%E2%80%9332%20%282010%29"><span><span>Google Scholar</span></span></a></span></span></div></li><li class="Citation"><div class="CitationNumber">24.</div><div class="CitationContent" id="CR24">Hvitved, T., Klaedtke, F., Zălinescu, E.: A trace-based model for multiparty contracts. J. Log. Algebraic Program. <strong class="EmphasisTypeBold ">81</strong>(2), 72–98 (2012)<span class="Occurrences"><span class="Occurrence OccurrenceAMSID"><a class="gtm-reference" data-reference-type="MathSciNet" target="_blank" rel="noopener" href="http://www.ams.org/mathscinet-getitem?mr=2881522"><span><span>MathSciNet</span></span></a></span><span class="Occurrence OccurrenceDOI"><a class="gtm-reference" data-reference-type="CrossRef" target="_blank" rel="noopener" href="https://doi.org/10.1016/j.jlap.2011.04.010"><span><span>CrossRef</span></span></a></span><span class="Occurrence OccurrenceGS"><a target="_blank" rel="noopener" class="google-scholar-link gtm-reference" data-reference-type="Google Scholar" href="http://scholar.google.com/scholar_lookup?title=A%20trace-based%20model%20for%20multiparty%20contracts&amp;author=T.%20Hvitved&amp;author=F.%20Klaedtke&amp;author=E.%20Z%C4%83linescu&amp;journal=J.%20Log.%20Algebraic%20Program.&amp;volume=81&amp;issue=2&amp;pages=72-98&amp;publication_year=2012"><span><span>Google Scholar</span></span></a></span></span></div></li><li class="Citation"><div class="CitationNumber">25.</div><div class="CitationContent" id="CR25">Kowalski, R.: Algorithm = logic + control. Commun. ACM <strong class="EmphasisTypeBold ">22</strong>(7), 424–436 (1979)<span class="Occurrences"><span class="Occurrence OccurrenceDOI"><a class="gtm-reference" data-reference-type="CrossRef" target="_blank" rel="noopener" href="https://doi.org/10.1145/359131.359136"><span><span>CrossRef</span></span></a></span><span class="Occurrence OccurrenceGS"><a target="_blank" rel="noopener" class="google-scholar-link gtm-reference" data-reference-type="Google Scholar" href="http://scholar.google.com/scholar_lookup?title=Algorithm%20%3D%20logic%20%2B%20control&amp;author=R.%20Kowalski&amp;journal=Commun.%20ACM&amp;volume=22&amp;issue=7&amp;pages=424-436&amp;publication_year=1979"><span><span>Google Scholar</span></span></a></span></span></div></li><li class="Citation"><div class="CitationNumber">26.</div><div class="CitationContent" id="CR26">Larsen, C.K.: Declarative contracts. Mechanized semantics and analysis. Master’s thesis, University of Copenhagen, Denmark (2019). <span class="ExternalRef"><a target="_blank" rel="noopener" href="https://ckjaer.dk/files/thesis.pdf"><span class="RefSource">https://ckjaer.dk/files/thesis.pdf</span></a></span><span class="Occurrences"></span></div></li><li class="Citation"><div class="CitationNumber">27.</div><div class="CitationContent" id="CR27">Luu, L., Chu, D.-H., Olickel, H., Saxena, P., Hobor, A.: Making smart contracts smarter. In: Proceedings of the 2016 ACM SIGSAC Conference on Computer and Communications Security, CCS 2016, pp. 254–269. ACM, New York (2016)<span class="Occurrences"><span class="Occurrence OccurrenceGS"><a target="_blank" rel="noopener" class="google-scholar-link gtm-reference" data-reference-type="Google Scholar" href="https://scholar.google.com/scholar?q=Luu%2C%20L.%2C%20Chu%2C%20D.-H.%2C%20Olickel%2C%20H.%2C%20Saxena%2C%20P.%2C%20Hobor%2C%20A.%3A%20Making%20smart%20contracts%20smarter.%20In%3A%20Proceedings%20of%20the%202016%20ACM%20SIGSAC%20Conference%20on%20Computer%20and%20Communications%20Security%2C%20CCS%202016%2C%20pp.%20254%E2%80%93269.%20ACM%2C%20New%20York%20%282016%29"><span><span>Google Scholar</span></span></a></span></span></div></li><li class="Citation"><div class="CitationNumber">28.</div><div class="CitationContent" id="CR28">McCarthy, W.E.: The REA accounting model: a generalized framework for accounting systems in a shared data environment. Account. Rev. <strong class="EmphasisTypeBold ">LVII</strong>(3), 554–578 (1982)<span class="Occurrences"><span class="Occurrence OccurrenceGS"><a target="_blank" rel="noopener" class="google-scholar-link gtm-reference" data-reference-type="Google Scholar" href="http://scholar.google.com/scholar_lookup?title=The%20REA%20accounting%20model%3A%20a%20generalized%20framework%20for%20accounting%20systems%20in%20a%20shared%20data%20environment&amp;author=WE.%20McCarthy&amp;journal=Account.%20Rev.&amp;volume=LVII&amp;issue=3&amp;pages=554-578&amp;publication_year=1982"><span><span>Google Scholar</span></span></a></span></span></div></li><li class="Citation"><div class="CitationNumber">29.</div><div class="CitationContent" id="CR29">Nielsen, J.B., Spitters, B.: Smart contract interactions in Coq. arXiv preprint <span class="ExternalRef"><a target="_blank" rel="noopener" href="http://arxiv.org/abs/1911.04732"><span class="RefSource">arXiv:1911.04732</span></a></span> (2019)<span class="Occurrences"></span></div></li><li class="Citation"><div class="CitationNumber">30.</div><div class="CitationContent" id="CR30">Nikolic, I., Kolluri, A., Sergey, I., Saxena, P., Hobor, A.: Finding the greedy, prodigal, and suicidal contracts at scale. <span class="ExternalRef"><a target="_blank" rel="noopener" href="http://arxiv.org/abs/1802.06038v1"><span class="RefSource">arXiv:1802.06038v1</span></a></span> [cs.CR], arXiv, February 2018<span class="Occurrences"></span></div></li><li class="Citation"><div class="CitationNumber">31.</div><div class="CitationContent" id="CR31">Peyton Jones, S., Eber, J.-M., Seward, J.: Composing contracts: an adventure in financial engineering (functional pearl). SIGPLAN Not. <strong class="EmphasisTypeBold ">35</strong>(9), 280–292 (2000)<span class="Occurrences"><span class="Occurrence OccurrenceDOI"><a class="gtm-reference" data-reference-type="CrossRef" target="_blank" rel="noopener" href="https://doi.org/10.1145/357766.351267"><span><span>CrossRef</span></span></a></span><span class="Occurrence OccurrenceGS"><a target="_blank" rel="noopener" class="google-scholar-link gtm-reference" data-reference-type="Google Scholar" href="http://scholar.google.com/scholar_lookup?title=Composing%20contracts%3A%20an%20adventure%20in%20financial%20engineering%20%28functional%20pearl%29&amp;author=S.%20Peyton%20Jones&amp;author=J-M.%20Eber&amp;author=J.%20Seward&amp;journal=SIGPLAN%20Not.&amp;volume=35&amp;issue=9&amp;pages=280-292&amp;publication_year=2000"><span><span>Google Scholar</span></span></a></span></span></div></li><li class="Citation"><div class="CitationNumber">32.</div><div class="CitationContent" id="CR32">Schmidt, D.A.: Natural-semantics-based abstract interpretation (preliminary version). In: Mycroft, A. (ed.) SAS 1995. LNCS, vol. 983, pp. 1–18. Springer, Heidelberg (1995). <span class="ExternalRef"> <a target="_blank" rel="noopener" href="https://doi.org/10.1007/3-540-60360-3_28"><span class="RefSource">https://doi.org/10.1007/3-540-60360-3_28</span></a></span><span class="Occurrences"><span class="Occurrence OccurrenceDOI"><a class="gtm-reference" data-reference-type="CrossRef" target="_blank" rel="noopener" href="https://doi.org/10.1007/3-540-60360-3_28"><span><span>CrossRef</span></span></a></span><span class="Occurrence OccurrenceGS"><a target="_blank" rel="noopener" class="google-scholar-link gtm-reference" data-reference-type="Google Scholar" href="http://scholar.google.com/scholar_lookup?title=Natural-semantics-based%20abstract%20interpretation%20%28preliminary%20version%29&amp;author=DA.%20Schmidt&amp;pages=1-18&amp;publication_year=1995"><span><span>Google Scholar</span></span></a></span></span></div></li><li class="Citation"><div class="CitationNumber">33.</div><div class="CitationContent" id="CR33">Lamela Seijas, P., Thompson, S.: Marlowe: financial contracts on blockchain. In: Margaria, T., Steffen, B. (eds.) ISoLA 2018. LNCS, vol. 11247, pp. 356–375. Springer, Cham (2018). <span class="ExternalRef"> <a target="_blank" rel="noopener" href="https://doi.org/10.1007/978-3-030-03427-6_27"><span class="RefSource">https://doi.org/10.1007/978-3-030-03427-6_27</span></a></span><span class="Occurrences"><span class="Occurrence OccurrenceDOI"><a class="gtm-reference" data-reference-type="CrossRef" target="_blank" rel="noopener" href="https://doi.org/10.1007/978-3-030-03427-6_27"><span><span>CrossRef</span></span></a></span><span class="Occurrence OccurrenceGS"><a target="_blank" rel="noopener" class="google-scholar-link gtm-reference" data-reference-type="Google Scholar" href="http://scholar.google.com/scholar_lookup?title=Marlowe%3A%20financial%20contracts%20on%20blockchain&amp;author=P.%20Lamela%20Seijas&amp;author=S.%20Thompson&amp;pages=356-375&amp;publication_year=2018"><span><span>Google Scholar</span></span></a></span></span></div></li></ol></div></section><section class="Section1 RenderAsSection1"><h2 class="Heading" id="copyrightInformation">Copyright information</h2><div class="ArticleCopyright content"><div class="ChapterCopyright">© Springer Nature Switzerland AG 2020</div></div></section><section id="authorsandaffiliations" class="Section1 RenderAsSection1"><h2 class="Heading">Authors and Affiliations</h2><div class="content authors-affiliations u-interface"><ul class="test-contributor-names"><li itemscope="" itemtype="http://schema.org/Person" class="u-mb-2 u-pt-4 u-pb-4" itemprop="author"><span itemprop="name" class="authors-affiliations__name">Fritz Henglein</span><ul class="authors-affiliations__indexes u-inline-list" data-role="AuthorsIndexes"><li data-affiliation="affiliation-1">1</li><li data-affiliation="affiliation-2">2</li></ul><span class="author-information"><span class="author-information__contact u-icon-before"><a href="mailto:henglein@di.ku.dk" title="henglein@di.ku.dk" itemprop="email" data-track="click" data-track-action="Email author" data-track-label="">Email author</a></span></span></li><li itemscope="" itemtype="http://schema.org/Person" class="u-mb-2 u-pt-4 u-pb-4" itemprop="author"><span itemprop="name" class="authors-affiliations__name">Christian Kjær Larsen</span><ul class="authors-affiliations__indexes u-inline-list" data-role="AuthorsIndexes"><li data-affiliation="affiliation-1">1</li></ul></li><li itemscope="" itemtype="http://schema.org/Person" class="u-mb-2 u-pt-4 u-pb-4" itemprop="author"><span itemprop="name" class="authors-affiliations__name">Agata Murawska</span><ul class="authors-affiliations__indexes u-inline-list" data-role="AuthorsIndexes"><li data-affiliation="affiliation-1">1</li><li data-affiliation="affiliation-2">2</li></ul></li></ul><ol class="test-affiliations"><li class="affiliation" data-test="affiliation-1" data-affiliation-highlight="affiliation-1" itemscope="" itemtype="http://schema.org/Organization"><span class="affiliation__count">1.</span><span class="affiliation__item"><span itemprop="name" class="affiliation__name">University of Copenhagen</span><span itemprop="address" itemscope="" itemtype="http://schema.org/PostalAddress" class="affiliation__address"><span itemprop="addressRegion" class="affiliation__city">Copenhagen</span><span itemprop="addressCountry" class="affiliation__country">Denmark</span></span></span></li><li class="affiliation" data-test="affiliation-2" data-affiliation-highlight="affiliation-2" itemscope="" itemtype="http://schema.org/Organization"><span class="affiliation__count">2.</span><span class="affiliation__item"><span itemprop="name" class="affiliation__name">Deon Digital</span><span itemprop="address" itemscope="" itemtype="http://schema.org/PostalAddress" class="affiliation__address"><span itemprop="addressRegion" class="affiliation__city">Copenhagen</span><span itemprop="addressCountry" class="affiliation__country">Denmark</span></span></span></li></ol></div></section></div>
+                        </article>
+                        <aside class="section section--collapsible" id="AboutThisContent">
+    <h2 class="section__heading" id="aboutcontent">About this paper</h2>
+    <div class="section__content bibliographic-information">
+                <div id="crossMark" class="crossmark">
+            <a data-crossmark="10.1007%2F978-3-030-54455-3_42" target="_blank" rel="noopener" href="https://crossmark.crossref.org/dialog/?doi=10.1007%2F978-3-030-54455-3_42" title="Verify currency and authenticity via CrossMark" data-track="click" data-track-action="Crossmark" data-track-label="">
+                <span class="u-screenreader-only">CrossMark</span>
+                <svg class="CrossMark" id="crossmark-icon" width="57" height="81">
+                    <image width="57" height="81" alt="Verify currency and authenticity via CrossMark" src="/springerlink-static/1946221364/images/png/crossmark.png" xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/springerlink-static/1946221364/images/svg/crossmark.svg"></image>
+                </svg>
+            </a>
+        </div>
+
+        <div class="crossmark__adjacent">
+            <dl class="citation-info u-highlight-target u-mb-16" id="citeas" tabindex="-1">
+    <dt class="test-cite-heading">
+        Cite this paper as:
+    </dt>
+    <dd id="citethis-text">Henglein F., Larsen C.K., Murawska A. (2020) A Formally Verified Static Analysis Framework for Compositional Contracts. In: Bernhard M. et al. (eds) Financial Cryptography and Data Security. FC 2020. Lecture Notes in Computer Science, vol 12063. Springer, Cham. https://doi.org/10.1007/978-3-030-54455-3_42</dd>
+</dl>
+                <ul class="bibliographic-information__list bibliographic-information__list--inline">
+        <li class="bibliographic-information__item">
+            <span class="bibliographic-information__title">First Online</span>
+            <span class="bibliographic-information__value u-overflow-wrap">07 August 2020</span>
+        </li>
+        <li class="bibliographic-information__item">
+            <span class="bibliographic-information__title">DOI</span>
+            <span class="bibliographic-information__value u-overflow-wrap" id="doi-url">https://doi.org/10.1007/978-3-030-54455-3_42</span>
+        </li>
+            <li class="bibliographic-information__item">
+                <span class="bibliographic-information__title">Publisher Name</span>
+                <span class="bibliographic-information__value" id="publisher-name">Springer, Cham</span>
+            </li>
+            <li class="bibliographic-information__item">
+                <span class="bibliographic-information__title">Print ISBN</span>
+                <span class="bibliographic-information__value" id="print-isbn">978-3-030-54454-6</span>
+            </li>
+            <li class="bibliographic-information__item">
+                <span class="bibliographic-information__title">Online ISBN</span>
+                <span class="bibliographic-information__value" id="electronic-isbn">978-3-030-54455-3</span>
+            </li>
+
+                <li class="bibliographic-information__item">
+            <span class="bibliographic-information__title">eBook Packages</span>
+                <span class="bibliographic-information__value" itemprop="genre"><a id="ebook-package" href="/search?facet-content-type&#x3D;%22Book%22&amp;package&#x3D;11645&amp;facet-start-year&#x3D;2020&amp;facet-end-year&#x3D;2020">Computer Science</a></span>
+                <span class="bibliographic-information__value" itemprop="genre"><a id="ebook-package" href="/search?facet-content-type&#x3D;%22Book%22&amp;package&#x3D;43710&amp;facet-start-year&#x3D;2020&amp;facet-end-year&#x3D;2020">Computer Science (R0)</a></span>
+        </li>
+
+    </ul>
+
+            <ul class="bibliographic-information__list">
+            <li class="bibliographic-information__item">
+                <a id="about-book" href="//www.springer.com/978-3-030-54454-6?utm_source&#x3D;springerlink&amp;utm_medium&#x3D;referral&amp;utm_campaign&#x3D;bookpage_about_buyonpublisherssite" >Buy this book on publisher's site</a>
+            </li>
+        <li class="bibliographic-information__item">
+            <a id="reprintsandpermissions-link" target="_blank" rel="noopener" href="https://s100.copyright.com/AppDispatchServlet?publisherName&#x3D;SpringerNature&amp;orderBeanReset&#x3D;true&amp;orderSource&#x3D;SpringerLink&amp;copyright&#x3D;Springer+Nature+Switzerland+AG&amp;author&#x3D;Fritz+Henglein%2C+Christian+Kj%C3%A6r+Larsen%2C+Agata+Murawska&amp;contentID&#x3D;10.1007%2F978-3-030-54455-3_42&amp;endPage&#x3D;619&amp;publicationDate&#x3D;2020&amp;startPage&#x3D;599&amp;publication&#x3D;eBook&amp;title&#x3D;A+Formally+Verified+Static+Analysis+Framework+for+Compositional+Contracts&amp;imprint&#x3D;Springer+Nature+Switzerland+AG" title="Visit RightsLink for information about reusing this paper" data-track="click" data-track-action="Reprints and Permissions" data-track-label="">Reprints and Permissions</a>
+        </li>
+</ul>
+
+
+
+        </div>
+      
+      
+          
+    </div>
+</aside>
+
+                        <div class="section section--collapsible uptodate-recommendations gtm-recommendations">
+    <h2 class="uptodate-recommendations__title section__heading gtm-recommendations__title" id="uptodaterecommendations">Personalised recommendations</h2>
+    <div class="section__content">
+        <div class="uptodate-recommendations__container">
+             <link rel="uptodate-inline" href="/springerlink-static/1946221364/css/recommendations.css"/>
+        </div>
+    </div>
+</div>
+                                <div id="doubleclick-native-ad" data-google-ad="native"></div>
+
+                        
+
+
+
+    <div class="sticky-banner sticky-banner--buybox u-interface u-hide" data-component="SpringerLink.StickyBanner" data-namespace="hasLink">
+        <div class="sticky-banner__container">
+                <div class="citations" data-component="SV.Dropdown" data-namespace="citationsSticky">
+        <h3 class="u-h4" data-role="button-dropdown__title">
+    <span>Cite</span>
+    <span class="hide-text-small">paper</span>
+</h3>
+<ul class="citations__content" data-role="button-dropdown__content">
+    <li>
+        <a href="#citeas" data-track="click" data-track-action="Cite as link" data-track-label="Cite dropdown">How to cite?</a>
+    </li>
+        <li>
+            <a href="//citation-needed.springer.com/v2/references/10.1007/978-3-030-54455-3_42?format&#x3D;refman&amp;flavour&#x3D;citation"
+               title="Download this paper&#39;s citation as a .RIS file" data-track="click" data-track-action="Export citation" data-track-label="RIS">
+                <span class="citations__extension" data-gtmlabel="RIS">
+                    <svg class="u-vertical-align-absolute" width="12" height="14" viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg"><path d="M7 7.269v-6.271c0-.551-.448-.998-1-.998-.556 0-1 .447-1 .998v6.271l-1.5-1.547c-.375-.387-1.01-.397-1.401-.006l.016-.016c-.397.397-.391 1.025-.001 1.416l3.178 3.178c.392.392 1.024.391 1.415 0l3.178-3.178c.392-.392.391-1.025-.001-1.416l.016.016c-.397-.397-1.018-.388-1.401.006l-1.5 1.547zm-7 5.731c0-.552.456-1 1.002-1h9.995c.554 0 1.002.444 1.002 1 0 .552-.456 1-1.002 1h-9.995c-.554 0-1.002-.444-1.002-1z" fill="#004aa7"/></svg>
+                    .RIS
+                </span>
+                <span class="citations__types">
+                        <span>
+                            Papers
+                        </span>
+                        <span>
+                            Reference Manager
+                        </span>
+                        <span>
+                            RefWorks
+                        </span>
+                        <span>
+                            Zotero
+                        </span>
+                </span>
+            </a>
+        </li>
+        <li>
+            <a href="//citation-needed.springer.com/v2/references/10.1007/978-3-030-54455-3_42?format&#x3D;endnote&amp;flavour&#x3D;citation"
+               title="Download this paper&#39;s citation as a .ENW file" data-track="click" data-track-action="Export citation" data-track-label="ENW">
+                <span class="citations__extension" data-gtmlabel="ENW">
+                    <svg class="u-vertical-align-absolute" width="12" height="14" viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg"><path d="M7 7.269v-6.271c0-.551-.448-.998-1-.998-.556 0-1 .447-1 .998v6.271l-1.5-1.547c-.375-.387-1.01-.397-1.401-.006l.016-.016c-.397.397-.391 1.025-.001 1.416l3.178 3.178c.392.392 1.024.391 1.415 0l3.178-3.178c.392-.392.391-1.025-.001-1.416l.016.016c-.397-.397-1.018-.388-1.401.006l-1.5 1.547zm-7 5.731c0-.552.456-1 1.002-1h9.995c.554 0 1.002.444 1.002 1 0 .552-.456 1-1.002 1h-9.995c-.554 0-1.002-.444-1.002-1z" fill="#004aa7"/></svg>
+                    .ENW
+                </span>
+                <span class="citations__types">
+                        <span>
+                            EndNote
+                        </span>
+                </span>
+            </a>
+        </li>
+        <li>
+            <a href="//citation-needed.springer.com/v2/references/10.1007/978-3-030-54455-3_42?format&#x3D;bibtex&amp;flavour&#x3D;citation"
+               title="Download this paper&#39;s citation as a .BIB file" data-track="click" data-track-action="Export citation" data-track-label="BIB">
+                <span class="citations__extension" data-gtmlabel="BIB">
+                    <svg class="u-vertical-align-absolute" width="12" height="14" viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg"><path d="M7 7.269v-6.271c0-.551-.448-.998-1-.998-.556 0-1 .447-1 .998v6.271l-1.5-1.547c-.375-.387-1.01-.397-1.401-.006l.016-.016c-.397.397-.391 1.025-.001 1.416l3.178 3.178c.392.392 1.024.391 1.415 0l3.178-3.178c.392-.392.391-1.025-.001-1.416l.016.016c-.397-.397-1.018-.388-1.401.006l-1.5 1.547zm-7 5.731c0-.552.456-1 1.002-1h9.995c.554 0 1.002.444 1.002 1 0 .552-.456 1-1.002 1h-9.995c-.554 0-1.002-.444-1.002-1z" fill="#004aa7"/></svg>
+                    .BIB
+                </span>
+                <span class="citations__types">
+                        <span>
+                            BibTeX
+                        </span>
+                        <span>
+                            JabRef
+                        </span>
+                        <span>
+                            Mendeley
+                        </span>
+                </span>
+            </a>
+        </li>
+</ul>
+    </div>
+
+                
+
+
+
+                <div class="sticky-banner__buybox-link sticky-banner__buybox-link--sticky">
+        <a href="#buy" class="gtm-buybox-anchor">
+            Buy options
+        </a>
+    </div>
+
+        </div>
+    </div>
+
+
+                    </div>
+                    <aside class="main-sidebar-right u-interface">
+                        <div data-role="sticky-wrapper">
+                            <div class="main-sidebar-right__content u-composite-layer" data-component="SpringerLink.StickySidebar">
+                                <div class="article-actions" id="article-actions">
+                                    <h2 class="u-screenreader-only" aria-hidden="true">Actions</h2>
+
+                                        <div id="buy">
+                                            
+
+
+
+<style type="text/css">
+    .buybox {
+        margin: 16px 0 0;
+        position: relative;
+    }
+    .buybox {
+        font-family: Source Sans Pro, Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        font-size: 1.4rem;
+    }
+    .buybox {
+        zoom: 1;
+    }
+    .buybox:after,
+    .buybox:before {
+        content: '';
+        display: table;
+    }
+    .buybox:after {
+        clear: both;
+    }
+    /*---------------------------------*/
+    .buybox .buybox__header {
+        border: 1px solid #b3b3b3;
+        border-bottom: 0;
+        padding: 8px;
+        position: relative;
+        background-color: #f2f2f2;
+    }
+    .buybox__header .buybox__login {
+        font-family: Source Sans Pro, Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        font-size: 1.4rem;
+        letter-spacing: .017em;
+        display: inline-block;
+        line-height: 1.2;
+        padding: 0;
+    }
+    .buybox__header .buybox__login:before {
+        position: absolute;
+        top: 50%;
+        -webkit-transform: perspective(1px) translateY(-50%);
+        transform: perspective(1px) translateY(-50%);
+        content: '\A';
+        width: 34px;
+        height: 34px;
+        left: 10px;
+    }
+    /*---------------------------------*/
+    .buybox .buybox__body {
+        padding: 0;
+        padding-bottom: 16px;
+        position: relative;
+        text-align: center;
+        background-color: #fcfcfc;
+        border: 1px solid #b3b3b3;
+    }
+    /******/
+    .buybox__body .buybox__section {
+        padding: 16px 12px 0 12px;
+        text-align: left;
+    }
+    .buybox__section .buybox__buttons {
+        text-align: center;
+        width: 100%;
+    }
+    /********** mycopy buybox specific **********/
+    .buybox.mycopy__buybox .buybox__body {
+        background-color: transparent;
+    }
+    .buybox.mycopy__buybox .buybox__section .buybox__buttons {
+        border-top: 0;
+        padding-top: 0;
+    }
+    /******/
+    .buybox__section:nth-child(2) .buybox__buttons {
+        border-top: 1px solid #b3b3b3;
+        padding-top: 20px;
+    }
+    .buybox__buttons .buybox__buy-button {
+        display: inline-block;
+        text-align: center;
+        margin-bottom: 5px;
+        padding: 6px 12px;
+        max-width: 180px
+    }
+    .buybox__buttons .buybox__price {
+        white-space: nowrap;
+        text-align: center;
+        font-size: larger;
+        padding-top: 6px;
+    }
+    .buybox__section .buybox__meta {
+        letter-spacing: 0;
+        padding-top: 12px;
+    }
+    .buybox__section .buybox__meta:only-of-type {
+        padding-top: 0;
+        position: relative;
+        bottom: 6px;
+    }
+    /********** mycopy buybox specific **********/
+    .buybox.mycopy__buybox .buybox__section .buybox__meta {
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+    /******/
+    .buybox__meta .buybox__product-title {
+        display: inline;
+        font-weight: bold;
+    }
+    .buybox__meta .buybox__list {
+        line-height: 1.3;
+    }
+    .buybox__meta .buybox__list li {
+        position: relative;
+        padding-left: 1em;
+        list-style: none;
+        margin-bottom: 5px;
+    }
+    .buybox__meta .buybox__list li:before {
+        font-size: 1em;
+        content: '\2022';
+        float: left;
+        position: relative;
+        top: .1em;
+        font-family: serif;
+        font-weight: 600;
+        text-align: center;
+        line-height: inherit;
+        color: #666;
+        width: auto;
+        margin-left: -1em;
+    }
+    .buybox__meta .buybox__list li:last-child {
+        margin-bottom: 0;
+    }
+    /********** chapter buybox specific **********/
+    .buybox.chapter__buybox .buybox__section .buybox__meta {
+        border-top: 1px solid #d3d3d3;
+        padding-top: 12px;
+    }
+    .buybox.chapter__buybox .buybox__section .buybox__buy-ebook {
+        margin-bottom: 12px;
+    }
+    /******/
+    /*---------------------------------*/
+    .buybox .buybox__footer {
+        border: 1px solid #b3b3b3;
+        border-top: 0;
+        padding: 8px;
+        position: relative;
+        border-style: dashed;
+        line-height: 1.3;
+    }
+    .buybox .deepdyve {
+        display: none;
+        text-align: left;
+        margin: 8px 12px 0 12px;
+        padding-top: 5px;
+        border-top: 1px solid #d3d3d3;
+    }
+    /*-----------------------------------------------------------------*/
+    @media screen and (min-width: 460px) and (max-width: 1074px) {
+        .buybox__body .buybox__section {
+            display: inline-block;
+            vertical-align: top;
+            padding: 12px 12px;
+            padding-bottom: 0;
+            text-align: left;
+            width: 48%;
+        }
+        .buybox__body .buybox__section {
+            padding-top: 16px;
+            padding-left: 0;
+        }
+        .buybox__section:nth-of-type(2) .buybox__meta {
+            border-left: 1px solid #d3d3d3;
+            padding-left: 28px;
+        }
+        .buybox__section:nth-of-type(2) .buybox__buttons {
+            border-top: 0;
+            padding-top: 0;
+            padding-left: 16px ;
+        }
+        .buybox__buttons .buybox__buy-button {
+        }
+        /********** article buybox specific **********/
+        .buybox.article__buybox .buybox__section:nth-of-type(2) {
+            margin-top: 16px;
+            padding-top: 0;
+        }
+        .buybox.article__buybox .buybox__section:nth-of-type(2) .buybox__meta {
+            margin-top: 40px;
+            padding-top: 0;
+            padding-bottom: 45px;
+        }
+        .buybox.article__buybox .buybox__section:nth-of-type(2) .buybox__meta:only-of-type {
+            margin-top: 8px;
+            padding-top: 12px;
+            padding-bottom: 12px;
+        }
+        /********** mycopy buybox specific **********/
+        .buybox.mycopy__buybox .buybox__section:first-child {
+            width: 69%;
+            padding-left: 12px ;
+        }
+        .buybox.mycopy__buybox .buybox__section:last-child {
+            width: 29%;
+        }
+        /********** chapter buybox specific **********/
+        .buybox.chapter__buybox .buybox__body {
+            display: flex;
+            align-items: stretch;
+            padding-left: 12px;
+            padding-top: 12px;
+        }
+        .buybox.chapter__buybox .buybox__section .buybox__meta {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            border-top: 0;
+            padding-top: 0;
+        }
+        /******/
+    }
+    /*-----------------------------------------------------------------*/
+    @media screen and (max-width: 459px) {
+        /********** mycopy buybox specific **********/
+        .buybox.mycopy__buybox .buybox__body {
+            padding-bottom: 5px;
+        }
+        .buybox.mycopy__buybox .buybox__section:last-child {
+            text-align: center;
+            width: 100%;
+        }
+        .buybox.mycopy__buybox .buybox__buttons {
+            display: inline-block;
+            width: 150px ;
+        }
+        /******/
+    }
+    /*-----------------------------------------------------------------*/
+</style>
+
+<div class="buybox chapter__buybox" data-webtrekkTrackId="196033507532344" data-webtrekkContentId="SL-chapter">
+    <div class="buybox__header">
+        <span class="buybox__login">Log in to check access</span>
+    </div>
+    <div class="buybox__body">
+        <div class="buybox__section">
+            <div class="buybox__buttons">
+
+                
+                    <form id="ebook_cart__new" class="buybox__form buybox__buy-ebook" action="https://order.springer.com/public/checkout" method="POST">
+                        <input type="hidden" name="type" value="ebook">
+                        <input type="hidden" name="doi" value="10.1007/978-3-030-54455-3">
+                        <input type="hidden" name="isxn" value="978-3-030-54455-3">
+                        <input type="hidden" name="contenttitle" value="Financial Cryptography and Data Security">
+                        <button
+                        data-product-id="978-3-030-54455-3_Financial Cryptography and Data Se"
+                        data-track-category="ebook"
+                        data-eCommerceParam_11="chapter-page"
+                        type="submit"
+                        class="buybox__buy-button c-button c-button--blue"
+                        data-track="click"
+                        data-track-action="buy ebook"
+                        data-track-label="buy ebook action">
+                            <span data-test-id="test-buy-ebook" class="buybox__buy">Buy eBook</span>
+                        </button>
+                        <div data-test-id="test-book-price" class="buybox__price">
+                            EUR&nbsp;74.89
+                        </div>
+                    </form>
+
+                
+
+                
+                    
+
+
+<form class="buybox__form" action="https://order.springer.com/public/checkout" method="POST">
+    
+        <input type="hidden" name="type" value="chapter"/>
+    
+        <input type="hidden" name="doi" value="10.1007/978-3-030-54455-3_42"/>
+    
+        <input type="hidden" name="isxn" value="978-3-030-54455-3"/>
+    
+        <input type="hidden" name="contenttitle" value="A Formally Verified Static Analysis Framework for Compositional Contracts"/>
+    
+        <input type="hidden" name="copyrightyear" value="2020"/>
+    
+        <input type="hidden" name="year" value="2020"/>
+    
+        <input type="hidden" name="authors" value="Fritz Henglein, Christian Kjær Larsen, Agata Murawska"/>
+    
+        <input type="hidden" name="title" value="Financial Cryptography and Data Security"/>
+    
+        <input type="hidden" name="mac" value="4291f0bf19ac9c882a0feeb6b02ffa5c"/>
+    
+        <input type="hidden" name="returnurl" value="https://link.springer.com/chapter/10.1007%2F978-3-030-54455-3_42"/>
+    
+    
+        <button
+        data-product-id="10.1007/978-3-030-54455-3_42_A Formally Verified Static Analysi"
+        data-track-category="ppv"
+        data-eCommerceParam_11="chapter-page"
+        type="submit"
+        class="buybox__buy-button c-button c-button--blue"
+        data-track="click"
+        data-track-action="buy pdf"
+        data-track-label="buy chapter action">
+            <span data-test-id="test-buy-chapter" class="buybox__buy">Buy paper (PDF)</span>
+        </button>
+        <div data-test-id="test-chapter-price" class="buybox__price">
+            EUR&nbsp;30.69
+        </div>
+    
+</form>
+
+                
+            </div>
+        </div>
+
+        
+            <div class="buybox__section">
+    <div class="buybox__meta">
+        <ul class="buybox__list">
+            <li>Instant download</li>
+            <li>Readable on all devices</li>
+            <li>Own it forever</li>
+            <li>Local sales tax included if applicable</li>
+        </ul>
+    </div>
+</div>
+        
+        
+
+        <div id="buybox__section__physical-book" class="buybox__section" style="margin-top: 16px; border-top: 1px dashed #b3b3b3;">
+            <a class="buybox__buy-button c-button" href=https://www.springer.com/9783030544546#otherversion=9783030544546 style="white-space: nowrap;">
+            Buy Physical Book
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="16" style="margin-left: 4px; margin-right: 0; transform: translateY(-1px);">
+                <path d="M4 0v1.3H2.7c-.7 0-1.3.6-1.3 1.3v10.7c0 .7.6 1.3 1.3 1.3h10.7c.7 0 1.3-.6 1.3-1.3V12H16v1.3c0 1.5-1.2 2.7-2.7 2.7H2.7C1.2 16 0 14.8 0 13.3V2.7C0 1.2 1.2 0 2.7 0H4zm11.3 0c.4 0 .7.3.7.7v6.2c0 .4-.3.7-.7.7-.4 0-.7-.3-.7-.7V2.2L8.9 8c-.2.3-.7.3-.9 0-.3-.2-.3-.7 0-.9l5.8-5.8H9.1c-.4 0-.7-.3-.7-.6 0-.4.3-.7.7-.7h6.2z" fill="#666"/>
+            </svg>
+            </a>
+        </div>
+    
+    </div>
+    <div class="buybox__footer">
+    <a class="js-buybox__inst-sub-link" data-gtm="buybox__inst-sub-link" href="https://www.springernature.com/gp/librarians/licensing/license-options">
+        Learn about institutional subscriptions</a>
+</div>
+
+    
+
+</div>
+
+                                        </div>
+
+                                    <div class="u-js-hide u-js-show-two-col">
+                                        
+        
+
+
+
+
+                                            <div class="citations" data-component="SV.Dropdown" data-namespace="citations">
+        <h3 class="u-h4" data-role="button-dropdown__title">
+    <span>Cite</span>
+    <span class="hide-text-small">paper</span>
+</h3>
+<ul class="citations__content" data-role="button-dropdown__content">
+    <li>
+        <a href="#citeas" data-track="click" data-track-action="Cite as link" data-track-label="Cite dropdown">How to cite?</a>
+    </li>
+        <li>
+            <a href="//citation-needed.springer.com/v2/references/10.1007/978-3-030-54455-3_42?format&#x3D;refman&amp;flavour&#x3D;citation"
+               title="Download this paper&#39;s citation as a .RIS file" data-track="click" data-track-action="Export citation" data-track-label="RIS">
+                <span class="citations__extension" data-gtmlabel="RIS">
+                    <svg class="u-vertical-align-absolute" width="12" height="14" viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg"><path d="M7 7.269v-6.271c0-.551-.448-.998-1-.998-.556 0-1 .447-1 .998v6.271l-1.5-1.547c-.375-.387-1.01-.397-1.401-.006l.016-.016c-.397.397-.391 1.025-.001 1.416l3.178 3.178c.392.392 1.024.391 1.415 0l3.178-3.178c.392-.392.391-1.025-.001-1.416l.016.016c-.397-.397-1.018-.388-1.401.006l-1.5 1.547zm-7 5.731c0-.552.456-1 1.002-1h9.995c.554 0 1.002.444 1.002 1 0 .552-.456 1-1.002 1h-9.995c-.554 0-1.002-.444-1.002-1z" fill="#004aa7"/></svg>
+                    .RIS
+                </span>
+                <span class="citations__types">
+                        <span>
+                            Papers
+                        </span>
+                        <span>
+                            Reference Manager
+                        </span>
+                        <span>
+                            RefWorks
+                        </span>
+                        <span>
+                            Zotero
+                        </span>
+                </span>
+            </a>
+        </li>
+        <li>
+            <a href="//citation-needed.springer.com/v2/references/10.1007/978-3-030-54455-3_42?format&#x3D;endnote&amp;flavour&#x3D;citation"
+               title="Download this paper&#39;s citation as a .ENW file" data-track="click" data-track-action="Export citation" data-track-label="ENW">
+                <span class="citations__extension" data-gtmlabel="ENW">
+                    <svg class="u-vertical-align-absolute" width="12" height="14" viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg"><path d="M7 7.269v-6.271c0-.551-.448-.998-1-.998-.556 0-1 .447-1 .998v6.271l-1.5-1.547c-.375-.387-1.01-.397-1.401-.006l.016-.016c-.397.397-.391 1.025-.001 1.416l3.178 3.178c.392.392 1.024.391 1.415 0l3.178-3.178c.392-.392.391-1.025-.001-1.416l.016.016c-.397-.397-1.018-.388-1.401.006l-1.5 1.547zm-7 5.731c0-.552.456-1 1.002-1h9.995c.554 0 1.002.444 1.002 1 0 .552-.456 1-1.002 1h-9.995c-.554 0-1.002-.444-1.002-1z" fill="#004aa7"/></svg>
+                    .ENW
+                </span>
+                <span class="citations__types">
+                        <span>
+                            EndNote
+                        </span>
+                </span>
+            </a>
+        </li>
+        <li>
+            <a href="//citation-needed.springer.com/v2/references/10.1007/978-3-030-54455-3_42?format&#x3D;bibtex&amp;flavour&#x3D;citation"
+               title="Download this paper&#39;s citation as a .BIB file" data-track="click" data-track-action="Export citation" data-track-label="BIB">
+                <span class="citations__extension" data-gtmlabel="BIB">
+                    <svg class="u-vertical-align-absolute" width="12" height="14" viewBox="0 0 12 14" xmlns="http://www.w3.org/2000/svg"><path d="M7 7.269v-6.271c0-.551-.448-.998-1-.998-.556 0-1 .447-1 .998v6.271l-1.5-1.547c-.375-.387-1.01-.397-1.401-.006l.016-.016c-.397.397-.391 1.025-.001 1.416l3.178 3.178c.392.392 1.024.391 1.415 0l3.178-3.178c.392-.392.391-1.025-.001-1.416l.016.016c-.397-.397-1.018-.388-1.401.006l-1.5 1.547zm-7 5.731c0-.552.456-1 1.002-1h9.995c.554 0 1.002.444 1.002 1 0 .552-.456 1-1.002 1h-9.995c-.554 0-1.002-.444-1.002-1z" fill="#004aa7"/></svg>
+                    .BIB
+                </span>
+                <span class="citations__types">
+                        <span>
+                            BibTeX
+                        </span>
+                        <span>
+                            JabRef
+                        </span>
+                        <span>
+                            Mendeley
+                        </span>
+                </span>
+            </a>
+        </li>
+</ul>
+    </div>
+
+                                            
+
+
+
+                                    </div>
+                                </div>
+                                
+
+                            </div>
+                                <div class="skyscraper-ad u-hide" data-google-ad="skyscraper">
+        <div class="skyscraper-ad__wrapper">
+            <p class="skyscraper-ad__label">Advertisement</p>
+            <button class="skyscraper-ad__hide" title="Hide this advertisement" data-track="click" data-track-action="Hide advertisement" data-track-label="">Hide</button>
+            <div id="doubleclick-ad" class="skyscraper-ad__ad"></div>
+        </div>
+    </div>
+
+                        </div>
+                    </aside>
+                </div>
+            </main>
+                <footer class="footer u-interface">
+        <div class="footer__aside-wrapper">
+            <div class="footer__content">
+                <div class="footer__aside">
+                    <p class="footer__strapline">Over 10 million scientific documents at your fingertips</p>
+                                <div class="footer__edition" data-component="SV.EditionSwitcher">
+                                    <h3 class="u-hide" data-role="button-dropdown__title" data-btn-text="Switch between Academic &#38; Corporate Edition">Switch Edition</h3>
+                                    <ul data-role="button-dropdown__content">
+                                        <li  class="selected"><a href="/siteEdition/link?previousUrl=/chapter/10.1007%2F978-3-030-54455-3_42&id=siteedition-academic-link" id="siteedition-academic-link">Academic Edition</a></li>
+                                        <li ><a href="/siteEdition/rd?previousUrl=/chapter/10.1007%2F978-3-030-54455-3_42&id=siteedition-corporate-link" id="siteedition-corporate-link">Corporate Edition</a></li>
+                                    </ul>
+                                </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer__content">
+            <ul class="footer__nav">
+                <li>
+                    <a href="/">Home</a>
+                </li>
+                <li>
+                    <a href="/impressum">Impressum</a>
+                </li>
+                <li>
+                    <a href="/termsandconditions">Legal information</a>
+                </li>
+                <li>
+                    <a href="/privacystatement">Privacy statement</a>
+                </li>
+                <li>
+                    <a href="https://www.springernature.com/ccpa">California privacy statement</a>
+                </li>
+                <li>
+                    <a href="/cookiepolicy">How we use cookies</a>
+                </li>
+                <li>
+                    <a class="optanon-toggle-display" href="javascript:void(0);">Manage cookies/Do not sell my data</a>
+                </li>
+                <li>
+                    <a href="/accessibility">Accessibility</a>
+                </li>
+                <li>
+                    <a id="contactus-footer-link" href="/contactus">Contact us</a>
+                </li>
+            </ul>
+            <a class="parent-logo"
+               target="_blank" rel="noopener"
+               href="//www.springernature.com"
+               title="Go to Springer Nature">
+                <span class="u-screenreader-only">Springer Nature</span>
+                <svg width="125" height="12" focusable="false" aria-hidden="true">
+                    <image width="125" height="12"
+                           src="/springerlink-static/1946221364/images/png/springernature.png"
+                           xmlns:xlink="http://www.w3.org/1999/xlink"
+                           xlink:href="/springerlink-static/1946221364/images/svg/springernature.svg">
+                    </image>
+                </svg>
+            </a>
+
+            <p class="footer__copyright">&copy; 2020 Springer Nature Switzerland AG. Part of <a target="_blank" rel="noopener" href="//www.springernature.com">Springer Nature</a>.</p>
+                <p class="footer__user-access-info">
+                    <span>Not logged in</span>
+                    <span>Not affiliated</span>
+                    <span>89.78.13.249</span>
+                </p>
+        </div>
+    </footer>
+
+        </div>
+        <script type="text/javascript">
+    (function() {
+        var linkEl = document.querySelector('.js-ctm');
+        var scriptsList = [];
+        var polyfillFeatures = '';
+
+        window.SpringerLink = window.SpringerLink || {};
+        window.SpringerLink.staticLocation = '/springerlink-static/1946221364';
+        window.eventTrackerInstance = null;
+
+        if (window.matchMedia && window.matchMedia(linkEl.media).matches) {
+            (function(h){h.className = h.className.replace('no-js', 'js')})(document.documentElement);
+
+            polyfillFeatures = 'default,fetch,Promise,Object.setPrototypeOf,Object.entries,Number.isInteger,MutationObserver,startsWith,Array.prototype.includes,Array.from,IntersectionObserver';
+
+            scriptsList = [
+                'https://cdn.polyfill.io/v2/polyfill.min.js?features=' + polyfillFeatures + '&flags=gated',
+                window.SpringerLink.staticLocation + '/js/main.js'
+            ];
+
+            scriptsList.forEach(function(script) {
+                var tag = document.createElement('script');
+                tag.async = false;
+                tag.src = script;
+
+                document.body.appendChild(tag);
+            });
+        }
+    })();
+</script>
+
+    <script>
+    (function() {
+        var linkEl = document.querySelector('.js-ctm');
+        if (window.matchMedia && window.matchMedia(linkEl.media).matches) {
+            var scriptMathJax = document.createElement('script');
+            scriptMathJax.async = false;
+            scriptMathJax.src = '/springerlink-static/1946221364/js/mathJax.js';
+            var s0 = document.getElementsByTagName('script')[0];
+            s0.parentNode.insertBefore(scriptMathJax, s0);
+        }
+    })();
+</script>
+
+
+    <script type="text/javascript" id="googletag-push">
+        
+            var adSlot = '270604982/springerlink/book/chapter';
+        
+
+        var definedSlots = [
+                {slot: [728, 90], containerName: 'doubleclick-leaderboard-ad'},
+                {slot: [160, 600], containerName: 'doubleclick-ad'},
+            {slot: [2, 2], containerName: 'doubleclick-native-ad'}
+        ];
+    </script>
+
+
+        
+        <span id="chat-widget" class="u-hide"></span>
+        
+        
+    </body>
+</html>
