@@ -105,14 +105,15 @@ for root, dirs, files in os.walk("./library/entries"):
 
                             mdfile = os.path.join("", f"entry-{i}.md")
 #Date: {year}\n\
+                            NEWLINE = "\n"
                             markdown = f"\
 Title: {title}\n\
 Year: {year}\n\
 Authors: {'; '.join(authors)}\n\
 Bibfile: {os.path.join(cwd, bibfile)}\n\
-{'Date: ' + date_added if date_added != '' else ''}\n\
-{'Modified: ' + date_modified if date_modified != '' else ''}\n\
-{'DOI: ' + doi if doi != '' else ''}\n\
+{'Date: ' + date_added + NEWLINE if date_added != '' else ''}\
+{'Modified: ' + date_modified + NEWLINE if date_modified != '' else ''}\
+{'DOI: ' + doi + NEWLINE if doi != '' else ''}\
 Key: {key}\n\
 Slug: {key}\n\
 engine: knitr\n"
