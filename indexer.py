@@ -2,6 +2,7 @@ import glob, os
 import contextlib
 import bibtexparser as parser
 import string
+import urllib.parse
 
 @contextlib.contextmanager
 def pushd(new_dir):
@@ -94,7 +95,8 @@ for root, dirs, files in os.walk("./library/entries"):
                             for pdffile in os.listdir("./"):
                                 if pdffile.endswith(".pdf"):
                                     print(f"PDF {pdffile}")
-                                    pdffiles.append(os.path.join(cwd, pdffile))
+                                    pdffileEncoded = urllib.parse.quote(os.path.join(cwd, pdffile))
+                                    pdffiles.append(pdffileEncoded)
 
                             pdffiles_str = ""
                             if len(pdffiles) == 1: 
