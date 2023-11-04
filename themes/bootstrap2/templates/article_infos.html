@@ -12,8 +12,8 @@
         <i class="icon-calendar"></i>{{ article.year }}
 </a>
 {% if article.authors %}
-        <nobr>
         <span class="label">By</span>
+        <nobr>
                 {% for author in article.authors %}
                         <a href="{{ SITEURL }}/{{ author.url }}"><i class="icon-user"></i>{{ author }}</a>
                 {% endfor %}
@@ -22,6 +22,7 @@
         <span class="label">By</span>
         <a href="{{ SITEURL }}/{{ article.author.url }}"><i class="icon-user"></i>{{ article.author }}</a>
 {% endif %}
+<span class="label">Key</span><nobr>{{ article.key }}</nobr>
 <span class="label">Links</span>
 {% if article.pdffiles %}
         {% for pdffile in article.pdffiles %}
