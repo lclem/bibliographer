@@ -41,7 +41,7 @@ def parsebib(root, bibfile):
     for entry in library.entries:
         fields = entry.fields_dict
 
-        print(f"FIELDS: {fields}")
+        # print(f"FIELDS: {fields}")
         # print(f"key {entry.key}, type {entry.entry_type}, fields {entry.fields_dict} \n")
 
         key = entry.key
@@ -95,7 +95,8 @@ for root, dirs, files in os.walk("./library/entries"):
                             for pdffile in os.listdir("./"):
                                 if pdffile.endswith(".pdf"):
                                     print(f"PDF {pdffile}")
-                                    pdffileEncoded = urllib.parse.quote(os.path.join(cwd, pdffile))
+                                    pdffileEncoded = os.path.join(cwd, pdffile)
+                                    # pdffileEncoded = urllib.parse.quote(pdffileEncoded)
                                     pdffiles.append(pdffileEncoded)
 
                             pdffiles_str = ""
