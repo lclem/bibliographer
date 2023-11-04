@@ -12,11 +12,16 @@ def pushd(new_dir):
     finally:
         os.chdir(previous_dir)
 
-valid_characters = string.ascii_letters + string.digits + string.whitespace + '-'
+valid_characters = string.ascii_letters + string.digits + string.whitespace + '-,;:ł'
 
 def sanitise(str):
     result = "".join(c for c in str if c in valid_characters)
     return result.encode('utf-8').decode("ascii", "ignore")
+
+def normalise_author(author):
+    names = author.split(", ")
+    names = names[1:] + [names[0]]
+    return " ".join(names)
 
 def parsebib(root, bibfile):
     library = parser.parse_file(bibfile)
@@ -35,7 +40,7 @@ def parsebib(root, bibfile):
     for entry in library.entries:
         fields = entry.fields_dict
 
-        # print(f"FIELDS: {fields}")
+        print(f"FIELDS: {fields}")
         # print(f"key {entry.key}, type {entry.entry_type}, fields {entry.fields_dict} \n")
 
         key = entry.key
@@ -47,6 +52,9 @@ def parsebib(root, bibfile):
 
         author = sanitise(fields['Author'].value if 'Author' in fields else "N/A")
         authors = author.split(" and ")
+
+        for i in range(0, len(authors)):
+            authors[i] = normalise_author(authors[i])
 
         result.append((key, authors, title, year))
 
