@@ -113,6 +113,7 @@ Title: {title}\n\
 Year: {year}\n\
 Authors: {'; '.join(authors)}\n\
 Bibfile: {os.path.join(cwd, bibfile)}\n\
+Mdfile: {os.path.join(cwd, mdfile)}\n\
 {'Date: ' + date_added + NEWLINE if date_added != '' else ''}\
 {'Modified: ' + date_modified + NEWLINE if date_modified != '' else ''}\
 {'DOI: ' + doi + NEWLINE if doi != '' else ''}\
