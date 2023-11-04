@@ -1,3 +1,4 @@
 #!/bin/bash
 
-python3 ./indexer.py && pelican && rsync -aP library docs/
+#&& rsync -aP library docs/
+python3 ./indexer.py && pelican

@@ -27,13 +27,13 @@
 <span class="label">PDF</span>
 {% if article.pdffiles %}
         {% for pdffile in article.pdffiles %}
-        [<a href="{{ SITEURL }}/{{ pdffile }}">pdf</a> | <a href="pdfefile:///SyncedFolders/bibliographer/{{ pdffile }}">pdfe</a>]
+        [<a href="{{ GITHUB_VIEW_URL }}/{{ pdffile | urlencode}}">pdf</a> | <a href="pdfefile:///SyncedFolders/bibliographer/{{ pdffile }}">pdfe</a>]
         {% endfor %}
 {% elif article.pdffile %}
-        [<a href="{{ SITEURL }}/{{ article.pdffile }}">pdf</a> | <a href="pdfefile:///SyncedFolders/bibliographer/{{ article.pdffile }}">pdfe</a>]
+        [<a href="{{ GITHUB_VIEW_URL }}/{{ article.pdffile | urlencode}}">pdf</a> | <a href="pdfefile:///SyncedFolders/bibliographer/{{ article.pdffile }}">pdfe</a>]
 {% endif %}
 <span class="label">BIB</span>
 <a href="javascript:copyBib()">[copy]</a>
-<a href="{{ SITEURL }}/{{ article.bibfile }}">[bib]</a>
+<!-- <a href="{{ SITEURL }}/{{ article.bibfile }}">[bib]</a> -->
 <a href="{{ GITHUB_EDIT_URL }}/{{ article.bibfile }}">[edit]</a>
 </footer>
