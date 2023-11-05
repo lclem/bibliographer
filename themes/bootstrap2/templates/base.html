@@ -450,7 +450,7 @@
       async function openGitHub(key, fileName, bibStr) {
 
         // TODO
-        sanitisedKey = key;
+        sanitisedKey = key.replace("/", "_");
 
         url = "https://github.com/lclem/bibliographer/new/main/library/entries/";
         url += sanitisedKey + "?filename=" + fileName + "&value=";
@@ -609,6 +609,10 @@
 
             xmlhttp.open("GET", theUrl, false);
             xmlhttp.send();
+
+          }
+          // https://dl.acm.org/doi/10.1145/3087604.3087623
+          else if (theText.startsWith("https://dl.acm.org/doi/")) {
 
           }
       }
