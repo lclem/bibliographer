@@ -25,10 +25,10 @@
 <a class="published" title="{{ article.date.isoformat() }}"><i class="icon-calendar"></i>{{ article.locale_date }}</a>
 <span class="label">URL</span>
 {% if article.doi %}
-        <a href="{{ article.doi }}">[doi]</a>
+        <a href="{{ article.doi }}" target="_blank">[doi]</a>
 {% endif %}
 {% if article.theurl %}
-        <a href="{{ article.theurl }}">[url]</a>
+        <a href="{{ article.theurl }}" target="_blank">[url]</a>
 {% endif %}
 <!-- <span class="label">Key</span> -->
 <a hidden><nobr>{{ article.key }}</nobr></a>
