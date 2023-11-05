@@ -360,11 +360,11 @@
     <div class="container-fluid">
       <div class="row">
         <div class="span9" id="content">
-          <p>
-            <button type="button" id="add-button" onclick="confirmBib()">Add anyway</button>
-          </p>
           <div class="stork-wrapper">
-            <input id="stork-input" class="stork-input" data-stork="sitesearch" placeholder="Search publication"/>
+            <p>
+              <input id="stork-input" class="stork-input" data-stork="sitesearch" placeholder="Search publication" onchange="updateSearch()"/>
+              <button type="button" id="add-button" onclick="confirmBib()">Add reference</button>
+            </p>
             <p>
               <div class="stork-output" data-stork="sitesearch-output"></div>
             </p>
@@ -392,8 +392,12 @@
 
     <script>
       let addButton = document.getElementById('add-button');
+      let searchInput = document.getElementById('stork-input');
       let dropArea = document.getElementById('drop-area');
       let dt = [];
+
+      searchInput.addEventListener("change", updateSearch, false);
+      // searchInput.addEventListener("input", updateSearch, false);
 
       ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {dropArea.addEventListener(eventName, preventDefaults, false)});
       ['dragenter', 'dragover'].forEach(eventName => {dropArea.addEventListener(eventName, highlight, false)});
@@ -443,6 +447,100 @@
 
       var bibFile;
 
+      async function openGitHub(key, fileName, bibStr) {
+
+        // TODO
+        sanitisedKey = key;
+
+        url = "https://github.com/lclem/bibliographer/new/main/library/entries/";
+        url += sanitisedKey + "?filename=" + fileName + "&value=";
+        url += encodeURIComponent(bibStr);
+
+        window.open(url, "_blank");
+
+        addButton.style.display = "none";
+
+      }
+
+      async function processBib(bibStr, fileName, force = false) {
+
+        console.log("processBib: " + bibStr);
+
+        try {
+          bibJSONs = bibtexParse.toJSON(bibStr);
+
+          for (bibJSON of bibJSONs) {
+            console.log(bibJSON);
+
+            key = bibJSON["citationKey"];
+            console.log(key);
+
+            tags = bibJSON["entryTags"];
+
+            if ("title" in tags) {
+              title = tags["title"];
+            }
+            else if ("Title" in tags) {
+              title = tags["Title"];
+            }
+            else {
+              title = ""
+            }
+
+            console.log(title);
+
+            keySearchResults = stork.search("sitesearch", key);
+            titleSearchResults = stork.search("sitesearch", title);
+            let titleHit = false;
+
+            if (titleSearchResults.total_hit_count > 0) {
+              titleHit = titleSearchResults.results[0].score > 2000
+            }
+
+            if (!force && (keySearchResults.total_hit_count > 0 || titleHit)) {
+              console.log("bib already exists");
+              element = document.getElementById("stork-input");
+
+              if (keySearchResults.total_hit_count) {
+                console.log(keySearchResults);
+                element.value = key;
+              }
+              else {
+                console.log(titleSearchResults);
+                element.value = title;
+              }
+
+              element.dispatchEvent(new Event('input', { bubbles: true }));
+              addButton.style.display = "block";
+
+            }
+            else {
+
+              // date-added    = "2018-12-22 10:50:04 +0100",
+              var currentdate = new Date(); 
+              var datetime =
+                currentdate.getFullYear() + "-" +
+                (currentdate.getMonth()+1) + "-" +
+                currentdate.getDate() + " " +
+                currentdate.getHours() + ":" +
+                currentdate.getMinutes() + ":" +
+                currentdate.getSeconds() +
+                " +0100";
+
+              bibJSON.entryTags["date-added"] = datetime;
+              console.log(datetime);
+              
+              bibStr = bibtexParse.toBibtex([bibJSON], false);
+              console.log(bibStr);
+
+              openGitHub(key, fileName, bibStr);
+            }
+          }
+        } catch (err) {
+          console.error('Failed to parse bib: ', err);
+        }
+      }
+
       async function uploadBib(inp, force = false) {
           console.log(inp);
 
@@ -458,126 +556,62 @@
           var reader = new FileReader();
           reader.readAsText(bibFile, "UTF-8");
           reader.onload = function (evt) {
-            bibContents = evt.target.result;
-            console.log(bibContents);
+            bibStr = evt.target.result;
+            processBib(bibStr, fileName, force)
 
-            try {
-              bibJSONs = bibtexParse.toJSON(bibContents);
-
-              for (bibJSON of bibJSONs) {
-                console.log(bibJSON);
-
-                key = bibJSON["citationKey"];
-                console.log(key);
-
-                tags = bibJSON["entryTags"];
-
-                if ("title" in tags) {
-                  title = tags["title"];
-                }
-                else if ("Title" in tags) {
-                  title = tags["Title"];
-                }
-                else {
-                  title = ""
-                }
-
-                console.log(title);
-
-                keySearchResults = stork.search("sitesearch", key);
-                titleSearchResults = stork.search("sitesearch", title);
-                let titleHit = false;
-
-                if (titleSearchResults.total_hit_count > 0) {
-                  titleHit = titleSearchResults.results[0].score > 2000
-                }
-
-                if (!force && (keySearchResults.total_hit_count > 0 || titleHit)) {
-                  console.log("bib already exists");
-                  element = document.getElementById("stork-input");
-
-                  if (keySearchResults.total_hit_count) {
-                    console.log(keySearchResults);
-                    element.value = key;
-                  }
-                  else {
-                    console.log(titleSearchResults);
-                    element.value = title;
-                  }
-
-                  element.dispatchEvent(new Event('input', { bubbles: true }));
-                  addButton.style.display = "block";
-
-                }
-                else {
-
-                  // TODO
-                  sanitisedKey = key
-
-                  // date-added    = "2018-12-22 10:50:04 +0100",
-                  var currentdate = new Date(); 
-                  var datetime =
-                    currentdate.getFullYear() + "-" +
-                    (currentdate.getMonth()+1) + "-" +
-                    currentdate.getDate() + " " +
-                    currentdate.getHours() + ":" +
-                    currentdate.getMinutes() + ":" +
-                    currentdate.getSeconds() +
-                    " +0100";
-
-                  bibJSON.entryTags["date-added"] = datetime;
-                  console.log(datetime);
-                  
-                  bibStr = bibtexParse.toBibtex([bibJSON], false);
-                  console.log(bibStr);
-                  
-                  url = "https://github.com/lclem/bibliographer/new/main/library/entries/";
-                  url += sanitisedKey + "?filename=" + fileName + "&value=";
-                  url += encodeURIComponent(bibStr);
-
-                  window.open(url, "_blank");
-
-                  addButton.style.display = "none";
-
-                }
-              }
-            } catch (err) {
-              console.error('Failed to parse bib: ', err);
-            }
           }
           reader.onerror = function (evt) {
             console.log("error reading file");
-          }
-              
-          // formData.append("bibFile", bibFile);
-          // formData.append("user", JSON.stringify(user)); 
-          
-          // const ctrl = new AbortController()    // timeout
-          // setTimeout(() => ctrl.abort(), 5000);
-          
-          // try {
-          //   let r = await fetch('/upload/image', 
-          //     {method: "POST", body: formData, signal: ctrl.signal}); 
-          //   console.log('HTTP response code:',r.status); 
-          // } catch(e) {
-          //   console.log('Huston we have problem...:', e);
-          // }
-          
+          }          
       }
-      // function copyBib() {
-      //   // Get the text field
-      //   var copyText = document.getElementById("bib").innerHTML;
 
-      //   // Select the text field
-      //   copyText.select();
-      //   copyText.setSelectionRange(0, 99999); // For mobile devices
+      async function updateSearch() {
+          var theText = searchInput.value;
 
-      //   // Copy the text inside the text field
-      //   navigator.clipboard.writeText(copyText.value);
+          // detect arxiv link
+          if (theText.startsWith("https://arxiv.org/abs/")) {
 
-      //   // Alert the copied text
-      //   alert("Copied the text: " + copyText.value);
-      // }
+            var split = theText.split("/");
+            var id = split.slice(-1)[0];
+
+            console.log("arxiv id: " + id);
+
+            // https://arxiv.org/abs/2104.14624
+            // https://arxiv.org/pdf/2104.14624.pdf
+            // https://ui.adsabs.harvard.edu/abs/2021arXiv210414624G/exportcitation
+
+            year = "20" + id.substring(0, 2);
+            // theUrl = "https://ui.adsabs.harvard.edu/abs/" + year + "arXiv" + id.replace(".", "") + "G" + "/exportcitation"
+            theUrl = "https://ui.adsabs.harvard.edu/abs/arXiv:" + id + "/exportcitation";
+
+            if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp=new XMLHttpRequest();
+            }
+            else {// code for IE6, IE5
+                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange = async function() {
+              if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                let res = xmlhttp.responseText;
+                // createDiv(xmlhttp.responseText);
+                // console.log(res);
+
+                var el = document.createElement('html');
+                el.innerHTML = res;
+
+                var els = el.getElementsByClassName('export-textarea');
+                var bibStr = els[0].innerText;
+
+                fileName = id + ".bib";
+                processBib(bibStr, fileName);
+              }
+            }
+
+            xmlhttp.open("GET", theUrl, false);
+            xmlhttp.send();
+
+          }
+      }
     </script>
   </body>
 </html>
