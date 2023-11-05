@@ -331,15 +331,15 @@
         </div>
       </div>
     </div>
-    <div class="stork-wrapper">
-      <input class="stork-input" data-stork="sitesearch" placeholder="Search publication"/>
-      <div class="stork-output" data-stork="sitesearch-output"></div>
-    </div>
     <div class="container-fluid">
       <div class="row">
         <div class="span9" id="content">
-            {% block content %}
-            {% endblock %}
+          <div class="stork-wrapper">
+            <input class="stork-input" data-stork="sitesearch" placeholder="Search publication"/>
+            <div class="stork-output" data-stork="sitesearch-output"></div>
+          </div>
+          {% block content %}
+          {% endblock %}
         </div>
       </div>
     </div>
