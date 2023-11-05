@@ -113,6 +113,7 @@ for root, dirs, files in os.walk("./library/entries"):
 Title: {title}\n\
 Year: {year}\n\
 Authors: {'; '.join(authors)}\n\
+Rootfolder: {cwd}\n\
 Bibfile: {os.path.join(cwd, bibfile)}\n\
 Mdfile: {os.path.join(cwd, mdfile)}\n\
 {'Date: ' + date_added + NEWLINE if date_added != '' else ''}\

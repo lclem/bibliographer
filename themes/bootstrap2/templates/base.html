@@ -87,6 +87,10 @@
         --stork-results-border-color: var(--stork-border-color);
       }
 
+      #add-button {
+        display: none;
+      }
+
       .stork-wrapper {
         position: relative;
         font-family: var(--stork-font-family);
@@ -277,6 +281,28 @@
       .stork-close-button:active {
         background: hsla(0, 0%, 65%);
       }
+
+      #drop-area {
+        /* border: 2px dashed #ccc; */
+        /* border-radius: 20px; */
+        /* width: 480px; */
+        /* font-family: sans-serif; */
+        /* margin: 100px auto; */
+        /* padding: 20px; */
+      }
+      #drop-area.highlight {
+        /* border-color: purple; */
+        background-color: aliceblue;
+      }
+
+      footer {
+       display: block;
+      }
+
+      .pagination {
+        height: 40px;
+        margin: 20px 0px 50px 0;
+      }
     </style>
 
     <link href="{{ SITEURL }}/theme/css/bootstrap-responsive.min.css" rel="stylesheet">
@@ -296,7 +322,7 @@
 
   </head>
 
-  <body>
+  <body id="drop-area">
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
         <div class="container-fluid">
@@ -334,43 +360,74 @@
     <div class="container-fluid">
       <div class="row">
         <div class="span9" id="content">
+          <p>
+            <button type="button" id="add-button" onclick="confirmBib()">Add anyway</button>
+          </p>
           <div class="stork-wrapper">
-            <input class="stork-input" data-stork="sitesearch" placeholder="Search publication"/>
-            <div class="stork-output" data-stork="sitesearch-output"></div>
+            <input id="stork-input" class="stork-input" data-stork="sitesearch" placeholder="Search publication"/>
+            <p>
+              <div class="stork-output" data-stork="sitesearch-output"></div>
+            </p>
           </div>
           {% block content %}
           {% endblock %}
+          <p>
+            <div class="small">
+              Last Updated: {{ BUILD_TIME | strftime("%b %d, %Y, %H:%M:%S") }}
+            </div>
+          </p>      
         </div>
       </div>
-    </div>
-
+  </div>
     <!-- Le javascript -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="{{ SITEURL }}/theme/js/jquery-1.7.2.min.js"></script>
     <script src="{{ SITEURL }}/theme/js/bootstrap.min.js"></script>
+    <script src="{{ SITEURL }}/theme/js/bibtexParse.js"></script>
     <script src="https://files.stork-search.net/releases/v1.5.0/stork.js"></script>
     <script>
-        stork.register("sitesearch", "{{ SITEURL }}/search-index.st");
+        options = {showScores: false};
+        stork.register("sitesearch", "{{ SITEURL }}/search-index.st", options);
     </script>
 
     <script>
-      let text = document.getElementById('bib').innerHTML;
+      let addButton = document.getElementById('add-button');
+      let dropArea = document.getElementById('drop-area');
+      let dt = [];
 
-      // navigator.permissions.query({ name: "write-on-clipboard" }).then((result) => {
-      //   if (result.state == "granted" || result.state == "prompt") {
-      //     alert("Write access granted!");
-      //   }
-      // });
+      ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {dropArea.addEventListener(eventName, preventDefaults, false)});
+      ['dragenter', 'dragover'].forEach(eventName => {dropArea.addEventListener(eventName, highlight, false)});
+      ['dragleave', 'drop'].forEach(eventName => {dropArea.addEventListener(eventName, unhighlight, false)});
+      dropArea.addEventListener('drop', handleDrop, false)
+
+      function preventDefaults (e) {
+        e.preventDefault()
+        e.stopPropagation()
+      }
+
+      function highlight(e) {
+        dropArea.classList.add('highlight')
+      }
+
+      function unhighlight(e) {
+        dropArea.classList.remove('highlight')
+      }
+
+      function handleDrop(e) {
+        dt = e.dataTransfer;
+        uploadBib(dt);
+      }
 
       const copyBib = async () => {
         try {
+          let text = document.getElementById('bib').innerHTML;
           await navigator.clipboard.writeText(text);
 
-          var tooltip = document.getElementById("myTooltip");
-          tooltip.innerHTML = "copied to clipboard!";
+          // var tooltip = document.getElementById("myTooltip");
+          // tooltip.innerHTML = "copied to clipboard!";
           console.log('Content copied to clipboard');
         } catch (err) {
-          tooltip.innerHTML = "error: "+ err;
+          // tooltip.innerHTML = "error: "+ err;
           console.error('Failed to copy: ', err);
         }
       }
@@ -380,6 +437,133 @@
         tooltip.innerHTML = "Copy to clipboard";
       }
 
+      function confirmBib() {
+        uploadBib(dt, true);
+      }
+
+      var bibFile;
+
+      async function uploadBib(inp, force = false) {
+          console.log(inp);
+
+          if (force) {
+          }
+          else {
+            bibFile = inp.files[0];
+          }
+
+          let fileName = bibFile.name;
+          console.log("File name: " + fileName);
+
+          var reader = new FileReader();
+          reader.readAsText(bibFile, "UTF-8");
+          reader.onload = function (evt) {
+            bibContents = evt.target.result;
+            console.log(bibContents);
+
+            try {
+              bibJSONs = bibtexParse.toJSON(bibContents);
+
+              for (bibJSON of bibJSONs) {
+                console.log(bibJSON);
+
+                key = bibJSON["citationKey"];
+                console.log(key);
+
+                tags = bibJSON["entryTags"];
+
+                if ("title" in tags) {
+                  title = tags["title"];
+                }
+                else if ("Title" in tags) {
+                  title = tags["Title"];
+                }
+                else {
+                  title = ""
+                }
+
+                console.log(title);
+
+                keySearchResults = stork.search("sitesearch", key);
+                titleSearchResults = stork.search("sitesearch", title);
+                let titleHit = false;
+
+                if (titleSearchResults.total_hit_count > 0) {
+                  titleHit = titleSearchResults.results[0].score > 2000
+                }
+
+                if (!force && (keySearchResults.total_hit_count > 0 || titleHit)) {
+                  console.log("bib already exists");
+                  element = document.getElementById("stork-input");
+
+                  if (keySearchResults.total_hit_count) {
+                    console.log(keySearchResults);
+                    element.value = key;
+                  }
+                  else {
+                    console.log(titleSearchResults);
+                    element.value = title;
+                  }
+
+                  element.dispatchEvent(new Event('input', { bubbles: true }));
+                  addButton.style.display = "block";
+
+                }
+                else {
+
+                  // TODO
+                  sanitisedKey = key
+
+                  // date-added    = "2018-12-22 10:50:04 +0100",
+                  var currentdate = new Date(); 
+                  var datetime =
+                    currentdate.getFullYear() + "-" +
+                    (currentdate.getMonth()+1) + "-" +
+                    currentdate.getDate() + " " +
+                    currentdate.getHours() + ":" +
+                    currentdate.getMinutes() + ":" +
+                    currentdate.getSeconds() +
+                    " +0100";
+
+                  bibJSON.entryTags["date-added"] = datetime;
+                  console.log(datetime);
+                  
+                  bibStr = bibtexParse.toBibtex([bibJSON], false);
+                  console.log(bibStr);
+                  
+                  url = "https://github.com/lclem/bibliographer/new/main/library/entries/";
+                  url += sanitisedKey + "?filename=" + fileName + "&value=";
+                  url += encodeURIComponent(bibStr);
+
+                  window.open(url, "_blank");
+
+                  addButton.style.display = "none";
+
+                }
+              }
+            } catch (err) {
+              console.error('Failed to parse bib: ', err);
+            }
+          }
+          reader.onerror = function (evt) {
+            console.log("error reading file");
+          }
+              
+          // formData.append("bibFile", bibFile);
+          // formData.append("user", JSON.stringify(user)); 
+          
+          // const ctrl = new AbortController()    // timeout
+          // setTimeout(() => ctrl.abort(), 5000);
+          
+          // try {
+          //   let r = await fetch('/upload/image', 
+          //     {method: "POST", body: formData, signal: ctrl.signal}); 
+          //   console.log('HTTP response code:',r.status); 
+          // } catch(e) {
+          //   console.log('Huston we have problem...:', e);
+          // }
+          
+      }
       // function copyBib() {
       //   // Get the text field
       //   var copyText = document.getElementById("bib").innerHTML;

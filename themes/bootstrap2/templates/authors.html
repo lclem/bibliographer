@@ -3,9 +3,9 @@
 <section id="content">
 <h1>Authors</h1>
 <dl>
-{% for author in authors %}
-    <a href="{{ SITEURL }}/{{ author.url }}"><i class="icon-user"></i>{{ author }}</a>
-{% endfor %}
+    {% for author in authors %}
+        <a href="{{ SITEURL }}/{{ author.url }}"><i class="icon-user"></i>{{ author }}</a>
+    {% endfor %}
 </dl>
 </section>
 {% endblock %}

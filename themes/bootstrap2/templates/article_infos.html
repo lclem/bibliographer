@@ -7,33 +7,36 @@
         <span class="label">Title</span>
         <a href="{{ SITEURL }}/{{ article.url }}"><nobr>{{ article.title }}</nobr></a>
 </p>
-<span class="label">Year</span>
-<a class="published" title="{{ article.year }}">
-        <i class="icon-calendar"></i>{{ article.year }}
-</a>
+<span class="label">By</span>
 {% if article.authors %}
-        <span class="label">By</span>
         <nobr>
                 {% for author in article.authors %}
                         <a href="{{ SITEURL }}/{{ author.url }}"><i class="icon-user"></i>{{ author }}</a>
                 {% endfor %}
         </nobr>
 {% elif article.author %}
-        <span class="label">By</span>
-        <a href="{{ SITEURL }}/{{ article.author.url }}"><i class="icon-user"></i>{{ article.author }}</a>
+        <nobr>
+                <a href="{{ SITEURL }}/{{ article.author.url }}"><i class="icon-user"></i>{{ article.author }}</a>
+        </nobr>
 {% endif %}
+<span class="label">Year</span>
+<a class="published" title="{{ article.year }}"><i class="icon-calendar"></i>{{ article.year }}</a>
+<span class="label">Added</span>
+<a class="published" title="{{ article.date.isoformat() }}"><i class="icon-calendar"></i>{{ article.locale_date }}</a>
 <!-- <span class="label">Key</span> -->
 <a hidden><nobr>{{ article.key }}</nobr></a>
 <span class="label">PDF</span>
-{% if article.pdffiles %}
-        {% for pdffile in article.pdffiles %}
-        [<a href="{{ GITHUB_VIEW_URL }}/{{ pdffile | urlencode}}">pdf</a> | <a href="pdfefile:///SyncedFolders/bibliographer/{{ pdffile }}">pdfe</a>]
-        {% endfor %}
-{% elif article.pdffile %}
-        [<a href="{{ GITHUB_VIEW_URL }}/{{ article.pdffile | urlencode}}">pdf</a> | <a href="pdfefile:///SyncedFolders/bibliographer/{{ article.pdffile }}">pdfe</a>]
-{% endif %}
+        {% if article.pdffiles %}
+                {% for pdffile in article.pdffiles %}
+                [<a href="{{ GITHUB_VIEW_URL }}/{{ pdffile | urlencode}}">pdf</a> | <a href="pdfefile:///SyncedFolders/bibliographer/{{ pdffile }}">pdfe</a>]
+                {% endfor %}
+        {% elif article.pdffile %}
+                [<a href="{{ GITHUB_VIEW_URL }}/{{ article.pdffile | urlencode}}">pdf</a> | <a href="pdfefile:///SyncedFolders/bibliographer/{{ article.pdffile }}">pdfe</a>]
+        {% endif %}
 <span class="label">BIB</span>
-<a href="javascript:copyBib()">[copy]</a>
-<!-- <a href="{{ SITEURL }}/{{ article.bibfile }}">[bib]</a> -->
-<a href="{{ GITHUB_EDIT_URL }}/{{ article.bibfile }}">[edit]</a>
+        <a href="javascript:copyBib()">[copy]</a>
+        <!-- <a href="{{ SITEURL }}/{{ article.bibfile }}">[bib]</a> -->
+        <a href="{{ GITHUB_EDIT_URL }}/{{ article.bibfile }}">[edit]</a>
+<span class="label">SRC</span>
+        <a href="{{ GITHUB_EDIT_URL }}/{{ article.rootfolder }}">[edit]</a>
 </footer>
