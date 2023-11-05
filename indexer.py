@@ -47,11 +47,30 @@ def parsebib(root, bibfile):
         key = entry.key
         key = key.encode('utf-8').decode("ascii", "ignore")
         
-        title = sanitise(fields['Title'].value if 'Title' in fields else "N/A")
-        
-        year = fields['Year'].value if 'Year' in fields else "0"
+        if 'Title' in fields:
+            title = fields['Title'].value
+        elif 'title' in fields:
+            title = fields['title'].value
+        else
+            title = "N/A"
 
-        author = sanitise(fields['Author'].value if 'Author' in fields else "N/A")
+        title = sanitise(title)
+
+        if 'Year' in fields:
+            year = fields['Year'].value
+        elif 'year' in fields:
+            year = fields['year'].value
+        else
+            year = "0"
+
+        if 'Author' in fields:
+            author = fields['Author'].value
+        elif 'author' in fields:
+            author = fields['author'].value
+        else
+            author = "N/A"
+
+        author = sanitise(author)
         authors = author.split(" and ")
 
         for i in range(0, len(authors)):
