@@ -93,9 +93,6 @@
             <span class="icon-bar"></span>
           </a>
           <a class="brand" href="{{ SITEURL }}/index.html">{{ SITENAME }} {% if SITESUBTITLE %} <strong>{{ SITESUBTITLE }}</strong>{% endif %}</a>
-          <div class="container-fluid">
-            Search: <input data-stork="sitesearch" />
-          </div>
           <div class="nav-collapse">
             <ul class="nav">
               {% for title, link in MENUITEMS %}
@@ -120,6 +117,9 @@
           </div>
         </div>
       </div>
+    </div>
+    <div class="container-fluid">
+      Search: <input data-stork="sitesearch" />
     </div>
     <div data-stork="sitesearch-output"></div>
     <div class="container-fluid">
