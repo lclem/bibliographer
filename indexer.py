@@ -59,9 +59,20 @@ def parsebib(root, bibfile):
 
         date_added = fields['date-added'].value if 'date-added' in fields else ""
         date_modified = fields['date-modified'].value if 'date-modified' in fields else ""
+
+        if 'URL'in fields:
+            url = fields['URL'].value
+        elif 'url' in fields:
+            url = fields['url']
+        else:
+            url = ""
+
         doi = fields['DOI'].value if 'DOI' in fields else ""
 
-        result.append((key, authors, title, year, date_added, date_modified, doi))
+        if doi != "" and not doi.startswith("http"):
+            doi = f"http://dx.doi.org/{doi}"
+
+        result.append((key, authors, title, year, date_added, date_modified, doi, url))
 
     # print(f"RES: {result}")
     return result
@@ -88,7 +99,7 @@ for root, dirs, files in os.walk("./library/entries"):
 
                         bibcontent = "\n".join(biblines)
                         
-                        for key, authors, title, year, date_added, date_modified, doi in parsebib("./", bibfile):
+                        for key, authors, title, year, date_added, date_modified, doi, url in parsebib("./", bibfile):
                             print(f"BIB {authors} - {title}")
 
                             pdffiles = []
@@ -119,6 +130,7 @@ Mdfile: {os.path.join(cwd, mdfile)}\n\
 {'Date: ' + date_added + NEWLINE if date_added != '' else ''}\
 {'Modified: ' + date_modified + NEWLINE if date_modified != '' else ''}\
 {'DOI: ' + doi + NEWLINE if doi != '' else ''}\
+{'THEURL: ' + url + NEWLINE if url != '' else ''}\
 Key: {key}\n\
 Slug: {key}\n\
 engine: knitr\n"

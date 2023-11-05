@@ -23,15 +23,22 @@
 <a class="published" title="{{ article.year }}"><i class="icon-calendar"></i>{{ article.year }}</a>
 <span class="label">Added</span>
 <a class="published" title="{{ article.date.isoformat() }}"><i class="icon-calendar"></i>{{ article.locale_date }}</a>
+<span class="label">URL</span>
+{% if article.doi %}
+        <a href="{{ article.doi }}">[doi]</a>
+{% endif %}
+{% if article.theurl %}
+        <a href="{{ article.theurl }}">[url]</a>
+{% endif %}
 <!-- <span class="label">Key</span> -->
 <a hidden><nobr>{{ article.key }}</nobr></a>
 <span class="label">PDF</span>
         {% if article.pdffiles %}
                 {% for pdffile in article.pdffiles %}
-                [<a href="{{ GITHUB_VIEW_URL }}/{{ pdffile | urlencode}}">pdf</a> | <a href="pdfefile:///SyncedFolders/bibliographer/{{ pdffile }}">pdfe</a>]
+                [<a href="{{ GITHUB_VIEW_URL }}/{{ pdffile | urlencode}}" target="_blank">pdf</a> | <a href="pdfefile:///SyncedFolders/bibliographer/{{ pdffile }}">pdfe</a>]
                 {% endfor %}
         {% elif article.pdffile %}
-                [<a href="{{ GITHUB_VIEW_URL }}/{{ article.pdffile | urlencode}}">pdf</a> | <a href="pdfefile:///SyncedFolders/bibliographer/{{ article.pdffile }}">pdfe</a>]
+                [<a href="{{ GITHUB_VIEW_URL }}/{{ article.pdffile | urlencode}}" target="_blank">pdf</a> | <a href="pdfefile:///SyncedFolders/bibliographer/{{ article.pdffile }}">pdfe</a>]
         {% endif %}
 <span class="label">BIB</span>
         <a href="javascript:copyBib()">[copy]</a>
