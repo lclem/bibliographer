@@ -82,7 +82,7 @@ def parsebib(root, bibfile):
         if 'URL'in fields:
             url = fields['URL'].value
         elif 'url' in fields:
-            url = fields['url']
+            url = fields['url'].value
         else:
             url = ""
 
