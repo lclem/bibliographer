@@ -51,7 +51,7 @@ def parsebib(root, bibfile):
             title = fields['Title'].value
         elif 'title' in fields:
             title = fields['title'].value
-        else
+        else:
             title = "N/A"
 
         title = sanitise(title)
@@ -60,14 +60,14 @@ def parsebib(root, bibfile):
             year = fields['Year'].value
         elif 'year' in fields:
             year = fields['year'].value
-        else
+        else:
             year = "0"
 
         if 'Author' in fields:
             author = fields['Author'].value
         elif 'author' in fields:
             author = fields['author'].value
-        else
+        else:
             author = "N/A"
 
         author = sanitise(author)
