@@ -737,6 +737,20 @@
 
         await pdfjsLib.getDocument(data).promise.then(async doc => { 
           // console.log(doc);
+
+          doc.getMarkInfo().then(info => console.log("mark info: " + info));
+          doc.getDownloadInfo().then(info => console.log("download info: " + info));
+          doc.getFieldObjects().then(info => console.log("field objs: " + info));
+          doc.getAttachments().then(info => console.log("attachments: " + info));
+          doc.getOutline().then(info => console.log("outline: " + info));
+          doc.getPage(1).then(firstPage => {
+            console.log("first page: " + firstPage);
+            firstPage.getTextContent({ normalizeWhitespace: true }).then(content => {
+              console.log("content: " + content);
+            });
+          });
+          // doc.getData().then(info => console.log("data: " + info));
+
           var meta = doc.getMetadata();
           meta.then(metadata => {
             
@@ -750,6 +764,7 @@
 
             author = info.Author;
             title = info.Title;
+            creator = info.Creator;
 
             console.log("author: " + author);
             console.log("title: " + title);
@@ -767,6 +782,10 @@
             // we have an arxiv PDF
             if (arxivId != "") {
               getBib("https://arxiv.org/abs/" + arxivId);
+            }
+            // we have an HAL PDF
+            else if (creator == "HAL") {
+
             }
 
           });
