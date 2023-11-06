@@ -595,14 +595,13 @@
           }          
       }
 
-      async function updateSearch() {
-          var theText = stork_input.value;
+      async function getBib(articleUrl) {
 
           // detect arxiv link
-	  // TODO: handle also https://arxiv.org/abs/math/0703211
-          if (theText.startsWith("https://arxiv.org/abs/")) {
+	        // TODO: handle also https://arxiv.org/abs/math/0703211
+          if (articleUrl.startsWith("https://arxiv.org/abs/")) {
 
-            var split = theText.split("/");
+            var split = articleUrl.split("/");
             var id = split.slice(-1)[0];
 
             console.log("arxiv id: " + id);
@@ -641,16 +640,20 @@
             xmlhttp.open("GET", theUrl, false);
             xmlhttp.send();
 
-          }
-          // https://dl.acm.org/doi/10.1145/3087604.3087623
-          else if (theText.startsWith("https://dl.acm.org/doi/")) {
+            }
+            // https://dl.acm.org/doi/10.1145/3087604.3087623
+            else if (articleUrl.startsWith("https://dl.acm.org/doi/")) {
 
-          }
-          // https://epubs.siam.org/doi/abs/10.1137/S0097539793251219
-          // https://epubs.siam.org/action/downloadCitation?format=bibtex&include=abs&direct=true&doi=10.1137/S0097539793251219&downloadFileName=siam_S0097539793251219
-          else if (theText.startsWith("https://epubs.siam.org/doi/abs/")) {
+            }
+            // https://epubs.siam.org/doi/abs/10.1137/S0097539793251219
+            // https://epubs.siam.org/action/downloadCitation?format=bibtex&include=abs&direct=true&doi=10.1137/S0097539793251219&downloadFileName=siam_S0097539793251219
+            else if (articleUrl.startsWith("https://epubs.siam.org/doi/abs/")) {
 
-          }
+            }
+      }
+
+      async function updateSearch() {
+          getBib(stork_input.value);
       }
 
       async function uploadPdf(thePdf) {
@@ -706,8 +709,9 @@
 
         // we have an arxiv PDF
         if (arxivId != "") {
-
+          getBib("https://arxiv.org/abs/" + arxivId);
         }
+        
       }
     </script>
   </body>
