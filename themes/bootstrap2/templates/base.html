@@ -384,7 +384,12 @@
     <script src="{{ SITEURL }}/theme/js/jquery-1.7.2.min.js"></script>
     <script src="{{ SITEURL }}/theme/js/bootstrap.min.js"></script>
     <script src="{{ SITEURL }}/theme/js/bibtexParse.js"></script>
-    <script src="{{ SITEURL }}/theme/js/pdf.min.js"></script>
+    <script src="{{ SITEURL }}/theme/js/pdf.js"></script>
+    <script>
+      // https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/
+			pdfjsLib.GlobalWorkerOptions.workerSrc =
+				'{{ SITEURL }}/theme/js/pdf.worker.js';
+		</script>
     <script src="https://files.stork-search.net/releases/v1.5.0/stork.js"></script>
     <script>
         options = {showScores: false};
@@ -393,12 +398,12 @@
 
     <script>
       let addButton = document.getElementById('add-button');
-      let searchInput = document.getElementById('stork-input');
+      var stork_input = document.getElementById('stork-input');
       let dropArea = document.getElementById('drop-area');
       let dt = [];
 
-      searchInput.addEventListener("change", updateSearch, false);
-      // searchInput.addEventListener("input", updateSearch, false);
+      stork_input.addEventListener("change", updateSearch, false);
+      // stork_input.addEventListener("input", updateSearch, false);
 
       ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {dropArea.addEventListener(eventName, preventDefaults, false)});
       ['dragenter', 'dragover'].forEach(eventName => {dropArea.addEventListener(eventName, highlight, false)});
@@ -420,7 +425,25 @@
 
       function handleDrop(e) {
         dt = e.dataTransfer;
-        uploadBib(dt);
+        var len = dt.files.length;
+
+        if (len != 1) {
+          console.log("not supported: dropped files #" + len);
+          return;
+        }
+
+        var theFile = dt.files[0];
+        var fileName = theFile.name;
+
+        if (fileName.endsWith(".bib")) {
+          uploadBib(dt);
+        }
+        else if (fileName.endsWith(".pdf")) {
+          uploadPdf(theFile);
+        }
+        else {
+          console.log("unsupported format: " + fileName);
+        }
       }
 
       const copyBib = async () => {
@@ -435,6 +458,11 @@
           // tooltip.innerHTML = "error: "+ err;
           console.error('Failed to copy: ', err);
         }
+      }
+
+      function triggerStorkSearch(str) {
+        stork_input.value = str;
+        stork_input.dispatchEvent(new Event('input', { bubbles: true }));
       }
 
       function outFunc() {
@@ -500,18 +528,19 @@
 
             if (!force && (keySearchResults.total_hit_count > 0 || titleHit)) {
               console.log("bib already exists");
-              element = document.getElementById("stork-input");
+
+              var str = "";
 
               if (keySearchResults.total_hit_count) {
                 console.log(keySearchResults);
-                element.value = key;
+                str = key;
               }
               else {
                 console.log(titleSearchResults);
-                element.value = title;
+                str = title;
               }
 
-              element.dispatchEvent(new Event('input', { bubbles: true }));
+              triggerStorkSearch(str);
               addButton.style.display = "block";
 
             }
@@ -567,7 +596,7 @@
       }
 
       async function updateSearch() {
-          var theText = searchInput.value;
+          var theText = stork_input.value;
 
           // detect arxiv link
           if (theText.startsWith("https://arxiv.org/abs/")) {
@@ -621,6 +650,63 @@
           else if (theText.startsWith("https://epubs.siam.org/doi/abs/")) {
 
           }
+      }
+
+      async function uploadPdf(thePdf) {
+
+        console.log(thePdf);
+        var fileName = thePdf.name;
+
+        // match 2304.14575 inside the filename
+        var rx = /[0-9][0-9][0-9][0-9]\.[0-9][0-9][0-9][0-9][0-9]/g;
+        var matches = rx.exec(fileName);
+        var arxivId = "";
+
+        if (matches !== null && matches.length > 0) {
+          arxivId = matches[0];
+          console.log("arxiv id: " + arxivId);
+        }
+        else {
+          console.log("cannot extract arxiv id");
+        }
+
+        var data = await thePdf.arrayBuffer();
+        // console.log(data.byteLength);
+        // console.log(data);
+
+        var title = "";
+        var author = "";
+
+        await pdfjsLib.getDocument(data).promise.then(async doc => { 
+          // console.log(doc);
+          var meta = doc.getMetadata();
+          meta.then(metadata => {
+            
+            console.log(metadata);
+
+            var info = metadata.info;
+            console.log(info);
+
+            var meta = metadata.metadata;
+            console.log(meta);
+
+            author = info.Author;
+            title = info.Title;
+
+            console.log("author: " + author);
+            console.log("title: " + title);
+
+            if (title != "") {
+              triggerStorkSearch(title);
+            }
+          });
+
+        });
+
+        // we have an arxiv PDF
+        if (arxivId != "") {
+
+        }
       }
     </script>
   </body>
