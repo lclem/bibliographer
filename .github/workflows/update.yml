@@ -1,0 +1,24 @@
+name: update
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch:
+    
+jobs:
+  library_update:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+    - name: update library
+      uses: appleboy/ssh-action@v0.1.10
+      with:
+        host: ${{ secrets.HOSTNAME }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.PRIVATE_KEY }}
+        port: ${{ secrets.PORT }}
+        command_timeout: 30m
+        script: | 
+          ./library_update.sh
