@@ -21,4 +21,4 @@ jobs:
         port: ${{ secrets.PORT }}
         command_timeout: 30m
         script: | 
-          ./library_update.sh
+          cd /home/pi/nextcloud/files/Media/Library/bibliographer/ && ./begin.sh
