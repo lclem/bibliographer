@@ -404,11 +404,14 @@
 
       stork_input.addEventListener("change", updateSearch, false);
       // stork_input.addEventListener("input", updateSearch, false);
+      stork_input.addEventListener("paste", detectPaste, false);
 
       ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {dropArea.addEventListener(eventName, preventDefaults, false)});
       ['dragenter', 'dragover'].forEach(eventName => {dropArea.addEventListener(eventName, highlight, false)});
       ['dragleave', 'drop'].forEach(eventName => {dropArea.addEventListener(eventName, unhighlight, false)});
       dropArea.addEventListener('drop', handleDrop, false)
+
+      const target = document.querySelector("div.target");
 
       function preventDefaults (e) {
         e.preventDefault()
@@ -493,6 +496,7 @@
 
       async function processBib(bibStr, fileName, force = false) {
 
+        bibStr = bibStr.trim();
         console.log("processBib: " + bibStr);
 
         try {
@@ -516,14 +520,17 @@
               title = ""
             }
 
-            console.log(title);
+            console.log("title: " + title);
 
             keySearchResults = stork.search("sitesearch", key);
-            titleSearchResults = stork.search("sitesearch", title);
             let titleHit = false;
 
-            if (titleSearchResults.total_hit_count > 0) {
-              titleHit = titleSearchResults.results[0].score > 2000
+            if (title != "") {
+              titleSearchResults = stork.search("sitesearch", title);
+
+              if (titleSearchResults.total_hit_count > 0) {
+                titleHit = titleSearchResults.results[0].score > 2000;
+              }
             }
 
             if (!force && (keySearchResults.total_hit_count > 0 || titleHit)) {
@@ -561,7 +568,13 @@
               console.log(datetime);
               
               bibStr = bibtexParse.toBibtex([bibJSON], false);
+              bibStr = bibStr.trim();
               console.log(bibStr);
+
+              // create filename from bib if not present
+              if (fileName == "") {
+                fileName = key + ".bib";
+              }
 
               openGitHub(key, fileName, bibStr);
             }
@@ -595,6 +608,28 @@
           }          
       }
 
+      // given a url fetch its contents and invoke the callback function on the result
+      async function getData(theUrl, callback) {
+
+        if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp=new XMLHttpRequest();
+        }
+        else {// code for IE6, IE5
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange = async function() {
+          if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            let res = xmlhttp.responseText;
+            console.log("res: " + res);
+            callback(res);
+          }
+        }
+
+        xmlhttp.open("GET", theUrl, false);
+        xmlhttp.send();
+
+      }
+
       async function getBib(articleUrl) {
 
           // detect arxiv link
@@ -613,43 +648,46 @@
             year = "20" + id.substring(0, 2);
             // theUrl = "https://ui.adsabs.harvard.edu/abs/" + year + "arXiv" + id.replace(".", "") + "G" + "/exportcitation"
             theUrl = "https://ui.adsabs.harvard.edu/abs/arXiv:" + id + "/exportcitation";
+            getData(theUrl, res => {
+              var el = document.createElement('html');
+              el.innerHTML = res;
 
-            if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
-                xmlhttp=new XMLHttpRequest();
-            }
-            else {// code for IE6, IE5
-                xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-            }
-            xmlhttp.onreadystatechange = async function() {
-              if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                let res = xmlhttp.responseText;
-                // createDiv(xmlhttp.responseText);
-                // console.log(res);
+              var els = el.getElementsByClassName('export-textarea');
+              var bibStr = els[0].innerText;
 
-                var el = document.createElement('html');
-                el.innerHTML = res;
+              fileName = id + ".bib";
+              processBib(bibStr, fileName);
 
-                var els = el.getElementsByClassName('export-textarea');
-                var bibStr = els[0].innerText;
+            });
 
-                fileName = id + ".bib";
-                processBib(bibStr, fileName);
-              }
-            }
+          }
+          // https://dl.acm.org/doi/10.1145/3087604.3087623
+          else if (articleUrl.startsWith("https://dl.acm.org/doi/")) {
 
-            xmlhttp.open("GET", theUrl, false);
-            xmlhttp.send();
+          }
+          // https://epubs.siam.org/doi/abs/10.1137/S0097539793251219
+          // https://epubs.siam.org/action/downloadCitation?format=bibtex&include=abs&direct=true&doi=10.1137/S0097539793251219&downloadFileName=siam_S0097539793251219
+          else if (articleUrl.startsWith("https://epubs.siam.org/doi/abs/")) {
 
-            }
-            // https://dl.acm.org/doi/10.1145/3087604.3087623
-            else if (articleUrl.startsWith("https://dl.acm.org/doi/")) {
+          }
+          // https://inria.hal.science/hal-02885579
+          // https://inria.hal.science/hal-02885579/bibtex
+          else if (articleUrl.startsWith("https://inria.hal.science/hal-")) {
 
-            }
-            // https://epubs.siam.org/doi/abs/10.1137/S0097539793251219
-            // https://epubs.siam.org/action/downloadCitation?format=bibtex&include=abs&direct=true&doi=10.1137/S0097539793251219&downloadFileName=siam_S0097539793251219
-            else if (articleUrl.startsWith("https://epubs.siam.org/doi/abs/")) {
+            var split = articleUrl.split("/");
+            var halId = split.slice(-1)[0];
 
-            }
+            console.log("hal id: " + halId);
+
+            var bibUrl = "https://inria.hal.science/" + halId + "/bibtex";
+            getData(bibUrl, bibStr => {
+              
+              var fileName = halId + ".bib";
+              processBib(bibStr, fileName);
+
+            });
+            
+          }
       }
 
       async function updateSearch() {
@@ -713,6 +751,13 @@
         }
         
       }
+
+      function detectPaste(event) {
+        // event.preventDefault();
+        let paste = (event.clipboardData || window.clipboardData).getData("text");
+        processBib(paste, "");
+
+      };
     </script>
   </body>
 </html>

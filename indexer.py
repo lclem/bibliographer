@@ -13,7 +13,7 @@ def pushd(new_dir):
     finally:
         os.chdir(previous_dir)
 
-valid_characters = string.ascii_letters + string.digits + string.whitespace + '-,;:ł'
+valid_characters = string.ascii_letters + string.digits + string.whitespace + '-,;:łąę\'\"./\\'
 
 def sanitise(str):
     result = "".join(c for c in str if c in valid_characters)
