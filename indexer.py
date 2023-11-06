@@ -86,7 +86,12 @@ def parsebib(root, bibfile):
         else:
             url = ""
 
-        doi = fields['DOI'].value if 'DOI' in fields else ""
+        if 'DOI'in fields:
+            doi = fields['DOI'].value
+        elif 'doi' in fields:
+            doi = fields['doi'].value
+        else:
+            doi = ""
 
         if doi != "" and not doi.startswith("http"):
             doi = f"http://dx.doi.org/{doi}"
