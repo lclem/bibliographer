@@ -599,6 +599,7 @@
           var theText = stork_input.value;
 
           // detect arxiv link
+	  // TODO: handle also https://arxiv.org/abs/math/0703211
           if (theText.startsWith("https://arxiv.org/abs/")) {
 
             var split = theText.split("/");
