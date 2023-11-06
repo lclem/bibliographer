@@ -611,6 +611,8 @@
       // given a url fetch its contents and invoke the callback function on the result
       async function getData(theUrl, callback) {
 
+        console.log("getting url: " + theUrl);
+
         if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
             xmlhttp=new XMLHttpRequest();
         }
@@ -688,6 +690,20 @@
             });
             
           }
+          // https://link.springer.com/article/10.1007/s10883-019-09441-w
+          else if (articleUrl.startsWith("https://link.springer.com/article/")) {
+
+          }
+          // https://doi.org/10.1007/s10883-019-09441-w
+          else if (articleUrl.startsWith("https://doi.org/")) {
+            
+            var strippedUrl = articleUrl.substring(8, articleUrl.length);
+            // didn't work
+            // var url = "https://www.doi2bib.org/bib/" + strippedUrl;
+            // getData(url, html => { 
+            //   console.log("html: " + html);
+            // });
+          }
       }
 
       async function updateSearch() {
@@ -738,18 +754,24 @@
             console.log("author: " + author);
             console.log("title: " + title);
 
-            if (title != "") {
+            // sometimes the title contains an arxiv id
+            // arXiv:2210.16580v1  [cs.DB]  29 Oct 2022
+            if (title.startsWith("arXiv:")) {
+              arxivId = title.split(":")[1].split(" ")[0].split("v")[0];
+              console.log("extracted arxiv id from title: " + arxivId);
+            }
+            else if (title != "") {
               triggerStorkSearch(title);
             }
+
+            // we have an arxiv PDF
+            if (arxivId != "") {
+              getBib("https://arxiv.org/abs/" + arxivId);
+            }
+
           });
 
-        });
-
-        // we have an arxiv PDF
-        if (arxivId != "") {
-          getBib("https://arxiv.org/abs/" + arxivId);
-        }
-        
+        });        
       }
 
       function detectPaste(event) {
