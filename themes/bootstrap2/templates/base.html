@@ -599,13 +599,19 @@
             bibFile = inp.files[0];
           }
 
-          let fileName = bibFile.name;
-          console.log("File name: " + fileName);
-
+          let fileName = "";
+          
           var reader = new FileReader();
           reader.readAsText(bibFile, "UTF-8");
           reader.onload = function (evt) {
             bibStr = evt.target.result;
+
+            if (bibFile.name !== null) {
+              fileName = bibFile.name;
+            }
+            
+            console.log("File name: " + fileName);
+
             processBib(bibStr, fileName, force)
 
           }
