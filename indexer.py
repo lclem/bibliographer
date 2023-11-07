@@ -13,16 +13,45 @@ def pushd(new_dir):
     finally:
         os.chdir(previous_dir)
 
-valid_characters = string.ascii_letters + string.digits + string.whitespace + '-,;:łąę\'\"./\\ö()[]áóēüç'
+valid_characters = string.ascii_letters + string.digits + string.whitespace + '-,;:łąę\'\"./\\ö()[]áóēüçášńßéèÉ'
+
+substitutions = {
+    "\\'n": "ń",
+    "\\l": "ł",
+    "\\'a": "á",
+    "\\v{s}": "š",
+    "\\ss": "ß",
+    "\\'e": "é",
+    "\\`e": "è",
+    "\\'E": "É",
+    "\\\"o": "ö"
+    }
 
 def sanitise(str):
     result = "".join(c for c in str if c in valid_characters)
-    return result.encode('utf-8').decode("ascii", "ignore")
+    return result.encode('utf-8').decode("utf-8", "ignore")
 
-def normalise_author(author):
+def normalise_names_order(author):
     names = author.split(", ")
     names = names[1:] + [names[0]]
-    return " ".join(names)
+    names = " ".join(names)
+
+    return names
+
+def normalise(str):
+
+    orig = str
+    for key, value in substitutions.items():
+        str = str.replace(key, value)
+
+    # print(f"normalise {orig} => {str}\n")
+    return str
+
+def getValue(dict, key, default):
+    if key in dict:
+        return dict[key].value
+    else:
+        return default
 
 def parsebib(root, bibfile):
     library = parser.parse_file(bibfile)
@@ -47,54 +76,28 @@ def parsebib(root, bibfile):
         key = entry.key
         key = key.encode('utf-8').decode("ascii", "ignore")
         
-        if 'Title' in fields:
-            title = fields['Title'].value
-        elif 'title' in fields:
-            title = fields['title'].value
-        else:
-            title = "N/A"
 
-        title = sanitise(title)
+        fields =  {k.lower(): v for k, v in fields.items()}
 
-        if 'Year' in fields:
-            year = fields['Year'].value
-        elif 'year' in fields:
-            year = fields['year'].value
-        else:
-            year = "0"
+        title = getValue(fields, "title", "N/A")
+        title = sanitise(normalise(title))
 
-        if 'Author' in fields:
-            author = fields['Author'].value
-        elif 'author' in fields:
-            author = fields['author'].value
-        else:
-            author = "N/A"
+        year = getValue(fields, "year", "0")
 
-        author = sanitise(author)
+        author = getValue(fields, "author", "N/A")
+        author = sanitise(normalise(author))
         authors = author.split(" and ")
 
         for i in range(0, len(authors)):
-            authors[i] = normalise_author(authors[i])
+            authors[i] = normalise_names_order(authors[i])
 
-        date_added = fields['date-added'].value if 'date-added' in fields else ""
-        date_modified = fields['date-modified'].value if 'date-modified' in fields else ""
+        date_added = getValue(fields, 'date-added', "")
+        date_modified = getValue(fields, 'date-modified', "")
 
-        if 'URL'in fields:
-            url = fields['URL'].value
-        elif 'url' in fields:
-            url = fields['url'].value
-        else:
-            url = ""
-
+        url = getValue(fields, 'url', "")
         url = url.strip()
 
-        if 'DOI'in fields:
-            doi = fields['DOI'].value
-        elif 'doi' in fields:
-            doi = fields['doi'].value
-        else:
-            doi = ""
-
+        doi = getValue(fields, 'doi', "")
         doi = doi.strip()
 
         if doi != "" and not doi.startswith("http"):
