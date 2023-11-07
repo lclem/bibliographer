@@ -614,17 +614,23 @@
           }          
       }
 
-      // given a url fetch its contents and invoke the callback function on the result
-      async function getData(theUrl, callback) {
-
-        console.log("getting url: " + theUrl);
-
+      function getXmlHttp() {
+        var xmlhttp;
         if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
             xmlhttp=new XMLHttpRequest();
         }
         else {// code for IE6, IE5
             xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
         }
+        return xmlhttp;
+      }
+
+      // given a url fetch its contents and invoke the callback function on the result
+      async function getData(theUrl, callback) {
+
+        console.log("getting url: " + theUrl);
+
+        xmlhttp = getXmlHttp();
         xmlhttp.onreadystatechange = async function() {
           if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
             let res = xmlhttp.responseText;
@@ -636,6 +642,24 @@
         xmlhttp.open("GET", theUrl, false);
         xmlhttp.send();
 
+      }
+
+      async function doi2bib(doiUrl, callback) {
+
+        xmlhttp = getXmlHttp();
+        xmlhttp.onreadystatechange = async function() {
+          if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+            let res = xmlhttp.responseText;
+            console.log("doi2bib: " + res);
+            callback(res);
+          }
+        }
+
+        xmlhttp.open("GET", doiUrl, false);
+        xmlhttp.setRequestHeader('Accept', 'application/x-bibtex; charset=utf-8');
+        // xmlhttp.setRequestHeader('Access-Control-Allow-Origin', '');
+        xmlhttp.send();
+        
       }
 
       async function getBib(articleUrl) {
@@ -710,6 +734,14 @@
             // getData(url, html => { 
             //   console.log("html: " + html);
             // });
+
+            doi2bib(articleUrl, bibStr => {
+
+              // console.log("bib: " + bibStr);
+              // fileName = "doi.bib";
+              processBib(bibStr, "");
+
+            });
           }
       }
 
