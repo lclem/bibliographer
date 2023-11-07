@@ -732,22 +732,15 @@
 
           }
           // https://doi.org/10.1007/s10883-019-09441-w
-          else if (articleUrl.startsWith("https://doi.org/")) {
-            
-            var strippedUrl = articleUrl.substring(8, articleUrl.length);
-            // didn't work
-            // var url = "https://www.doi2bib.org/bib/" + strippedUrl;
-            // getData(url, html => { 
-            //   console.log("html: " + html);
-            // });
+          // dx.doi.org/10.2140/obs.2019.2.119
+          else if (articleUrl.includes("doi.org")) {
 
-            doi2bib(articleUrl, bibStr => {
+            if (!articleUrl.startsWith("https://")) {
+              articleUrl = "https://" + articleUrl;
+            }
 
-              // console.log("bib: " + bibStr);
-              // fileName = "doi.bib";
-              processBib(bibStr, "");
-
-            });
+            // var strippedUrl = articleUrl.substring(8, articleUrl.length);
+            doi2bib(articleUrl, bibStr => { processBib(bibStr, ""); });
           }
       }
 
