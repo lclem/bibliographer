@@ -23,12 +23,14 @@
 <a class="published" title="{{ article.year }}"><i class="icon-calendar"></i>{{ article.year }}</a>
 <span class="label">Added</span>
 <a class="published" title="{{ article.date.isoformat() }}"><i class="icon-calendar"></i>{{ article.locale_date }}</a>
-<span class="label">URL</span>
-{% if article.doi %}
-        <a href="{{ article.doi }}" target="_blank">[doi]</a>
-{% endif %}
-{% if article.theurl %}
-        <a href="{{ article.theurl }}" target="_blank">[url]</a>
+{% if article.doi or article.theurl %}
+        <span class="label">URL</span>
+        {% if article.doi %}
+                <a href="{{ article.doi }}" target="_blank">[doi]</a>
+        {% endif %}
+        {% if article.theurl %}
+                <a href="{{ article.theurl }}" target="_blank">[url]</a>
+        {% endif %}
 {% endif %}
 <!-- <span class="label">Key</span> -->
 <a hidden><nobr>{{ article.key }}</nobr></a>
