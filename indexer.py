@@ -28,7 +28,7 @@ substitutions = {
     "\\\"o": "ö",
     "\\'o": "ó",
     "\\'c": "ć",
-    "\\u{a}: "ă"
+    "\\u{a}": "ă"
     }
 
 def sanitise(str):
