@@ -31,13 +31,50 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.ACCESS_TOKEN }}
+                
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+          cache: 'pip'
+  
+      - name: install python dependencies
+        run: pip3 install bibtexparser==2.0.0b3 pelican-search markdown requests
+      
+      - name: install stork
+        uses: taiki-e/cache-cargo-install-action@v1
+        with:
+          tool: stork-search
+  
+      - name: GITHUB CONTEXT
+        run: echo "$GITHUB_CONTEXT"
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+  
+      - name: get commit message
+        run: |
+           echo ::set-env name=commitmsg::$(git log --format=%B -n 1 ${{ github.event.after }})
+  
+      - name: show commit message
+        run : echo $commitmsg
+  
+      - name: build website
+        run: set -o xtrace && ./build.sh
+
       - name: Setup Pages
         uses: actions/configure-pages@v3
+        
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
-          # Upload entire repository
-          path: '.'
+          path: './docs'
+          
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
+
+      - name: Commit main repo
+        uses: stefanzweifel/git-auto-commit-action@v4.1.6
+        with:
+          commit_message: update main repo, commit message was "${{ env.commitmsg }}"
