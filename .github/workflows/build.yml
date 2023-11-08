@@ -77,3 +77,8 @@ jobs:
       with:
         repository: './website/'
         commit_message: update website, commit message was "${{ env.commitmsg }}"
+
+    - name: Commit main repo
+      uses: stefanzweifel/git-auto-commit-action@v4.1.6
+      with:
+        commit_message: update main repo, commit message was "${{ env.commitmsg }}"
