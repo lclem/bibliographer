@@ -15,7 +15,7 @@ def pushd(new_dir):
     finally:
         os.chdir(previous_dir)
 
-valid_characters = string.ascii_letters + string.digits + string.whitespace + '-,;:łąę\'"./\\äëö()[]áăóôüçćšńßéèÉŁ'
+valid_characters = string.ascii_letters + string.digits + string.whitespace + '-,;:\'"./\\()[]äáăąèéëęöóôüçćłńšßżÉŁ'
 
 substitutions = {
     "\\'n": "ń",
@@ -35,7 +35,8 @@ substitutions = {
     "\\k{e}": "ę",
     "\\\"a": "ä",
     "\\L": "Ł",
-    "\\^o": "ô"
+    "\\^o": "ô",
+    "\\.z": "ż"
     }
 
 def sanitise(str):
