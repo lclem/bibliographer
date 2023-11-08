@@ -56,6 +56,8 @@ jobs:
 
     - name: Commit main repo
       uses: stefanzweifel/git-auto-commit-action@v4.1.6
+      with:
+        commit_message: update main repo, commit message was "${{ env.commitmsg }}"
 
     - name: checkout the website branch
       uses: actions/checkout@v2
