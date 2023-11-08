@@ -1,3 +1,4 @@
 bibtexparser==2.0.0b3
 pelican-search
 markdown
+requests
