@@ -56,27 +56,22 @@ jobs:
     - name: build website
       run: set -o xtrace && ./build.sh
 
-    - name: Commit main repo
-      uses: stefanzweifel/git-auto-commit-action@v4.1.6
-      with:
-        commit_message: update main repo, commit message was "${{ env.commitmsg }}"
+    # - name: checkout the website branch
+    #   uses: actions/checkout@v2
+    #   with:
+    #     repository: 'lclem/bibliographer'
+    #     path: './website/'
+    #     ref: 'web'
+    #     token: ${{ secrets.ACCESS_TOKEN }}
 
-    - name: checkout the website branch
-      uses: actions/checkout@v2
-      with:
-        repository: 'lclem/bibliographer'
-        path: './website/'
-        ref: 'web'
-        token: ${{ secrets.ACCESS_TOKEN }}
+    # - name: copy website
+    #   run: rm -fr ./website/docs && mv ./docs ./website
 
-    - name: copy website
-      run: rm -fr ./website/docs && mv ./docs ./website
-
-    - name: Commit website repo
-      uses: stefanzweifel/git-auto-commit-action@v4.1.6
-      with:
-        repository: './website/'
-        commit_message: update website, commit message was "${{ env.commitmsg }}"
+    # - name: Commit website repo
+    #   uses: stefanzweifel/git-auto-commit-action@v4.1.6
+    #   with:
+    #     repository: './website/'
+    #     commit_message: update website, commit message was "${{ env.commitmsg }}"
 
     - name: Commit main repo
       uses: stefanzweifel/git-auto-commit-action@v4.1.6
