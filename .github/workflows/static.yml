@@ -21,6 +21,9 @@ concurrency:
   group: "pages"
   cancel-in-progress: false
 
+  # group: ${{ github.workflow }}-${{ github.ref }}
+  # cancel-in-progress: true
+
 jobs:
   # Single deploy job since we're just deploying
   deploy:
