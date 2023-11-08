@@ -109,6 +109,7 @@
     <script src="{{ SITEURL }}/theme/js/stork.js"></script>
 
     <script>
+        stork.initialize("{{ SITEURL }}/theme/js/stork.wasm")
         options = {showScores: false};
         stork.register("sitesearch", "{{ SITEURL }}/search-index.st", options);
     </script>
