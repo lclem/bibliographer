@@ -3,6 +3,8 @@ import contextlib
 import bibtexparser as parser
 import string
 import urllib.parse
+import requests
+import subprocess
 
 @contextlib.contextmanager
 def pushd(new_dir):
@@ -82,7 +84,6 @@ def parsebib(root, bibfile):
         key = entry.key
         key = key.encode('utf-8').decode("ascii", "ignore")
         
-
         fields =  {k.lower(): v for k, v in fields.items()}
 
         title = getValue(fields, "title", "N/A")
@@ -109,7 +110,10 @@ def parsebib(root, bibfile):
         if doi != "" and not doi.startswith("http"):
             doi = f"http://dx.doi.org/{doi}"
 
-        result.append((key, authors, title, year, date_added, date_modified, doi, url))
+        eprint = getValue(fields, 'eprint', "")
+        journal = getValue(fields, 'journal', "")
+
+        result.append((key, authors, title, year, date_added, date_modified, doi, url, eprint, journal))
 
     # print(f"RES: {result}")
     return result
@@ -136,23 +140,43 @@ for root, dirs, files in os.walk("./library/entries"):
 
                         bibcontent = "\n".join(biblines)
                         
-                        for key, authors, title, year, date_added, date_modified, doi, url in parsebib("./", bibfile):
+                        for key, authors, title, year, date_added, date_modified, doi, url, eprint, journal in parsebib("./", bibfile):
                             print(f"BIB {authors} - {title}")
 
-                            pdffiles = []
-                            for pdffile in os.listdir("./"):
-                                if pdffile.endswith(".pdf"):
-                                    print(f"PDF {pdffile}")
-                                    pdffileEncoded = os.path.join(cwd, pdffile)
-                                    # pdffileEncoded = urllib.parse.quote(pdffileEncoded)
-                                    pdffiles.append(pdffileEncoded)
+                            pdfFiles = []
+                            for pdfFile in os.listdir("./"):
+                                if pdfFile.endswith(".pdf"):
+                                    print(f"PDF {pdfFile}")
+                                    pdfFileEncoded = os.path.join(cwd, pdfFile)
+                                    # pdfFileEncoded = urllib.parse.quote(pdfFileEncoded)
+                                    pdfFiles.append(pdfFileEncoded)
 
-                            pdffiles_str = ""
-                            if len(pdffiles) == 1: 
-                                    pdffiles_str += f'Pdffile: {pdffiles[0]}\n'
-                            elif len(pdffiles) > 1:
-                                for pdffile in pdffiles:
-                                    pdffiles_str += f'Pdffiles: {pdffile}\n'
+                            # if there is no PDF for an arxiv paper, get a pdf
+                            if len(pdfFiles) == 0 and not eprint == "" and "arXiv" in journal:
+
+                                try:
+                                    pdfFile = f"{eprint}.pdf"
+                                    pdfUrl = f"https://arxiv.org/pdf/{pdfFile}"
+                                    print(f"PDF {pdfUrl}")
+                                    req = requests.get(pdfUrl, allow_redirects=True)
+                                    open(pdfFile, 'wb').write(req.content)
+
+                                    print(f"GIT-ADD {pdfFile}")
+                                    subprocess.run(["git", "add", pdfFile])
+
+                                    pdfFileEncoded = os.path.join(cwd, pdfFile)
+                                    pdfFiles.append(pdfFileEncoded)
+
+                                except e:
+                                    print(f"EXCEPT {e}")
+                                    
+                            pdfFiles_str = ""
+
+                            if len(pdfFiles) == 1: 
+                                    pdfFiles_str += f'Pdffile: {pdfFiles[0]}\n'
+                            elif len(pdfFiles) > 1:
+                                for pdfFile in pdfFiles:
+                                    pdfFiles_str += f'Pdffiles: {pdfFile}\n'
 
                             mdfile = os.path.join("", f"entry-{i}.md")
 #Date: {year}\n\
@@ -172,9 +196,9 @@ Key: {key}\n\
 Slug: {key}\n\
 engine: knitr\n"
 
-                            if not len(pdffiles) == 0:
-                                # markdown += f"Pdffiles: {'; '.join(pdffiles)}\n"
-                                markdown += pdffiles_str
+                            if not len(pdfFiles) == 0:
+                                # markdown += f"Pdffiles: {'; '.join(pdfFiles)}\n"
+                                markdown += pdfFiles_str
 
                             markdown += "\n"
                             markdown += f"\
