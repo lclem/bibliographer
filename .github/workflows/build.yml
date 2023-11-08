@@ -22,9 +22,14 @@ jobs:
 
     - name: install python dependencies
       run: pip3 install bibtexparser==2.0.0b3 pelican-search markdown
-
+    
     - name: install stork
-      run: cargo install stork-search --locked
+      uses: taiki-e/cache-cargo-install-action@v1
+      with:
+        tool: stork-search
+        
+    # - name: install stork
+    #   run: cargo install stork-search --locked
 
     - name: checkout the repo
       uses: actions/checkout@v2
