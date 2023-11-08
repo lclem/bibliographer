@@ -19,6 +19,12 @@ jobs:
       ACTIONS_ALLOW_UNSECURE_COMMANDS: true
 
     steps:
+        
+    # - name: install stork
+    #   run: cargo install stork-search --locked
+
+    - name: checkout the repo
+      uses: actions/checkout@v2
 
     - uses: actions/setup-python@v2
       with:
@@ -32,12 +38,6 @@ jobs:
       uses: taiki-e/cache-cargo-install-action@v1
       with:
         tool: stork-search
-        
-    # - name: install stork
-    #   run: cargo install stork-search --locked
-
-    - name: checkout the repo
-      uses: actions/checkout@v2
 
     - name: GITHUB CONTEXT
       run: echo "$GITHUB_CONTEXT"
