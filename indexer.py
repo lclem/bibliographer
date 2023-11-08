@@ -33,7 +33,7 @@ substitutions = {
     "\\'c": "ć",
     "\\u{a}": "ă",
     "\\k{e}": "ę",
-    "\\"a": "ä"
+    "\\\"a": "ä"
     }
 
 def sanitise(str):
