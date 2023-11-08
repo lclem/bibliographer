@@ -389,6 +389,8 @@
 
       async function getBib(articleUrl) {
 
+          articleUrl = articleUrl.trim();
+
           // detect arxiv link
 	        // TODO: handle also https://arxiv.org/abs/math/0703211
           // TODO: handle also https://arxiv.org/pdf/2310.02393.pdf
