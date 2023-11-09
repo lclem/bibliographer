@@ -56,6 +56,9 @@ def normalise_names_order(author):
 def normalise(str):
 
     orig = str
+    # remove newlines
+    str = ''.join(str.splitlines())
+
     for key, value in substitutions.items():
         str = str.replace(key, value)
 
