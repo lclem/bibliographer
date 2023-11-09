@@ -5,6 +5,7 @@ import string
 import urllib.parse
 import requests
 import subprocess
+import re
 
 @contextlib.contextmanager
 def pushd(new_dir):
@@ -18,29 +19,26 @@ def pushd(new_dir):
 valid_characters = string.ascii_letters + string.digits + string.whitespace + '-,;:\'"./\\()[]äáăąèéëęöóôüçćłńšßżÉŁ'
 
 substitutions = {
-    "\\'n": "ń",
-    "\\l": "ł",
-    "\\'a": "á",
-    "\\v{s}": "š",
-    "\\v s": "š",
-    "\\ss": "ß",
-    "\\'e": "é",
-    "\\`e": "è",
-    "\\'E": "É",
-    '\\"e': "ë",
-    "\\\"o": "ö",
-    "\\'o": "ó",
-    "\\\"u": "ü",
-    "\\'c": "ć",
-    "\\u{a}": "ă",
-    "\\u a": "ă",
-    "\\k{e}": "ę",
-    "\\k e": "ę",
-    "\\\"a": "ä",
-    "\\L": "Ł",
-    "\\^o": "ô",
-    "\\.z": "ż"
-    }
+    r"\\'\s*n": "ń",
+    r"\\l": "ł",
+    r"\\'\s*a": "á",
+    r"\\v\s*s": "š",
+    r"\\ss": "ß",
+    r"\\'\s*e": "é",
+    r"\\`\s*e": "è",
+    r"\\'\s*E": "É",
+    r'\\"\s*e': "ë",
+    r'\\"\s*o': "ö",
+    r"\\'\s*o": "ó",
+    r'\\"\s*u': "ü",
+    r"\\'\s*c": "ć",
+    r"\\u\s*a": "ă",
+    r"\\k\s*e": "ę",
+    r'\\"\s*a': "ä",
+    r"\\L": "Ł",
+    r"\\^\s*o": "ô",
+    r"\\.\s*z": "ż"
+}
 
 def sanitise(str):
     result = "".join(c for c in str if c in valid_characters)
@@ -57,10 +55,14 @@ def normalise(str):
 
     orig = str
     # remove newlines
-    str = ''.join(str.splitlines())
+    # str = ''.join(str.splitlines())
+    # str = str.replace("\n", " ")
+    str = re.sub(r"\s+", " ", str)
+    str = sanitise(str)
 
     for key, value in substitutions.items():
-        str = str.replace(key, value)
+        # str = str.replace(key, value)
+        str = re.sub(key, value, str)
 
     # print(f"normalise {orig} => {str}\n")
     return str
@@ -97,12 +99,12 @@ def parsebib(root, bibfile):
         fields =  {k.lower(): v for k, v in fields.items()}
 
         title = getValue(fields, "title", "N/A")
-        title = sanitise(normalise(title))
+        title = normalise(title)
 
         year = getValue(fields, "year", "0")
 
         author = getValue(fields, "author", "N/A")
-        author = sanitise(normalise(author))
+        author = normalise(author)
         authors = author.split(" and ")
 
         for i in range(0, len(authors)):
