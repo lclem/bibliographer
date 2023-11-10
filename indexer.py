@@ -16,13 +16,18 @@ def pushd(new_dir):
     finally:
         os.chdir(previous_dir)
 
-valid_characters = string.ascii_letters + string.digits + string.whitespace + '-,;:\'"./\\()[]äáăąèéëęöóôøüçćłńšßżÉŁ'
+valid_characters = string.ascii_letters + string.digits + string.whitespace + '-,;:\'"./\\()[]äáăąāèéëęöóôøüçćčČłńšßżÉŁ'
 
 substitutions = {
     r"\\'\s*n": "ń",
     r"\\l": "ł",
     r"\\'\s*a": "á",
+    r"\\=\s*a": "ā",
     r"\\v\s*s": "š",
+    r"\\v\s*c": "č",
+    r"\\'\s*c": "ć",
+    r"\\c\s*c": "ç",
+    r"\\v\s*C": "Č",
     r"\\ss": "ß",
     r"\\'\s*e": "é",
     r"\\`\s*e": "è",
@@ -31,7 +36,6 @@ substitutions = {
     r'\\"\s*o': "ö",
     r"\\'\s*o": "ó",
     r'\\"\s*u': "ü",
-    r"\\'\s*c": "ć",
     r"\\u\s*a": "ă",
     r"\\k\s*e": "ę",
     r'\\"\s*a': "ä",
