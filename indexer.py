@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 import glob, os
 import contextlib
 import bibtexparser as parser
