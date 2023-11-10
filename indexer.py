@@ -16,34 +16,36 @@ def pushd(new_dir):
     finally:
         os.chdir(previous_dir)
 
-valid_characters = string.ascii_letters + string.digits + string.whitespace + '-,;:\'"./\\()[]äáăąāèéëęöóôøüçćčČłńšßżÉŁ'
-
 substitutions = {
-    r"\\'\s*n": "ń",
-    r"\\l": "ł",
     r"\\'\s*a": "á",
     r"\\=\s*a": "ā",
-    r"\\v\s*s": "š",
+    r"\\u\s*a": "ă",
+    r'\\"\s*a': "ä",
+    r'\\c\s*a': "ą",
     r"\\v\s*c": "č",
     r"\\'\s*c": "ć",
     r"\\c\s*c": "ç",
     r"\\v\s*C": "Č",
     r"\\ss": "ß",
     r"\\'\s*e": "é",
-    r"\\`\s*e": "è",
     r"\\'\s*E": "É",
+    r"\\`\s*e": "è",
+    r"\\k\s*e": "ę",
     r'\\"\s*e': "ë",
     r'\\"\s*o': "ö",
     r"\\'\s*o": "ó",
-    r'\\"\s*u': "ü",
-    r"\\u\s*a": "ă",
-    r"\\k\s*e": "ę",
-    r'\\"\s*a': "ä",
-    r"\\L": "Ł",
     r"\\^\s*o": "ô",
     r"\\o": "ø",
+    r"\\'\s*n": "ń",
+    r'\\"\s*u': "ü",
+    r"\\v\s*s": "š",
+    r"\\l": "ł",
+    r"\\L": "Ł",
     r"\\.\s*z": "ż"
 }
+
+valid_characters = string.ascii_letters + string.digits + string.whitespace + '-,;:\'"./\\()[]' + "".join(substitutions.values())
+
 
 def sanitise(str):
     result = "".join(c for c in str if c in valid_characters)
