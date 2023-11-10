@@ -163,7 +163,7 @@
         var theFile = dt.files[0];
         var fileName = theFile.name;
 
-        if (fileName.endsWith(".bib")) {
+        if (fileName.endsWith(".bib") || fileName.endsWith(".txt")) {
           uploadBib(dt);
         }
         else if (fileName.endsWith(".pdf")) {
@@ -387,6 +387,9 @@
         
       }
 
+      // can get the PDF with https://sci-hub.se/
+      // look for a url of the form https://moscow.sci-hub.se/864/d09cfcb7e8c9636cb503218595308a11/lasota2006.pdf#navpanes=0&view=FitH
+
       async function getBib(articleUrl) {
 
           articleUrl = articleUrl.trim();
@@ -421,8 +424,14 @@
             });
 
           }
+          // https://www.sciencedirect.com/science/article/pii/S0304397506001964
+          else if (articleUrl.startsWith("https://www.sciencedirect.com/science/article/pii/")) {
+
+          }
           // https://dl.acm.org/doi/10.1145/3087604.3087623
           else if (articleUrl.startsWith("https://dl.acm.org/doi/")) {
+
+            // https://doi.org/
 
           }
           // https://epubs.siam.org/doi/abs/10.1137/S0097539793251219
