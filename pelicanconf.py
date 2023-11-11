@@ -15,12 +15,12 @@ OUTPUT_PATH = 'docs'
 PATH = 'library'
 
 # can be useful in development, but set to False when you're ready to publish
-# RELATIVE_URLS = True
-RELATIVE_URLS = False
+RELATIVE_URLS = True
+# RELATIVE_URLS = False
 
 STORK_INPUT_OPTIONS = {
     "html_selector": "nobr",
-    "url_prefix": "/bibliographer"
+    # "url_prefix": "/bibliographer"
 }
 
 GITHUB_URL = 'https://github.com/lclem/bibliographer'
@@ -77,4 +77,4 @@ ARTICLE_SAVE_AS = 'posts/{date:%Y}/{date:%m}/{slug}/index.html'
 # Custom Home page
 DIRECT_TEMPLATES = ['index', 'author', 'archives', 'home']
 PAGINATED_TEMPLATES = {'home' : 10, 'index' : 20}
-# TEMPLATE_PAGES = {'archives.html': 'index.html'}
+TEMPLATE_PAGES = {'nopdf.html': 'nopdf.html'}

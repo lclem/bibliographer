@@ -1,8 +1,6 @@
 {% extends "base.html" %}
 {% block content_title %}Recently added{% endblock %}
 {% block content %}
-<!-- <h1>Recently added</h1>
-<p></p> -->
 {% if articles %}
         <ul>
         {% for article in (articles_page.object_list if articles_page else articles) %}
@@ -17,7 +15,6 @@
         </ul>
 {% endif %}
 {% if articles_page and articles_paginator.num_pages > 1 %}
-<p>
 <div class="pagination">
 <ul>
         {% set curr_page = articles_page.number %}
@@ -50,7 +47,6 @@
         {% endif %}
 </ul>
 </div>
-</p>
 {% else %}
         {% if pages %}
                 <section id="content" class="body">

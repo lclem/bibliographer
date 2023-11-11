@@ -34,7 +34,8 @@
 {% endif %}
 <!-- <span class="label">Key</span> -->
 <a hidden><nobr>{{ article.key }}</nobr></a>
-<span class="label">PDF</span>
+{% if article.pdffiles or article.pdffile %}
+        <span class="label">PDF</span>
         {% if article.pdffiles %}
                 {% for pdffile in article.pdffiles %}
                 [<a href="{{ GITHUB_VIEW_URL }}/{{ pdffile | urlencode}}" target="_blank">pdf</a> | <a href="pdfefile:///SyncedFolders/bibliographer/{{ pdffile }}">pdfe</a>]
@@ -42,6 +43,7 @@
         {% elif article.pdffile %}
                 [<a href="{{ GITHUB_VIEW_URL }}/{{ article.pdffile | urlencode}}" target="_blank">pdf</a> | <a href="pdfefile:///SyncedFolders/bibliographer/{{ article.pdffile }}">pdfe</a>]
         {% endif %}
+{% endif %}
 <span class="label">BIB</span>
         <a href="javascript:copyBib()">[copy]</a>
         <!-- <a href="{{ SITEURL }}/{{ article.bibfile }}">[bib]</a> -->

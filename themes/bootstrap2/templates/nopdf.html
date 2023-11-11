@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content_title %}Recently added{% endblock %}
+{% block content %}
+{% if articles %}
+        <ul>
+        {% for article in articles %}
+                {% if not article.pdffiles and not article.pdffile %}
+                        <li>
+                                <a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a>
+                                {% for author in article.authors %}
+                                        <a href="{{ SITEURL }}/{{ author.url }}"><i class="icon-user"></i>{{ author }}</a>
+                                {% endfor %}
+                                <a class="published" title="{{ article.date.isoformat() }}"><i class="icon-calendar"></i>{{ article.locale_date }}</a>                        
+                        </li>
+                {% endif %}
+        {% endfor %}
+        </ul>
+{% endif %}
+{% endblock content %}

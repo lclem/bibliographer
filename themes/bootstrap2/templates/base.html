@@ -78,7 +78,7 @@
         <div class="span9" id="content">
           <div class="stork-wrapper">
             <p>
-              <input id="stork-input" class="stork-input" data-stork="sitesearch" placeholder="Search publication" onchange="updateSearch()"/>
+              <input id="stork-input" class="stork-input" data-stork="sitesearch" placeholder="Search publication"/>
               <button type="button" id="add-button" onclick="confirmBib()">Add reference</button>
             </p>
             <p>
@@ -90,6 +90,8 @@
           <p>
             <div class="small">
               Last Updated: {{ BUILD_TIME | strftime("%b %d, %Y, %H:%M:%S") }}
+            </div>
+            <div id="status" class = "small">
             </div>
           </p>      
         </div>
@@ -122,7 +124,13 @@
       let addButton = document.getElementById('add-button');
       var stork_input = document.getElementById('stork-input');
       let dropArea = document.getElementById('drop-area');
+      let status = document.getElementById('status');
       let dt = [];
+      let bibStr = "";
+
+      function statusAppend(str) {
+        status.innerText = str + "\n" + status.innerText;
+      }
 
       // PDFJS.cMapUrl = "//mozilla/pdfjs-dist/tree/master/cmaps";
       // PDFJS.cMapPacked = true;
@@ -189,6 +197,7 @@
       }
 
       function triggerStorkSearch(str) {
+        console.log('triggerStorkSearch: ' + str);
         stork_input.value = str;
         stork_input.dispatchEvent(new Event('input', { bubbles: true }));
       }
@@ -214,17 +223,17 @@
         url += encodeURIComponent(bibStr);
 
         window.open(url, "_blank");
-
         addButton.style.display = "none";
 
       }
 
-      // TODO: when pasting a bib which gives a search it, it is not possible to import: check what happens
+      // TODO: when pasting a bib which gives a search hit, it is not possible to import: check what happens
 
       async function processBib(bibStr, fileName, force = false) {
 
         bibStr = bibStr.trim();
         console.log("processBib: " + bibStr);
+        statusAppend("processing bib: " + bibStr);
 
         try {
           bibJSONs = bibtexParse.toJSON(bibStr);
@@ -249,18 +258,9 @@
 
             console.log("title: " + title);
 
-            keySearchResults = stork.search("sitesearch", key);
-            let titleHit = false;
+            searchResults = stork.search("sitesearch", key + " " + title);
 
-            if (title != "") {
-              titleSearchResults = stork.search("sitesearch", title);
-
-              if (titleSearchResults.total_hit_count > 0) {
-                titleHit = titleSearchResults.results[0].score > 2000;
-              }
-            }
-
-            if (!force && (keySearchResults.total_hit_count > 0 || titleHit)) {
+            if (!force && (searchResults.total_hit_count > 0 && searchResults.results[0].score > 2000)) {
               console.log("bib already exists");
 
               var str = "";
@@ -274,7 +274,8 @@
                 str = title;
               }
 
-              triggerStorkSearch(str);
+              stork.search("sitesearch", str);
+              // triggerStorkSearch(str);
               addButton.style.display = "block";
 
             }
@@ -312,7 +313,7 @@
       }
 
       async function uploadBib(inp, force = false) {
-          console.log(inp);
+          console.log("uploadBib: " + inp);
 
           if (force) {
           }
@@ -353,7 +354,7 @@
       }
 
       // given a url fetch its contents and invoke the callback function on the result
-      async function getData(theUrl, callback) {
+      async function getWebPage(theUrl, callback) {
 
         console.log("getting url: " + theUrl);
 
@@ -372,6 +373,8 @@
       }
 
       async function doi2bib(doiUrl, callback) {
+
+        statusAppend("doi: " + doiUrl);
 
         xmlhttp = getXmlHttp();
         xmlhttp.onreadystatechange = async function() {
@@ -413,7 +416,7 @@
             year = "20" + id.substring(0, 2);
             // theUrl = "https://ui.adsabs.harvard.edu/abs/" + year + "arXiv" + id.replace(".", "") + "G" + "/exportcitation"
             theUrl = "https://ui.adsabs.harvard.edu/abs/arXiv:" + id + "/exportcitation";
-            getData(theUrl, res => {
+            getWebPage(theUrl, res => {
               var el = document.createElement('html');
               el.innerHTML = res;
 
@@ -428,6 +431,19 @@
           }
           // https://www.sciencedirect.com/science/article/pii/S0304397506001964
           else if (articleUrl.startsWith("https://www.sciencedirect.com/science/article/pii/")) {
+
+            statusAppend("detected sciencedirect article");
+
+            getWebPage(articleUrl, res => {
+              var el = document.createElement('html');
+              el.innerHTML = res;
+
+              var els = el.getElementsByClassName('doi');
+              var doi = els[0].innerText;
+
+              doi2bib(doi, bibStr => { processBib(bibStr, ""); });
+
+            });
 
           }
           // https://dl.acm.org/doi/10.1145/3087604.3087623
@@ -451,7 +467,7 @@
             console.log("hal id: " + halId);
 
             var bibUrl = "https://inria.hal.science/" + halId + "/bibtex";
-            getData(bibUrl, bibStr => {
+            getWebPage(bibUrl, bibStr => {
               
               var fileName = halId + ".bib";
               processBib(bibStr, fileName);
@@ -459,8 +475,28 @@
             });
             
           }
+          // https://link.springer.com/chapter/10.1007/3-540-60915-6_4
           // https://link.springer.com/article/10.1007/s10883-019-09441-w
-          else if (articleUrl.startsWith("https://link.springer.com/article/")) {
+          else if (articleUrl.startsWith("https://link.springer.com/article/") ||
+                  articleUrl.startsWith("https://link.springer.com/chapter/")) {
+
+            statusAppend("detected springer article");
+
+            var sciHubUrl = "https://sci-hub.se/";
+            articleUrl = sciHubUrl + articleUrl;
+
+            getWebPage(articleUrl, res => {
+              var el = new DOMParser().parseFromString(res, "text/html");
+              
+              // var els = el.getElementsByClassName('c-bibliographic-information__value');
+              var div = el.getElementById("doi");
+              var doi = div.innerText.trim();
+              var doiUrl = "https://doi.org/" + doi;
+
+              doi2bib(doiUrl, bibStr => { processBib(bibStr, ""); });
+
+            });  
+            
 
           }
           // https://doi.org/10.1007/s10883-019-09441-w
@@ -477,7 +513,8 @@
       }
 
       async function updateSearch() {
-          getBib(stork_input.value);
+        console.log("stork update search: " + stork_input.value);
+        getBib(stork_input.value);
       }
 
       async function uploadPdf(thePdf) {
@@ -519,7 +556,6 @@
               console.log("content: " + content);
             });
           });
-          // doc.getData().then(info => console.log("data: " + info));
 
           var meta = doc.getMetadata();
           meta.then(metadata => {
@@ -565,9 +601,8 @@
 
       function detectPaste(event) {
         // event.preventDefault();
-        let paste = (event.clipboardData || window.clipboardData).getData("text");
-        processBib(paste, "");
-
+        // let paste = (event.clipboardData || window.clipboardData).getData("text");
+        // processBib(paste, "");
       };
     </script>
   </body>

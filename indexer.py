@@ -8,6 +8,25 @@ import urllib.parse
 import requests
 import subprocess
 import re
+from xml.dom.minidom import parse, parseString
+import xml.etree.ElementTree as ET
+from bs4 import BeautifulSoup
+import urllib
+import werkzeug
+
+# def get_filename(url: str):
+#     try:
+#         with requests.get(url) as req:
+#             if content_disposition := req.headers.get("Content-Disposition"):
+#                 param, options = werkzeug.http.parse_options_header(content_disposition)
+#                 if param == 'attachment' and (filename := options.get('filename')):
+#                     return filename
+
+#             path = urlparse(req.url).path
+#             name = path[path.rfind('/') + 1:]
+#             return name
+#     except requests.exceptions.RequestException as e:
+#         raise e
 
 @contextlib.contextmanager
 def pushd(new_dir):
@@ -49,7 +68,6 @@ substitutions = {
 }
 
 valid_characters = string.ascii_letters + string.digits + string.whitespace + '-,;:\'"./\\()[]' + "".join(substitutions.values())
-
 
 def sanitise(str):
     result = "".join(c for c in str if c in valid_characters)
@@ -141,6 +159,41 @@ def parsebib(root, bibfile):
     # print(f"RES: {result}")
     return result
 
+def addPDF(pdfUrl, pdfFile, pdfFiles):
+
+    print(f"PDFURL {pdfUrl}")
+
+    try:
+        # response = requests.get(pdfUrl, allow_redirects=True)
+        # disp = response.headers.keys()
+        # print(f"RESPONSE {disp}")
+
+        response = urllib.request.urlopen(pdfUrl)
+
+        # try to extract a pdf file name
+        if pdfFile is None or pdfFile == "":
+            headers = response.headers
+            pdfFile = headers.get_filename()
+
+        if pdfFile is None or pdfFile == "":
+            path = urllib.parse.urlparse(response.url).path
+            pdfFile = path[path.rfind('/') + 1:]
+
+        if pdfFile is None or pdfFile == "":
+            pdfFile = "article.pdf"
+
+        open(pdfFile, 'wb').write(response.read())
+
+        print(f"GIT-ADD {pdfFile}")
+        subprocess.run(["git", "add", pdfFile])
+
+        pdfFileEncoded = os.path.join(cwd, pdfFile)
+        pdfFiles.append(pdfFileEncoded)
+
+    except e:
+        print(f"EXCEPT {e}")
+
+
 for root, dirs, files in os.walk("./library/entries"):
     i = 0
     for dir in dirs:
@@ -176,30 +229,47 @@ for root, dirs, files in os.walk("./library/entries"):
 
                             # if there is no PDF for an arxiv paper, get a pdf
                             if len(pdfFiles) == 0 and not eprint == "" and "arXiv" in journal:
-
-                                try:
-                                    pdfFile = f"{eprint}.pdf"
-                                    pdfUrl = f"https://arxiv.org/pdf/{pdfFile}"
-                                    print(f"PDF {pdfUrl}")
-                                    req = requests.get(pdfUrl, allow_redirects=True)
-                                    open(pdfFile, 'wb').write(req.content)
-
-                                    print(f"GIT-ADD {pdfFile}")
-                                    subprocess.run(["git", "add", pdfFile])
-
-                                    pdfFileEncoded = os.path.join(cwd, pdfFile)
-                                    pdfFiles.append(pdfFileEncoded)
-
-                                except e:
-                                    print(f"EXCEPT {e}")
+                                pdfFile = f"{eprint}.pdf"
+                                pdfUrl = f"https://arxiv.org/pdf/{pdfFile}"
+                                addPDF(pdfUrl, pdfFile, pdfFiles)
                                     
                             pdfFiles_str = ""
 
-                            if len(pdfFiles) == 1: 
+                            if doi != "":
+                                doi_or_url = doi
+                            elif url != "":
+                                doi_or_url = url
+                            else:
+                                doi_or_url = ""
+
+                            if len(pdfFiles) == 0 and doi_or_url != "":
+                                # use sci-hub if we have a doi or url
+
+                                # http://dx.doi.org/10.1145/358746.358767
+                                # https://www.sciencedirect.com/science/article/pii/S0304397500001006
+
+                                sciHub = "https://sci-hub.se/" + doi_or_url
+                                print(f"SCIHUB URL {sciHub}")
+
+                                req = requests.get(sciHub, allow_redirects=True)
+                                html = req.content.decode("utf-8") 
+                                soup = BeautifulSoup(html, features="html.parser")
+                                pdfElement = soup.find(attrs={'id': 'pdf'})
+
+                                if pdfElement is not None:
+                                    print(f"SCIHUB ELEMENT {pdfElement}")
+                                    pdfUrl = "https:" + pdfElement['src']
+
+                                    addPDF(pdfUrl, "", pdfFiles)
+
+                            if len(pdfFiles) == 1:
                                     pdfFiles_str += f'Pdffile: {pdfFiles[0]}\n'
                             elif len(pdfFiles) > 1:
                                 for pdfFile in pdfFiles:
                                     pdfFiles_str += f'Pdffiles: {pdfFile}\n'
+                            else:
+                                # still no PDF file
+                                print(f"NOPDF")
 
                             mdfile = os.path.join("", f"entry-{i}.md")
 #Date: {year}\n\
