@@ -43,7 +43,7 @@ jobs:
           cache: 'pip'
   
       - name: install python dependencies
-        run: pip3 install bibtexparser==2.0.0b3 pelican-search markdown requests
+        run: pip3 install bibtexparser==2.0.0b3 pelican-search markdown requests BeautifulSoup4
       
       - name: install stork
         uses: taiki-e/cache-cargo-install-action@v1
