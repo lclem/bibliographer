@@ -99,8 +99,14 @@ def getValue(dict, key, default):
     else:
         return default
 
-def parsebib(root, bibfile):
-    library = parser.parse_file(bibfile)
+def writeBib(entry, bibFile):
+    library = parser.Library([entry])
+    parser.write_file(bibFile, library)
+    print(f"GITADD {bibFile}")
+    subprocess.run(["git", "add", bibFile])
+
+def parsebib(root, bibFile):
+    library = parser.parse_file(bibFile)
 
     # print(f"Parsed {len(library.blocks)} blocks, including:"
     #     f"\n\t{len(library.entries)} entries"
@@ -146,12 +152,12 @@ def parsebib(root, bibfile):
         doi = doi.strip()
 
         if doi != "" and not doi.startswith("http"):
-            doi = f"http://dx.doi.org/{doi}"
+            doi = f"https://dx.doi.org/{doi}"
 
         eprint = getValue(fields, 'eprint', "")
         journal = getValue(fields, 'journal', "")
 
-        result.append((key, authors, title, year, date_added, date_modified, doi, url, eprint, journal))
+        result.append((entry, key, authors, title, year, date_added, date_modified, doi, url, eprint, journal))
 
     # print(f"RES: {result}")
     return result
@@ -198,6 +204,29 @@ def addPDF(pdfUrl, pdfFile, pdfFiles):
     except Exception as e:
         print(f"EXCEPT {e}")
 
+def amendDOI(doi, eprint, journal):
+
+    if not eprint == "" and "arXiv" in journal:
+        absUrl = f"https://arxiv.org/abs/{eprint}"
+        print(f"ARXIV-ABS {absUrl}")
+
+        req = requests.get(absUrl, allow_redirects=True)
+        html = req.content.decode("utf-8") 
+        soup = BeautifulSoup(html, features="html.parser")
+        doiElement = soup.find(attrs={'class': 'arxivdoi'})
+
+        if doiElement is not None:
+            doiA = doiElement.find("a")
+
+            if doiA is not None:
+                doi = doiA["href"]
+                print(f"ARXIV-DOI {doi}")
+
+                if doi is not None:
+                    return doi, True
+
+    return doi, False
+
 for root, dirs, files in os.walk("./library/entries"):
     i = 0
     for dir in dirs:
@@ -207,10 +236,10 @@ for root, dirs, files in os.walk("./library/entries"):
             for _, _, files in os.walk("./"):
                 for file in files:
                     if file.endswith(".bib"):
-                        bibfile = file # os.path.join(root, file)
-                        # print(f"FILE {bibfile}")
+                        bibFile = file # os.path.join(root, file)
+                        # print(f"FILE {bibFile}")
 
-                        text_file = open(bibfile, "r")
+                        text_file = open(bibFile, "r")
                         bibcontent = text_file.read().strip()
                         text_file.close()
 
@@ -220,8 +249,17 @@ for root, dirs, files in os.walk("./library/entries"):
 
                         bibcontent = "\n".join(biblines)
                         
-                        for key, authors, title, year, date_added, date_modified, doi, url, eprint, journal in parsebib("./", bibfile):
+                        for bibEntry in parsebib("./", bibFile):
+
+                            entry, key, authors, title, year, date_added, date_modified, doi, url, eprint, journal = bibEntry
                             print(f"BIB {authors} - {title}")
+
+                            doi, modified = amendDOI(doi, eprint, journal)
+
+                            if modified:
+                                print(f"NEW-DOI {doi}")
+                                entry.set_field(parser.model.Field("doi", doi))
+                                writeBib(entry, bibFile)
 
                             pdfFiles = []
                             for pdfFile in os.listdir("./"):
@@ -250,27 +288,31 @@ for root, dirs, files in os.walk("./library/entries"):
                                 # use sci-hub if we have a doi or url
 
                                 # http://dx.doi.org/10.1145/358746.358767
+                                # https://dx.doi.org/10.1145/358746.358767
                                 # https://www.sciencedirect.com/science/article/pii/S0304397500001006
 
                                 sciHubRoot = "https://sci-hub.se/"
                                 sciHub = sciHubRoot + doi_or_url
                                 print(f"SCIHUB URL {sciHub}")
 
-                                req = requests.get(sciHub, allow_redirects=True)
-                                html = req.content.decode("utf-8") 
-                                soup = BeautifulSoup(html, features="html.parser")
-                                pdfElement = soup.find(attrs={'id': 'pdf'})
+                                try:
+                                    req = requests.get(sciHub, allow_redirects=True)
+                                    html = req.content.decode("utf-8") 
+                                    soup = BeautifulSoup(html, features="html.parser")
+                                    pdfElement = soup.find(attrs={'id': 'pdf'})
 
-                                if pdfElement is not None:
-                                    print(f"SCIHUB ELEMENT {pdfElement}")
+                                    if pdfElement is not None:
+                                        print(f"SCIHUB ELEMENT {pdfElement}")
 
-                                    srcUrl = pdfElement['src']
-                                    if srcUrl.startswith("//"):
-                                        pdfUrl = "https:" + srcUrl
-                                    else:
-                                        pdfUrl = sciHubRoot + srcUrl
+                                        srcUrl = pdfElement['src']
+                                        if srcUrl.startswith("//"):
+                                            pdfUrl = "https:" + srcUrl
+                                        else:
+                                            pdfUrl = sciHubRoot + srcUrl
 
-                                    addPDF(pdfUrl, "", pdfFiles)
+                                        addPDF(pdfUrl, "", pdfFiles)
+                                except Exception as e:
+                                    print(f"SCIHUB EXCEPT " + e)
 
                             if len(pdfFiles) == 1:
                                     pdfFiles_str += f'Pdffile: {pdfFiles[0]}\n'
@@ -289,7 +331,7 @@ Title: {title}\n\
 Year: {year}\n\
 Authors: {'; '.join(authors)}\n\
 Rootfolder: {cwd}\n\
-Bibfile: {os.path.join(cwd, bibfile)}\n\
+Bibfile: {os.path.join(cwd, bibFile)}\n\
 Mdfile: {os.path.join(cwd, mdfile)}\n\
 {'Date: ' + date_added + NEWLINE if date_added != '' else ''}\
 {'Modified: ' + date_modified + NEWLINE if date_modified != '' else ''}\
