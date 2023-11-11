@@ -1,10 +1,10 @@
-{% extends "index2.html" %}
+{% extends "index.html" %}
 {% block content %}
 <section id="content">
 <h1>Authors with bad names</h1>
 <dl>
     {% for author in authors %}
-        {% if '\' in author %}
+        {% if '\\' in author %}
             <a href="{{ SITEURL }}/{{ author.url }}"><i class="icon-user"></i>{{ author }}</a>
         {% endif %}
     {% endfor %}
