@@ -206,6 +206,9 @@ def addPDF(pdfUrl, pdfFile, pdfFiles):
 
 def amendDOI(doi, eprint, journal):
 
+    if not doi == "":
+        return doi, False
+
     if not eprint == "" and "arXiv" in journal:
         absUrl = f"https://arxiv.org/abs/{eprint}"
         print(f"ARXIV-ABS {absUrl}")
@@ -284,6 +287,7 @@ for root, dirs, files in os.walk("./library/entries"):
                             else:
                                 doi_or_url = ""
 
+                            # if there is still no PDF then try sci-hub to get one
                             if len(pdfFiles) == 0 and doi_or_url != "":
                                 # use sci-hub if we have a doi or url
 
