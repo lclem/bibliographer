@@ -38,6 +38,7 @@ def pushd(new_dir):
         os.chdir(previous_dir)
 
 substitutions = {
+    r"\\relax\s*": "",
     r"\\`\s*a": "à",
     r"\\'\s*a": "á",
     r"\\=\s*a": "ā",
@@ -67,7 +68,7 @@ substitutions = {
     r"\\o": "ø",
     r'\\oe': "œ",
     r'\\OE': "Œ",
-    r"\\~\s*n": "ñ",
+    r"\\\~\s*n": "ñ",
     r"\\'\s*n": "ń",
     r"\\v\s*r": "ř",
     r"\\'\s*s": "ś",
