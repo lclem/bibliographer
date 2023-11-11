@@ -12,7 +12,7 @@ from xml.dom.minidom import parse, parseString
 import xml.etree.ElementTree as ET
 from bs4 import BeautifulSoup
 import urllib
-import werkzeug
+# import werkzeug
 
 # def get_filename(url: str):
 #     try:
@@ -67,7 +67,7 @@ substitutions = {
     r"\\.\s*z": "ż"
 }
 
-valid_characters = string.ascii_letters + string.digits + string.whitespace + '-,;:\'"./\\()[]' + "".join(substitutions.values())
+valid_characters = string.ascii_letters + string.digits + string.whitespace + '`-,;:\'"./\\()[]' + "".join(substitutions.values())
 
 def sanitise(str):
     result = "".join(c for c in str if c in valid_characters)
@@ -83,9 +83,6 @@ def normalise_names_order(author):
 def normalise(str):
 
     orig = str
-    # remove newlines
-    # str = ''.join(str.splitlines())
-    # str = str.replace("\n", " ")
     str = re.sub(r"\s+", " ", str)
     str = sanitise(str)
 
@@ -169,6 +166,14 @@ def addPDF(pdfUrl, pdfFile, pdfFiles):
         # print(f"RESPONSE {disp}")
 
         response = urllib.request.urlopen(pdfUrl)
+        size = int(response.headers.get('content-length'))
+
+        if size > 2_000_000:
+            print(f"TOOLARGE {size}")
+            open("addPdf.log", 'wb').write(b"PDF too large")
+            return
+
+        contents = response.read()
 
         # try to extract a pdf file name
         if pdfFile is None or pdfFile == "":
@@ -182,17 +187,16 @@ def addPDF(pdfUrl, pdfFile, pdfFiles):
         if pdfFile is None or pdfFile == "":
             pdfFile = "article.pdf"
 
-        open(pdfFile, 'wb').write(response.read())
+        open(pdfFile, 'wb').write(contents)
 
-        print(f"GIT-ADD {pdfFile}")
+        print(f"GITADD {pdfFile}")
         subprocess.run(["git", "add", pdfFile])
 
         pdfFileEncoded = os.path.join(cwd, pdfFile)
         pdfFiles.append(pdfFileEncoded)
 
-    except e:
+    except Exception as e:
         print(f"EXCEPT {e}")
-
 
 for root, dirs, files in os.walk("./library/entries"):
     i = 0
@@ -248,7 +252,8 @@ for root, dirs, files in os.walk("./library/entries"):
                                 # http://dx.doi.org/10.1145/358746.358767
                                 # https://www.sciencedirect.com/science/article/pii/S0304397500001006
 
-                                sciHub = "https://sci-hub.se/" + doi_or_url
+                                sciHubRoot = "https://sci-hub.se/"
+                                sciHub = sciHubRoot + doi_or_url
                                 print(f"SCIHUB URL {sciHub}")
 
                                 req = requests.get(sciHub, allow_redirects=True)
@@ -258,7 +263,12 @@ for root, dirs, files in os.walk("./library/entries"):
 
                                 if pdfElement is not None:
                                     print(f"SCIHUB ELEMENT {pdfElement}")
-                                    pdfUrl = "https:" + pdfElement['src']
+
+                                    srcUrl = pdfElement['src']
+                                    if srcUrl.startswith("//"):
+                                        pdfUrl = "https:" + srcUrl
+                                    else:
+                                        pdfUrl = sciHubRoot + srcUrl
 
                                     addPDF(pdfUrl, "", pdfFiles)
 

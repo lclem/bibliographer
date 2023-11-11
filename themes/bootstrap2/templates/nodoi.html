@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block content_title %}Recently added{% endblock %}
+{% block content %}
+{% if articles %}
+        <ul>
+        {% for article in articles %}
+                {% if not article.doi %}
+                        <li>
+                                <div class="article">
+                                        <div class="well small">
+                                                {% include "article_infos.html" %}
+                                        </div>
+                                </div>                     
+                        </li>
+                {% endif %}
+        {% endfor %}
+        </ul>
+{% endif %}
+{% endblock content %}
