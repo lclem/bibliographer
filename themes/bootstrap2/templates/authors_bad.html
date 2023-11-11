@@ -4,7 +4,7 @@
 <h1>Authors with bad names</h1>
 <dl>
     {% for author, articles in authors | sort %}
-        {% if author.name.contains('\\') %}
+        {% if '\\' in author.name %}
             <a href="{{ SITEURL }}/{{ author.url }}"><i class="icon-user"></i>{{ author }}</a>
         {% endif %}
     {% endfor %}
