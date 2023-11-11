@@ -53,6 +53,7 @@ substitutions = {
     r"\\`\s*e": "è",
     r"\\k\s*e": "ę",
     r'\\"\s*e': "ë",
+    r"\\v\s*e": "ě",
     r"\\'\s*\\i": "í",
     r"\\l": "ł",
     r"\\L": "Ł",
@@ -63,7 +64,10 @@ substitutions = {
     r"\\'\s*n": "ń",
     r"\\v\s*r": "ř",
     r"\\v\s*s": "š",
+    r"\\v\s*S": "Š",
     r'\\"\s*u': "ü",
+    r"\\`\s*u": "ù",
+    r"\\'\s*u": "ú",
     r"\\.\s*z": "ż"
 }
 
@@ -152,7 +156,7 @@ def parsebib(root, bibFile):
         doi = doi.strip()
 
         if doi != "" and not doi.startswith("http"):
-            doi = f"https://dx.doi.org/{doi}"
+            doi = mkDoiUrl(doi)
 
         eprint = getValue(fields, 'eprint', "")
         journal = getValue(fields, 'journal', "")
@@ -204,7 +208,10 @@ def addPDF(pdfUrl, pdfFile, pdfFiles):
     except Exception as e:
         print(f"EXCEPT {e}")
 
-def amendDOI(doi, eprint, journal):
+def mkDoiUrl(doi):
+    return f"https://dx.doi.org/{doi}"
+
+def amendDOI(doi, eprint, journal, key):
 
     if not doi == "":
         return doi, False
@@ -227,6 +234,23 @@ def amendDOI(doi, eprint, journal):
 
                 if doi is not None:
                     return doi, True
+
+    # sometimes the citation key is the DOI
+    # All DOI numbers begin with a 10 and contain a prefix and a suffix separated by a slash.
+    # The prefix is a unique number of four or more digits assigned to organizations;
+    # the suffix is assigned by the publisher and was designed to be flexible with publisher identification standards.
+    # 10.1093/ajae/aaq063
+    # 10.1371/journal.pgen.1001111
+
+    doiPattern = "^10\.[0-9][0-9][0-9][0-9][0-9]*/.+"
+    if re.search(doiPattern, key):
+
+        doi = mkDoiUrl(key)
+        response = requests.get(doi)
+
+        if response.status_code == 200:
+            print(f"KEY-DOI {doi}")
+            return doi, True
 
     return doi, False
 
@@ -257,7 +281,7 @@ for root, dirs, files in os.walk("./library/entries"):
                             entry, key, authors, title, year, date_added, date_modified, doi, url, eprint, journal = bibEntry
                             print(f"BIB {authors} - {title}")
 
-                            doi, modified = amendDOI(doi, eprint, journal)
+                            doi, modified = amendDOI(doi, eprint, journal, key)
 
                             if modified:
                                 print(f"NEW-DOI {doi}")
