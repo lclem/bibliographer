@@ -87,6 +87,7 @@ substitutions = {
     r"\\~\s*n": "ñ",
     r"\\\\textasciitilde\s*n": "ñ",
     r"\\'\s*n": "ń",
+    r"\\v\s*n": "ň",
     r"\\v\s*r": "ř",
     r"\\v\s*R": "Ř",
     r"\\'\s*s": "ś",
