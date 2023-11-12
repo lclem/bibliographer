@@ -47,7 +47,7 @@ FEED_ALL_RSS = 'feeds/all.rss.xml'
 #     base_directory: 'output'
 # }
 
-MENUITEMS = [('no doi', '/nodoi.html'), ('bad author', '/authors_bad.html')]
+MENUITEMS = [('no doi', STORK_INPUT_OPTIONS["url_prefix"] + '/nodoi.html'), ('bad author', STORK_INPUT_OPTIONS["url_prefix"] +'/authors_bad.html')]
 
 SLUGIFY_SOURCE = "basename"
 DISPLAY_CATEGORIES_ON_MENU = False
