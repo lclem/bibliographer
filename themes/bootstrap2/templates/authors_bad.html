@@ -4,13 +4,16 @@
 <section id="content">
 <h1>Authors with bad names</h1>
 <ul>
+    {% set ns = namespace(bad_count = 0) %}
     {% for author, articles in authors | sort %}
         {% if '\\' in author.name %}
-        <li>
-            <a href="{{ SITEURL }}/{{ author.url }}"><i class="icon-user"></i>{{ author }}</a>
-        </li>
+            {% set ns.bad_count = ns.bad_count + 1 %}
+            <li>
+                <a href="{{ SITEURL }}/{{ author.url }}"><i class="icon-user"></i>{{ author }}</a>
+            </li>
         {% endif %}
     {% endfor %}
 </ul>
+<p>(total: {{ ns.bad_count }})</p>
 </section>
 {% endblock %}
