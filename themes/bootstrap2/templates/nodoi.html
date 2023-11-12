@@ -1,17 +1,12 @@
 {% extends "base.html" %}
 {% block content_title %}No doi ({{articles | length}}){% endblock %}
 {% block content %}
+        <h1>Articles without a DOI</h1>
         {% if articles %}
                 <ul>
                 {% for article in articles %}
                         {% if not article.doi %}
-                                <li>
-                                        <div class="article">
-                                                <div class="well small">
-                                                        {% include "article_infos_compact.html" %}
-                                                </div>
-                                        </div>                     
-                                </li>
+                                <li>{% include "article_infos_compact.html" %}</li>
                         {% endif %}
                 {% endfor %}
                 </ul>

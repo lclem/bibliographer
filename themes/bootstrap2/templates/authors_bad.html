@@ -1,13 +1,16 @@
 {% extends "index.html" %}
+{% block content_title %}Authors with bad names{% endblock %}
 {% block content %}
 <section id="content">
 <h1>Authors with bad names</h1>
-<dl>
+<ul>
     {% for author, articles in authors | sort %}
         {% if '\\' in author.name %}
+        <li>
             <a href="{{ SITEURL }}/{{ author.url }}"><i class="icon-user"></i>{{ author }}</a>
+        </li>
         {% endif %}
     {% endfor %}
-</dl>
+</ul>
 </section>
 {% endblock %}

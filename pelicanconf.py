@@ -23,6 +23,8 @@ STORK_INPUT_OPTIONS = {
     "url_prefix": "/bibliographer"
 }
 
+LOAD_CONTENT_CACHE = False
+
 GITHUB_URL = 'https://github.com/lclem/bibliographer'
 GITHUB_VIEW_URL = GITHUB_URL + '/tree/main'
 GITHUB_BLOB_URL = GITHUB_URL + '/blob/main'
@@ -44,6 +46,8 @@ FEED_ALL_RSS = 'feeds/all.rss.xml'
 # STORK_INPUT_OPTIONS = {
 #     base_directory: 'output'
 # }
+
+MENUITEMS = [('no doi', '/nodoi.html'), ('bad author', '/authors_bad.html')]
 
 SLUGIFY_SOURCE = "basename"
 DISPLAY_CATEGORIES_ON_MENU = False

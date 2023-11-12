@@ -2,10 +2,12 @@
 {% block content %}
 <section id="content">
 <h1>Authors</h1>
-<dl>
+<ul>
     {% for author, articles in authors | sort %}
+    <li>
         <a href="{{ SITEURL }}/{{ author.url }}"><i class="icon-user"></i>{{ author }}</a>
+    </li>
     {% endfor %}
-</dl>
+</ul>
 </section>
 {% endblock %}
