@@ -79,6 +79,7 @@ substitutions = {
     r"\\\\\\textasciitilde\s*n": "ñ",
     r"\\'\s*n": "ń",
     r"\\v\s*r": "ř",
+    r"\\v\s*R": "Ř",
     r"\\'\s*s": "ś",
     r"\\'\s*S": "Ś",
     r"\\v\s*s": "š",
@@ -94,7 +95,9 @@ substitutions = {
     r"\\r\s*u": "ů",
     r"\\^\s*u": "û",
     r"\\'\s*y": "ý",
-    r"\\.\s*z": "ż"
+    r"\\.\s*z": "ż",
+    r"\\v\s*z": "ž",
+    r"\\v\s*Z": "Ž"
 }
 
 valid_characters = string.ascii_letters + string.digits + string.whitespace + '`-,;:\'"./\\()[]ễ' + "".join(substitutions.values())
