@@ -1,19 +1,17 @@
 {% extends "base.html" %}
-{% block content_title %}No pdf ({{articles | length}}){% endblock %}
+{% block content_title %}Articles without a pdf{% endblock %}
 {% block content %}
+        <h1>Articles without a PDF</h1>
         {% if articles %}
                 <ul>
+                {% set ns = namespace(bad_count = 0) %}
                 {% for article in articles %}
                         {% if not article.pdffiles and not article.pdffile %}
-                                <li>
-                                        <div class="article">
-                                                <div class="well small">
-                                                        {% include "article_infos_compact.html" %}
-                                                </div>
-                                        </div>                    
-                                </li>
+                                {% set ns.bad_count = ns.bad_count + 1 %}
+                                <li>{% include "article_infos_compact.html" %}</li>
                         {% endif %}
                 {% endfor %}
                 </ul>
         {% endif %}
+        <p>(total: {{ ns.bad_count }})</p>
 {% endblock content %}

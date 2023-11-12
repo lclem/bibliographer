@@ -20,6 +20,7 @@ RELATIVE_URLS = False
 
 STORK_INPUT_OPTIONS = {
     "html_selector": "nobr",
+    # "url_prefix" : ""
     "url_prefix": "/bibliographer"
 }
 
@@ -47,7 +48,10 @@ FEED_ALL_RSS = 'feeds/all.rss.xml'
 #     base_directory: 'output'
 # }
 
-MENUITEMS = [('no doi', STORK_INPUT_OPTIONS["url_prefix"] + '/nodoi.html'), ('bad author', STORK_INPUT_OPTIONS["url_prefix"] +'/authors_bad.html')]
+MENUITEMS = [
+        ('no doi', STORK_INPUT_OPTIONS["url_prefix"] + '/nodoi.html'),
+        ('no pdf', STORK_INPUT_OPTIONS["url_prefix"] + '/nopdf.html'),
+        ('bad author', STORK_INPUT_OPTIONS["url_prefix"] +'/authors_bad.html')]
 
 SLUGIFY_SOURCE = "basename"
 DISPLAY_CATEGORIES_ON_MENU = False
@@ -79,6 +83,6 @@ ARTICLE_URL = 'posts/{date:%Y}/{date:%m}/{slug}/'
 ARTICLE_SAVE_AS = 'posts/{date:%Y}/{date:%m}/{slug}/index.html'
 
 # Custom Home page
-DIRECT_TEMPLATES = ['index', 'author', 'archives', 'home', 'authors_bad']
+DIRECT_TEMPLATES = ['index', 'author', 'archives', 'home', 'authors_bad', "nodoi", "nopdf"]
 PAGINATED_TEMPLATES = {'home' : 10, 'index' : 20}
 TEMPLATE_PAGES = {'nopdf.html': 'nopdf.html', "nodoi.html": "nodoi.html", "authors.html": "authors.html", "authors_bad.html": "authors_bad.html"}
