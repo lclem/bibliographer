@@ -4,11 +4,14 @@
         <h1>Articles without a DOI</h1>
         {% if articles %}
                 <ul>
+                {% set ns = namespace(bad_count = 0) %}
                 {% for article in articles %}
                         {% if not article.doi %}
+                                {% set ns.bad_count = ns.bad_count + 1 %}
                                 <li>{% include "article_infos_compact.html" %}</li>
                         {% endif %}
                 {% endfor %}
                 </ul>
         {% endif %}
+        <p>(total: {{ ns.bad_count }})</p>
 {% endblock content %}
