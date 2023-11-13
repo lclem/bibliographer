@@ -64,11 +64,11 @@ for root, dirs, _ in os.walk("./library/entries"):
                     if bibFile.endswith(".bib"):                    
                         for entry, doi in parseBib(bibFile):
 
+                            print(f"DOI {doi}")
                             dst = f"../../doi/{doi}/index.bib"
 
                             dstfolder = os.path.dirname(dst)
                             if not os.path.exists(dstfolder):
                                 os.makedirs(dstfolder)
 
-                            print(f"DOI {doi}/{bibFile}")
                             shutil.copy(bibFile, dst)
