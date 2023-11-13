@@ -1,4 +1,4 @@
-#!/usr/bin/python3
+#!/usr/bin/python
 
 # find all bib files in library/entries
 # for each bib file with a DOI identifier of the form https://dx.doi.org/DOI,
@@ -65,7 +65,7 @@ for root, dirs, _ in os.walk("./library/entries"):
                         for entry, doi in parseBib(bibFile):
 
                             print(f"DOI {doi}")
-                            dst = f"../../doi/{doi}/index.bib"
+                            dst = f"../../doi/{doi}/index.html"
 
                             dstfolder = os.path.dirname(dst)
                             if not os.path.exists(dstfolder):
