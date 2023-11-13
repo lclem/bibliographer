@@ -357,7 +357,7 @@
       // given a url fetch its contents and invoke the callback function on the result
       async function getWebPage(theUrl, callback) {
 
-        console.log("getting url: " + theUrl);
+        statusAppend("getting url: " + theUrl);
 
         xmlhttp = getXmlHttp();
         xmlhttp.onreadystatechange = async function() {
@@ -366,10 +366,17 @@
             console.log("res: " + res);
             callback(res);
           }
+          else {
+            statusAppend("status: " + xmlhttp.status);
+          }
         }
 
-        xmlhttp.open("GET", theUrl, false);
-        xmlhttp.send();
+        try {
+          xmlhttp.open("GET", theUrl, false);
+          xmlhttp.send();
+        } catch (err) {
+          statusAppend('GET error: ', err);
+        }
 
       }
 
