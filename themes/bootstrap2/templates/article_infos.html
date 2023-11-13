@@ -26,7 +26,8 @@
 {% if article.doi or article.theurl %}
         <span class="label">URL</span>
         {% if article.doi %}
-                <a href="{{ article.doi }}" target="_blank">[doi]</a>
+                <a href="{{ article.doiUrl }}" target="_blank">[doi]</a>
+                <a href="{{ SITEURL }}/doi/{{ article.doi }}" target="_blank">[local]</a>
         {% endif %}
         {% if article.theurl %}
                 <a href="{{ article.theurl }}" target="_blank">[url]</a>

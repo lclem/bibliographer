@@ -332,6 +332,14 @@ for root, dirs, files in os.walk("./library/entries"):
                                 entry.set_field(parser.model.Field("doi", doi))
                                 writeBib(entry, bibFile)
 
+                            doiNoURL = doi
+
+                            if doiNoURL != "":
+                                doiNoURL = doiNoURL.removeprefix("https://dx.doi.org/")
+                                doiNoURL = doiNoURL.removeprefix("https://doi.org/")
+                                doiNoURL = doiNoURL.removeprefix("http://dx.doi.org/")
+                                doiNoURL = doiNoURL.removeprefix("http://doi.org/")
+
                             pdfFiles = []
                             for pdfFile in os.listdir("./"):
                                 if pdfFile.endswith(".pdf"):
@@ -407,7 +415,8 @@ Bibfile: {os.path.join(cwd, bibFile)}\n\
 Mdfile: {os.path.join(cwd, mdfile)}\n\
 {'Date: ' + date_added + NEWLINE if date_added != '' else ''}\
 {'Modified: ' + date_modified + NEWLINE if date_modified != '' else ''}\
-{'DOI: ' + doi + NEWLINE if doi != '' else ''}\
+{'doiUrl: ' + doi + NEWLINE if doi != '' else ''}\
+{'DOI: ' + doiNoURL + NEWLINE if doiNoURL != '' else ''}\
 {'THEURL: ' + url + NEWLINE if url != '' else ''}\
 Key: {key}\n\
 Slug: {key}\n\
