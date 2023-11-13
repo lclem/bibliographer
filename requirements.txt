@@ -1,5 +1,6 @@
 bibtexparser==2.0.0b3
 pelican-search
+pelican-markdown-include
 markdown
 requests
 werkzeug
