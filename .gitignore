@@ -20,4 +20,4 @@ pip-log.txt
 .DS_Store
 *.md
 docs
-doi
+library/doi

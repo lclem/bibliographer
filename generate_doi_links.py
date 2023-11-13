@@ -64,7 +64,7 @@ for root, dirs, _ in os.walk("./library/entries"):
                     if bibFile.endswith(".bib"):                    
                         for entry, doi in parseBib(bibFile):
 
-                            dst = f"../../../doi/{doi}/index.bib"
+                            dst = f"../../doi/{doi}/index.bib"
 
                             dstfolder = os.path.dirname(dst)
                             if not os.path.exists(dstfolder):
