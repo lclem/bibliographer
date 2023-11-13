@@ -66,6 +66,7 @@ NEWEST_FIRST_ARCHIVES = True
 
 # static paths will be copied without parsing their contents
 STATIC_PATHS = [
+    'doi'
     # 'images',
     # 'extra/robots.txt',
     ]
