@@ -6,3 +6,4 @@ requests
 werkzeug
 beautifulsoup4
 pypdf
+cryptography

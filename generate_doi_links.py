@@ -61,7 +61,7 @@ for root, dirs, _ in os.walk("./library/entries"):
             # print(f"ROOT {root}, DIR {dir}")
             for _, _, files in os.walk("./"):
                 for bibFile in files:
-                    if bibFile.endswith(".bib"):                    
+                    if bibFile.endswith(".bib"):
                         for entry, doi in parseBib(bibFile):
 
                             print(f"DOI {doi}")
