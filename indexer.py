@@ -130,7 +130,7 @@ def normalise_names_order(author):
 
 def normalise(str):
 
-    orig = str
+    # orig = str
     str = re.sub(r"\s+", " ", str)
     str = sanitise(str)
 
@@ -197,6 +197,10 @@ def parsebib(bibFile):
         url = url.strip()
 
         doi = getValue(fields, 'doi', "")
+
+        if doi == "":
+            doi = getValue(fields, 'DOI', "")
+
         doi = doi.strip()
 
         if doi != "" and not doi.startswith("http"):
