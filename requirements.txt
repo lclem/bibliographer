@@ -5,3 +5,4 @@ markdown
 requests
 werkzeug
 beautifulsoup4
+pypdf
