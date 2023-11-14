@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 
 # find all bib files in library/entries
 # for each bib file with a DOI identifier of the form https://dx.doi.org/DOI,

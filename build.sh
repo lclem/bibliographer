@@ -1,6 +1,6 @@
 #!/bin/bash
 
 #&& rsync -aP library docs/
-python ./indexer.py
-python ./generate_doi_links.py
+/usr/bin/python3 ./indexer.py
+/usr/bin/python3 ./generate_doi_links.py
 pelican

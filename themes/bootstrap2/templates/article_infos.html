@@ -23,12 +23,10 @@
 <a class="published" title="{{ article.year }}"><i class="icon-calendar"></i>{{ article.year }}</a>
 <span class="label">Added</span>
 <a class="published" title="{{ article.date.isoformat() }}"><i class="icon-calendar"></i>{{ article.locale_date }}</a>
-{% if article.doi or article.theurl %}
+{% if article.thedoiurl or article.theurl %}
         <span class="label">URL</span>
-        {% if article.doi %}
-                {{ article.thedoiurl }}
+        {% if article.thedoiurl %}
                 <a href="{{ article.thedoiurl }}" target="_blank">[doi]</a>
-                <a href="{{ SITEURL }}/doi/{{ article.doi }}" target="_blank">[local]</a>
         {% endif %}
         {% if article.theurl %}
                 <a href="{{ article.theurl }}" target="_blank">[url]</a>
@@ -48,6 +46,9 @@
 {% endif %}
 <span class="label">BIB</span>
         <a href="javascript:copyBib()">[copy]</a>
+        {% if article.doi %}
+                <a href="{{ SITEURL }}/doi/{{ article.doi }}" target="_blank">[cite]</a>
+        {% endif %}
         <!-- <a href="{{ SITEURL }}/{{ article.bibfile }}">[bib]</a> -->
         <a href="{{ GITHUB_EDIT_URL }}/{{ article.bibfile }}" target="_blank">[edit]</a>
 <span class="label">SRC</span>

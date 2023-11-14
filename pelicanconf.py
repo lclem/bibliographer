@@ -80,8 +80,14 @@ READERS = {'html': None}
 # code blocks with line numbers
 PYGMENTS_RST_OPTIONS = {'linenos': 'table'}
 
-ARTICLE_URL = 'posts/{date:%Y}/{date:%m}/{slug}/'
-ARTICLE_SAVE_AS = 'posts/{date:%Y}/{date:%m}/{slug}/index.html'
+# ARTICLE_URL = 'posts/{date:%Y}/{date:%m}/{slug}/'
+# ARTICLE_SAVE_AS = 'posts/{date:%Y}/{date:%m}/{slug}/index.html'
+
+ARTICLE_URL = 'articles/{slug}/'
+ARTICLE_SAVE_AS = 'articles/{slug}/index.html'
+
+PAGE_URL = 'pages/{slug}/'
+PAGE_SAVE_AS = 'pages/{slug}/index.html'
 
 # Custom Home page
 DIRECT_TEMPLATES = ['index', 'author', 'archives', 'authors_bad', "nodoi", "nopdf"]

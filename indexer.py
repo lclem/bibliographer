@@ -153,7 +153,7 @@ def writeBib(entry, bibFile):
     print(f"GITADD {bibFile}")
     subprocess.run(["git", "add", bibFile])
 
-def parsebib(root, bibFile):
+def parsebib(bibFile):
     library = parser.parse_file(bibFile)
 
     # print(f"Parsed {len(library.blocks)} blocks, including:"
@@ -300,6 +300,7 @@ def amendDOI(doi, eprint, journal, key):
 
 for root, dirs, files in os.walk("./library/entries"):
     i = 0
+    errors = 0
     for dir in dirs:
         cwd = os.path.join(root, dir)
         with pushd(cwd):
@@ -320,7 +321,12 @@ for root, dirs, files in os.walk("./library/entries"):
 
                         bibcontent = "\n".join(biblines)
                         
-                        for bibEntry in parsebib("./", bibFile):
+                        parseResults = parsebib(bibFile)
+
+                        if parseResults == []:
+                            errors = errors + 1
+
+                        for bibEntry in parseResults:
 
                             entry, key, authors, title, year, date_added, date_modified, doi, url, eprint, journal = bibEntry
                             print(f"BIB {authors} - {title}")
@@ -419,7 +425,7 @@ Mdfile: {os.path.join(cwd, mdfile)}\n\
 {'doi: ' + doiNoURL + NEWLINE if doiNoURL != '' else ''}\
 {'theurl: ' + url + NEWLINE if url != '' else ''}\
 Key: {key}\n\
-Slug: {key}\n\
+Slug: {doiNoURL if doiNoURL != '' else key}\n\
 engine: knitr\n"
 
                             if not len(pdfFiles) == 0:
@@ -440,3 +446,5 @@ engine: knitr\n"
                             text_file.close()
 
                             i = i + 1
+
+print(f"ERRORS {errors}")
