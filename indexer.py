@@ -415,9 +415,9 @@ Bibfile: {os.path.join(cwd, bibFile)}\n\
 Mdfile: {os.path.join(cwd, mdfile)}\n\
 {'Date: ' + date_added + NEWLINE if date_added != '' else ''}\
 {'Modified: ' + date_modified + NEWLINE if date_modified != '' else ''}\
-{'doiUrl: ' + doi + NEWLINE if doi != '' else ''}\
-{'DOI: ' + doiNoURL + NEWLINE if doiNoURL != '' else ''}\
-{'THEURL: ' + url + NEWLINE if url != '' else ''}\
+{'thedoiurl: ' + doi + NEWLINE if doi != '' else ''}\
+{'doi: ' + doiNoURL + NEWLINE if doiNoURL != '' else ''}\
+{'theurl: ' + url + NEWLINE if url != '' else ''}\
 Key: {key}\n\
 Slug: {key}\n\
 engine: knitr\n"
