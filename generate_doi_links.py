@@ -10,7 +10,6 @@ import os
 import shutil
 import contextlib
 import bibtexparser as parser
-# import subprocess
 
 @contextlib.contextmanager
 def pushd(new_dir):

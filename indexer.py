@@ -12,21 +12,6 @@ from xml.dom.minidom import parse, parseString
 import xml.etree.ElementTree as ET
 from bs4 import BeautifulSoup
 import urllib
-# import werkzeug
-
-# def get_filename(url: str):
-#     try:
-#         with requests.get(url) as req:
-#             if content_disposition := req.headers.get("Content-Disposition"):
-#                 param, options = werkzeug.http.parse_options_header(content_disposition)
-#                 if param == 'attachment' and (filename := options.get('filename')):
-#                     return filename
-
-#             path = urlparse(req.url).path
-#             name = path[path.rfind('/') + 1:]
-#             return name
-#     except requests.exceptions.RequestException as e:
-#         raise e
 
 @contextlib.contextmanager
 def pushd(new_dir):
