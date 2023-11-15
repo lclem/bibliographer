@@ -192,6 +192,7 @@ for root, dirs, _ in os.walk("./entries"):
             if not os.path.exists(doisCheckedFilename):
 
                 allGood = True
+		somePdfProcessed = False
 
                 for _, _, files in os.walk("./"):
 
@@ -199,8 +200,9 @@ for root, dirs, _ in os.walk("./entries"):
                         if pdfFile.endswith(".pdf"):
                             res = processPDF(pdfFile)
                             allGood = allGood and res
+			    somePdfProcessed = True
 
-                if allGood:
+                if allGood and somePdfProcessed:
                     open(doisCheckedFilename, "w").close()
 
     # only walk directly inside ./entries
