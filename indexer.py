@@ -359,7 +359,8 @@ for root, dirs, files in os.walk("./library/entries"):
                                 doi_or_url = ""
 
                             # if there is still no PDF then try sci-hub to get one
-                            if len(pdfFiles) == 0 and doi_or_url != "":
+                            # PS: trying to get PDF files for every BIB seems a bad idea
+                            if False and len(pdfFiles) == 0 and doi_or_url != "":
                                 # use sci-hub if we have a doi or url
 
                                 # http://dx.doi.org/10.1145/358746.358767
