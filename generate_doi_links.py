@@ -35,11 +35,7 @@ def parseBib(bibFile):
 
     result = []
     for entry in library.entries:
-        fields = entry.fields_dict
-
-        # print(f"FIELDS: {fields}")
-        # print(f"key {entry.key}, type {entry.entry_type}, fields {entry.fields_dict} \n")
-
+        fields = {k.lower(): v for k, v in entry.fields_dict.items()}
         doi = getValue(fields, 'doi', "").strip()
 
         if doi != "":
