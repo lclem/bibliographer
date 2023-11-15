@@ -85,6 +85,12 @@ def processBib(root, bibFile):
                     print(colored("VALID", "green"), f"{doi} {root}/{bibFile}")
 
                 if doi != origDoi:
+
+                    # remove all versions of doi
+                    for i, key in enumerate([f.key.lower() for f in entry._fields]):
+                        if key == "doi":
+                            del entry._fields[i]
+
                     entry.set_field(parser.model.Field("doi", doi))
                     writeBib(entry, bibFile)
 
