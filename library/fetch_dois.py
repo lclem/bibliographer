@@ -51,11 +51,11 @@ def fetchDoi(doi):
         print(f"NO DOI {response}")
         return
 
-    response = response.content.decode().strip()
-    print(f"DOI {doi}")
-    print(response)
-
     try: 
+        response = response.content.decode().strip()
+        print(f"DOI {doi}")
+        print(response)
+
         library = parser.parse_string(response)
         for entry in library.entries:
             if not saveBibEntry(entry):
