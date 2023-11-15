@@ -39,7 +39,7 @@ def writeBib(entry, bibFile):
 def processBib(root, bibFile):
 
     try:
-        print(f"BIB {root}/{bibFile}")
+        # print(f"BIB {root}/{bibFile}")
 
         layers = [ parser.middlewares.SortFieldsAlphabeticallyMiddleware(), parser.middlewares.SortFieldsCustomMiddleware(order = tuple(("doi",)), case_sensitive = False, allow_inplace_modification = True) ]
         library = parser.parse_file(bibFile, parse_stack = None, append_middleware = layers)
@@ -60,7 +60,7 @@ def processBib(root, bibFile):
             doi = getValue(fields, 'doi', "").strip()
 
             if doi == "":
-                print(f"NO DOI | {bibFile}")
+                print(f"NO DOI {root}/{bibFile}")
 
                 if getValue(fields, 'DOI', "").strip() != "":
                     raise Exception("capitalisation problem")
@@ -84,7 +84,7 @@ def processBib(root, bibFile):
                 else:
                     print(colored("VALID", "green"), f"{doi} {root}/{bibFile}")
 
-                if doi != origDoi:
+                if doi != origDoi or "DOI" in entry.fields_dict() or "Doi" in entry.fields_dict():
 
                     # remove all versions of doi
                     for i, key in enumerate([f.key.lower() for f in entry._fields]):
