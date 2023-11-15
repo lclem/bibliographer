@@ -84,7 +84,7 @@ def processBib(root, bibFile):
                 else:
                     print(colored("VALID", "green"), f"{doi} {root}/{bibFile}")
 
-                if doi != origDoi or "DOI" in entry.fields_dict() or "Doi" in entry.fields_dict():
+                if doi != origDoi or "DOI" in entry.fields_dict or "Doi" in entry.fields_dict:
 
                     # remove all versions of doi
                     for i, key in enumerate([f.key.lower() for f in entry._fields]):
