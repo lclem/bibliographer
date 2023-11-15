@@ -202,3 +202,6 @@ for root, dirs, _ in os.walk("./entries"):
 
                 if allGood:
                     open(doisCheckedFilename, "w").close()
+
+    # only walk directly inside ./entries
+    break
