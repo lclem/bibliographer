@@ -259,23 +259,13 @@
 
             console.log("title: " + title);
 
-            searchResults = stork.search("sitesearch", key + " " + title);
+	    searchString = key + " " + title;
+            searchResults = stork.search("sitesearch", searchString);
 
             if (!force && (searchResults.total_hit_count > 0 && searchResults.results[0].score > 2000)) {
               console.log("bib already exists");
 
-              var str = "";
-
-              if (keySearchResults.total_hit_count) {
-                console.log(keySearchResults);
-                str = key;
-              }
-              else {
-                console.log(titleSearchResults);
-                str = title;
-              }
-
-              stork.search("sitesearch", str);
+              stork.search("sitesearch", searchString);
               // triggerStorkSearch(str);
               addButton.style.display = "block";
 
