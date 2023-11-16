@@ -1,4 +1,4 @@
-#!/bin/python3
+#!/usr/bin/python3
 
 import string, requests, re, subprocess, os
 from termcolor import colored
@@ -28,6 +28,11 @@ def saveBibEntry(entry):
 
     if os.path.exists(directory):
         print(colored("EXISTS", "red"), f"{directory}")
+
+        # check whether we have this doi in the library / webpage
+        # return True if we have it already
+        # if not, change the key to a fresh one and add it
+
         return False
     
     Path(directory).mkdir(parents=True, exist_ok=True)
@@ -42,6 +47,9 @@ def saveBibEntry(entry):
     return True
 
 def fetchDoi(doi):
+
+    # TODO: first check that we don't have this doi already in the repo / webpage
+
     doiUrl = f"https://dx.doi.org/{doi}"
     headers = {'Accept': 'application/x-bibtex; charset=utf-8'}
 
@@ -74,24 +82,28 @@ doisWeHave = set()
 doisWeDontHave = set()
 # doisWeStillDontHave = set()
 
+# load all known dois
 with open(doisWeHaveFileName, "r") as f:
     for line in f:
         doi = line.strip()
         doisWeHave.add(doi)
 
+# load all unknown dois
 with open(doisWeDontHaveFileName, "r") as f:
     for line in f:
         doi = line.strip()
         if doi not in doisWeHave:
             doisWeDontHave.add(doi)
 
+# get a bib for all unknown dois
 for doi in doisWeDontHave:
-    if doiValid(doi):
+    if doiValid(doi) and doi not in doisWeHave:
         if fetchDoi(doi):
             doisWeHave.add(doi)
             with open(doisWeHaveFileName, 'a') as f:
                 f.write(f"{doi}\n")
 
+# update the unknown dois based on what we found
 with open(doisWeDontHaveFileName, 'w') as f:
     for doi in doisWeDontHave:
         if doi not in doisWeHave:
