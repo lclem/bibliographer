@@ -5,6 +5,7 @@ from pypdf import PdfReader, PdfWriter, generic
 writeNewPdf = False
 
 if len(sys.argv) > 1 and sys.argv[1] == "--writePdf":
+    print("OPTION --writePdf")
     writeNewPdf = True
 
 doisWeHave = set()
