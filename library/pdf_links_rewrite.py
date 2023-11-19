@@ -64,6 +64,9 @@ def isDOI(uri):
 
     return "doi.org" in uri
 
+# TODO: 1) try to also rewrite non-doi URI to (our) doi URI
+# TODO: 2) when this is not possible (because no doi exists or we are unable to find it), it would be nice to find a way to rewrite to the corresponding slug if we have it
+
 def rewriteURI(uri):
 
     # if type(uri) is bytes:
@@ -91,6 +94,7 @@ def rewriteURI(uri):
     if doi == "":
         return uri
     
+    # this assumes that the doi is the slug with which the article is published
     newUri = f"https://lclem.github.io/bibliographer/articles/{doi}"
 
     if doi in doisWeDontHave:
