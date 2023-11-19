@@ -240,6 +240,12 @@
 
       }
 
+      const lowerize = obj =>
+        Object.keys(obj).reduce((acc, k) => {
+          acc[k.toLowerCase()] = obj[k];
+          return acc;
+        }, {});
+        
       // TODO: when pasting a bib which gives a search hit, it is not possible to import: check what happens
 
       async function processBib(aBibStr, fileName, force = false) {
@@ -253,6 +259,8 @@
 
           for (bibJSON of bibJSONs) {
             console.log(bibJSON);
+
+            bibJSON = lowerize(bibJSON);
 
             key = bibJSON["citationKey"];
             console.log("key: " + key);
