@@ -478,7 +478,10 @@
           // https://inria.hal.science/hal-02885579
           // https://inria.hal.science/hal-02885579/bibtex
           // https://pastel.hal.science/tel-01223284v2
-          else if (articleUrl.startsWith("https://inria.hal.science/") || articleUrl.startsWith("https://pastel.hal.science/")) {
+          
+          else if (articleUrl.startsWith("https://inria.hal.science/") ||
+            articleUrl.startsWith("https://pastel.hal.science/") ||
+            articleUrl.startsWith("https://hal.science/")) {
 
             var halId = "";
 
