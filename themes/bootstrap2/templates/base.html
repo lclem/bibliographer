@@ -214,14 +214,24 @@
         uploadBib(dt, true);
       }
 
+        // TODO: improve
+        function sanitiseKey(key) {
+          key = key.replace("/", "_");
+          key = key.replace(":", "_");
+      }
+
       async function openGitHub(key, fileName, bibStr) {
 
-        // TODO
-        sanitisedKey = key.replace("/", "_");
+        sanitisedKey = sanitiseKey(key);
 
         url = "https://github.com/lclem/bibliographer/new/main/library/entries/";
         url += sanitisedKey + "?filename=" + fileName + "&value=";
         url += encodeURIComponent(bibStr);
+
+        // create filename from key if not present
+        if (fileName == "") {
+          fileName = sanitisedKey + ".bib";
+        }
 
         console.log("openGitHub, key:" + key + ", fileName: " + fileName + ", bibStr: " + bibStr);
 
@@ -292,10 +302,9 @@
               bibStr = bibStr.trim();
               console.log(bibStr);
 
-              // create filename from bib if not present
-              if (fileName == "") {
-                fileName = key + ".bib";
-              }
+              //TODO: at this stage from time to time the key could be garbage
+              // and also the filename
+              //sanitise it, eg. remove https:// etc
 
               openGitHub(key, fileName, bibStr);
             }
