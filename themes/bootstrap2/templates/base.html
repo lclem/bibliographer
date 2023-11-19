@@ -230,9 +230,9 @@
 
       // TODO: when pasting a bib which gives a search hit, it is not possible to import: check what happens
 
-      async function processBib(bibStr, fileName, force = false) {
+      async function processBib(aBibStr, fileName, force = false) {
 
-        bibStr = bibStr.trim();
+        bibStr = aBibStr.trim();
         console.log("processBib: " + bibStr);
         statusAppend("processing bib: " + bibStr);
 
@@ -243,7 +243,7 @@
             console.log(bibJSON);
 
             key = bibJSON["citationKey"];
-            console.log(key);
+            console.log("key: " + key);
 
             tags = bibJSON["entryTags"];
 
@@ -304,13 +304,13 @@
       }
 
       async function uploadBib(inp, force = false) {
-          console.log("uploadBib: " + inp + ", force: " + force);
+        console.log("uploadBib: " + inp + ", force: " + force);
 
-          if (force) {
-          }
-          else {
-            bibFile = inp.files[0];
-          }
+        if (force) {
+          processBib(bibStr, "", force);
+        }
+        else {
+          bibFile = inp.files[0];
 
           let fileName = "";
           
@@ -325,12 +325,13 @@
             
             console.log("File name: " + fileName);
 
-            processBib(bibStr, fileName, force)
+            processBib(bibStr, fileName, force);
 
           }
           reader.onerror = function (evt) {
             console.log("error reading file");
-          }          
+          }
+        }
       }
 
       function getXmlHttp() {
