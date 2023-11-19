@@ -223,6 +223,8 @@
         url += sanitisedKey + "?filename=" + fileName + "&value=";
         url += encodeURIComponent(bibStr);
 
+        console.log("openGitHub, key:" + key + ", fileName: " + fileName + ", bibStr: " + bibStr);
+
         window.open(url, "_blank");
         addButton.style.display = "none";
 
