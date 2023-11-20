@@ -216,24 +216,28 @@
 
         // TODO: improve
         function sanitiseKey(key) {
-          key = key.replace("/", "_");
-          key = key.replace(":", "_");
+
+          newKey = key.replace("/", "_");
+          newKey = newKey.replace(":", "_");
+          console.log("sanitising key " + key + " --> " + newKey);
+
+          return newKey;
       }
 
       async function openGitHub(key, fileName, bibStr) {
 
         sanitisedKey = sanitiseKey(key);
-
-        url = "https://github.com/lclem/bibliographer/new/main/library/entries/";
-        url += sanitisedKey + "?filename=" + fileName + "&value=";
-        url += encodeURIComponent(bibStr);
-
+        
         // create filename from key if not present
         if (fileName == "") {
           fileName = sanitisedKey + ".bib";
         }
 
-        console.log("openGitHub, key:" + key + ", fileName: " + fileName + ", bibStr: " + bibStr);
+        url = "https://github.com/lclem/bibliographer/new/main/library/entries/";
+        url += sanitisedKey + "?filename=" + fileName + "&value=";
+        url += encodeURIComponent(bibStr);
+
+        console.log("openGitHub, key:" + sanitisedKey + ", fileName: " + fileName + ", bibStr: " + bibStr + " = " + url);
 
         window.open(url, "_blank");
         addButton.style.display = "none";
@@ -256,6 +260,7 @@
 
         try {
           bibJSONs = bibtexParse.toJSON(bibStr);
+          // console.log(bibJSONs);
 
           for (bibJSON of bibJSONs) {
             console.log(bibJSON);
@@ -263,8 +268,10 @@
             key = bibJSON.citationKey;
             console.log("key: " + key);
 
-            bibJSON.entryTags = lowerize[bibJSON.entryTags];
+            bibJSON.entryTags = lowerize(bibJSON.entryTags);
             tags = bibJSON.entryTags;
+            // tags = lowerize(bibJSON.entryTags);
+            console.log("tags: " + tags);
 
             if ("title" in tags) {
               title = tags["title"];
