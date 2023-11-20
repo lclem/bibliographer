@@ -262,16 +262,13 @@
 
             bibJSON = lowerize(bibJSON);
 
-            key = bibJSON["citationKey"];
+            key = bibJSON["citationkey"];
             console.log("key: " + key);
 
-            tags = bibJSON["entryTags"];
+            tags = bibJSON["entrytags"];
 
             if ("title" in tags) {
               title = tags["title"];
-            }
-            else if ("Title" in tags) {
-              title = tags["Title"];
             }
             else {
               title = ""

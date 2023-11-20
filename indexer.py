@@ -128,7 +128,7 @@ def normalise(str):
 
 def getValue(dict, key, default):
     if key in dict:
-        return dict[key].value
+        return dict[key].value.strip()
     else:
         return default
 
@@ -179,22 +179,16 @@ def parsebib(bibFile):
         date_modified = getValue(fields, 'date-modified', "")
 
         url = getValue(fields, 'url', "")
-        url = url.strip()
-
         doi = getValue(fields, 'doi', "")
-
-        if doi == "":
-            doi = getValue(fields, 'DOI', "")
-
-        doi = doi.strip()
 
         if doi != "" and not doi.startswith("http"):
             doi = mkDoiUrl(doi)
 
         eprint = getValue(fields, 'eprint', "")
         journal = getValue(fields, 'journal', "")
+        booktitle = getValue(fields, 'booktitle', "")
 
-        result.append((entry, key, authors, title, year, date_added, date_modified, doi, url, eprint, journal))
+        result.append((entry, key, authors, title, year, date_added, date_modified, doi, url, eprint, journal, booktitle))
 
     # print(f"RES: {result}")
     return result
@@ -317,7 +311,7 @@ for root, dirs, files in os.walk("./library/entries"):
 
                         for bibEntry in parseResults:
 
-                            entry, key, authors, title, year, date_added, date_modified, doi, url, eprint, journal = bibEntry
+                            entry, key, authors, title, year, date_added, date_modified, doi, url, eprint, journal, booktitle = bibEntry
                             print(f"BIB {authors} - {title}")
 
                             doi, modified = amendDOI(doi, eprint, journal, key)
@@ -409,6 +403,8 @@ Authors: {'; '.join(authors)}\n\
 Rootfolder: {cwd}\n\
 Bibfile: {os.path.join(cwd, bibFile)}\n\
 Mdfile: {os.path.join(cwd, mdfile)}\n\
+{'Journal: ' + journal + NEWLINE if journal != '' else ''}\
+{'Booktitle: ' + booktitle + NEWLINE if booktitle != '' else ''}\
 {'Date: ' + date_added + NEWLINE if date_added != '' else ''}\
 {'Modified: ' + date_modified + NEWLINE if date_modified != '' else ''}\
 {'thedoiurl: ' + doi + NEWLINE if doi != '' else ''}\

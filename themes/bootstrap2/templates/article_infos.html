@@ -23,6 +23,14 @@
 <a class="published" title="{{ article.year }}"><i class="icon-calendar"></i>{{ article.year }}</a>
 <span class="label">Added</span>
 <a class="published" title="{{ article.date.isoformat() }}"><i class="icon-calendar"></i>{{ article.locale_date }}</a>
+{% if article.journal %}
+        <span class="label">Journal</span>
+        {{ article.journal }}
+{% endif %}
+{% if article.booktitle %}
+        <span class="label">Booktitle</span>
+        {{ article.booktitle }}
+{% endif %}
 {% if article.thedoiurl or article.theurl %}
         <span class="label">URL</span>
         {% if article.thedoiurl %}
