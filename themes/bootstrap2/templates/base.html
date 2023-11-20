@@ -260,11 +260,11 @@
           for (bibJSON of bibJSONs) {
             console.log(bibJSON);
 
-            key = bibJSON["citationkey"];
+            key = bibJSON.citationKey;
             console.log("key: " + key);
 
-            bibJSON.entryTags = lowerize[bibJSON.entryTags]
-            tags = bibJSON.entryTags
+            bibJSON.entryTags = lowerize[bibJSON.entryTags];
+            tags = bibJSON.entryTags;
 
             if ("title" in tags) {
               title = tags["title"];
