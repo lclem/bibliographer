@@ -78,6 +78,7 @@ def processBib(root, bibFile):
 
                 doi = doi.replace("\\\\_", "_")
                 doi = doi.replace("\\_", "_")
+                doi = doi.replace("{_}", "_")
 
                 if not doiValid(doi):
                     print(colored("INVALID", "red"), f"{doi} {root}/{bibFile}")
