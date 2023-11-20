@@ -260,12 +260,11 @@
           for (bibJSON of bibJSONs) {
             console.log(bibJSON);
 
-            bibJSON = lowerize(bibJSON);
-
             key = bibJSON["citationkey"];
             console.log("key: " + key);
 
-            tags = bibJSON["entrytags"];
+            bibJSON.entryTags = lowerize[bibJSON.entryTags]
+            tags = bibJSON.entryTags
 
             if ("title" in tags) {
               title = tags["title"];
@@ -300,7 +299,7 @@
                 currentdate.getSeconds() +
                 " +0100";
 
-              bibJSON.entrytags["date-added"] = datetime;
+              bibJSON.entryTags["date-added"] = datetime;
               console.log(datetime);
               
               bibStr = bibtexParse.toBibtex([bibJSON], false);
