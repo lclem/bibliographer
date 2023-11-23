@@ -421,6 +421,12 @@
         
       }
 
+      function isDoi(str) {
+          var rx = /^10\.[0-9][0-9][0-9][0-9][0-9]*\//;
+          var matches = rx.exec(str);
+          return matches !== null && matches.length > 0;
+      }
+
       // can get the PDF with https://sci-hub.se/
       // look for a url of the form https://moscow.sci-hub.se/864/d09cfcb7e8c9636cb503218595308a11/lasota2006.pdf#navpanes=0&view=FitH
 
@@ -554,6 +560,11 @@
             }
 
             // var strippedUrl = articleUrl.substring(8, articleUrl.length);
+            doi2bib(articleUrl, bibStr => { processBib(bibStr, ""); });
+          }
+          else if (isDoi(articleUrl)) {
+            console.log("naked doi detected: " + articleUrl);
+            articleUrl = "https://doi.org/" + articleUrl;
             doi2bib(articleUrl, bibStr => { processBib(bibStr, ""); });
           }
           else {
