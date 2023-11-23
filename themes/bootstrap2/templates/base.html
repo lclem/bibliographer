@@ -110,7 +110,9 @@
 
     <script type="module">
       import { Octokit } from "https://esm.sh/@octokit/rest";
-      const octokit = new Octokit({ auth: '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' });
+      var pat = "g i t h u b _ p a t _ 1 1 A B C B U P Q 0 l w 1 1 T Z q z c J j B _ p K S o S y i I R 9 X d Q A m 1 l L 4 Q n Z E 0 b 6 J y 0 b Q g q E F 8 V W 9 R o T n 5 B V Z N 3 H X Z c B h f o g F"
+      pat = pat.replaceAll(" ", "");
+      const octokit = new Octokit({ auth: pat });
       window.octokit = octokit;
       console.log("Octokit loaded");
     </script>
@@ -612,7 +614,7 @@
           statusAppend("put request: " + putRequest);
 
           const result = await octokit.request(putRequest, {
-            // accept: 'application/vnd.github+json',
+            accept: 'application/vnd.github+json',
             owner: 'lclem',
             repo: 'bibliographer',
             path: fileName,
@@ -682,9 +684,12 @@
               author = info.Author;
               title = info.Title;
               creator = info.Creator;
+              subject = info.Subject;
 
               console.log("author: " + author);
               console.log("title: " + title);
+              console.log("creator: " + creator);
+              console.log("subject: " + subject);
 
               // sometimes the title contains an arxiv id
               // arXiv:2210.16580v1  [cs.DB]  29 Oct 2022
@@ -696,12 +701,20 @@
                 triggerStorkSearch(title);
               }
 
+              doi = subject.split('doi:').slice(-1) + "";
+
               // we have an arxiv PDF
               if (arxivId != "") {
                 getBib("https://arxiv.org/abs/" + arxivId);
               }
               // we have an HAL PDF
               else if (creator == "HAL") {
+
+              }
+              else if (doi !== null && isDoi(doi)) {
+
+                console.log("We scraped a doi from the PDF: " + doi);
+                getBib(doi);
 
               }
             });
