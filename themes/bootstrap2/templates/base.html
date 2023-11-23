@@ -217,8 +217,8 @@
         // TODO: improve
         function sanitiseKey(key) {
 
-          newKey = key.replace("/", "_");
-          newKey = newKey.replace(":", "_");
+          newKey = key.replaceAll("/", "_");
+          newKey = newKey.replaceAll(":", "_");
           console.log("sanitising key " + key + " --> " + newKey);
 
           return newKey;
