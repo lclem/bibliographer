@@ -286,7 +286,9 @@
             searchResults = stork.search("sitesearch", searchString);
 
             if (!force && (searchResults.total_hit_count > 0 && searchResults.results[0].score > 2000)) {
-              console.log("bib already exists");
+              console.log("bib already exists: " + searchResults.total_hit_count);
+              console.log("results: ");
+              console.log(searchResults.results)
 
               stork.search("sitesearch", searchString);
               // triggerStorkSearch(str);
