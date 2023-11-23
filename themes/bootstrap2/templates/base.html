@@ -112,15 +112,15 @@
     <script src="https://mozilla.github.io/pdf.js/build/pdf.worker.js"></script> -->
 
     <!-- <script src="https://files.stork-search.net/releases/v1.5.0/stork.js"></script> -->
-    <script src="{{ SITEURL }}/theme/js/stork-1.6/stork.js"></script>
+    <script async src="{{ SITEURL }}/theme/js/stork-1.6/stork.js" onload="storkInit()"></script>
 
     <script>
-        stork.initialize("{{ SITEURL }}/theme/js/stork-1.6/stork.wasm")
+      async function storkInit() {
+        stork.initialize("{{ SITEURL }}/theme/js/stork-1.6/stork.wasm");
         options = {showScores: false};
         stork.register("sitesearch", "{{ SITEURL }}/search-index.st", options);
-    </script>
+      }
 
-    <script>
       let addButton = document.getElementById('add-button');
       var stork_input = document.getElementById('stork-input');
       let dropArea = document.getElementById('drop-area');
