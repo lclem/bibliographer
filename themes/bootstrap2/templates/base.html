@@ -108,6 +108,13 @@
 			pdfjsLib.GlobalWorkerOptions.workerSrc = '{{ SITEURL }}/theme/js/pdf.worker.js';
 		</script>
 
+    <script type="module">
+      import { Octokit } from "https://esm.sh/@octokit/rest";
+      const octokit = new Octokit({ auth: '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' });
+      window.octokit = octokit;
+      console.log("Octokit loaded");
+    </script>
+
     <!-- <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script> 
     <script src="https://mozilla.github.io/pdf.js/build/pdf.worker.js"></script> -->
 
@@ -241,7 +248,6 @@
 
         window.open(url, "_blank");
         addButton.style.display = "none";
-
       }
 
       const lowerize = obj =>
@@ -348,7 +354,6 @@
             }
             
             console.log("File name: " + fileName);
-
             processBib(bibStr, fileName, force);
 
           }
@@ -541,6 +546,7 @@
           }
           // https://doi.org/10.1007/s10883-019-09441-w
           // dx.doi.org/10.2140/obs.2019.2.119
+          // TODO: recognise a doi also without the URL prefix, i.e., just "10.1007/s10883-019-09441-w"
           else if (articleUrl.includes("doi.org")) {
 
             if (!articleUrl.startsWith("https://")) {
@@ -560,86 +566,136 @@
         getBib(stork_input.value);
       }
 
+      const toBase64 = file => new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        reader.onload = () => resolve(reader.result);
+        reader.onerror = reject;
+      });
+
+      // TODO: if we are creating a new bib entry,
+      // then also automatically add the dropped pdf to the corresponding git folder
+
       async function uploadPdf(thePdf) {
 
         console.log(thePdf);
         var fileName = thePdf.name;
 
-        // match 2304.14575 inside the filename
-        var rx = /[0-9][0-9][0-9][0-9]\.[0-9][0-9][0-9][0-9][0-9]/g;
-        var matches = rx.exec(fileName);
-        var arxivId = "";
+        // if we are on an article page,
+        // dropping a PDF means "add this PDF to this entry"
+        if(document.getElementById('title_label') != null){ // && document.getElementById('PDF_label') == null) {
 
-        if (matches !== null && matches.length > 0) {
-          arxivId = matches[0];
-          console.log("arxiv id: " + arxivId);
+          const articleUrl = document.getElementById('article_url');
+          console.log("PDF dropped on article page, url: " + articleUrl);
+
+          pdfContents = await toBase64(thePdf);
+          pdfContents = pdfContents.slice(pdfContents.indexOf(",") + 1);
+          // console.log("pdfContents: " + pdfContents);
+
+          var rootFolder = document.getElementById('article_rootfolder').getAttribute("href");
+          console.log("rootFolder: " + rootFolder);
+          path = "library/entries/" + rootFolder.split("/").slice(-1) + "/";
+
+          fileName = encodeURIComponent(fileName);
+          putRequest = 'PUT /repos/lclem/bibliographer/contents/' + path + fileName;
+          statusAppend("put request: " + putRequest);
+
+          const result = await octokit.request(putRequest, {
+            // accept: 'application/vnd.github+json',
+            owner: 'lclem',
+            repo: 'bibliographer',
+            path: fileName,
+            message: 'PDF upload',
+            // sha: '0d5a690c8fad5e605a6e8766295d9d459d65de42',
+            committer: {
+              name: 'Lorenzo C',
+              email: 'clementelorenzo@gmail.com'
+            },
+            content: pdfContents,
+            headers: {
+              'X-GitHub-Api-Version': '2022-11-28'
+            }
+          });
+
+          console.log(result.data);
+          window.open(rootFolder, "_blank");
+
         }
         else {
-          console.log("cannot extract arxiv id");
-        }
+          // match 2304.14575 inside the filename
+          var rx = /[0-9][0-9][0-9][0-9]\.[0-9][0-9][0-9][0-9][0-9]/g;
+          var matches = rx.exec(fileName);
+          var arxivId = "";
 
-        var data = await thePdf.arrayBuffer();
-        // console.log(data.byteLength);
-        // console.log(data);
+          if (matches !== null && matches.length > 0) {
+            arxivId = matches[0];
+            console.log("arxiv id: " + arxivId);
+          }
+          else {
+            console.log("cannot extract arxiv id");
+          }
 
-        var title = "";
-        var author = "";
+          var data = await thePdf.arrayBuffer();
+          // console.log(data.byteLength);
+          // console.log(data);
 
-        await pdfjsLib.getDocument(data).promise.then(async doc => { 
-          // console.log(doc);
+          var title = "";
+          var author = "";
 
-          doc.getMarkInfo().then(info => console.log("mark info: " + info));
-          doc.getDownloadInfo().then(info => console.log("download info: " + info));
-          doc.getFieldObjects().then(info => console.log("field objs: " + info));
-          doc.getAttachments().then(info => console.log("attachments: " + info));
-          doc.getOutline().then(info => console.log("outline: " + info));
-          doc.getPage(1).then(firstPage => {
-            console.log("first page: " + firstPage);
-            firstPage.getTextContent({ normalizeWhitespace: true }).then(content => {
-              console.log("content: " + content);
+          await pdfjsLib.getDocument(data).promise.then(async doc => {
+            // console.log(doc);
+
+            doc.getMarkInfo().then(info => console.log("mark info: " + info));
+            doc.getDownloadInfo().then(info => console.log("download info: " + info));
+            doc.getFieldObjects().then(info => console.log("field objs: " + info));
+            doc.getAttachments().then(info => console.log("attachments: " + info));
+            doc.getOutline().then(info => console.log("outline: " + info));
+            doc.getPage(1).then(firstPage => {
+              console.log("first page: " + firstPage);
+              firstPage.getTextContent({ normalizeWhitespace: true }).then(content => {
+                console.log("content: " + content);
+              });
+            });
+
+            var meta = doc.getMetadata();
+            meta.then(metadata => {
+              
+              console.log(metadata);
+
+              var info = metadata.info;
+              console.log(info);
+
+              var meta = metadata.metadata;
+              console.log(meta);
+
+              author = info.Author;
+              title = info.Title;
+              creator = info.Creator;
+
+              console.log("author: " + author);
+              console.log("title: " + title);
+
+              // sometimes the title contains an arxiv id
+              // arXiv:2210.16580v1  [cs.DB]  29 Oct 2022
+              if (title.startsWith("arXiv:")) {
+                arxivId = title.split(":")[1].split(" ")[0].split("v")[0];
+                console.log("extracted arxiv id from title: " + arxivId);
+              }
+              else if (title != "") {
+                triggerStorkSearch(title);
+              }
+
+              // we have an arxiv PDF
+              if (arxivId != "") {
+                getBib("https://arxiv.org/abs/" + arxivId);
+              }
+              // we have an HAL PDF
+              else if (creator == "HAL") {
+
+              }
             });
           });
-
-          var meta = doc.getMetadata();
-          meta.then(metadata => {
-            
-            console.log(metadata);
-
-            var info = metadata.info;
-            console.log(info);
-
-            var meta = metadata.metadata;
-            console.log(meta);
-
-            author = info.Author;
-            title = info.Title;
-            creator = info.Creator;
-
-            console.log("author: " + author);
-            console.log("title: " + title);
-
-            // sometimes the title contains an arxiv id
-            // arXiv:2210.16580v1  [cs.DB]  29 Oct 2022
-            if (title.startsWith("arXiv:")) {
-              arxivId = title.split(":")[1].split(" ")[0].split("v")[0];
-              console.log("extracted arxiv id from title: " + arxivId);
-            }
-            else if (title != "") {
-              triggerStorkSearch(title);
-            }
-
-            // we have an arxiv PDF
-            if (arxivId != "") {
-              getBib("https://arxiv.org/abs/" + arxivId);
-            }
-            // we have an HAL PDF
-            else if (creator == "HAL") {
-
-            }
-
-          });
-
-        });        
+        }
       }
 
       function detectPaste(event) {

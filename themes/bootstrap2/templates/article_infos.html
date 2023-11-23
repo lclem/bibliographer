@@ -4,20 +4,22 @@
         <i class="icon-calendar"></i>{{ article.locale_date }}
 </abbr> -->
 <p>
-        <span class="label">Title</span>
-        <a href="{{ SITEURL }}/{{ article.url }}"><nobr>{{ article.title }}</nobr></a>
+        <span class="label" id="title_label">Title</span>
+        <a href="{{ SITEURL }}/{{ article.url }}" id="article_url"><i><nobr id="article_title">{{ article.title }}</nobr></i></a>
 </p>
 <span class="label">By</span>
 {% if article.authors %}
-        <nobr>
-                {% for author in article.authors %}
-                        <a href="{{ SITEURL }}/{{ author.url }}"><i class="icon-user"></i>{{ author }}</a>
-                {% endfor %}
-        </nobr>
+        {% for author in article.authors %}
+                <a href="{{ SITEURL }}/{{ author.url }}">
+                        <i class="icon-user"></i>
+                        <nobr>{{ author }}</nobr>
+                </a>
+        {% endfor %}
 {% elif article.author %}
-        <nobr>
-                <a href="{{ SITEURL }}/{{ article.author.url }}"><i class="icon-user"></i>{{ article.author }}</a>
-        </nobr>
+        <a href="{{ SITEURL }}/{{ article.author.url }}">
+                <i class="icon-user"></i>
+                <nobr>{{ article.author }}</nobr>
+        </a>
 {% endif %}
 <span class="label">Year</span>
 <a class="published" title="{{ article.year }}"><i class="icon-calendar"></i>{{ article.year }}</a>
@@ -43,7 +45,7 @@
 <!-- <span class="label">Key</span> -->
 <a hidden><nobr>{{ article.key }}</nobr></a>
 {% if article.pdffiles or article.pdffile %}
-        <span class="label">PDF</span>
+        <span class="label" id="PDF_label">PDF</span>
         {% if article.pdffiles %}
                 {% for pdffile in article.pdffiles %}
                 [<a href="{{ GITHUB_VIEW_URL }}/{{ pdffile | urlencode}}" target="_blank">pdf</a> | <a href="pdfefile:///SyncedFolders/bibliographer/{{ pdffile }}">pdfe</a>]
@@ -60,5 +62,5 @@
         <!-- <a href="{{ SITEURL }}/{{ article.bibfile }}">[bib]</a> -->
         <a href="{{ GITHUB_EDIT_URL }}/{{ article.bibfile }}" target="_blank">[edit]</a>
 <span class="label">SRC</span>
-        <a href="{{ GITHUB_EDIT_URL }}/{{ article.rootfolder }}" target="_blank">[edit]</a>
+        <a href="{{ GITHUB_EDIT_URL }}/{{ article.rootfolder }}" id="article_rootfolder" target="_blank">[edit]</a>
 </footer>
