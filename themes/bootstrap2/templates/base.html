@@ -271,7 +271,7 @@
             bibJSON.entryTags = lowerize(bibJSON.entryTags);
             tags = bibJSON.entryTags;
             // tags = lowerize(bibJSON.entryTags);
-            console.log("tags: " + tags);
+            console.log("tags: " + JSON.stringify(tags));
 
             if ("title" in tags) {
               title = tags["title"];
