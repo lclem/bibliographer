@@ -531,25 +531,31 @@
           }
           // https://link.springer.com/chapter/10.1007/3-540-60915-6_4
           // https://link.springer.com/article/10.1007/s10883-019-09441-w
+          // https://link.springer.com/chapter/10.1007/978-3-030-72016-2_16
           else if (articleUrl.startsWith("https://link.springer.com/article/") ||
                   articleUrl.startsWith("https://link.springer.com/chapter/")) {
 
-            statusAppend("detected springer article");
+            doi = articleUrl.split("/").slice(-2).join("/");
+            statusAppend("detected springer article, doi: " + doi);
 
-            var sciHubUrl = "https://sci-hub.se/";
-            articleUrl = sciHubUrl + articleUrl;
+            articleUrl = "https://doi.org/" + doi;
+            doi2bib(articleUrl, bibStr => { processBib(bibStr, ""); });
+            
+            // does not always return a doi
+            // var sciHubUrl = "https://sci-hub.se/";
+            // articleUrl = sciHubUrl + articleUrl;
 
-            getWebPage(articleUrl, res => {
-              var el = new DOMParser().parseFromString(res, "text/html");
+            // getWebPage(articleUrl, res => {
+            //   var el = new DOMParser().parseFromString(res, "text/html");
               
-              // var els = el.getElementsByClassName('c-bibliographic-information__value');
-              var div = el.getElementById("doi");
-              var doi = div.innerText.trim();
-              var doiUrl = "https://doi.org/" + doi;
+            //   // var els = el.getElementsByClassName('c-bibliographic-information__value');
+            //   var div = el.getElementById("doi");
+            //   var doi = div.innerText.trim();
+            //   var doiUrl = "https://doi.org/" + doi;
 
-              doi2bib(doiUrl, bibStr => { processBib(bibStr, ""); });
+            //   doi2bib(doiUrl, bibStr => { processBib(bibStr, ""); });
 
-            });  
+            // });
             
           }
           // https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.CSL.2023.31
