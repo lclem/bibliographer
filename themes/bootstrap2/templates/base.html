@@ -266,6 +266,9 @@
 
             key = bibJSON.citationKey;
             console.log("key: " + key);
+            
+            sanitisedKey = sanitiseKey(key);
+            bibJSON.citationKey = sanitisedKey;
 
             bibJSON.entryTags = lowerize(bibJSON.entryTags);
             tags = bibJSON.entryTags;
@@ -276,7 +279,7 @@
               title = tags["title"];
             }
             else {
-              title = ""
+              title = "";
             }
 
             console.log("title: " + title);
@@ -316,7 +319,7 @@
 
               //TODO: at this stage from time to time the key could be garbage
               // and also the filename
-              //sanitise it, eg. remove https:// etc
+              //sanitise it, eg. remove https:// etc              
 
               openGitHub(key, fileName, bibStr);
             }
