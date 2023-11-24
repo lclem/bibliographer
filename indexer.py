@@ -100,7 +100,7 @@ substitutions = {
     r"\\v\s*Z": "Ž"
 }
 
-valid_characters = string.ascii_letters + string.digits + string.whitespace + '*=^~`-,;:\'"./\\()[]ễ' + "".join(substitutions.values())
+valid_characters = string.ascii_letters + string.digits + string.whitespace + '+-<>*=^~`-,;:\'"./\\()[]ễ' + "".join(substitutions.values())
 
 def sanitise(str):
     result = "".join(c for c in str if c in valid_characters)
