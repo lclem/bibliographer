@@ -552,6 +552,17 @@
             });  
             
           }
+          // https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.CSL.2023.31
+          else if (articleUrl.startsWith("https://drops.dagstuhl.de/entities/document/")) {
+
+            // get the doi
+            doi = articleUrl.split("/").slice(-2).join("/");
+            statusAppend("detected LIPIcs dagstuhl drops article, doi: " + doi);
+
+            articleUrl = "https://doi.org/" + doi;
+            doi2bib(articleUrl, bibStr => { processBib(bibStr, ""); });
+
+          }
           // https://doi.org/10.1007/s10883-019-09441-w
           // dx.doi.org/10.2140/obs.2019.2.119
           // TODO: recognise a doi also without the URL prefix, i.e., just "10.1007/s10883-019-09441-w"
