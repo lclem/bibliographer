@@ -266,7 +266,7 @@
 
             key = bibJSON.citationKey;
             console.log("key: " + key);
-            
+
             sanitisedKey = sanitiseKey(key);
             bibJSON.citationKey = sanitisedKey;
 
@@ -745,6 +745,7 @@
         stork.initialize("{{ SITEURL }}/theme/js/stork-1.6/stork.wasm");
         options = {showScores: false};
         stork.register("sitesearch", "{{ SITEURL }}/search-index.st", options);
+        console.log("stork initialised");
       }
     </script>
 
