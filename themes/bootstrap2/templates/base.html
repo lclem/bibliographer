@@ -504,10 +504,12 @@
           // https://inria.hal.science/hal-02885579
           // https://inria.hal.science/hal-02885579/bibtex
           // https://pastel.hal.science/tel-01223284v2
+          // https://hal.archives-ouvertes.fr/hal-03466451
           
           else if (articleUrl.startsWith("https://inria.hal.science/") ||
             articleUrl.startsWith("https://pastel.hal.science/") ||
-            articleUrl.startsWith("https://hal.science/")) {
+            articleUrl.startsWith("https://hal.science/") ||
+            articleUrl.startsWith("https://hal.archives-ouvertes.fr/")) {
 
             var halId = "";
 
@@ -540,7 +542,7 @@
 
             articleUrl = "https://doi.org/" + doi;
             doi2bib(articleUrl, bibStr => { processBib(bibStr, ""); });
-            
+
             // does not always return a doi
             // var sciHubUrl = "https://sci-hub.se/";
             // articleUrl = sciHubUrl + articleUrl;
