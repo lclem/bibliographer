@@ -74,7 +74,13 @@ jobs:
           sudo rm -rf "/usr/local/share/boost";
           sudo rm -rf /home/runner/.cache
           # this is necessary to build things (e.g., python libraries)
-          ls -l "$AGENT_TOOLSDIRECTORY"
+          # rm -rf "$AGENT_TOOLSDIRECTORY"
+
+      - name: list tools dir
+        run: ls -l "$AGENT_TOOLSDIRECTORY"
+
+      - name: list dir
+        run: cwd && du -hs
 
       - name: Compute free space (2)
         run: df -h
@@ -84,12 +90,12 @@ jobs:
 
       - name: Setup Pages
         uses: actions/configure-pages@v3
-        
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
           path: './docs'
-          
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
