@@ -108,17 +108,29 @@ jobs:
       - name: build website
         run: set -o xtrace && ./build.sh
 
+      - name: Compute free space (3)
+        run: df -h
+
       - name: Setup Pages
         uses: actions/configure-pages@v3
+
+      - name: Compute free space (4)
+        run: df -h
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
         with:
           path: './docs'
 
+      - name: Compute free space (5)
+        run: df -h
+  
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
+
+      - name: Compute free space (6)
+        run: df -h
 
       - name: Commit main repo
         uses: stefanzweifel/git-auto-commit-action@v5
