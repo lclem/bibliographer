@@ -84,7 +84,7 @@ jobs:
           sudo rm -rf /usr/share/dotnet;
           sudo rm -rf /opt/ghc;
           sudo rm -rf /usr/local/share/boost;
-          sudo rm -rf /home/runner/.cache;
+          # sudo rm -rf /home/runner/.cache; # need this
           sudo rm -rf /usr/share/dotnet;
           sudo rm -rf /opt/ghc;
           sudo rm -rf "$AGENT_TOOLSDIRECTORY/CodeQL";
