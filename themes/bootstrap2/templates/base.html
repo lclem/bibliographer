@@ -237,7 +237,7 @@
         url += sanitisedKey + "?filename=" + fileName + "&value=";
         url += encodeURIComponent(bibStr);
 
-        console.log("openGitHub, key:" + sanitisedKey + ", fileName: " + fileName + ", bibStr: " + bibStr + " = " + url);
+        statusAppend("openGitHub, key:" + sanitisedKey + ", fileName: " + fileName + ", bibStr: " + bibStr + " = " + url);
 
         window.open(url, "_blank");
         addButton.style.display = "none";
@@ -362,10 +362,10 @@
       function getXmlHttp() {
         var xmlhttp;
         if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
-            xmlhttp=new XMLHttpRequest();
+            xmlhttp = new XMLHttpRequest();
         }
         else {// code for IE6, IE5
-            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
         }
         return xmlhttp;
       }
@@ -412,7 +412,6 @@
 
         xmlhttp.open("GET", doiUrl, false);
         xmlhttp.setRequestHeader('Accept', 'application/x-bibtex; charset=utf-8');
-        // xmlhttp.setRequestHeader('Access-Control-Allow-Origin', '');
         xmlhttp.send();
         
       }
@@ -462,7 +461,9 @@
 
           }
           // https://www.sciencedirect.com/science/article/pii/S0304397506001964
-          else if (articleUrl.startsWith("https://www.sciencedirect.com/science/article/pii/")) {
+          // https://www.sciencedirect.com/science/article/abs/pii/S0021869322001302
+          else if (articleUrl.startsWith("https://www.sciencedirect.com/science/article/pii/") || 
+                  articleUrl.startsWith("https://www.sciencedirect.com/science/article/abs/pii/")) {
 
             statusAppend("detected sciencedirect article");
 
@@ -646,7 +647,9 @@
 
           console.log(result.data);
           window.open(rootFolder, "_blank");
-
+          
+          commitUrl = result.data.commit.html_url;
+          statusAppend(commitUrl);
         }
         else {
           // match 2304.14575 inside the filename
