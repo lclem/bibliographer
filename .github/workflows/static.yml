@@ -64,7 +64,6 @@ jobs:
       # - name: show commit message    
       #   run : echo $commitmsg
 
-
       - name: Compute free space (1)
         run: df -h
 
@@ -73,8 +72,9 @@ jobs:
           sudo rm -rf /usr/share/dotnet;
           sudo rm -rf /opt/ghc;
           sudo rm -rf "/usr/local/share/boost";
+          sudo rm -rf /home/runner/.cache
           # this is necessary to build things (e.g., python libraries)
-          #sudo rm -rf "$AGENT_TOOLSDIRECTORY"
+          ls -l "$AGENT_TOOLSDIRECTORY"
 
       - name: Compute free space (2)
         run: df -h
