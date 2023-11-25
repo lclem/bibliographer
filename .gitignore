@@ -18,6 +18,7 @@ articles.bib.save
 pip-log.txt
 
 .DS_Store
+._*
 *.md
 docs
 library/doi
