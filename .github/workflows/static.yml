@@ -39,8 +39,8 @@ jobs:
       - name: Maximize build space
         uses: easimon/maximize-build-space@master
         with:
-          root-reserve-mb: 1024
-          swap-size-mb: 1024
+          root-reserve-mb: 10240
+          swap-size-mb: 2024
           remove-dotnet: 'true'
           remove-android: 'true'
           remove-haskell: 'true'
@@ -116,6 +116,9 @@ jobs:
 
       - name: Compute free space (4)
         run: df -h
+
+      - name: List mounts
+        run: sudo mount -l
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v2
