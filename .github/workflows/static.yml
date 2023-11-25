@@ -71,8 +71,14 @@ jobs:
         run: >-
           sudo rm -rf /usr/share/dotnet;
           sudo rm -rf /opt/ghc;
-          sudo rm -rf "/usr/local/share/boost";
-          sudo rm -rf /home/runner/.cache
+          sudo rm -rf /usr/local/share/boost;
+          sudo rm -rf /home/runner/.cache;
+          sudo rm -rf "$AGENT_TOOLSDIRECTORY/CodeQL";
+          sudo rm -rf "$AGENT_TOOLSDIRECTORY/Java_Temurin-Hotspot_jdk";
+          sudo rm -rf "$AGENT_TOOLSDIRECTORY/Ruby";
+          sudo rm -rf "$AGENT_TOOLSDIRECTORY/go";
+          sudo rm -rf "$AGENT_TOOLSDIRECTORY/node";
+
           # this is necessary to build things (e.g., python libraries)
           # rm -rf "$AGENT_TOOLSDIRECTORY"
 
@@ -80,7 +86,7 @@ jobs:
         run: ls -l "$AGENT_TOOLSDIRECTORY"
 
       - name: list dir
-        run: cwd && du -hs
+        run: pwd && du -hs
 
       - name: Compute free space (2)
         run: df -h
