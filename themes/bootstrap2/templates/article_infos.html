@@ -48,11 +48,11 @@
         <span class="label" id="PDF_label">PDF</span>
         {% if article.pdffiles %}
                 {% for pdffile in article.pdffiles %}
-                [<a href="{{ GITHUB_VIEW_URL }}/{{ pdffile | urlencode }}" target="_blank">pdf</a> | <a href="pdfefile:///SyncedFolders/bibliographer/{{ pdffile | replace('./', '', 1) | urlencode }}">pdfe</a>]
+                [<a href="{{ GITHUB_VIEW_URL }}/{{ pdffile | urlencode }}" target="_blank">pdf</a> | <a href="pdfefile:///SyncedFolders/bibliographer/{{ pdffile | replace('./', '', 1) | urlencode | replace(":","%3A") }}">pdfe</a>]
                 {% endfor %}
         {% elif article.pdffile %}
                 [<a href="{{ GITHUB_VIEW_URL }}/{{ article.pdffile | urlencode }}" target="_blank">pdf</a> |
-                 <a href="pdfefile:///SyncedFolders/bibliographer/{{ article.pdffile | replace('./', '', 1) | urlencode }}">pdfe1</a> | 
+                 <a href="pdfefile:///SyncedFolders/bibliographer/{{ article.pdffile | replace('./', '', 1) | urlencode | replace(":","%3A") }}">pdfe1</a> | 
                  <a href="pdfefile:///SyncedFolders/bibliographer/{{ article.pdffile | replace('./', '', 1) }}">pdfe2</a>]
         {% endif %}
 {% endif %}
