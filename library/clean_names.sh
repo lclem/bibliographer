@@ -1,3 +1,3 @@
 #!/bin/bash
 
-find . -name \*:\* -exec ./clean_name.sh {} \;
+find . -type d  -name \*:\* -exec ./clean_name.sh {} \;
