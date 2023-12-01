@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+
+set -e
+
+#ARCH="x64"
+
+if [[ $(uname -m) == "armv7l" ]]; then
+  ARCH="arm"
+elif [[ $(uname -m) == "aarch64" ]]; then
+  ARCH="arm64"
+fi
+
+ARCH="arm"
+VERSION_OK="2.286.1"
+VERSION="2.297.0"
+VERSION_LATEST="2.311.0"
+
+curl -s -L -o actions.tar.gz "https://github.com/actions/runner/releases/download/v${VERSION}/actions-runner-linux-${ARCH}-${VERSION}.tar.gz"
+tar xf actions.tar.gz
+rm -f actions.tar.gz
+sudo ./bin/installdependencies.sh
