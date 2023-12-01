@@ -621,16 +621,3 @@ function detectPaste(event) {
   let paste = (event.clipboardData || window.clipboardData).getData("text");
   processBib(paste, "");
 };
-
-async function storkInit() {
-  stork.initialize("{{ SITEURL }}/theme/js/stork-1.6/stork.wasm");
-  options = {showScores: false};
-
-  const deferred = async function() { //Async Function Expression
-    stork.register("sitesearch", "{{ SITEURL }}/search-index.st", options);
-    console.log("stork initialised");
-  };
-
-  deferred();
-  
-}
