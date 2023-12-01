@@ -102,6 +102,11 @@ substitutions = {
 
 valid_characters = string.ascii_letters + string.digits + string.whitespace + '&+-<>*=^~`-,;:\'"./\\()[]ễ' + "".join(substitutions.values())
 
+def remove_prefix(input_string, prefix):
+    if prefix and input_string.startswith(prefix):
+        return input_string[len(prefix):]
+    return input_string
+
 def sanitise(str):
     result = "".join(c for c in str if c in valid_characters)
     return result.encode('utf-8').decode("utf-8", "ignore")
@@ -324,10 +329,10 @@ for root, dirs, files in os.walk("./library/entries"):
                             doiNoURL = doi
 
                             if doiNoURL != "":
-                                doiNoURL = doiNoURL.removeprefix("https://dx.doi.org/")
-                                doiNoURL = doiNoURL.removeprefix("https://doi.org/")
-                                doiNoURL = doiNoURL.removeprefix("http://dx.doi.org/")
-                                doiNoURL = doiNoURL.removeprefix("http://doi.org/")
+                                doiNoURL = remove_prefix(doiNoURL, "https://dx.doi.org/")
+                                doiNoURL = remove_prefix(doiNoURL, "https://doi.org/")
+                                doiNoURL = remove_prefix(doiNoURL, "http://dx.doi.org/")
+                                doiNoURL = remove_prefix(doiNoURL, "http://doi.org/")
 
                             pdfFiles = []
                             for pdfFile in os.listdir("./"):
