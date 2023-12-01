@@ -44,10 +44,10 @@ def parseBib(bibFile):
         doi = getValue(fields, 'doi', "").strip()
 
         if doi != "":
-            doi = removeprefix(doi, "https://dx.doi.org/")
-            doi = removeprefix(doi, "https://doi.org/")
-            doi = removeprefix(doi, "http://dx.doi.org/")
-            doi = removeprefix(doi, "http://doi.org/")
+            doi = remove_prefix(doi, "https://dx.doi.org/")
+            doi = remove_prefix(doi, "https://doi.org/")
+            doi = remove_prefix(doi, "http://dx.doi.org/")
+            doi = remove_prefix(doi, "http://doi.org/")
 
             result.append((entry, doi))
 
