@@ -30,6 +30,11 @@ def writeBib(entry, bibFile):
     library = parser.Library([entry])
     parser.write_file(bibFile, library)
 
+def remove_prefix(input_string, prefix):
+    if prefix and input_string.startswith(prefix):
+        return input_string[len(prefix):]
+    return input_string
+
 def parseBib(bibFile):
     library = parser.parse_file(bibFile)
 
