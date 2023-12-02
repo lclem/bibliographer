@@ -1,4 +1,4 @@
-import { statusAppend, sanitiseKey, lowerize, getWebPage, doi2bib, isDoi, toBase64 } from 'https://lclem.github.io/librarian/theme/js/util.js';
+import { statusAppend, sanitiseKey, lowerize, getWebPage, doi2bib, isDoi, toBase64, storkInit } from 'https://lclem.github.io/librarian/theme/js/util.js';
 import { openGitHub, uploadFile } from 'https://lclem.github.io/librarian/theme/js/github.js';
 
 let addButton = document.getElementById('add-button');
@@ -10,22 +10,7 @@ let bibStr = "";
 
 var bibFile;
 
-async function storkInit(siteurl) {
-		stork.initialize(siteurl + "/theme/js/stork-1.6/stork.wasm");
-		options = {showScores: false};
-		
-		const deferred = async function() {
-		stork.register("sitesearch", siteurl + "/search-index.st", options);
-		console.log("stork initialised");
-		};
-		
-		deferred();
-}
-
 window.storkInit = storkInit;
-
-// PDFJS.cMapUrl = "//mozilla/pdfjs-dist/tree/master/cmaps";
-// PDFJS.cMapPacked = true;
 
 stork_input.addEventListener("change", updateSearch, false);
 // stork_input.addEventListener("input", updateSearch, false);
