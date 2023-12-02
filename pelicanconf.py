@@ -24,8 +24,8 @@ STORK_INPUT_OPTIONS = {
     "url_prefix": "/bibliographer"
 }
 
-LOAD_CONTENT_CACHE = True
-CONTENT_CACHING_LAYER = 'generator'
+LOAD_CONTENT_CACHE = False
+# CONTENT_CACHING_LAYER = 'generator'
 
 GITHUB_URL = 'https://github.com/lclem/bibliographer'
 GITHUB_VIEW_URL = GITHUB_URL + '/tree/main'

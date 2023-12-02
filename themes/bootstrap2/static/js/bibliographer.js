@@ -12,7 +12,6 @@ var bibFile;
 
 window.storkInit = storkInit;
 
-
 stork_input.addEventListener("change", updateSearch, false);
 // stork_input.addEventListener("input", updateSearch, false);
 stork_input.addEventListener("paste", detectPaste, false);
