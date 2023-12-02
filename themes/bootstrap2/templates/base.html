@@ -112,20 +112,7 @@
     <script src="{{ SITEURL }}/theme/js/bibliographer.js"></script>
 
     <!-- <script src="https://files.stork-search.net/releases/v1.5.0/stork.js"></script> -->
-    <script defer src="{{ SITEURL }}/theme/js/stork-1.6/stork.js" onload="storkInit()">
-	    async function storkInit() {
-		stork.initialize("{{ SITEURL }}/theme/js/stork-1.6/stork.wasm");
-		options = {showScores: false};
-		
-		const deferred = async function() { //Async Function Expression
-		stork.register("sitesearch", "{{ SITEURL }}/search-index.st", options);
-		console.log("stork initialised");
-		};
-		
-		deferred();
-		
-	    }
-    </script>
+    <script defer src="{{ SITEURL }}/theme/js/stork-1.6/stork.js" onload="storkInit('{{ SITEURL }}')"></script>
     
   </body>
 </html>
