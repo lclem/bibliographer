@@ -24,6 +24,8 @@ async function storkInit(siteurl) {
 		deferred();
 }
 
+window.storkInit = storkInit
+
 // PDFJS.cMapUrl = "//mozilla/pdfjs-dist/tree/master/cmaps";
 // PDFJS.cMapPacked = true;
 
