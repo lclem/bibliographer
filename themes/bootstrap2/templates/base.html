@@ -93,12 +93,8 @@
     <script src="{{ SITEURL }}/theme/js/bibtexParse.js">window.bibtexParse = bibtexParse</script>
     <script src="{{ SITEURL }}/theme/js/pdf.js"></script>
     <script>
-      // https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/
-			pdfjsLib.GlobalWorkerOptions.workerSrc = '{{ SITEURL }}/theme/js/pdf.worker.js';
-		</script>
-
-    <!-- <script src="https://mozilla.github.io/pdf.js/build/pdf.js"></script> 
-    <script src="https://mozilla.github.io/pdf.js/build/pdf.worker.js"></script> -->
+	    pdfjsLib.GlobalWorkerOptions.workerSrc = '{{ SITEURL }}/theme/js/pdf.worker.js';
+    </script>
 
     <script src="{{ SITEURL }}/theme/js/bibliographer.js"></script>
 
