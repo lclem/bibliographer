@@ -92,27 +92,29 @@ function confirmBib() {
 // TODO: when pasting a bib which gives a search hit, it is not possible to import: check what happens
 async function processBib(aBibStr, fileName, force = false) {
 
-  bibStr = aBibStr.trim();
+  var bibStr = aBibStr.trim();
   console.log("processBib: " + bibStr);
   statusAppend("processing bib: " + bibStr);
 
   try {
-    bibJSONs = bibtexParse.toJSON(bibStr);
+    var bibJSONs = bibtexParse.toJSON(bibStr);
     // console.log(bibJSONs);
 
-    for (bibJSON of bibJSONs) {
+    for (var bibJSON of bibJSONs) {
       console.log(bibJSON);
 
-      key = bibJSON.citationKey;
+      var key = bibJSON.citationKey;
       console.log("key: " + key);
 
-      sanitisedKey = sanitiseKey(key);
+      var sanitisedKey = sanitiseKey(key);
       bibJSON.citationKey = sanitisedKey;
 
       bibJSON.entryTags = lowerize(bibJSON.entryTags);
-      tags = bibJSON.entryTags;
+      var tags = bibJSON.entryTags;
       // tags = lowerize(bibJSON.entryTags);
       console.log("tags: " + JSON.stringify(tags));
+
+      var title = "";
 
       if ("title" in tags) {
         title = tags["title"];
@@ -123,8 +125,8 @@ async function processBib(aBibStr, fileName, force = false) {
 
       console.log("title: " + title);
 
-      searchString = title; //key + " " + title;
-      searchResults = stork.search("sitesearch", searchString);
+      var searchString = title; //key + " " + title;
+      var searchResults = stork.search("sitesearch", searchString);
 
       if (!force && (searchResults.total_hit_count > 0 && searchResults.results[0].score > 2000)) {
         console.log("bib already exists: " + searchResults.total_hit_count);
@@ -152,7 +154,7 @@ async function processBib(aBibStr, fileName, force = false) {
         bibJSON.entryTags["date-added"] = datetime;
         console.log(datetime);
         
-        bibStr = bibtexParse.toBibtex([bibJSON], false);
+        var bibStr = bibtexParse.toBibtex([bibJSON], false);
         bibStr = bibStr.trim();
         console.log(bibStr);
 
@@ -175,14 +177,14 @@ async function uploadBib(inp, force = false) {
     processBib(bibStr, "", force);
   }
   else {
-    bibFile = inp.files[0];
+    var bibFile = inp.files[0];
 
     let fileName = "";
     
     var reader = new FileReader();
     reader.readAsText(bibFile, "UTF-8");
     reader.onload = function (evt) {
-      bibStr = evt.target.result;
+      var bibStr = evt.target.result;
 
       if (bibFile.name !== null) {
         fileName = bibFile.name;
@@ -220,9 +222,9 @@ async function getBib(articleUrl) {
       // https://arxiv.org/pdf/2104.14624.pdf
       // https://ui.adsabs.harvard.edu/abs/2021arXiv210414624G/exportcitation
 
-      year = "20" + id.substring(0, 2);
+      var year = "20" + id.substring(0, 2);
       // theUrl = "https://ui.adsabs.harvard.edu/abs/" + year + "arXiv" + id.replace(".", "") + "G" + "/exportcitation"
-      theUrl = "https://ui.adsabs.harvard.edu/abs/arXiv:" + id + "/exportcitation";
+      var theUrl = "https://ui.adsabs.harvard.edu/abs/arXiv:" + id + "/exportcitation";
       getWebPage(theUrl, res => {
         var el = document.createElement('html');
         el.innerHTML = res;
@@ -230,7 +232,7 @@ async function getBib(articleUrl) {
         var els = el.getElementsByClassName('export-textarea');
         var bibStr = els[0].innerText;
 
-        fileName = id + ".bib";
+        const fileName = id + ".bib";
         processBib(bibStr, fileName);
 
       });
@@ -293,6 +295,7 @@ async function getBib(articleUrl) {
         halId = "tel-" + articleUrl.split("tel-")[1];
       }
 
+      halId = halId.replace("/", "");
       statusAppend("hal id: " + halId);
 
       var bibUrl = "https://inria.hal.science/" + halId + "/bibtex";
@@ -310,10 +313,10 @@ async function getBib(articleUrl) {
     else if (articleUrl.startsWith("https://link.springer.com/article/") ||
             articleUrl.startsWith("https://link.springer.com/chapter/")) {
 
-      doi = articleUrl.split("/").slice(-2).join("/");
+      var doi = articleUrl.split("/").slice(-2).join("/");
       statusAppend("detected springer article, doi: " + doi);
 
-      articleUrl = "https://doi.org/" + doi;
+      var articleUrl = "https://doi.org/" + doi;
       doi2bib(articleUrl, bibStr => { processBib(bibStr, ""); });
 
       // does not always return a doi
@@ -337,7 +340,7 @@ async function getBib(articleUrl) {
     else if (articleUrl.startsWith("https://drops.dagstuhl.de/entities/document/")) {
 
       // get the doi
-      doi = articleUrl.split("/").slice(-2).join("/");
+      var doi = articleUrl.split("/").slice(-2).join("/");
       statusAppend("detected LIPIcs dagstuhl drops article, doi: " + doi);
 
       articleUrl = "https://doi.org/" + doi;
@@ -433,10 +436,10 @@ async function uploadPdf(thePdf) {
         var meta = metadata.metadata;
         console.log(meta);
 
-        author = info.Author;
-        title = info.Title;
-        creator = info.Creator;
-        subject = info.Subject;
+        var author = info.Author;
+        var title = info.Title;
+        var creator = info.Creator;
+        var subject = info.Subject;
 
         console.log("author: " + author);
         console.log("title: " + title);
@@ -453,7 +456,7 @@ async function uploadPdf(thePdf) {
           triggerStorkSearch(title);
         }
 
-        doi = subject.split('doi:').slice(-1) + "";
+        var doi = subject.split('doi:').slice(-1) + "";
 
         // we have an arxiv PDF
         if (arxivId != "") {
