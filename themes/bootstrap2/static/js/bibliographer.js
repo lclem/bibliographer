@@ -1,3 +1,6 @@
+import { statusAppend, sanitiseKey, lowerize } from 'https://lclem.github.io/librarian/theme/js/util.js';
+import { openGitHub } from 'https://lclem.github.io/librarian/theme/js/github.js';
+
 let addButton = document.getElementById('add-button');
 var stork_input = document.getElementById('stork-input');
 let dropArea = document.getElementById('drop-area');
@@ -6,11 +9,6 @@ let dt = [];
 let bibStr = "";
 
 var bibFile;
-
-function statusAppend(str) {
-  console.log(str);
-  status.innerText = str + "\n" + status.innerText;
-}
 
 async function storkInit(siteurl) {
 		stork.initialize(siteurl + "/theme/js/stork-1.6/stork.wasm");
@@ -105,40 +103,7 @@ function confirmBib() {
   uploadBib(dt, true);
 }
 
-  // TODO: improve
-  function sanitiseKey(key) {
 
-    newKey = key.replaceAll("/", "_");
-    newKey = newKey.replaceAll(":", "_");
-    console.log("sanitising key " + key + " --> " + newKey);
-
-    return newKey;
-}
-
-async function openGitHub(key, fileName, bibStr) {
-
-  sanitisedKey = sanitiseKey(key);
-  
-  // create filename from key if not present
-  if (fileName == "") {
-    fileName = sanitisedKey + ".bib";
-  }
-
-  url = "https://github.com/lclem/bibliographer/new/main/library/entries/";
-  url += sanitisedKey + "?filename=" + fileName + "&value=";
-  url += encodeURIComponent(bibStr);
-
-  statusAppend("openGitHub, key:" + sanitisedKey + ", fileName: " + fileName + ", bibStr: " + bibStr + " = " + url);
-
-  window.open(url, "_blank");
-  addButton.style.display = "none";
-}
-
-const lowerize = obj =>
-  Object.keys(obj).reduce((acc, k) => {
-    acc[k.toLowerCase()] = obj[k];
-    return acc;
-  }, {});
   
 // TODO: when pasting a bib which gives a search hit, it is not possible to import: check what happens
 
