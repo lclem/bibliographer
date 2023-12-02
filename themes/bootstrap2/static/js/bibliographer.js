@@ -1,5 +1,5 @@
-import { statusAppend, sanitiseKey, lowerize } from 'https://lclem.github.io/librarian/theme/js/util.js';
-import { openGitHub } from 'https://lclem.github.io/librarian/theme/js/github.js';
+import { statusAppend, sanitiseKey, lowerize, getWebPage, doi2bib, isDoi, toBase64 } from 'https://lclem.github.io/librarian/theme/js/util.js';
+import { openGitHub, uploadFile } from 'https://lclem.github.io/librarian/theme/js/github.js';
 
 let addButton = document.getElementById('add-button');
 var stork_input = document.getElementById('stork-input');
@@ -103,10 +103,7 @@ function confirmBib() {
   uploadBib(dt, true);
 }
 
-
-  
 // TODO: when pasting a bib which gives a search hit, it is not possible to import: check what happens
-
 async function processBib(aBibStr, fileName, force = false) {
 
   bibStr = aBibStr.trim();
@@ -215,69 +212,6 @@ async function uploadBib(inp, force = false) {
   }
 }
 
-function getXmlHttp() {
-  var xmlhttp;
-  if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
-      xmlhttp = new XMLHttpRequest();
-  }
-  else {// code for IE6, IE5
-      xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-  }
-  return xmlhttp;
-}
-
-// given a url fetch its contents and invoke the callback function on the result
-async function getWebPage(theUrl, callback) {
-
-  statusAppend("getting url: " + theUrl);
-
-  xmlhttp = getXmlHttp();
-  xmlhttp.onreadystatechange = async function() {
-    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-      let res = xmlhttp.responseText;
-      console.log("res: " + res);
-      callback(res);
-    }
-    else {
-      statusAppend("status: " + xmlhttp.status);
-    }
-  }
-
-  try {
-    xmlhttp.open("GET", theUrl, false);
-    xmlhttp.send();
-  } catch (err) {
-    statusAppend('GET error: ', err);
-  }
-
-}
-
-// get bib information given the doi
-async function doi2bib(doiUrl, callback) {
-
-  statusAppend("doi: " + doiUrl);
-
-  xmlhttp = getXmlHttp();
-  xmlhttp.onreadystatechange = async function() {
-    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-      let res = xmlhttp.responseText;
-      console.log("doi2bib: " + res);
-      callback(res);
-    }
-  }
-
-  xmlhttp.open("GET", doiUrl, false);
-  xmlhttp.setRequestHeader('Accept', 'application/x-bibtex; charset=utf-8');
-  xmlhttp.send();
-  
-}
-
-function isDoi(str) {
-    var rx = /^10\.[0-9][0-9][0-9][0-9][0-9]*\//;
-    var matches = rx.exec(str);
-    return matches !== null && matches.length > 0;
-}
-
 // can get the PDF with https://sci-hub.se/
 // look for a url of the form https://moscow.sci-hub.se/864/d09cfcb7e8c9636cb503218595308a11/lasota2006.pdf#navpanes=0&view=FitH
 
@@ -357,6 +291,7 @@ async function getBib(articleUrl) {
     // https://inria.hal.science/hal-02885579/bibtex
     // https://pastel.hal.science/tel-01223284v2
     // https://hal.archives-ouvertes.fr/hal-03466451
+    // https://hal.science/tel-04310389
     
     else if (articleUrl.startsWith("https://inria.hal.science/") ||
       articleUrl.startsWith("https://pastel.hal.science/") ||
@@ -450,13 +385,6 @@ async function updateSearch() {
   getBib(stork_input.value);
 }
 
-const toBase64 = file => new Promise((resolve, reject) => {
-  const reader = new FileReader();
-  reader.readAsDataURL(file);
-  reader.onload = () => resolve(reader.result);
-  reader.onerror = reject;
-});
-
 // TODO: if we are creating a new bib entry,
 // then also automatically add the dropped pdf to the corresponding git folder
 
@@ -469,43 +397,8 @@ async function uploadPdf(thePdf) {
   // dropping a PDF means "add this PDF to this entry"
   if(document.getElementById('title_label') != null){ // && document.getElementById('PDF_label') == null) {
 
-    const articleUrl = document.getElementById('article_url');
-    console.log("PDF dropped on article page, url: " + articleUrl);
+    uploadFile("bibliographer", thePdf);
 
-    pdfContents = await toBase64(thePdf);
-    pdfContents = pdfContents.slice(pdfContents.indexOf(",") + 1);
-    // console.log("pdfContents: " + pdfContents);
-
-    var rootFolder = document.getElementById('article_rootfolder').getAttribute("href");
-    console.log("rootFolder: " + rootFolder);
-    path = "library/entries/" + rootFolder.split("/").slice(-1) + "/";
-
-    fileName = encodeURIComponent(fileName);
-    putRequest = 'PUT /repos/lclem/bibliographer/contents/' + path + fileName;
-    statusAppend("put request: " + putRequest);
-
-    const result = await octokit.request(putRequest, {
-      accept: 'application/vnd.github+json',
-      owner: 'lclem',
-      repo: 'bibliographer',
-      path: fileName,
-      message: 'PDF upload',
-      // sha: '0d5a690c8fad5e605a6e8766295d9d459d65de42',
-      committer: {
-        name: 'Lorenzo C',
-        email: 'clementelorenzo@gmail.com'
-      },
-      content: pdfContents,
-      headers: {
-        'X-GitHub-Api-Version': '2022-11-28'
-      }
-    });
-
-    console.log(result.data);
-    window.open(rootFolder, "_blank");
-    
-    commitUrl = result.data.commit.html_url;
-    statusAppend(commitUrl);
   }
   else {
     // match 2304.14575 inside the filename
