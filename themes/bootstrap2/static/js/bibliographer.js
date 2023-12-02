@@ -1,4 +1,4 @@
-import { statusAppend, sanitiseKey, lowerize, getWebPage, doi2bib, isDoi, toBase64, storkInit } from 'https://lclem.github.io/librarian/theme/js/util.js';
+import { statusAppend, sanitiseKey, lowerize, getWebPage, doi2bib, isDoi, storkInit } from 'https://lclem.github.io/librarian/theme/js/util.js';
 import { openGitHub, uploadFile } from 'https://lclem.github.io/librarian/theme/js/github.js';
 
 let addButton = document.getElementById('add-button');
@@ -170,7 +170,7 @@ async function processBib(aBibStr, fileName, force = false) {
         // and also the filename
         //sanitise it, eg. remove https:// etc              
 
-        openGitHub(key, fileName, bibStr);
+        openGitHub("bibliographer", key, fileName, bibStr);
       }
     }
   } catch (err) {
