@@ -5,7 +5,11 @@
 </abbr> -->
 <p>
         <span class="label" id="title_label">Title</span>
-        <a href="{{ SITEURL }}/{{ article.url }}" id="article_url"><i><nobr id="article_title">{{ article.title }}</nobr></i></a>
+        <a href="{{ SITEURL }}/{{ article.url }}" id="article_url"><i><nobr id="article_title">{{ article.title }}</nobr></i>
+                {% if article.volume %}
+                        [{{ article.volume }}]
+                {% endif %}
+        </a>
 </p>
 <span class="label">By</span>
 {% if article.authors %}

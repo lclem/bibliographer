@@ -1,5 +1,9 @@
 <footer class="post-info">
-        <a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}</a>
+        <a href="{{ SITEURL }}/{{ article.url }}">{{ article.title }}
+                {% if article.volume %}
+                        [{{ article.volume }}]
+                {% endif %}
+        </a>
         {% if article.authors %}
                 {% for author in article.authors %}
                         <a href="{{ SITEURL }}/{{ author.url }}"><i class="icon-user"></i>{{ author }}</a>
