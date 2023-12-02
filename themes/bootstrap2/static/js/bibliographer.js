@@ -12,6 +12,18 @@ function statusAppend(str) {
   status.innerText = str + "\n" + status.innerText;
 }
 
+async function storkInit(siteurl) {
+		stork.initialize(siteurl + "/theme/js/stork-1.6/stork.wasm");
+		options = {showScores: false};
+		
+		const deferred = async function() {
+		stork.register("sitesearch", siteurl + "/search-index.st", options);
+		console.log("stork initialised");
+		};
+		
+		deferred();
+}
+
 // PDFJS.cMapUrl = "//mozilla/pdfjs-dist/tree/master/cmaps";
 // PDFJS.cMapPacked = true;
 
