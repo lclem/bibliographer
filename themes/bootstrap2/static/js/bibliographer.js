@@ -125,9 +125,18 @@ async function processBib(aBibStr, fileName, force = false) {
       console.log("title: " + title);
 
       var searchString = title; //key + " " + title;
-      var searchResults = stork.search("sitesearch", searchString);
+      var searchOK = false
+      var searchResults;
+      
+      try {
+        searchResults = stork.search("sitesearch", searchString);
+        searchOK = true;
+      }
+      catch (err) {
+        console.error('seach error: ', err);
+      }
 
-      if (!force && (searchResults.total_hit_count > 0 && searchResults.results[0].score > 2000)) {
+      if (!force && searchOK && (searchResults.total_hit_count > 0 && searchResults.results[0].score > 2000)) {
         console.log("bib already exists: " + searchResults.total_hit_count);
         console.log("results: ");
         console.log(searchResults.results)
