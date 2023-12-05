@@ -80,6 +80,10 @@ def processBib(root, bibFile):
                 doi = doi.replace("\\_", "_")
                 doi = doi.replace("{_}", "_")
 
+                # reduce the doi to lower case to normalise
+                # (DOI names are not case sensitive)
+                doi = doi.lower()
+
                 if not doiValid(doi):
                     print(colored("INVALID", "red"), f"{doi} {root}/{bibFile}")
                 else:
