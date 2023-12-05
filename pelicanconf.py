@@ -27,6 +27,9 @@ STORK_INPUT_OPTIONS = {
 LOAD_CONTENT_CACHE = False
 # CONTENT_CACHING_LAYER = 'generator'
 
+PORT = 8808
+BIND = "192.168.0.15"
+
 GITHUB_URL = 'https://github.com/lclem/bibliographer'
 GITHUB_VIEW_URL = GITHUB_URL + '/tree/main'
 GITHUB_BLOB_URL = GITHUB_URL + '/blob/main'
@@ -52,7 +55,9 @@ FEED_ALL_RSS = 'feeds/all.rss.xml'
 MENUITEMS = [
         ('no doi', STORK_INPUT_OPTIONS["url_prefix"] + '/nodoi.html'),
         ('no pdf', STORK_INPUT_OPTIONS["url_prefix"] + '/nopdf.html'),
-        ('bad author', STORK_INPUT_OPTIONS["url_prefix"] +'/authors_bad.html')]
+        ('bad author', STORK_INPUT_OPTIONS["url_prefix"] +'/authors_bad.html'),
+        ('add item', STORK_INPUT_OPTIONS["url_prefix"] + '/form.html')
+    ]
 
 SLUGIFY_SOURCE = "basename"
 DISPLAY_CATEGORIES_ON_MENU = False
@@ -91,6 +96,6 @@ PAGE_URL = 'pages/{slug}/'
 PAGE_SAVE_AS = 'pages/{slug}/index.html'
 
 # Custom Home page
-DIRECT_TEMPLATES = ['index', 'author', 'archives', 'authors_bad', "nodoi", "nopdf"]
+DIRECT_TEMPLATES = ['index', 'author', 'archives', 'authors_bad', "nodoi", "nopdf", 'form']
 PAGINATED_TEMPLATES = {'index' : 20}
 TEMPLATE_PAGES = {'nopdf.html': 'nopdf.html', "nodoi.html": "nodoi.html", "authors.html": "authors.html", "authors_bad.html": "authors_bad.html"}
