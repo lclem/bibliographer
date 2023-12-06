@@ -28,13 +28,29 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: self-hosted
+    env:
+      ACTIONS_ALLOW_UNSECURE_COMMANDS: true
     steps:
 
       - name: Checkout
         uses: actions/checkout@v2
                 
-      - name: build website
-        run: set -o xtrace && ./build.sh
+      # - name: build website
+      #   run: set -o xtrace && ./build.sh
+
+      - name: build website (1)
+        run: python3 ./indexer.py > /dev/null
+        
+      - name: build website (2)
+        run: python3 ./generate_doi_links.py > /dev/null
+        
+      - name: Commit main repo
+        uses: stefanzweifel/git-auto-commit-action@v4.1.6
+        with:
+          commit_message: update main repo
+
+      - name: build website (3)
+        run: pelican
 
       - name: Setup Pages
         uses: actions/configure-pages@v3
@@ -49,8 +65,3 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v2
-
-      - name: Commit main repo
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          commit_message: update main repo
