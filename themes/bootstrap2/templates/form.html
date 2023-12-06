@@ -1,5 +1,141 @@
 {% extends "base.html" %}
 {% block content_title %}Add entry{% endblock %}
 {% block content %}
-This is a form
+<form id="newEntryForm">
+    <label for="key">Key:</label>
+    <input type="text" id="key" name="key" class="bibtexInput"/>
+
+    <br>
+    <label for="type1">Type:</label>
+        <input type="radio" id="article" name="type1" value="@article"/>
+        <label for="article">article</label>
+
+        <input type="radio" id="phdthesis" name="type1" value="@phdthesis">
+        <label for="phdthesis">phdthesis</label>
+
+        <input type="radio" id="inbook" name="type1" value="@inbook">
+        <label for="inbook">inbook</label>
+
+        <input type="radio" id="masterthesis" name="type1" value="@masterthesis">
+        <label for="masterthesis">masterthesis</label>
+
+        <input type="radio" id="incollection" name="type1" value="@incollection">
+        <label for="incollection">incollection</label>
+
+        <input type="radio" id="inproceedings" name="type1" value="@inproceedings">
+        <label for="inproceedings">inproceedings</label>
+
+        <input type="radio" id="manual" name="type1" value="@manual">
+        <label for="manual">manual</label>
+
+        <input type="radio" id="misc" name="type1" value="@misc">
+        <label for="misc">misc</label>
+
+    <br>
+    <label for="title">Title:</label>
+    <input type="text" id="title" name="title">
+
+    <br>
+    <label for="author">Author:</label>
+    <input type="text" id="author" name="author">
+
+    <br>
+    <label for="journal">Journal:</label>
+    <input type="text" id="journal" name="journal">
+
+    <br>
+    <label for="year">Year:</label>
+    <input type="text" id="year" name="year">
+
+    <br>
+    <label for="pages">Pages:</label>
+    <input type="text" id="pages" name="pages">
+
+    <br>
+    <label for="doi">DOI:</label>
+    <input type="text" id="doi" name="doi">
+
+    <br>
+    <label for="type">Type:</label>
+    <input type="text" id="type" name="type">
+
+    <br>
+    <input type="submit" value="Submit">
+</form>
+
+<br>
+
+<div class="highlight">
+    <pre>
+        <span></span>
+        <code class="bibtexCode">
+        </code>
+    </pre>
+</div>
+
+
+<script>
+
+    const form = document.getElementById('newEntryForm');
+    const bibtexCode = document.querySelector('.bibtexCode');
+
+    for (const input of document.querySelectorAll("input")) {
+        if(input.parentElement.tagName == "FORM") {
+            input.addEventListener("input", (event) => {
+                const bibStr = buildBibString();
+                bibtexCode.textContent = bibStr;
+            });
+        }
+    }
+
+    function preventDefaults(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+
+    function buildBibString() {
+
+        const key = form.elements.key.value;
+        const title = form.elements.title.value;
+        const author = form.elements.author.value;
+        const type1 = form.elements.type1.value;
+
+        var bibStr = `${type1}{${key},
+                author = {${author}},
+                title = {${title}}`;
+
+        function addIfDefined(str, field) {
+            var value = form.elements[field].value;
+
+            if (typeof value !== "undefined")
+                value = value.trim();
+
+            if (value !== "")
+                str += `,
+                ${field} = {${value}}`;
+            
+            return str;
+        }
+
+        bibStr = addIfDefined(bibStr, "journal");
+        bibStr = addIfDefined(bibStr, "year");
+        bibStr = addIfDefined(bibStr, "pages");
+        bibStr = addIfDefined(bibStr, "doi");
+        bibStr = addIfDefined(bibStr, "type");
+
+        bibStr += "}";
+
+        return bibStr;
+    }
+
+    form.addEventListener('submit', preventDefaults, false);
+    form.addEventListener('submit', function(event) {
+
+        var bibStr = buildBibString();
+        console.log("submit: " + bibStr);
+        processBib(bibStr, "", false);
+
+    }, false);
+
+</script>
 {% endblock content %}

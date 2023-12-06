@@ -4,11 +4,8 @@ import { openGitHub, uploadFile } from 'https://lclem.github.io/librarian/theme/
 let addButton = document.getElementById('add-button');
 var stork_input = document.getElementById('stork-input');
 let dropArea = document.getElementById('drop-area');
-let status = document.getElementById('status');
 let dt = [];
 let bibStr = "";
-
-var bibFile;
 
 window.storkInit = storkInit;
 
@@ -16,17 +13,15 @@ stork_input.addEventListener("change", updateSearch, false);
 // stork_input.addEventListener("input", updateSearch, false);
 stork_input.addEventListener("paste", detectPaste, false);
 
+function preventDefaults (e) {
+  e.preventDefault();
+  e.stopPropagation();
+}
+
 ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {dropArea.addEventListener(eventName, preventDefaults, false)});
 ['dragenter', 'dragover'].forEach(eventName => {dropArea.addEventListener(eventName, highlight, false)});
 ['dragleave', 'drop'].forEach(eventName => {dropArea.addEventListener(eventName, unhighlight, false)});
 dropArea.addEventListener('drop', handleDrop, false)
-
-const target = document.querySelector("div.target");
-
-function preventDefaults (e) {
-  e.preventDefault()
-  e.stopPropagation()
-}
 
 function highlight(e) {
   dropArea.classList.add('highlight')
@@ -73,6 +68,9 @@ const copyBib = async () => {
   }
 }
 
+// used for exporting the function
+window.copyBib = copyBib;
+
 function triggerStorkSearch(str) {
   console.log('triggerStorkSearch: ' + str);
   stork_input.value = str;
@@ -83,6 +81,8 @@ function outFunc() {
   var tooltip = document.getElementById("myTooltip");
   tooltip.innerHTML = "Copy to clipboard";
 }
+
+window.outFunc = outFunc;
 
 function confirmBib() {
   uploadBib(dt, true);
@@ -177,6 +177,9 @@ async function processBib(aBibStr, fileName, force = false) {
     console.error('Failed to parse bib: ', err);
   }
 }
+
+// export the function
+window.processBib = processBib;
 
 async function uploadBib(inp, force = false) {
   console.log("uploadBib: " + inp + ", force: " + force);

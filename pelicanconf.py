@@ -15,20 +15,20 @@ OUTPUT_PATH = 'docs'
 PATH = 'library'
 
 # can be useful in development, but set to False when you're ready to publish
-RELATIVE_URLS = True
-# RELATIVE_URLS = False
+# RELATIVE_URLS = True
+RELATIVE_URLS = False
 
 STORK_INPUT_OPTIONS = {
     "html_selector": "nobr",
-    "url_prefix" : ""
-    # "url_prefix": "/bibliographer"
+    # "url_prefix" : ""
+    "url_prefix": "/bibliographer"
 }
 
 LOAD_CONTENT_CACHE = False
 # CONTENT_CACHING_LAYER = 'generator'
 
-PORT = 8808
-BIND = "192.168.0.15"
+# PORT = 8808
+# BIND = "192.168.0.15"
 
 GITHUB_URL = 'https://github.com/lclem/bibliographer'
 GITHUB_VIEW_URL = GITHUB_URL + '/tree/main'
@@ -98,4 +98,4 @@ PAGE_SAVE_AS = 'pages/{slug}/index.html'
 # Custom Home page
 DIRECT_TEMPLATES = ['index', 'author', 'archives', 'authors_bad', "nodoi", "nopdf", 'form']
 PAGINATED_TEMPLATES = {'index' : 20}
-TEMPLATE_PAGES = {'nopdf.html': 'nopdf.html', "nodoi.html": "nodoi.html", "authors.html": "authors.html", "authors_bad.html": "authors_bad.html"}
+TEMPLATE_PAGES = {'nopdf.html': 'nopdf.html', "nodoi.html": "nodoi.html", "authors.html": "authors.html", "authors_bad.html": "authors_bad.html", "form.html": "form.html"}

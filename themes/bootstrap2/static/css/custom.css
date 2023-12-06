@@ -279,5 +279,21 @@ background-color: aliceblue;
 }
 
 footer {
-display: block;
+    display: block;
+}
+
+input {
+    display: inline;
+}
+
+input[type="radio"] {
+    display: inline;
+}
+
+label {
+    display: inline;
+}
+
+form {
+    display: inline;
 }
