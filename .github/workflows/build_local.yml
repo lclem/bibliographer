@@ -48,6 +48,7 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v4.1.6
         with:
           commit_message: update main repo
+          github-token: ${{ secrets.ACCESS_TOKEN }}
 
       - name: build website (3)
         run: pelican
