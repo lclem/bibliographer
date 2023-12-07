@@ -49,6 +49,9 @@ jobs:
         with:
           commit_message: update main repo
 
+      - name: Compute library size
+        run: du -hs ./library | cut -d'.' -f1 | xargs | tr -d '\n' > ./themes/bootstrap2/templates/size.txt
+
       - name: build website (3)
         run: pelican
 
