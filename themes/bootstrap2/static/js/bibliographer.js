@@ -1,4 +1,4 @@
-import { statusAppend, sanitiseKey, lowerize, getWebPage, doi2bib, isDoi, storkInit } from 'https://lclem.github.io/librarian/theme/js/util.js';
+import { statusAppend, sanitiseKey, lowerize, getWebPage, doi2bib, isDoi, storkInit, load_elapsed } from 'https://lclem.github.io/librarian/theme/js/util.js';
 import { openGitHub, uploadFile } from 'https://lclem.github.io/librarian/theme/js/github.js';
 
 let addButton = document.getElementById('add-button');
@@ -8,6 +8,7 @@ let dt = [];
 let bibStr = "";
 
 window.storkInit = storkInit;
+window.onLoad = load_elapsed();
 
 stork_input.addEventListener("change", updateSearch, false);
 // stork_input.addEventListener("input", updateSearch, false);
