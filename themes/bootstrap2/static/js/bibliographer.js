@@ -89,6 +89,8 @@ function confirmBib() {
   uploadBib(dt, true);
 }
 
+window.confirmBib = confirmBib;
+
 // TODO: when pasting a bib which gives a search hit, it is not possible to import: check what happens
 async function processBib(aBibStr, fileName, force = false) {
 
