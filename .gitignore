@@ -11,6 +11,9 @@ articles.bib.new.bib
 articles.bib.lst
 articles.bib.save
 
+themes/bootstrap2/templates/size.txt
+themes/bootstrap2/templates/authors.txt
+
 #Python
 *.py[cod]
 

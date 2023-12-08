@@ -1,63 +1,232 @@
 {% extends "base.html" %}
 {% block content_title %}Add entry{% endblock %}
 {% block content %}
-<form id="newEntryForm">
-    <label for="key">Key:</label>
-    <input type="text" id="key" name="key" class="bibtexInput"/>
 
-    <br>
-    <label for="type1">Type:</label>
-        <input type="radio" id="article" name="type1" value="@article"/>
-        <label for="article">article</label>
+<style>
+    * {
+      box-sizing: border-box;
+    }
+    
+    body {
+      font: 16px Arial;  
+    }
+    
+    /*the container must be positioned relative:*/
+    .autocomplete {
+      position: relative;
+      display: inline-block;
+      width: 100%;
+    }
+    
+    label {
+      /* border: 1px solid transparent; */
+      /* background-color: #f1f1f1; */
+      padding: 4px;
+      font-size: 12px;
+    }
 
-        <input type="radio" id="phdthesis" name="type1" value="@phdthesis">
-        <label for="phdthesis">phdthesis</label>
+    input {
+      border: 1px solid transparent;
+      background-color: #f1f1f1;
+      padding: 16px;
+      font-size: 16px;
+    }
 
-        <input type="radio" id="inbook" name="type1" value="@inbook">
-        <label for="inbook">inbook</label>
+    input[type=text] {
+      background-color: #f1f1f1;
+      width: 100%;
+    }
+    
+    input[type=submit] {
+      background-color: DodgerBlue;
+      color: #fff;
+      cursor: pointer;
+      padding: 10px;
+    }
+    
+    .autocomplete-items {
+      position: absolute;
+      border: 1px solid #d4d4d4;
+      border-bottom: none;
+      border-top: none;
+      z-index: 99;
+      /*position the autocomplete items to be the same width as the container:*/
+      top: 100%;
+      left: 0;
+      right: 0;
+    }
+    
+    .autocomplete-items div {
+      padding: 10px;
+      cursor: pointer;
+      background-color: #fff; 
+      border-bottom: 1px solid #d4d4d4; 
+    }
+    
+    /*when hovering an item:*/
+    .autocomplete-items div:hover {
+      background-color: #e9e9e9; 
+    }
+    
+    /*when navigating through the items using the arrow keys:*/
+    .autocomplete-active {
+      background-color: DodgerBlue !important; 
+      color: #ffffff; 
+    }
 
-        <input type="radio" id="masterthesis" name="type1" value="@masterthesis">
-        <label for="masterthesis">masterthesis</label>
+    .container {
+        display: block;
+        position: relative;
+        padding-left: 35px;
+        margin-bottom: 12px;
+        width: auto;
+        cursor: pointer;
+        font-size: 16px;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+    }
 
-        <input type="radio" id="incollection" name="type1" value="@incollection">
-        <label for="incollection">incollection</label>
+    /* Hide the browser's default radio button */
+    .container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+    }
 
+    /* Create a custom radio button */
+    .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 25px;
+    width: 25px;
+    background-color: #eee;
+    border-radius: 50%;
+    }
+
+    /* On mouse-over, add a grey background color */
+    .container:hover input ~ .checkmark {
+    background-color: #ccc;
+    }
+
+    /* When the radio button is checked, add a blue background */
+    .container input:checked ~ .checkmark {
+    background-color: #2196F3;
+    }
+
+    /* Create the indicator (the dot/circle - hidden when not checked) */
+    .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+    }
+
+    /* Show the indicator (dot/circle) when checked */
+    .container input:checked ~ .checkmark:after {
+    display: block;
+    }
+
+    /* Style the indicator (dot/circle) */
+    .container .checkmark:after {
+    top: 9px;
+    left: 9px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: white;
+    }
+</style>
+
+<form id="newEntryForm" autocomplete="off">
+    <label class="container">
+        article
+        <input type="radio" id="article" name="type1" value="@article" checked/>
+        <span class="checkmark"></span>
+    </label>
+
+    <label class="container">
+        inproceedings
         <input type="radio" id="inproceedings" name="type1" value="@inproceedings">
-        <label for="inproceedings">inproceedings</label>
+        <span class="checkmark"></span>
+    </label>
 
+    <label class="container">
+        incollection
+        <input type="radio" id="incollection" name="type1" value="@incollection">
+        <span class="checkmark"></span>
+    </label>
+
+    <label class="container">
+        inbook
+        <input type="radio" id="inbook" name="type1" value="@inbook">
+        <span class="checkmark"></span>
+    </label>
+
+    <label class="container">
+        phdthesis
+        <input type="radio" id="phdthesis" name="type1" value="@phdthesis">
+        <span class="checkmark"></span>
+    </label>
+    
+    <label class="container">
+        masterthesis
+        <input type="radio" id="masterthesis" name="type1" value="@masterthesis">
+        <span class="checkmark"></span>
+    </label>
+    
+    <label class="container">
+        manual
         <input type="radio" id="manual" name="type1" value="@manual">
-        <label for="manual">manual</label>
+        <span class="checkmark"></span>
+    </label>
 
+    <label class="container">
+        misc
         <input type="radio" id="misc" name="type1" value="@misc">
-        <label for="misc">misc</label>
+        <span class="checkmark"></span>
+    </label>
 
     <br>
-    <label for="title">Title:</label>
-    <input type="text" id="title" name="title">
+    <!-- <label for="key">Key:</label> -->
+    <input type="text" id="key" name="key" class="bibtexInput" placeholder="Key"/>
 
     <br>
-    <label for="author">Author:</label>
-    <input type="text" id="author" name="author">
+    <!-- <label for="title">Title:</label> -->
+    <input type="text" id="title" name="title" placeholder="Title">
 
     <br>
-    <label for="journal">Journal:</label>
-    <input type="text" id="journal" name="journal">
+    <!-- <label for="author">Author:</label> -->
+    <div class="autocomplete">
+        <!-- onKeyUp="showAuthorResults(this.value)" -->
+        <input type="text" id="author" name="author" placeholder="Author">
+    </div>
 
     <br>
-    <label for="year">Year:</label>
-    <input type="text" id="year" name="year">
+    <!-- <label for="journal">Journal:</label> -->
+    <input type="text" id="journal" name="journal" placeholder="Journal">
 
     <br>
-    <label for="pages">Pages:</label>
-    <input type="text" id="pages" name="pages">
+    <!-- <label for="year">Year:</label> -->
+    <input type="text" id="year" name="year" placeholder="Year">
 
     <br>
-    <label for="doi">DOI:</label>
-    <input type="text" id="doi" name="doi">
+    <!-- <label for="pages">Pages:</label> -->
+    <input type="text" id="pages" name="pages" placeholder="Pages">
 
     <br>
-    <label for="type">Type:</label>
-    <input type="text" id="type" name="type">
+    <!-- <label for="doi">DOI:</label> -->
+    <input type="text" id="doi" name="doi" placeholder="DOI">
+
+    <br>
+    <!-- <label for="type">Type:</label> -->
+    <input type="text" id="type" name="type" placeholder="Type">
+
+    <br>
+    <input type="text" id="keywords" name="keywords" placeholder="Keywords">
 
     <br>
     <input type="submit" value="Submit">
@@ -74,17 +243,35 @@
 </div>
 
 
-<script>
+<script type="module">
+    import { statusAppend, getWebPage } from 'https://lclem.github.io/librarian/theme/js/util.js';
 
     const form = document.getElementById('newEntryForm');
     const bibtexCode = document.querySelector('.bibtexCode');
 
+    var authors = [];
+
+    getWebPage("{{ SITEURL }}" + "/authors.txt", (text) => {
+        authors = text.split("\n");
+        console.log(`loaded ${authors.length} authors`);
+        autocomplete(document.getElementById("author"), authors);
+    });
+
     for (const input of document.querySelectorAll("input")) {
-        if(input.parentElement.tagName == "FORM") {
-            input.addEventListener("input", (event) => {
+        if(input.parentElement.tagName == "FORM" || input.parentElement.tagName == "DIV") {
+            console.log("adding input event listener")
+            console.log(input)
+
+            const listener = (event) => {
                 const bibStr = buildBibString();
                 bibtexCode.textContent = bibStr;
-            });
+            };
+
+            input.addEventListener("input", listener);
+            input.addEventListener("beforeinput", listener);
+            input.addEventListener("change", listener);
+            input.addEventListener("keydown", listener);
+            
         }
     }
 
@@ -122,6 +309,7 @@
         bibStr = addIfDefined(bibStr, "pages");
         bibStr = addIfDefined(bibStr, "doi");
         bibStr = addIfDefined(bibStr, "type");
+        bibStr = addIfDefined(bibStr, "keywords");
 
         bibStr += "}";
 
@@ -136,6 +324,133 @@
         processBib(bibStr, "", false);
 
     }, false);
+
+    // var search_terms = ['apple', 'apple watch', 'apple macbook', 'apple macbook pro', 'iphone', 'iphone 12'];
+
+    // function autocompleteAuthorMatch(input) {
+    //     if (input == '') {
+    //         return [];
+    //     }
+    //     var reg = new RegExp(input)
+    //     return search_terms.filter(function(term) {
+    //         if (term.match(reg)) {
+    //         return term;
+    //         }
+    //     });
+    // }
+
+    // function showAuthorResults(val) {
+    //     res = document.getElementById("author-result");
+    //     res.innerHTML = '';
+    //     let list = '';
+    //     let terms = autocompleteAuthorMatch(val);
+    //     for (i=0; i<terms.length; i++) {
+    //         list += '<li>' + terms[i] + '</li>';
+    //     }
+    //     res.innerHTML = '<ul>' + list + '</ul>';
+    // }
+    
+    function autocomplete(inp, arr) {
+        /*the autocomplete function takes two arguments,
+        the text field element and an array of possible autocompleted values:*/
+        var currentFocus;
+        /*execute a function when someone writes in the text field:*/
+        inp.addEventListener("input", function(e) {
+            var a, b, i, val = this.value;
+            /*close any already open lists of autocompleted values*/
+            closeAllLists();
+            if (!val) { return false; }
+            currentFocus = -1;
+            /*create a DIV element that will contain the items (values):*/
+            a = document.createElement("DIV");
+            a.setAttribute("id", this.id + "autocomplete-list");
+            a.setAttribute("class", "autocomplete-items");
+            /*append the DIV element as a child of the autocomplete container:*/
+            this.parentNode.appendChild(a);
+            /*for each item in the array...*/
+            for (i = 0; i < arr.length; i++) {
+                /*check if the item starts with the same letters as the text field value:*/
+                if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+                /*create a DIV element for each matching element:*/
+                b = document.createElement("DIV");
+                /*make the matching letters bold:*/
+                b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+                b.innerHTML += arr[i].substr(val.length);
+                /*insert a input field that will hold the current array item's value:*/
+                b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+                /*execute a function when someone clicks on the item value (DIV element):*/
+                b.addEventListener("click", function(e) {
+                    /*insert the value for the autocomplete text field:*/
+                    inp.value = this.getElementsByTagName("input")[0].value;
+                    /*close the list of autocompleted values,
+                    (or any other open lists of autocompleted values:*/
+                    closeAllLists();
+                });
+                a.appendChild(b);
+                }
+            }
+        });
+
+        /*execute a function presses a key on the keyboard:*/
+        inp.addEventListener("keydown", function(e) {
+            var x = document.getElementById(this.id + "autocomplete-list");
+            if (x) x = x.getElementsByTagName("div");
+            if (e.keyCode == 40) {
+                /*If the arrow DOWN key is pressed,
+                increase the currentFocus variable:*/
+                currentFocus++;
+                /*and and make the current item more visible:*/
+                addActive(x);
+            } else if (e.keyCode == 38) { //up
+                /*If the arrow UP key is pressed,
+                decrease the currentFocus variable:*/
+                currentFocus--;
+                /*and and make the current item more visible:*/
+                addActive(x);
+            } else if (e.keyCode == 13) {
+                /*If the ENTER key is pressed, prevent the form from being submitted,*/
+                e.preventDefault();
+                if (currentFocus > -1) {
+                /*and simulate a click on the "active" item:*/
+                if (x) x[currentFocus].click();
+                }
+            }
+        });
+
+        function addActive(x) {
+            /*a function to classify an item as "active":*/
+            if (!x) return false;
+            /*start by removing the "active" class on all items:*/
+            removeActive(x);
+            if (currentFocus >= x.length) currentFocus = 0;
+            if (currentFocus < 0) currentFocus = (x.length - 1);
+            /*add class "autocomplete-active":*/
+            x[currentFocus].classList.add("autocomplete-active");
+        }
+
+        function removeActive(x) {
+            /*a function to remove the "active" class from all autocomplete items:*/
+            for (var i = 0; i < x.length; i++) {
+                x[i].classList.remove("autocomplete-active");
+            }
+        }
+
+        function closeAllLists(elmnt) {
+            /*close all autocomplete lists in the document,
+            except the one passed as an argument:*/
+            var x = document.getElementsByClassName("autocomplete-items");
+            for (var i = 0; i < x.length; i++) {
+                if (elmnt != x[i] && elmnt != inp) {
+                    x[i].parentNode.removeChild(x[i]);
+                }
+            }
+        }
+
+        /*execute a function when someone clicks in the document:*/
+        document.addEventListener("click", function (e) {
+            closeAllLists(e.target);
+        });
+    }
 
 </script>
 {% endblock content %}

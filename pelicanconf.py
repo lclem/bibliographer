@@ -96,6 +96,6 @@ PAGE_URL = 'pages/{slug}/'
 PAGE_SAVE_AS = 'pages/{slug}/index.html'
 
 # Custom Home page
-DIRECT_TEMPLATES = ['index', 'author', 'archives', 'authors_bad', "nodoi", "nopdf", 'form']
+DIRECT_TEMPLATES = ['index', 'author', 'archives', 'authors_bad', 'nodoi', 'nopdf', 'form']
 PAGINATED_TEMPLATES = {'index' : 20}
-TEMPLATE_PAGES = {'nopdf.html': 'nopdf.html', "nodoi.html": "nodoi.html", "authors.html": "authors.html", "authors_bad.html": "authors_bad.html", "form.html": "form.html"}
+TEMPLATE_PAGES = {'nopdf.html': 'nopdf.html', 'nodoi.html': 'nodoi.html', 'authors.html': 'authors.html', 'authors_bad.html': 'authors_bad.html', 'form.html': 'form.html'}
