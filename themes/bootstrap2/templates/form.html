@@ -10,6 +10,12 @@
     body {
       font: 16px Arial;  
     }
+
+    .div_key {
+      position: relative;
+      /* display: inline-block; */
+      width: 100%;
+    }
     
     /*the container must be positioned relative:*/
     .autocomplete {
@@ -23,6 +29,13 @@
       /* background-color: #f1f1f1; */
       padding: 4px;
       font-size: 12px;
+    }
+
+    select {
+      border: 1px solid transparent;
+      background-color: #f1f1f1;
+      padding: 4px;
+      font-size: 16px;
     }
 
     input {
@@ -139,96 +152,63 @@
     border-radius: 50%;
     background: white;
     }
+
+    .key_exists {
+        /* width: 100%; */
+        /* padding: 25px; */
+        background-color: coral !important;
+        /* color: white; */
+        /* font-size: 25px; */
+    }
 </style>
 
 <form id="newEntryForm" autocomplete="off">
-    <label class="container">
-        article
-        <input type="radio" id="article" name="type1" value="@article" checked/>
-        <span class="checkmark"></span>
-    </label>
 
-    <label class="container">
-        inproceedings
-        <input type="radio" id="inproceedings" name="type1" value="@inproceedings">
-        <span class="checkmark"></span>
-    </label>
+    <select name="type1" id="type1">
+        <option value="@article">article</option>
+        <option value="@inproceedings">inproceedings</option>
+        <option value="@incollection">incollection</option>
+        <option value="@inbook">inbook</option>
+        <option value="@techreport">techreport</option>
+        <option value="@phdthesis">phdthesis</option>
+        <option value="@masterthesis">masterthesis</option>
+        <option value="@manual">manual</option>
+        <option value="@misc">misc</option>
+        <option value="@unpublished">unpublished</option>
+        <option value="@url">url</option>
+    </select>
 
-    <label class="container">
-        incollection
-        <input type="radio" id="incollection" name="type1" value="@incollection">
-        <span class="checkmark"></span>
-    </label>
-
-    <label class="container">
-        inbook
-        <input type="radio" id="inbook" name="type1" value="@inbook">
-        <span class="checkmark"></span>
-    </label>
-
-    <label class="container">
-        phdthesis
-        <input type="radio" id="phdthesis" name="type1" value="@phdthesis">
-        <span class="checkmark"></span>
-    </label>
-    
-    <label class="container">
-        masterthesis
-        <input type="radio" id="masterthesis" name="type1" value="@masterthesis">
-        <span class="checkmark"></span>
-    </label>
-    
-    <label class="container">
-        manual
-        <input type="radio" id="manual" name="type1" value="@manual">
-        <span class="checkmark"></span>
-    </label>
-
-    <label class="container">
-        misc
-        <input type="radio" id="misc" name="type1" value="@misc">
-        <span class="checkmark"></span>
-    </label>
-
-    <br>
     <!-- <label for="key">Key:</label> -->
-    <input type="text" id="key" name="key" class="bibtexInput" placeholder="Key"/>
+    <input type="text" id="key" name="key" class="bibtexInput" placeholder="Key">
+        <div class="div_key" id="div_key"></div>
+    </input>
 
-    <br>
     <!-- <label for="title">Title:</label> -->
     <input type="text" id="title" name="title" placeholder="Title">
 
-    <br>
     <!-- <label for="author">Author:</label> -->
     <div class="autocomplete">
         <!-- onKeyUp="showAuthorResults(this.value)" -->
         <input type="text" id="author" name="author" placeholder="Author">
     </div>
 
-    <br>
     <!-- <label for="journal">Journal:</label> -->
     <input type="text" id="journal" name="journal" placeholder="Journal">
 
-    <br>
     <!-- <label for="year">Year:</label> -->
     <input type="text" id="year" name="year" placeholder="Year">
 
-    <br>
     <!-- <label for="pages">Pages:</label> -->
     <input type="text" id="pages" name="pages" placeholder="Pages">
 
-    <br>
     <!-- <label for="doi">DOI:</label> -->
     <input type="text" id="doi" name="doi" placeholder="DOI">
 
-    <br>
     <!-- <label for="type">Type:</label> -->
     <input type="text" id="type" name="type" placeholder="Type">
 
-    <br>
     <input type="text" id="keywords" name="keywords" placeholder="Keywords">
 
-    <br>
     <input type="submit" value="Submit">
 </form>
 
@@ -250,22 +230,80 @@
     const bibtexCode = document.querySelector('.bibtexCode');
 
     var authors = [];
-
     getWebPage("{{ SITEURL }}" + "/authors.txt", (text) => {
         authors = text.split("\n");
-        console.log(`loaded ${authors.length} authors`);
+        statusAppend(`loaded ${authors.length} authors`);
         autocomplete(document.getElementById("author"), authors);
     });
 
+    var keys = [];
+    const inputKey = document.getElementById('key');
+    const div_key = document.getElementById('div_key');
+
+    function keyMatches(key) {
+        if (key == '')
+            return [];
+
+        var reg = new RegExp(key)
+        const matches = keys.filter( (term) => {
+            if (term.match(reg)) {
+            return term;
+            }
+        });
+
+        return matches;
+    }
+
+    getWebPage("{{ SITEURL }}" + "/keys.txt", (text) => {
+        keys = text.split("\n");
+        statusAppend(`loaded ${authors.length} keys`);
+        document.getElementById("key").addEventListener("input", (event) => {
+
+            const key = form.elements.key.value;
+            console.log("recorded: " + key);
+
+            div_key.innerHTML = '';
+
+            const matches = keyMatches(key);
+
+            if (matches.length == 0)
+                return;
+
+            // console.log("res: " + res);
+            
+            let list = '';
+            for (var i = 0; i < matches.length; i++) {
+                list += '<li>' + matches[i] + '</li>';
+            }
+            div_key.innerHTML = '<ul>' + list + '</ul>';
+        });
+    });
+
+    function keyExists() {
+        const key = form.elements.key.value;
+        return keys.includes(key);
+    }
+
+    const listener = (event) => {
+            const bibStr = buildBibString();
+            bibtexCode.textContent = bibStr;
+
+            // check that the key does not exist already
+            
+            if (keyExists()) {
+                inputKey.classList.add("key_exists");
+            }
+            else {
+                inputKey.classList.remove("key_exists");
+            }
+        };
+
+    document.querySelector("select").addEventListener("input", listener);
+
     for (const input of document.querySelectorAll("input")) {
         if(input.parentElement.tagName == "FORM" || input.parentElement.tagName == "DIV") {
-            console.log("adding input event listener")
-            console.log(input)
-
-            const listener = (event) => {
-                const bibStr = buildBibString();
-                bibtexCode.textContent = bibStr;
-            };
+            // console.log("adding input event listener")
+            // console.log(input)
 
             input.addEventListener("input", listener);
             input.addEventListener("beforeinput", listener);
@@ -317,38 +355,16 @@
     }
 
     form.addEventListener('submit', preventDefaults, false);
-    form.addEventListener('submit', function(event) {
-
+    form.addEventListener('submit', (event) => {
         var bibStr = buildBibString();
         console.log("submit: " + bibStr);
-        processBib(bibStr, "", false);
+
+        if (keyExists())
+            console.log("key exists!");
+        else
+            processBib(bibStr, "", false);
 
     }, false);
-
-    // var search_terms = ['apple', 'apple watch', 'apple macbook', 'apple macbook pro', 'iphone', 'iphone 12'];
-
-    // function autocompleteAuthorMatch(input) {
-    //     if (input == '') {
-    //         return [];
-    //     }
-    //     var reg = new RegExp(input)
-    //     return search_terms.filter(function(term) {
-    //         if (term.match(reg)) {
-    //         return term;
-    //         }
-    //     });
-    // }
-
-    // function showAuthorResults(val) {
-    //     res = document.getElementById("author-result");
-    //     res.innerHTML = '';
-    //     let list = '';
-    //     let terms = autocompleteAuthorMatch(val);
-    //     for (i=0; i<terms.length; i++) {
-    //         list += '<li>' + terms[i] + '</li>';
-    //     }
-    //     res.innerHTML = '<ul>' + list + '</ul>';
-    // }
     
     function autocomplete(inp, arr) {
         /*the autocomplete function takes two arguments,

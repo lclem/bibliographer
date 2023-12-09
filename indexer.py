@@ -287,6 +287,7 @@ def amendDOI(doi, eprint, journal, key):
     return doi, False
 
 allAuthors = set()
+allKeys = set()
 
 for root, dirs, files in os.walk("./library/entries"):
     i = 0
@@ -322,6 +323,7 @@ for root, dirs, files in os.walk("./library/entries"):
                             print(f"BIB {authors} - {title}")
 
                             allAuthors.update(authors)
+                            allKeys.add(key)
 
                             doi, modified = amendDOI(doi, eprint, journal, key)
 
@@ -443,10 +445,13 @@ engine: knitr\n"
                             i = i + 1
 
 authorsFile = open("./docs/authors.txt", "w")
-
 for author in allAuthors:
     authorsFile.write(author + "\n")
-
 authorsFile.close()
+
+keysFile = open("./docs/keys.txt", "w")
+for key in allKeys:
+    keysFile.write(key + "\n")
+keysFile.close()
 
 print(f"ERRORS {errors}")
