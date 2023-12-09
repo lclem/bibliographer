@@ -180,6 +180,9 @@ def parsebib(bibFile):
         for i in range(0, len(authors)):
             authors[i] = normalise_names_order(authors[i])
 
+        keywords = getValue(fields, "keywords", "")
+        keywords = keywords.split(" and ")
+
         date_added = getValue(fields, 'date-added', "")
         date_modified = getValue(fields, 'date-modified', "")
 
@@ -193,7 +196,7 @@ def parsebib(bibFile):
         journal = getValue(fields, 'journal', "")
         booktitle = getValue(fields, 'booktitle', "")
 
-        result.append((entry, key, authors, title, year, date_added, date_modified, doi, url, eprint, journal, booktitle))
+        result.append((entry, key, authors, title, year, date_added, date_modified, doi, url, eprint, journal, booktitle, keywords))
 
     # print(f"RES: {result}")
     return result
@@ -287,6 +290,7 @@ def amendDOI(doi, eprint, journal, key):
     return doi, False
 
 allAuthors = set()
+allKeywords = set()
 allKeys = set()
 
 for root, dirs, files in os.walk("./library/entries"):
@@ -319,11 +323,12 @@ for root, dirs, files in os.walk("./library/entries"):
 
                         for bibEntry in parseResults:
 
-                            entry, key, authors, title, year, date_added, date_modified, doi, url, eprint, journal, booktitle = bibEntry
+                            entry, key, authors, title, year, date_added, date_modified, doi, url, eprint, journal, booktitle, keywords = bibEntry
                             print(f"BIB {authors} - {title}")
 
                             allAuthors.update(authors)
                             allKeys.add(key)
+                            allKeywords.update(keywords)
 
                             doi, modified = amendDOI(doi, eprint, journal, key)
 
@@ -448,6 +453,11 @@ authorsFile = open("./docs/authors.txt", "w")
 for author in allAuthors:
     authorsFile.write(author + "\n")
 authorsFile.close()
+
+keywordsFile = open("./docs/keywords.txt", "w")
+for keyword in allKeywords:
+    keywordsFile.write(keyword + "\n")
+keywordsFile.close()
 
 keysFile = open("./docs/keys.txt", "w")
 for key in allKeys:

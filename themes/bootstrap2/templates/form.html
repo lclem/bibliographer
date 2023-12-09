@@ -11,6 +11,10 @@
       font: 16px Arial;  
     }
 
+    pre {
+        padding: 0px;
+    }
+
     .div_key {
       position: relative;
       /* display: inline-block; */
@@ -103,62 +107,139 @@
 
     /* Hide the browser's default radio button */
     .container input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    height: 0;
-    width: 0;
+        position: absolute;
+        opacity: 0;
+        cursor: pointer;
+        height: 0;
+        width: 0;
     }
 
     /* Create a custom radio button */
     .checkmark {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 25px;
-    width: 25px;
-    background-color: #eee;
-    border-radius: 50%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 25px;
+        width: 25px;
+        background-color: #eee;
+        border-radius: 50%;
     }
 
     /* On mouse-over, add a grey background color */
     .container:hover input ~ .checkmark {
-    background-color: #ccc;
+        background-color: #ccc;
     }
 
     /* When the radio button is checked, add a blue background */
     .container input:checked ~ .checkmark {
-    background-color: #2196F3;
+        background-color: #2196F3;
     }
 
     /* Create the indicator (the dot/circle - hidden when not checked) */
     .checkmark:after {
-    content: "";
-    position: absolute;
-    display: none;
+        content: "";
+        position: absolute;
+        display: none;
     }
 
     /* Show the indicator (dot/circle) when checked */
     .container input:checked ~ .checkmark:after {
-    display: block;
+        display: block;
     }
 
     /* Style the indicator (dot/circle) */
     .container .checkmark:after {
-    top: 9px;
-    left: 9px;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: white;
+        top: 9px;
+        left: 9px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: white;
     }
 
     .key_exists {
         /* width: 100%; */
         /* padding: 25px; */
-        background-color: coral !important;
+        background-color: #ff7f5082 !important;
         /* color: white; */
         /* font-size: 25px; */
+    }
+
+    .chips {
+        /* border: 1px solid #ccc; */
+        /* background-color: #f1f1f1; */
+        border-radius: 2px;
+        /* margin: 20px; */
+        
+        display: block;
+        width: 100%;
+        max-width: 100%;
+        
+        /* input {
+            border: none;
+            appearance: none;
+        } */
+
+        .keywords-field {
+            width: 100%;
+            height: auto;
+            min-height: 34px;
+            /* border: 2px solid #737679; */
+            /* padding: 8px; */
+            margin: 8px;
+            cursor: text;
+            border-radius: 3px;
+            box-shadow: 0 2px 6px rgba(25,25,25,0.2);
+        }
+
+        /* .chip {
+            background-color: dodgerblue;
+        } */
+
+        .chip {
+            display: inline-block;
+            width: auto;
+            background-color: lightblue;
+            /* color: #fff; */
+            border-radius: 16px;
+            margin-left: 2px;
+            margin-right: 2px;
+            padding: 3px 0px 3px 16px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .chips .chip {
+            float: left;
+        }
+
+        .chip--button {
+            padding: 2px 6px 2px 6px;
+            margin-left: 8px;
+            border-radius: 16px;
+            background-color: rgba(0, 0, 0, 0.15);
+            display: inline-block;
+        }
+
+        .chip--text {
+            /* border: 1px solid #ccc; */
+            /* border-radius: 2px; */
+            /* padding: 8px; */
+            display: inline-block;
+            /* pointer-events: none */
+        }
+
+        > input{
+            padding: 15px;
+            display: block;
+            box-sizing: border-box;
+            width: 100%;
+            height: 34px;
+            border: none;
+            margin: 5px 0 0;
+            display: inline-block;
+            /* background-color: transparent; */
+        }
     }
 </style>
 
@@ -166,6 +247,7 @@
 
     <select name="type1" id="type1">
         <option value="@article">article</option>
+        <option value="@book">book</option>
         <option value="@inproceedings">inproceedings</option>
         <option value="@incollection">incollection</option>
         <option value="@inbook">inbook</option>
@@ -187,9 +269,9 @@
     <input type="text" id="title" name="title" placeholder="Title">
 
     <!-- <label for="author">Author:</label> -->
-    <div class="autocomplete">
-        <!-- onKeyUp="showAuthorResults(this.value)" -->
-        <input type="text" id="author" name="author" placeholder="Author">
+    <div class="autocomplete keywords-field">
+        <input type="text" id="author" name="author" autocomplete="off" class="chip-input" placeholder="Author">
+        <div class="chips"></div>
     </div>
 
     <!-- <label for="journal">Journal:</label> -->
@@ -207,8 +289,13 @@
     <!-- <label for="type">Type:</label> -->
     <input type="text" id="type" name="type" placeholder="Type">
 
-    <input type="text" id="keywords" name="keywords" placeholder="Keywords">
+    <input type="text" id="publisher" name="publisher" placeholder="Publisher">
 
+    <div class="autocomplete keywords-field">
+        <input type="text" id="keywords" name="keywords" autocomplete="off" class="chip-input" placeholder="Keywords">
+        <div class="chips"></div>
+    </div>
+      
     <input type="submit" value="Submit">
 </form>
 
@@ -222,23 +309,84 @@
     </pre>
 </div>
 
-
 <script type="module">
     import { statusAppend, getWebPage } from 'https://lclem.github.io/librarian/theme/js/util.js';
 
     const form = document.getElementById('newEntryForm');
     const bibtexCode = document.querySelector('.bibtexCode');
+    const inputKey = document.getElementById('key');
+    const inputKeywords = document.getElementById('keywords');
+    const inputAuthor = document.getElementById("author");
+    const div_key = document.getElementById('div_key');
+
+    function keyExists() {
+        const key = form.elements.key.value;
+        return keys.includes(key);
+    }
+
+    const listenerBuildBibString = () => {
+        const bibStr = buildBibString();
+        bibtexCode.textContent = bibStr;
+
+        // check that the key does not exist already
+        
+        if (keyExists()) {
+            inputKey.classList.add("key_exists");
+        }
+        else {
+            inputKey.classList.remove("key_exists");
+        }
+    };
+
+    function loadTextArray(fileName, callback) {
+        getWebPage("{{ SITEURL }}/" + fileName, (text) => {
+            const entries = text.split("\n");
+            statusAppend(`loaded ${entries.length} entries from ${fileName}`);
+            callback(entries);
+        });
+    }
+
+    var keywords = [];
+    loadTextArray("keywords.txt", (entries) => {
+        keywords = entries;
+        autocomplete(inputKeywords, keywords, keyword => {
+            // additional callback when the user enters a new keyword
+            // addKeyword(inputKeywords, keyword);
+            // inputKeywords.value = '';
+        });
+    });
 
     var authors = [];
-    getWebPage("{{ SITEURL }}" + "/authors.txt", (text) => {
-        authors = text.split("\n");
-        statusAppend(`loaded ${authors.length} authors`);
-        autocomplete(document.getElementById("author"), authors);
+    loadTextArray("authors.txt", (entries) => {
+        authors = entries;
+        autocomplete(inputAuthor, authors, author => {
+            // additional callback when the user enters a new keyword
+            // addKeyword(inputAuthor, author);
+            // inputAuthor.value = '';
+        });
     });
 
     var keys = [];
-    const inputKey = document.getElementById('key');
-    const div_key = document.getElementById('div_key');
+    loadTextArray("keys.txt", (entries) => {
+        keys = entries;
+        inputKey.addEventListener("input", (event) => {
+            const key = form.elements.key.value;
+            console.log("recorded: " + key);
+
+            div_key.innerHTML = '';
+
+            const matches = keyMatches(key);
+
+            if (matches.length == 0)
+                return;
+
+            let list = '';
+            for (var i = 0; i < matches.length; i++) {
+                list += '<li>' + matches[i] + '</li>';
+            }
+            div_key.innerHTML = '<ul>' + list + '</ul>';
+            });
+    });
 
     function keyMatches(key) {
         if (key == '')
@@ -254,63 +402,79 @@
         return matches;
     }
 
-    getWebPage("{{ SITEURL }}" + "/keys.txt", (text) => {
-        keys = text.split("\n");
-        statusAppend(`loaded ${authors.length} keys`);
-        document.getElementById("key").addEventListener("input", (event) => {
-
-            const key = form.elements.key.value;
-            console.log("recorded: " + key);
-
-            div_key.innerHTML = '';
-
-            const matches = keyMatches(key);
-
-            if (matches.length == 0)
-                return;
-
-            // console.log("res: " + res);
-            
-            let list = '';
-            for (var i = 0; i < matches.length; i++) {
-                list += '<li>' + matches[i] + '</li>';
-            }
-            div_key.innerHTML = '<ul>' + list + '</ul>';
-        });
+    const allChips = document.querySelectorAll(".chips");
+    // console.log(allChips);
+    
+    const observerConfig = { attributes: true, childList: true, subtree: true };
+    const observer = new MutationObserver(listenerBuildBibString);
+    allChips.forEach(chips => {
+        // console.log(chips);
+        observer.observe(chips, observerConfig);
     });
 
-    function keyExists() {
-        const key = form.elements.key.value;
-        return keys.includes(key);
+    function addKeyword(target, keyword) {
+        // console.log(target);
+        const divSibling = target.nextElementSibling;
+        divSibling.appendChild((() => {
+            var _chip = document.createElement('div');
+
+            _chip.classList.add('chip');
+            _chip.addEventListener('click', chipClickHandler);
+
+            _chip.append(
+                (() => {
+                    var _chip_text = document.createElement('span');
+                    _chip_text.classList.add('chip--text');
+                    _chip_text.innerHTML = keyword;
+
+                    return _chip_text;
+                })(),
+                (() => {
+                    var _chip_button = document.createElement('span');
+                    _chip_button.classList.add('chip--button');
+                    _chip_button.innerHTML = '<strong>x</strong>';
+
+                    return _chip_button;
+                })()
+            );
+
+            return _chip;
+        })());
     }
 
-    const listener = (event) => {
-            const bibStr = buildBibString();
-            bibtexCode.textContent = bibStr;
-
-            // check that the key does not exist already
-            
-            if (keyExists()) {
-                inputKey.classList.add("key_exists");
+    function addChipListener(element) {
+        element.addEventListener('keypress', (event) => {
+            const target = event.target;
+            const value = target.value;
+            if(event.which === 13 && value !== "") {
+                event.preventDefault();
+                addKeyword(target, value);
+                target.value = '';
             }
-            else {
-                inputKey.classList.remove("key_exists");
-            }
-        };
+        });
 
-    document.querySelector("select").addEventListener("input", listener);
+    };
+
+    addChipListener(inputKeywords);
+    addChipListener(inputAuthor);
+    
+    function chipClickHandler(event){
+        const target = event.currentTarget;
+        const parent = target.parentNode;
+        parent.removeChild(target);
+    }
+
+    document.querySelector("select").addEventListener("input", listenerBuildBibString);
 
     for (const input of document.querySelectorAll("input")) {
-        if(input.parentElement.tagName == "FORM" || input.parentElement.tagName == "DIV") {
+        // if(input.parentElement.tagName == "FORM" || input.parentElement.tagName == "DIV") {
             // console.log("adding input event listener")
             // console.log(input)
-
-            input.addEventListener("input", listener);
-            input.addEventListener("beforeinput", listener);
-            input.addEventListener("change", listener);
-            input.addEventListener("keydown", listener);
-            
-        }
+            input.addEventListener("input", listenerBuildBibString);
+            input.addEventListener("beforeinput", listenerBuildBibString);
+            input.addEventListener("change", listenerBuildBibString);
+            input.addEventListener("keydown", listenerBuildBibString);
+        // }
     }
 
     function preventDefaults(e) {
@@ -318,27 +482,41 @@
         e.stopPropagation();
     }
 
+    function chips2string(element) {
+        const chips = Array.from(element.parentElement.querySelectorAll(".chip--text").values());
+        return chips.map(chip => {
+            return chip.textContent;
+        }).join(" and ");
+    }
+
     function buildBibString() {
 
         const key = form.elements.key.value;
         const title = form.elements.title.value;
-        const author = form.elements.author.value;
+        // const author = form.elements.author.value;
         const type1 = form.elements.type1.value;
+
+        const keywordsStr = chips2string(inputKeywords);
+        const author = chips2string(inputAuthor);
 
         var bibStr = `${type1}{${key},
                 author = {${author}},
                 title = {${title}}`;
 
-        function addIfDefined(str, field) {
-            var value = form.elements[field].value;
-
+        function mkBibField(field, value) {
             if (typeof value !== "undefined")
                 value = value.trim();
 
             if (value !== "")
-                str += `,
+                return `,
                 ${field} = {${value}}`;
-            
+            else
+                return "";
+        }
+
+        function addIfDefined(str, field) {
+            var value = form.elements[field].value;
+            str += mkBibField(field, value);
             return str;
         }
 
@@ -347,7 +525,11 @@
         bibStr = addIfDefined(bibStr, "pages");
         bibStr = addIfDefined(bibStr, "doi");
         bibStr = addIfDefined(bibStr, "type");
-        bibStr = addIfDefined(bibStr, "keywords");
+        bibStr = addIfDefined(bibStr, "publisher");
+
+        // console.log(`buildBibString, keywords: ${keywordsStr}`);
+        bibStr += mkBibField("keywords", keywordsStr);
+        // bibStr = addIfDefined(bibStr, "keywords");
 
         bibStr += "}";
 
@@ -366,7 +548,7 @@
 
     }, false);
     
-    function autocomplete(inp, arr) {
+    function autocomplete(inp, arr, callback = null) {
         /*the autocomplete function takes two arguments,
         the text field element and an array of possible autocompleted values:*/
         var currentFocus;
@@ -387,22 +569,27 @@
             for (i = 0; i < arr.length; i++) {
                 /*check if the item starts with the same letters as the text field value:*/
                 if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
-                /*create a DIV element for each matching element:*/
-                b = document.createElement("DIV");
-                /*make the matching letters bold:*/
-                b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
-                b.innerHTML += arr[i].substr(val.length);
-                /*insert a input field that will hold the current array item's value:*/
-                b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
-                /*execute a function when someone clicks on the item value (DIV element):*/
-                b.addEventListener("click", function(e) {
-                    /*insert the value for the autocomplete text field:*/
-                    inp.value = this.getElementsByTagName("input")[0].value;
-                    /*close the list of autocompleted values,
-                    (or any other open lists of autocompleted values:*/
-                    closeAllLists();
-                });
-                a.appendChild(b);
+                    /*create a DIV element for each matching element:*/
+                    b = document.createElement("DIV");
+                    /*make the matching letters bold:*/
+                    b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+                    b.innerHTML += arr[i].substr(val.length);
+                    /*insert a input field that will hold the current array item's value:*/
+                    b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+                    /*execute a function when someone clicks on the item value (DIV element):*/
+                    b.addEventListener("click", function(e) {
+                        console.log("autocomplete child click");
+                        /*insert the value for the autocomplete text field:*/
+                        const result = this.getElementsByTagName("input")[0].value;
+                        inp.value = result;
+                        e.preventDefault();
+                        // if (callback)
+                            // callback(result);
+                        /*close the list of autocompleted values,
+                        (or any other open lists of autocompleted values:*/
+                        closeAllLists();
+                    });
+                    a.appendChild(b);
                 }
             }
         });
@@ -410,7 +597,8 @@
         /*execute a function presses a key on the keyboard:*/
         inp.addEventListener("keydown", function(e) {
             var x = document.getElementById(this.id + "autocomplete-list");
-            if (x) x = x.getElementsByTagName("div");
+            if (x)
+                x = x.getElementsByTagName("div");
             if (e.keyCode == 40) {
                 /*If the arrow DOWN key is pressed,
                 increase the currentFocus variable:*/
@@ -425,21 +613,28 @@
                 addActive(x);
             } else if (e.keyCode == 13) {
                 /*If the ENTER key is pressed, prevent the form from being submitted,*/
-                e.preventDefault();
+                if (callback == null && x != null) {
+                    console.log("autocomplete: preventing default");
+                    e.preventDefault();
+                }
                 if (currentFocus > -1) {
                 /*and simulate a click on the "active" item:*/
-                if (x) x[currentFocus].click();
+                    if (x) {
+                        console.log(x);
+                        x[currentFocus].click();
+                    }
                 }
             }
         });
 
         function addActive(x) {
             /*a function to classify an item as "active":*/
-            if (!x) return false;
+            if (!x)
+                return false;
             /*start by removing the "active" class on all items:*/
             removeActive(x);
             if (currentFocus >= x.length) currentFocus = 0;
-            if (currentFocus < 0) currentFocus = (x.length - 1);
+            if (currentFocus < 0) currentFocus = x.length - 1;
             /*add class "autocomplete-active":*/
             x[currentFocus].classList.add("autocomplete-active");
         }
@@ -464,9 +659,12 @@
 
         /*execute a function when someone clicks in the document:*/
         document.addEventListener("click", function (e) {
+            // console.log("click detected");
+            // listenerBuildBibString();
             closeAllLists(e.target);
         });
     }
 
+    listenerBuildBibString();
 </script>
 {% endblock content %}
