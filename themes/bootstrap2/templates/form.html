@@ -336,27 +336,12 @@
 
     // utilities
     // given a url fetch its contents and invoke the callback function on the result
-    export async function getWebPageAdvanced(theUrl,
-        doneCallback,
-        loadStartCallback = null,
-        loadCallback = null,
-        loadEndCallback = null,
-        progressCallback = null,
-        errorCallback = null,
-        abortCallback = null) {
+    export async function getWebPageAdvanced(theUrl, doneCallback, callback) {
 
         var xmlhttp = getXmlHttp();
 
-        xmlhttp.addEventListener("loadstart", loadStartCallback);
-        xmlhttp.addEventListener("load", loadCallback);
-        xmlhttp.addEventListener("loadend", loadEndCallback);
-        xmlhttp.addEventListener("progress", progressCallback);
-        xmlhttp.addEventListener("error", errorCallback);
-        xmlhttp.addEventListener("abort", abortCallback);
-
-        xmlhttp.upload.onprogress = progressCallback;
-
-        xmlhttp.onreadystatechange = async function() {
+        xmlhttp.onreadystatechange = async e => {
+            console.log(e);
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                 let res = xmlhttp.responseText;
                 // console.log("res: " + res);
@@ -368,7 +353,14 @@
         }
 
         try {
-            xmlhttp.open("GET", theUrl, false);
+            xmlhttp.open("GET", theUrl, true);
+            xmlhttp.onabort = callback;
+            xmlhttp.onerror = callback;
+            xmlhttp.onload = callback;
+            xmlhttp.onloadend = callback;
+            xmlhttp.onloadstart = callback;
+            xmlhttp.onprogress = callback;
+            xmlhttp.ontimeout = callback;
             xmlhttp.send();
         } catch (err) {
             statusAppend('GET error: ', err);
@@ -395,45 +387,12 @@
         }
     };
 
-    function loadTextArray(fileName, callback, loadCallback = null, loadEndCallback = null) {
-        // getWebPageAdvanced(theUrl, doneCallback, loadStartCallback, loadCallback, loadEndCallback, progressCallback, errorCallback, abortCallback)
-        getWebPageAdvanced("{{ SITEURL }}/" + fileName, (text) => {
+    async function loadTextArray(fileName, callback, callback1) {
+        getWebPageAdvanced("{{ SITEURL }}/" + fileName, async (text) => {
             const entries = text.split("\n");
             statusAppend(`loaded ${entries.length} entries from ${fileName}`);
             callback(entries);
-        },
-        (e) => { //loadStartCallback
-            console.log(e);
-            if (loadStartCallback)
-                loadStartCallback(e);
-        },
-        (e) => { //loadCallback
-            // console.log("loadCallback");
-            console.log(e);
-            if (loadCallback)
-                loadCallback(e);
-        },
-        (e) => { //loadEndCallback
-            // console.log("loadEndCallback");
-            console.log(e);
-            if (loadEndCallback)
-                loadEndCallback(e);
-        },
-        (e) => { //progressCallback
-            console.log(e);
-            if (progressCallback)
-                progressCallback(e);
-        },
-        (e) => { //errorCallback
-            console.log(e);
-            if (errorCallback)
-                errorCallback(e);
-        },
-        (e) => { //abortCallback
-            console.log(e);
-            if (abortCallback)
-                abortCallback(e);
-        });
+        }, callback1);
     }
 
     var keywords = [];
@@ -449,8 +408,7 @@
     var authors = [];
     const authorProgressBar = document.getElementById("author-progress");
     loadTextArray("authors.txt",
-    // doneCallback, loadStartCallback, loadCallback, loadEndCallback, progressCallback, errorCallback, abortCallback)
-        entries => { // doneCallback
+        entries => { // callback
             authors = entries;
             autocomplete(inputAuthor, authors, author => {
                 // additional callback when the user enters a new keyword
@@ -458,33 +416,25 @@
                 // inputAuthor.value = '';
             })
         },
-        event => { //loadStartCallback
-            console.log("loadTextArray - loadStartCallback");
-            authorProgressBar.style.width = "0%";
-            authorProgressBar.style.opacity = 100;
-
-        },
-        event => { //load callback
-            console.log("loadTextArray - loadCallback");
-            // authorProgressBar.style.width = "0%";
-            // authorProgressBar.style.opacity = 100;
-
-        },
-        event => { // load end callback
-            console.log("loadTextArray - loadEndCallback");
-            authorProgressBar.style.width = "100%";
-            authorProgressBar.style.opacity = 0;
-        },
-        event => { //progressCallback
-            console.log("loadTextArray - progressCallback");
-            authorProgressBar.style.width = "0%";
-            if (event.lengthComputable) {
-                const percentComplete = event.loaded / event.total * 100;
-                authorProgressBar.style.width = `${percentComplete}%`;
-                console.log(percentComplete);
-            } else if (event.loaded)
-                // we only know the received amount and not the total amount
-                console.log('downloaded:', event.loaded);
+        event => { // callback1
+            console.log(event);
+            if (event.type == "load") {
+                authorProgressBar.style.width = "0%";
+                authorProgressBar.style.opacity = 100;
+            }
+            else if (event.type == "loadend") {
+                authorProgressBar.style.opacity = 0;
+                authorProgressBar.style.width = "100%";
+            }
+            else if (event.type == "progress") {
+                if (event.lengthComputable) {
+                    const percentComplete = event.loaded / event.total * 100;
+                    authorProgressBar.style.width = `${percentComplete}%`;
+                    console.log(percentComplete);
+                } else if (event.loaded)
+                    // we only know the received amount and not the total amount
+                    console.log('downloaded:', event.loaded);
+            }
         });
 
     var keys = [];
