@@ -243,12 +243,9 @@
 
     }
 
-    .author-progress {
+    .progress-bar {
         position: absolute;
         display: block;
-        content: "ciao";
-        /* opacity: 100; */
-        /* width: 100%; */
         bottom: 1px;
         background-color: var(--stork-accent-color);
         box-shadow: 0 0 8px var(--stork-accent-color);
@@ -275,9 +272,12 @@
     </select>
 
     <!-- <label for="key">Key:</label> -->
-    <input type="text" id="key" name="key" class="bibtexInput" placeholder="Key">
-        <div class="div_key" id="div_key"></div>
-    </input>
+    <div class="autocomplete keywords-field">
+        <input type="text" id="key" name="key" class="bibtexInput" placeholder="Key">
+            <div class="div_key" id="div_key"></div>
+        </input>
+        <div class="progress-bar" id="key-progress"></div>
+    </div>
 
     <!-- <label for="title">Title:</label> -->
     <input type="text" id="title" name="title" placeholder="Title">
@@ -285,7 +285,7 @@
     <!-- <label for="author">Author:</label> -->
     <div class="autocomplete keywords-field">
         <input type="text" id="author" name="author" autocomplete="off" class="chip-input" placeholder="Author">
-        <div class="author-progress" id="author-progress"></div>
+        <div class="progress-bar" id="author-progress"></div>
         <div class="chips"></div>
     </div>
 
@@ -308,6 +308,7 @@
 
     <div class="autocomplete keywords-field">
         <input type="text" id="keywords" name="keywords" autocomplete="off" class="chip-input" placeholder="Keywords">
+        <div class="progress-bar" id="keywords-progress"></div>
         <div class="chips"></div>
     </div>
       
@@ -341,14 +342,14 @@
         var xmlhttp = getXmlHttp();
 
         xmlhttp.onreadystatechange = async e => {
-            console.log(e);
+            // console.log(e);
             if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
                 let res = xmlhttp.responseText;
                 // console.log("res: " + res);
                 doneCallback(res);
             }
             else {
-                statusAppend("status: " + xmlhttp.status);
+                // statusAppend("status: " + xmlhttp.status);
             }
         }
 
@@ -387,23 +388,48 @@
         }
     };
 
-    async function loadTextArray(fileName, callback, callback1) {
-        getWebPageAdvanced("{{ SITEURL }}/" + fileName, async (text) => {
+    async function loadTextArray(fileName, callback, progressBar = null) {
+        getWebPageAdvanced("{{ SITEURL }}/" + fileName, async text => {
             const entries = text.split("\n");
             statusAppend(`loaded ${entries.length} entries from ${fileName}`);
             callback(entries);
-        }, callback1);
+        }, async event => {
+            console.log(event);
+            if (progressBar == null){
+                console.log('progress bar is null, ignoring');
+                return;
+            }
+            else if (event.type == "load") {
+                progressBar.style.width = "0%";
+                progressBar.style.opacity = 100;
+            }
+            else if (event.type == "loadend") {
+                progressBar.style.opacity = 0;
+                progressBar.style.width = "100%";
+            }
+            else if (event.type == "progress") {
+                progressBar.style.opacity = 100;
+                if (event.lengthComputable) {
+                    const percentComplete = event.loaded / event.total * 100;
+                    progressBar.style.width = `${percentComplete}%`;
+                    // console.log(percentComplete);
+                } else if (event.loaded)
+                    // we only know the received amount and not the total amount
+                    console.log('downloaded:', event.loaded);
+            }
+        });
     }
 
     var keywords = [];
-    loadTextArray("keywords.txt", (entries) => {
+    const keywordsProgressBar = document.getElementById("keywords-progress");
+    loadTextArray("keywords.txt", entries => {
         keywords = entries;
         autocomplete(inputKeywords, keywords, keyword => {
             // additional callback when the user enters a new keyword
             // addKeyword(inputKeywords, keyword);
             // inputKeywords.value = '';
         });
-    });
+    }, keywordsProgressBar);
 
     var authors = [];
     const authorProgressBar = document.getElementById("author-progress");
@@ -415,32 +441,13 @@
                 // addKeyword(inputAuthor, author);
                 // inputAuthor.value = '';
             })
-        },
-        event => { // callback1
-            console.log(event);
-            if (event.type == "load") {
-                authorProgressBar.style.width = "0%";
-                authorProgressBar.style.opacity = 100;
-            }
-            else if (event.type == "loadend") {
-                authorProgressBar.style.opacity = 0;
-                authorProgressBar.style.width = "100%";
-            }
-            else if (event.type == "progress") {
-                if (event.lengthComputable) {
-                    const percentComplete = event.loaded / event.total * 100;
-                    authorProgressBar.style.width = `${percentComplete}%`;
-                    console.log(percentComplete);
-                } else if (event.loaded)
-                    // we only know the received amount and not the total amount
-                    console.log('downloaded:', event.loaded);
-            }
-        });
+        }, authorProgressBar);
 
     var keys = [];
-    loadTextArray("keys.txt", (entries) => {
+    const keysProgressBar = document.getElementById("key-progress");
+    loadTextArray("keys.txt", entries => {
         keys = entries;
-        inputKey.addEventListener("input", (event) => {
+        inputKey.addEventListener("input", event => {
             const key = form.elements.key.value;
             console.log("recorded: " + key);
 
@@ -457,14 +464,14 @@
             }
             div_key.innerHTML = '<ul>' + list + '</ul>';
             });
-    });
+    }, keysProgressBar);
 
     function keyMatches(key) {
         if (key == '')
             return [];
 
         var reg = new RegExp(key)
-        const matches = keys.filter( (term) => {
+        const matches = keys.filter(term => {
             if (term.match(reg)) {
             return term;
             }
@@ -514,7 +521,7 @@
     }
 
     function addChipListener(element) {
-        element.addEventListener('keypress', (event) => {
+        element.addEventListener('keypress', event => {
             const target = event.target;
             const value = target.value;
             if(event.which === 13 && value !== "") {
@@ -608,7 +615,7 @@
     }
 
     form.addEventListener('submit', preventDefaults, false);
-    form.addEventListener('submit', (event) => {
+    form.addEventListener('submit', event => {
         var bibStr = buildBibString();
         console.log("submit: " + bibStr);
 
