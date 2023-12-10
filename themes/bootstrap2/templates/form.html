@@ -240,6 +240,20 @@
             display: inline-block;
             /* background-color: transparent; */
         }
+
+    }
+
+    .author-progress {
+        position: absolute;
+        display: block;
+        content: "ciao";
+        /* opacity: 100; */
+        /* width: 100%; */
+        bottom: 1px;
+        background-color: var(--stork-accent-color);
+        box-shadow: 0 0 8px var(--stork-accent-color);
+        height: 1px;
+        transition: width 0.25s ease, opacity 0.4s ease 0.4s;
     }
 </style>
 
@@ -271,6 +285,7 @@
     <!-- <label for="author">Author:</label> -->
     <div class="autocomplete keywords-field">
         <input type="text" id="author" name="author" autocomplete="off" class="chip-input" placeholder="Author">
+        <div class="author-progress" id="author-progress"></div>
         <div class="chips"></div>
     </div>
 
@@ -310,7 +325,7 @@
 </div>
 
 <script type="module">
-    import { statusAppend, getWebPage } from 'https://lclem.github.io/librarian/theme/js/util.js';
+    import { statusAppend, getWebPage, getXmlHttp } from 'https://lclem.github.io/librarian/theme/js/util.js';
 
     const form = document.getElementById('newEntryForm');
     const bibtexCode = document.querySelector('.bibtexCode');
@@ -318,6 +333,48 @@
     const inputKeywords = document.getElementById('keywords');
     const inputAuthor = document.getElementById("author");
     const div_key = document.getElementById('div_key');
+
+    // utilities
+    // given a url fetch its contents and invoke the callback function on the result
+    export async function getWebPageAdvanced(theUrl,
+        doneCallback,
+        loadStartCallback = null,
+        loadCallback = null,
+        loadEndCallback = null,
+        progressCallback = null,
+        errorCallback = null,
+        abortCallback = null) {
+
+        var xmlhttp = getXmlHttp();
+
+        xmlhttp.addEventListener("loadstart", loadStartCallback);
+        xmlhttp.addEventListener("load", loadCallback);
+        xmlhttp.addEventListener("loadend", loadEndCallback);
+        xmlhttp.addEventListener("progress", progressCallback);
+        xmlhttp.addEventListener("error", errorCallback);
+        xmlhttp.addEventListener("abort", abortCallback);
+
+        xmlhttp.upload.onprogress = progressCallback;
+
+        xmlhttp.onreadystatechange = async function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                let res = xmlhttp.responseText;
+                // console.log("res: " + res);
+                doneCallback(res);
+            }
+            else {
+                statusAppend("status: " + xmlhttp.status);
+            }
+        }
+
+        try {
+            xmlhttp.open("GET", theUrl, false);
+            xmlhttp.send();
+        } catch (err) {
+            statusAppend('GET error: ', err);
+        }
+
+    }
 
     function keyExists() {
         const key = form.elements.key.value;
@@ -338,11 +395,44 @@
         }
     };
 
-    function loadTextArray(fileName, callback) {
-        getWebPage("{{ SITEURL }}/" + fileName, (text) => {
+    function loadTextArray(fileName, callback, loadCallback = null, loadEndCallback = null) {
+        // getWebPageAdvanced(theUrl, doneCallback, loadStartCallback, loadCallback, loadEndCallback, progressCallback, errorCallback, abortCallback)
+        getWebPageAdvanced("{{ SITEURL }}/" + fileName, (text) => {
             const entries = text.split("\n");
             statusAppend(`loaded ${entries.length} entries from ${fileName}`);
             callback(entries);
+        },
+        (e) => { //loadStartCallback
+            console.log(e);
+            if (loadStartCallback)
+                loadStartCallback(e);
+        },
+        (e) => { //loadCallback
+            // console.log("loadCallback");
+            console.log(e);
+            if (loadCallback)
+                loadCallback(e);
+        },
+        (e) => { //loadEndCallback
+            // console.log("loadEndCallback");
+            console.log(e);
+            if (loadEndCallback)
+                loadEndCallback(e);
+        },
+        (e) => { //progressCallback
+            console.log(e);
+            if (progressCallback)
+                progressCallback(e);
+        },
+        (e) => { //errorCallback
+            console.log(e);
+            if (errorCallback)
+                errorCallback(e);
+        },
+        (e) => { //abortCallback
+            console.log(e);
+            if (abortCallback)
+                abortCallback(e);
         });
     }
 
@@ -357,14 +447,45 @@
     });
 
     var authors = [];
-    loadTextArray("authors.txt", (entries) => {
-        authors = entries;
-        autocomplete(inputAuthor, authors, author => {
-            // additional callback when the user enters a new keyword
-            // addKeyword(inputAuthor, author);
-            // inputAuthor.value = '';
+    const authorProgressBar = document.getElementById("author-progress");
+    loadTextArray("authors.txt",
+    // doneCallback, loadStartCallback, loadCallback, loadEndCallback, progressCallback, errorCallback, abortCallback)
+        entries => { // doneCallback
+            authors = entries;
+            autocomplete(inputAuthor, authors, author => {
+                // additional callback when the user enters a new keyword
+                // addKeyword(inputAuthor, author);
+                // inputAuthor.value = '';
+            })
+        },
+        event => { //loadStartCallback
+            console.log("loadTextArray - loadStartCallback");
+            authorProgressBar.style.width = "0%";
+            authorProgressBar.style.opacity = 100;
+
+        },
+        event => { //load callback
+            console.log("loadTextArray - loadCallback");
+            // authorProgressBar.style.width = "0%";
+            // authorProgressBar.style.opacity = 100;
+
+        },
+        event => { // load end callback
+            console.log("loadTextArray - loadEndCallback");
+            authorProgressBar.style.width = "100%";
+            authorProgressBar.style.opacity = 0;
+        },
+        event => { //progressCallback
+            console.log("loadTextArray - progressCallback");
+            authorProgressBar.style.width = "0%";
+            if (event.lengthComputable) {
+                const percentComplete = event.loaded / event.total * 100;
+                authorProgressBar.style.width = `${percentComplete}%`;
+                console.log(percentComplete);
+            } else if (event.loaded)
+                // we only know the received amount and not the total amount
+                console.log('downloaded:', event.loaded);
         });
-    });
 
     var keys = [];
     loadTextArray("keys.txt", (entries) => {
