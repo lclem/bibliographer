@@ -259,16 +259,22 @@
     <select name="type1" id="type1">
         <option value="@article">article</option>
         <option value="@book">book</option>
-        <option value="@inproceedings">inproceedings</option>
-        <option value="@incollection">incollection</option>
+        <option value="@booklet">booklet</option>
+        <option value="@commented">commented</option>
+        <option value="@conference">conference</option>
         <option value="@inbook">inbook</option>
-        <option value="@techreport">techreport</option>
-        <option value="@phdthesis">phdthesis</option>
-        <option value="@masterthesis">masterthesis</option>
+        <option value="@incollection">incollection</option>
+        <option value="@inproceedings">inproceedings</option>
         <option value="@manual">manual</option>
+        <option value="@masterthesis">masterthesis</option>
         <option value="@misc">misc</option>
+        <option value="@periodical">periodical</option>
+        <option value="@phdthesis">phdthesis</option>
+        <option value="@proceedings">proceedings</option>
+        <option value="@techreport">techreport</option>
         <option value="@unpublished">unpublished</option>
         <option value="@url">url</option>
+        <option value="@webpage">webpage</option>
     </select>
 
     <div class="autocomplete keywords-field">
@@ -286,14 +292,29 @@
         <div class="progress-bar" id="author-progress"></div>
     </div>
 
+    <input type="text" id="booktitle" name="booktitle" placeholder="Booktitle">
+    <input type="text" id="editor" name="editor" placeholder="Editor">
+    <input type="text" id="note" name="note" placeholder="Note">
+    <input type="text" id="howpublished" name="howpublished" placeholder="Howpublished">
+    <input type="text" id="address" name="address" placeholder="Address">
     <input type="text" id="journal" name="journal" placeholder="Journal">
     <input type="text" id="year" name="year" placeholder="Year">
+    <input type="text" id="volume" name="volume" placeholder="Volume">
+    <input type="text" id="volumetitle" name="volumetitle" placeholder="Volumetitle">
+    <input type="text" id="number" name="number" placeholder="Number">
+    <input type="text" id="chapter" name="chapter" placeholder="Chapter">
+    <input type="text" id="series" name="series" placeholder="Series">
+    <input type="text" id="edition" name="edition" placeholder="Edition">
     <input type="text" id="pages" name="pages" placeholder="Pages">
+    <input type="text" id="month" name="month" placeholder="Month">
     <input type="text" id="school" name="school" placeholder="School">
-    <input type="text" id="editor" name="editor" placeholder="Editor">
+    <input type="text" id="organisation" name="organisation" placeholder="Organisation">
+    <input type="text" id="institution" name="institution" placeholder="Institution">
     <input type="text" id="doi" name="doi" placeholder="DOI">
     <input type="text" id="type" name="type" placeholder="Type">
     <input type="text" id="publisher" name="publisher" placeholder="Publisher">
+    <input type="text" id="url" name="url" placeholder="Url">
+    <input type="text" id="lastchecked" name="lastchecked" placeholder="Lastchecked">
 
     <div class="autocomplete keywords-field">
         <input type="text" id="keywords" name="keywords" autocomplete="off" class="chip-input" placeholder="Keywords"/>
@@ -585,14 +606,29 @@
             return str;
         }
 
+        bibStr = addIfDefined(bibStr, "booktitle");
+        bibStr = addIfDefined(bibStr, "editor");
+        bibStr = addIfDefined(bibStr, "note");
+        bibStr = addIfDefined(bibStr, "howpublished");
+        bibStr = addIfDefined(bibStr, "address");
         bibStr = addIfDefined(bibStr, "journal");
         bibStr = addIfDefined(bibStr, "year");
+        bibStr = addIfDefined(bibStr, "volume");
+        bibStr = addIfDefined(bibStr, "volumetitle");
+        bibStr = addIfDefined(bibStr, "number");
+        bibStr = addIfDefined(bibStr, "chapter");
+        bibStr = addIfDefined(bibStr, "series");
+        bibStr = addIfDefined(bibStr, "edition");
         bibStr = addIfDefined(bibStr, "pages");
+        bibStr = addIfDefined(bibStr, "month");
         bibStr = addIfDefined(bibStr, "school");
-        bibStr = addIfDefined(bibStr, "editor");
+        bibStr = addIfDefined(bibStr, "organisation");
+        bibStr = addIfDefined(bibStr, "institution");
         bibStr = addIfDefined(bibStr, "doi");
         bibStr = addIfDefined(bibStr, "type");
         bibStr = addIfDefined(bibStr, "publisher");
+        bibStr = addIfDefined(bibStr, "url");
+        bibStr = addIfDefined(bibStr, "lastchecked");
 
         bibStr += mkBibField("keywords", keywordsStr);
         bibStr += "}";
