@@ -56,8 +56,8 @@
                 {% endfor %}
         {% elif article.pdffile %}
                 [<a href="{{ GITHUB_VIEW_URL }}/{{ article.pdffile | urlencode }}" target="_blank">pdf</a> |
-                 <a href="pdfefile:///SyncedFolders/bibliographer/{{ article.pdffile | replace('./', '', 1) | urlencode | replace(":","%3A") }}">pdfe1</a> | 
-                 <a href="pdfefile:///SyncedFolders/bibliographer/{{ article.pdffile | replace('./', '', 1) }}">pdfe2</a>]
+                 <a href="pdfefile:///SyncedFolders/bibliographer/{{ article.pdffile | replace('./', '', 1) | urlencode | replace(':','%3A') }}">pdfe</a>]
+                 <!-- | <a href="pdfefile:///SyncedFolders/bibliographer/{{ article.pdffile | replace('./', '', 1) }}">pdfe2</a> -->
         {% endif %}
 {% endif %}
 <span class="label">BIB</span>
@@ -67,6 +67,18 @@
         {% endif %}
         <!-- <a href="{{ SITEURL }}/{{ article.bibfile }}">[bib]</a> -->
         <a href="{{ GITHUB_EDIT_URL }}/{{ article.bibfile }}" target="_blank">[edit]</a>
+{% if article.tags %}
+        <span class="label">Tags</span>
+                {% for tag in article.tags %}
+                        <a href="{{ SITEURL }}/{{ tag.url }}"><i class="icon-tag"></i>{{ tag }}</a>
+                {% endfor %}
+{% endif %}
+<!-- {% if article.keywords %}
+        <span class="label">Keywords</span>
+                {% for keyword in article.keywords %}
+                        <a href="{{ SITEURL }}/{{ keyword.url }}"><i class="icon-tag"></i>{{ keyword }}</a>
+                {% endfor %}
+{% endif %} -->
 <span class="label">SRC</span>
         <a href="{{ GITHUB_EDIT_URL }}/{{ article.rootfolder }}" id="article_rootfolder" target="_blank">[edit]</a>
 <span class="label">FILES</span>

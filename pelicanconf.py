@@ -45,14 +45,23 @@ TRANSLATION_FEED_ATOM = None
 AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 
+TAG_FEED_ATOM = 'feeds/tags/{slug}.atom.xml'
+
 FEED_ALL_RSS = 'feeds/all.rss.xml'
 # CATEGORY_FEED_RSS = 'feeds/{slug}.rss.xml'
+# TAG_FEED_RSS = "tag/%s/feed"
 
 # STORK_INPUT_OPTIONS = {
 #     base_directory: 'output'
 # }
 
+TAG_CLOUD_STEPS = 4	#Count of different font sizes in the tag cloud
+TAG_CLOUD_MAX_ITEMS = 100	#Maximum number of tags in the cloud
+TAG_CLOUD_SORTING = "random"	#Tag cloud ordering scheme. Valid values: random, alphabetically, alphabetically-rev, size, and size-rev
+TAG_CLOUD_BADGE = True
+
 MENUITEMS = [
+        ('tags', STORK_INPUT_OPTIONS["url_prefix"] + '/tags.html'),
         ('no doi', STORK_INPUT_OPTIONS["url_prefix"] + '/nodoi.html'),
         ('no pdf', STORK_INPUT_OPTIONS["url_prefix"] + '/nopdf.html'),
         ('bad author', STORK_INPUT_OPTIONS["url_prefix"] +'/authors_bad.html'),
@@ -96,6 +105,6 @@ PAGE_URL = 'pages/{slug}/'
 PAGE_SAVE_AS = 'pages/{slug}/index.html'
 
 # Custom Home page
-DIRECT_TEMPLATES = ['index', 'author', 'archives', 'authors_bad', 'nodoi', 'nopdf', 'form']
+DIRECT_TEMPLATES = ['index', 'author', 'archives', 'authors_bad', 'nodoi', 'nopdf', 'form', 'tags']
 PAGINATED_TEMPLATES = {'index' : 20}
 TEMPLATE_PAGES = {'nopdf.html': 'nopdf.html', 'nodoi.html': 'nodoi.html', 'authors.html': 'authors.html', 'authors_bad.html': 'authors_bad.html', 'form.html': 'form.html'}
