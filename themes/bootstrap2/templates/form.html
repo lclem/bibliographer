@@ -256,25 +256,25 @@
 
 <form id="newEntryForm" autocomplete="off">
 
-    <select name="type1" id="type1">
-        <option value="@article">article</option>
-        <option value="@book">book</option>
-        <option value="@booklet">booklet</option>
-        <option value="@commented">commented</option>
-        <option value="@conference">conference</option>
-        <option value="@inbook">inbook</option>
-        <option value="@incollection">incollection</option>
-        <option value="@inproceedings">inproceedings</option>
-        <option value="@manual">manual</option>
-        <option value="@masterthesis">masterthesis</option>
-        <option value="@misc">misc</option>
-        <option value="@periodical">periodical</option>
-        <option value="@phdthesis">phdthesis</option>
-        <option value="@proceedings">proceedings</option>
-        <option value="@techreport">techreport</option>
-        <option value="@unpublished">unpublished</option>
-        <option value="@url">url</option>
-        <option value="@webpage">webpage</option>
+    <select name="entryType" id="entryType">
+        <option value="article">article</option>
+        <option value="book">book</option>
+        <option value="booklet">booklet</option>
+        <option value="commented">commented</option>
+        <option value="conference">conference</option>
+        <option value="inbook">inbook</option>
+        <option value="incollection">incollection</option>
+        <option value="inproceedings">inproceedings</option>
+        <option value="manual">manual</option>
+        <option value="masterthesis">masterthesis</option>
+        <option value="misc">misc</option>
+        <option value="periodical">periodical</option>
+        <option value="phdthesis">phdthesis</option>
+        <option value="proceedings">proceedings</option>
+        <option value="techreport">techreport</option>
+        <option value="unpublished">unpublished</option>
+        <option value="url">url</option>
+        <option value="webpage">webpage</option>
     </select>
 
     <div class="autocomplete keywords-field">
@@ -314,6 +314,7 @@
     <input type="text" id="type" name="type" placeholder="Type">
     <input type="text" id="publisher" name="publisher" placeholder="Publisher">
     <input type="text" id="url" name="url" placeholder="Url">
+    <input type="text" id="ISSN" name="ISSN" placeholder="ISSN">
     <input type="text" id="lastchecked" name="lastchecked" placeholder="Lastchecked">
 
     <div class="autocomplete keywords-field">
@@ -328,22 +329,29 @@
 <br>
 
 <div class="highlight">
+    <input type="text" id="bibtexInput" class="bibtexCode" placeholder="paste bibtex here">
+</div>
+
+<div class="highlight">
     <pre>
         <span></span>
-        <code class="bibtexCode">
+        <code class="bibtexCode" id="bibtexCode">
         </code>
     </pre>
 </div>
 
 <script type="module">
-    import { statusAppend, getWebPage, getXmlHttp } from 'https://lclem.github.io/librarian/theme/js/util.js';
+    import {statusAppend, getWebPage, getXmlHttp, lowerize} from 'https://lclem.github.io/librarian/theme/js/util.js';
 
     const form = document.getElementById('newEntryForm');
-    const bibtexCode = document.querySelector('.bibtexCode');
+    const bibtexCode = document.getElementById('bibtexCode');
     const inputKey = document.getElementById('key');
     const inputKeywords = document.getElementById('keywords');
     const inputAuthor = document.getElementById("author");
     const div_key = document.getElementById('div_key');
+    const bibtexInput = document.getElementById('bibtexInput');
+
+    const allTags = ["title", "author", "editor", "volume", "url", "doi", "number", "booktitle", "journal", "publisher", "year", "month", "pages", "ISSN", "note", "howpublished", "address", "volumetitle", "chapter", "series", "edition", "school", "organisation", "institution", "type", "lastchecked", "keywords"];
 
     // utilities
     // given a url fetch its contents and invoke the callback function on the result
@@ -397,6 +405,81 @@
             inputKey.classList.remove("key_exists");
         }
     };
+
+    bibtexInput.onpaste = e => {
+        // var sel = getTextAreaSelection(textarea);
+        // var initialLength = textarea.value.length;
+        // window.setTimeout(function() {
+        //     var val = textarea.value;
+        //     var pastedTextLength = val.length - (initialLength - sel.length);
+        //     var end = sel.start + pastedTextLength;
+        //     callback({
+        //         start: sel.start,
+        //         end: end,
+        //         length: pastedTextLength,
+        //         text: val.slice(sel.start, end)
+        //     });
+        // }, 1);
+        window.setTimeout(() => {
+            console.log("detected paste event");
+            console.log(e);
+            var text = bibtexInput.value;
+            console.log("contents: " + text);
+            handleBibPaste(text);
+        });
+    };
+
+    // Create a new 'change' event
+    const changeEvent = new Event('change');
+    const keyDownEvent = new Event('keydown');
+    const keyEnterEvent = new KeyboardEvent('keypress',  {keyCode : 13});
+
+    function modifyIfDefined(entryTags, field) {
+        const newValue = entryTags[field];
+
+        if (newValue) {
+            const element = form.elements[field];
+
+            if (field == "author" || field == "keywords") {
+                const items = newValue.split(" and ");
+                for (const item of items) {
+                    element.value = item;
+                    element.dispatchEvent(changeEvent);
+                    element.dispatchEvent(keyEnterEvent);
+                }
+            }
+            else {
+                element.value = newValue;
+                element.dispatchEvent(changeEvent);
+            }
+        }
+    }
+
+    async function handleBibPaste(bibStr) {
+        var bibJSONs = bibtexParse.toJSON(bibStr);
+        console.log(bibJSONs);
+
+        if (bibJSONs.length == 0)
+            return;
+
+        var bibJSON = bibJSONs[0];
+        console.log(bibJSON);
+
+        // populate the form
+        var key = bibJSON.citationKey;
+        inputKey.value = key;
+
+        var entryType = bibJSON.entryType;
+        form.elements["entryType"].value = entryType;
+//element.dispatchEvent(changeEvent);
+        // var sanitisedKey = sanitiseKey(key);
+        // bibJSON.citationKey = sanitisedKey;
+
+        var entryTags = lowerize(bibJSON.entryTags);
+        for (const tag of allTags)
+            modifyIfDefined(entryTags, tag);
+        
+    }
 
     async function loadTextArray(fileName, callback, progressBar = null) {
         getWebPageAdvanced("{{ SITEURL }}/" + fileName, async text => {
@@ -580,12 +663,12 @@
         const key = form.elements.key.value;
         const title = form.elements.title.value;
         // const author = form.elements.author.value;
-        const type1 = form.elements.type1.value;
+        const entryType = form.elements.entryType.value;
 
         const keywordsStr = chips2string(inputKeywords);
         const author = chips2string(inputAuthor);
 
-        var bibStr = `${type1}{${key},
+        var bibStr = `@${entryType}{${key},
                 author = {${author}},
                 title = {${title}}`;
 
@@ -606,29 +689,8 @@
             return str;
         }
 
-        bibStr = addIfDefined(bibStr, "booktitle");
-        bibStr = addIfDefined(bibStr, "editor");
-        bibStr = addIfDefined(bibStr, "note");
-        bibStr = addIfDefined(bibStr, "howpublished");
-        bibStr = addIfDefined(bibStr, "address");
-        bibStr = addIfDefined(bibStr, "journal");
-        bibStr = addIfDefined(bibStr, "year");
-        bibStr = addIfDefined(bibStr, "volume");
-        bibStr = addIfDefined(bibStr, "volumetitle");
-        bibStr = addIfDefined(bibStr, "number");
-        bibStr = addIfDefined(bibStr, "chapter");
-        bibStr = addIfDefined(bibStr, "series");
-        bibStr = addIfDefined(bibStr, "edition");
-        bibStr = addIfDefined(bibStr, "pages");
-        bibStr = addIfDefined(bibStr, "month");
-        bibStr = addIfDefined(bibStr, "school");
-        bibStr = addIfDefined(bibStr, "organisation");
-        bibStr = addIfDefined(bibStr, "institution");
-        bibStr = addIfDefined(bibStr, "doi");
-        bibStr = addIfDefined(bibStr, "type");
-        bibStr = addIfDefined(bibStr, "publisher");
-        bibStr = addIfDefined(bibStr, "url");
-        bibStr = addIfDefined(bibStr, "lastchecked");
+        for (const tag of allTags)
+            bibStr = addIfDefined(bibStr, tag);
 
         bibStr += mkBibField("keywords", keywordsStr);
         bibStr += "}";
@@ -644,7 +706,7 @@
         if (keyExists())
             console.log("key exists!");
         else
-            processBib(bibStr, "", false);
+            processBib(bibStr, "", true);
 
     }, false);
     
