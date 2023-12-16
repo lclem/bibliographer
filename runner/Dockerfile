@@ -24,7 +24,7 @@ RUN sudo apt-get install libssl-dev -y
 # RUN source "$HOME/.cargo/env"
 
 RUN cargo install stork-search --locked
-RUN pip3 install bibtexparser==2.0.0b3 "pelican[markdown]" pelican-search markdown requests BeautifulSoup4 typogrify
+RUN pip3 install bibtexparser==2.0.0b3 "pelican[markdown]" pelican-search markdown requests BeautifulSoup4 typogrify pelican-tag-cloud
 
 ENV PATH="${PATH}:/home/ubuntu/.local/bin:/home/ubuntu/.cargo/bin"
 
