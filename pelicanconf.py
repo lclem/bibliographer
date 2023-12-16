@@ -45,7 +45,17 @@ TRANSLATION_FEED_ATOM = None
 AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 
-TAG_FEED_ATOM = 'feeds/tags/{slug}.atom.xml'
+# this gives some errors such as
+# File name too long:      __init__.py:666
+# '/home/ubuntu/_work/bibliographer/bibliograp                
+# her/docs/feeds/tags/computational-complexity                
+# -cscc-algebraic-geometry-mathag-group-theory                
+# -mathgr-representation-theory-mathrt-quantum                
+# -physics-quant-ph-fos-computer-information-s                
+# ciences-fos-computer-information-sciences-fo                
+# s-mathematics-fos-mathematics-fos-physical-s                
+# ciences-fos-physical-sciences-f13.atom.xml'       
+# TAG_FEED_ATOM = 'feeds/tags/{slug}.atom.xml'
 
 FEED_ALL_RSS = 'feeds/all.rss.xml'
 # CATEGORY_FEED_RSS = 'feeds/{slug}.rss.xml'
