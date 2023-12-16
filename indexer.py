@@ -345,6 +345,11 @@ for root, dirs, files in os.walk("./library/entries"):
                                 doiNoURL = remove_prefix(doiNoURL, "http://dx.doi.org/")
                                 doiNoURL = remove_prefix(doiNoURL, "http://doi.org/")
 
+                            strippedUrl = url
+                            if strippedUrl != "":
+                                strippedUrl = remove_prefix(strippedUrl, "https://")
+                                strippedUrl = remove_prefix(strippedUrl, "http://")
+
                             pdfFiles = []
                             for pdfFile in os.listdir("./"):
                                 if pdfFile.endswith(".pdf"):
@@ -426,8 +431,9 @@ Mdfile: {os.path.join(cwd, mdfile)}\n\
 {'thedoiurl: ' + doi + NEWLINE if doi != '' else ''}\
 {'doi: ' + doiNoURL + NEWLINE if doiNoURL != '' else ''}\
 {'theurl: ' + url + NEWLINE if url != '' else ''}\
+{'Tags: ' + ', '.join(keywords) + NEWLINE if len(keywords) > 0 else ''}\
 Key: {key}\n\
-Slug: {doiNoURL if doiNoURL != '' else key}\n\
+Slug: {doiNoURL if doiNoURL != '' else strippedUrl if strippedUrl != '' else key}\n\
 engine: knitr\n"
 
                             if not len(pdfFiles) == 0:
