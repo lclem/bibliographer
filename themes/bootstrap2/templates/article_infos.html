@@ -97,11 +97,11 @@
 </footer>
 <script type="module">
         import {statusAppend, getWebPage, getXmlHttp, lowerize} from 'https://lclem.github.io/librarian/theme/js/util.js';
-        import {getWebPageAdvanced, loadTextArray, changeEvent, keyEnterEvent, preventDefaults} from '/theme/js/util.js';
-        import {autocomplete} from '/theme/js/autocomplete.js';
-        import {addChipListener, chips2string, initialiseChips} from '/theme/js/chips.js';
+        import {getWebPageAdvanced, loadTextArray, changeEvent, keyEnterEvent, preventDefaults} from '{{ SITEURL }}/theme/js/util.js';
+        import {autocomplete} from '{{ SITEURL }}/theme/js/autocomplete.js';
+        import {addChipListener, chips2string, initialiseChips} from '{{ SITEURL }}/theme/js/chips.js';
         // import {openGitHub, uploadFile} from 'https://lclem.github.io/librarian/theme/js/github.js';
-        import {uploadFileToGitHub} from '/theme/js/github.js';
+        import {uploadFileToGitHub} from '{{ SITEURL }}/theme/js/github.js';
 
         var keywords = [];
         var bibJSON = null;
