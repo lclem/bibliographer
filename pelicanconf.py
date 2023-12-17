@@ -34,6 +34,8 @@ GITHUB_URL = 'https://github.com/lclem/bibliographer'
 GITHUB_VIEW_URL = GITHUB_URL + '/tree/main'
 GITHUB_BLOB_URL = GITHUB_URL + '/blob/main'
 GITHUB_EDIT_URL = GITHUB_URL + '/edit/main'
+GITHUB_RAW_URL = 'https://raw.githubusercontent.com/lclem/bibliographer/main/'
+
 REVERSE_CATEGORY_ORDER = True
 LOCALE = 'en_US.UTF-8'
 DEFAULT_PAGINATION = 8

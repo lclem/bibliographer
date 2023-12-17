@@ -428,6 +428,7 @@ Year: {year}\n\
 Authors: {'; '.join(authors)}\n\
 Rootfolder: {cwd}\n\
 Bibfile: {os.path.join(cwd, bibFile)}\n\
+BibFileName: {bibFile}\n\
 Mdfile: {os.path.join(cwd, mdfile)}\n\
 {'Journal: ' + journal + NEWLINE if journal != '' else ''}\
 {'Booktitle: ' + booktitle + NEWLINE if booktitle != '' else ''}\

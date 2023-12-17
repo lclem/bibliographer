@@ -21,236 +21,12 @@
       width: 100%;
     }
     
-    /*the container must be positioned relative:*/
-    .autocomplete {
-      position: relative;
-      display: inline-block;
-      width: 100%;
-    }
-    
-    label {
-      /* border: 1px solid transparent; */
-      /* background-color: #f1f1f1; */
-      padding: 4px;
-      font-size: 12px;
-    }
-
-    select {
-      border: 1px solid transparent;
-      background-color: #f1f1f1;
-      padding: 4px;
-      font-size: 16px;
-    }
-
-    input {
-      border: 1px solid transparent;
-      background-color: #f1f1f1;
-      padding: 16px;
-      font-size: 16px;
-    }
-
-    input[type=text] {
-      background-color: #f1f1f1;
-      width: 100%;
-    }
-    
-    input[type=submit] {
-      background-color: DodgerBlue;
-      color: #fff;
-      cursor: pointer;
-      padding: 10px;
-    }
-    
-    .autocomplete-items {
-      position: absolute;
-      border: 1px solid #d4d4d4;
-      border-bottom: none;
-      border-top: none;
-      z-index: 99;
-      /*position the autocomplete items to be the same width as the container:*/
-      top: 100%;
-      left: 0;
-      right: 0;
-    }
-    
-    .autocomplete-items div {
-      padding: 10px;
-      cursor: pointer;
-      background-color: #fff; 
-      border-bottom: 1px solid #d4d4d4; 
-    }
-    
-    /*when hovering an item:*/
-    .autocomplete-items div:hover {
-      background-color: #e9e9e9; 
-    }
-    
-    /*when navigating through the items using the arrow keys:*/
-    .autocomplete-active {
-      background-color: DodgerBlue !important; 
-      color: #ffffff; 
-    }
-
-    .container {
-        display: block;
-        position: relative;
-        padding-left: 35px;
-        margin-bottom: 12px;
-        width: auto;
-        cursor: pointer;
-        font-size: 16px;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        user-select: none;
-    }
-
-    /* Hide the browser's default radio button */
-    .container input {
-        position: absolute;
-        opacity: 0;
-        cursor: pointer;
-        height: 0;
-        width: 0;
-    }
-
-    /* Create a custom radio button */
-    .checkmark {
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 25px;
-        width: 25px;
-        background-color: #eee;
-        border-radius: 50%;
-    }
-
-    /* On mouse-over, add a grey background color */
-    .container:hover input ~ .checkmark {
-        background-color: #ccc;
-    }
-
-    /* When the radio button is checked, add a blue background */
-    .container input:checked ~ .checkmark {
-        background-color: #2196F3;
-    }
-
-    /* Create the indicator (the dot/circle - hidden when not checked) */
-    .checkmark:after {
-        content: "";
-        position: absolute;
-        display: none;
-    }
-
-    /* Show the indicator (dot/circle) when checked */
-    .container input:checked ~ .checkmark:after {
-        display: block;
-    }
-
-    /* Style the indicator (dot/circle) */
-    .container .checkmark:after {
-        top: 9px;
-        left: 9px;
-        width: 8px;
-        height: 8px;
-        border-radius: 50%;
-        background: white;
-    }
-
     .key_exists {
         /* width: 100%; */
         /* padding: 25px; */
         background-color: #ff7f5082 !important;
         /* color: white; */
         /* font-size: 25px; */
-    }
-
-    .chips {
-        /* border: 1px solid #ccc; */
-        /* background-color: #f1f1f1; */
-        border-radius: 2px;
-        /* margin: 20px; */
-        
-        display: block;
-        width: 100%;
-        max-width: 100%;
-        
-        /* input {
-            border: none;
-            appearance: none;
-        } */
-
-        .keywords-field {
-            width: 100%;
-            height: auto;
-            min-height: 34px;
-            /* border: 2px solid #737679; */
-            /* padding: 8px; */
-            margin: 8px;
-            cursor: text;
-            border-radius: 3px;
-            box-shadow: 0 2px 6px rgba(25,25,25,0.2);
-        }
-
-        /* .chip {
-            background-color: dodgerblue;
-        } */
-
-        .chip {
-            display: inline-block;
-            width: auto;
-            background-color: lightblue;
-            /* color: #fff; */
-            border-radius: 16px;
-            margin-left: 2px;
-            margin-right: 2px;
-            padding: 3px 0px 3px 16px;
-            overflow: hidden;
-            cursor: pointer;
-        }
-
-        .chips .chip {
-            float: left;
-        }
-
-        .chip--button {
-            padding: 2px 6px 2px 6px;
-            margin-left: 8px;
-            border-radius: 16px;
-            background-color: rgba(0, 0, 0, 0.15);
-            display: inline-block;
-        }
-
-        .chip--text {
-            /* border: 1px solid #ccc; */
-            /* border-radius: 2px; */
-            /* padding: 8px; */
-            display: inline-block;
-            /* pointer-events: none */
-        }
-
-        > input{
-            padding: 15px;
-            display: block;
-            box-sizing: border-box;
-            width: 100%;
-            height: 34px;
-            border: none;
-            margin: 5px 0 0;
-            display: inline-block;
-            /* background-color: transparent; */
-        }
-
-    }
-
-    .progress-bar {
-        position: absolute;
-        display: block;
-        bottom: 1px;
-        background-color: var(--stork-accent-color);
-        box-shadow: 0 0 8px var(--stork-accent-color);
-        height: 1px;
-        transition: width 0.25s ease, opacity 0.4s ease 0.4s;
     }
 </style>
 
@@ -342,6 +118,9 @@
 
 <script type="module">
     import {statusAppend, getWebPage, getXmlHttp, lowerize} from 'https://lclem.github.io/librarian/theme/js/util.js';
+    import {getWebPageAdvanced, loadTextArray, changeEvent, keyEnterEvent, preventDefaults} from '/theme/js/util.js'
+    import {autocomplete} from '/theme/js/autocomplete.js'
+    import {addChipListener, chips2string, initialiseChips} from '/theme/js/chips.js'
 
     const form = document.getElementById('newEntryForm');
     const bibtexCode = document.getElementById('bibtexCode');
@@ -352,40 +131,6 @@
     const bibtexInput = document.getElementById('bibtexInput');
 
     const allTags = ["title", "author", "editor", "volume", "url", "doi", "number", "booktitle", "journal", "publisher", "year", "month", "pages", "ISSN", "note", "howpublished", "address", "volumetitle", "chapter", "series", "edition", "school", "organisation", "institution", "type", "lastchecked", "keywords"];
-
-    // utilities
-    // given a url fetch its contents and invoke the callback function on the result
-    export async function getWebPageAdvanced(theUrl, doneCallback, callback) {
-
-        var xmlhttp = getXmlHttp();
-
-        xmlhttp.onreadystatechange = async e => {
-            // console.log(e);
-            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
-                let res = xmlhttp.responseText;
-                // console.log("res: " + res);
-                doneCallback(res);
-            }
-            else {
-                // statusAppend("status: " + xmlhttp.status);
-            }
-        }
-
-        try {
-            xmlhttp.open("GET", theUrl, true);
-            xmlhttp.onabort = callback;
-            xmlhttp.onerror = callback;
-            xmlhttp.onload = callback;
-            xmlhttp.onloadend = callback;
-            xmlhttp.onloadstart = callback;
-            xmlhttp.onprogress = callback;
-            xmlhttp.ontimeout = callback;
-            xmlhttp.send();
-        } catch (err) {
-            statusAppend('GET error: ', err);
-        }
-
-    }
 
     function keyExists() {
         const key = form.elements.key.value;
@@ -428,11 +173,6 @@
             handleBibPaste(text);
         });
     };
-
-    // Create a new 'change' event
-    const changeEvent = new Event('change');
-    const keyDownEvent = new Event('keydown');
-    const keyEnterEvent = new KeyboardEvent('keypress',  {keyCode : 13});
 
     function modifyIfDefined(entryTags, field) {
         const newValue = entryTags[field];
@@ -481,41 +221,9 @@
         
     }
 
-    async function loadTextArray(fileName, callback, progressBar = null) {
-        getWebPageAdvanced("{{ SITEURL }}/" + fileName, async text => {
-            const entries = text.split("\n");
-            statusAppend(`loaded ${entries.length} entries from ${fileName}`);
-            callback(entries);
-        }, async event => {
-            console.log(event);
-            if (progressBar == null){
-                console.log('progress bar is null, ignoring');
-                return;
-            }
-            else if (event.type == "load") {
-                progressBar.style.width = "0%";
-                progressBar.style.opacity = 100;
-            }
-            else if (event.type == "loadend") {
-                progressBar.style.opacity = 0;
-                progressBar.style.width = "100%";
-            }
-            else if (event.type == "progress") {
-                progressBar.style.opacity = 100;
-                if (event.lengthComputable) {
-                    const percentComplete = event.loaded / event.total * 100;
-                    progressBar.style.width = `${percentComplete}%`;
-                    // console.log(percentComplete);
-                } else if (event.loaded)
-                    // we only know the received amount and not the total amount
-                    console.log('downloaded:', event.loaded);
-            }
-        });
-    }
-
     var keywords = [];
     const keywordsProgressBar = document.getElementById("keywords-progress");
-    loadTextArray("keywords.txt", entries => {
+    loadTextArray("{{ SITEURL }}/" + "keywords.txt", entries => {
         keywords = entries;
         autocomplete(inputKeywords, keywords, keyword => {
             addKeyword(inputKeywords, keyword);
@@ -525,7 +233,7 @@
 
     var authors = [];
     const authorProgressBar = document.getElementById("author-progress");
-    loadTextArray("authors.txt",
+    loadTextArray("{{ SITEURL }}/" + "authors.txt",
         entries => { // callback
             authors = entries;
             autocomplete(inputAuthor, authors, author => {
@@ -536,7 +244,7 @@
 
     var keys = [];
     const keysProgressBar = document.getElementById("key-progress");
-    loadTextArray("keys.txt", entries => {
+    loadTextArray("{{ SITEURL }}/" + "keys.txt", entries => {
         keys = entries;
         inputKey.addEventListener("input", event => {
             const key = form.elements.key.value;
@@ -571,67 +279,10 @@
         return matches;
     }
 
-    const allChips = document.querySelectorAll(".chips");
-    // console.log(allChips);
-    
-    const observerConfig = { attributes: true, childList: true, subtree: true };
-    const observer = new MutationObserver(listenerBuildBibString);
-    allChips.forEach(chips => {
-        // console.log(chips);
-        observer.observe(chips, observerConfig);
-    });
-
-    function addKeyword(target, keyword) {
-        // console.log(target);
-        const divSibling = target.nextElementSibling;
-        divSibling.appendChild((() => {
-            var _chip = document.createElement('div');
-
-            _chip.classList.add('chip');
-            _chip.addEventListener('click', chipClickHandler);
-
-            _chip.append(
-                (() => {
-                    var _chip_text = document.createElement('span');
-                    _chip_text.classList.add('chip--text');
-                    _chip_text.innerHTML = keyword;
-
-                    return _chip_text;
-                })(),
-                (() => {
-                    var _chip_button = document.createElement('span');
-                    _chip_button.classList.add('chip--button');
-                    _chip_button.innerHTML = '<strong>x</strong>';
-
-                    return _chip_button;
-                })()
-            );
-
-            return _chip;
-        })());
-    }
-
-    function addChipListener(element) {
-        element.addEventListener('keypress', event => {
-            const target = event.target;
-            const value = target.value;
-            if(event.which === 13 && value !== "") {
-                event.preventDefault();
-                addKeyword(target, value);
-                target.value = '';
-            }
-        });
-
-    };
-
     addChipListener(inputKeywords);
     addChipListener(inputAuthor);
-    
-    function chipClickHandler(event){
-        const target = event.currentTarget;
-        const parent = target.parentNode;
-        parent.removeChild(target);
-    }
+
+    initialiseChips(listenerBuildBibString);
 
     document.querySelector("select").addEventListener("input", listenerBuildBibString);
 
@@ -644,18 +295,6 @@
             input.addEventListener("change", listenerBuildBibString);
             input.addEventListener("keydown", listenerBuildBibString);
         // }
-    }
-
-    function preventDefaults(e) {
-        e.preventDefault();
-        e.stopPropagation();
-    }
-
-    function chips2string(element) {
-        const chips = Array.from(element.parentElement.querySelectorAll(".chip--text").values());
-        return chips.map(chip => {
-            return chip.textContent;
-        }).join(" and ");
     }
 
     function buildBibString() {
@@ -710,151 +349,6 @@
 
     }, false);
     
-    function autocomplete(inp, arr, callback = null) {
-        /*the autocomplete function takes two arguments,
-        the text field element and an array of possible autocompleted values:*/
-        var currentFocus;
-        /*execute a function when someone writes in the text field:*/
-        inp.addEventListener("input", function (e) {
-            var a, b, i, val = this.value;
-
-            /*close any already open lists of autocompleted values*/
-            closeAllLists();
-
-            if (!val) { return false; }
-
-            currentFocus = -1;
-
-            /*create a DIV element that will contain the items (values):*/
-            a = document.createElement("DIV");
-            a.setAttribute("id", this.id + "autocomplete-list");
-            a.setAttribute("class", "autocomplete-items");
-
-            /*append the DIV element as a child of the autocomplete container:*/
-            this.parentNode.appendChild(a);
-
-            /*for each item in the array...*/
-            var reg = new RegExp(val.toUpperCase());
-            for (i = 0; i < arr.length; i++) {
-
-                const entry = arr[i];
-                var match = reg.exec(entry.toUpperCase());
-                // const items = entri.split(" ");
-                // var matchStart, matchEnd;
-
-                // for (j = 0; j < items.length; j++) {
-                // }
-
-                /*check if the item starts with the same letters as the text field value:*/
-                // if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
-                if(match) {
-
-                    const matchIndex = match.index;
-                    const matchLength = match[0].length;
-
-                    // console.log(`found a match of ${val} in ${entry} starting at ${matchIndex} of len ${matchLength}`);
-
-                    /*create a DIV element for each matching element:*/
-                    b = document.createElement("DIV");
-
-                    /*make the matching letters bold:*/
-                    b.innerHTML = entry.substring(0, matchIndex);
-                    b.innerHTML += "<strong>" + entry.substring(matchIndex, matchIndex + matchLength) + "</strong>";
-                    b.innerHTML += entry.substring(matchIndex + matchLength);
-
-                    /*insert a input field that will hold the current array item's value:*/
-                    b.innerHTML += "<input type='hidden' value='" + entry + "'>";
-
-                    /*execute a function when someone clicks on the item value (DIV element):*/
-                    b.addEventListener("click", function (e) {
-                        console.log("autocomplete child click");
-                        /*insert the value for the autocomplete text field:*/
-                        const result = this.getElementsByTagName("input")[0].value;
-                        inp.value = result;
-                        e.preventDefault();
-                        // if (callback)
-                            // callback(result);
-                        /*close the list of autocompleted values,
-                        (or any other open lists of autocompleted values:*/
-                        closeAllLists();
-                    });
-
-                    a.appendChild(b);
-                }
-            }
-        });
-
-        /*execute a function presses a key on the keyboard:*/
-        inp.addEventListener("keydown", function(e) {
-            var x = document.getElementById(this.id + "autocomplete-list");
-            if (x)
-                x = x.getElementsByTagName("div");
-            if (e.keyCode == 40) {
-                /*If the arrow DOWN key is pressed,
-                increase the currentFocus variable:*/
-                currentFocus++;
-                /*and and make the current item more visible:*/
-                addActive(x);
-            } else if (e.keyCode == 38) { //up
-                /*If the arrow UP key is pressed,
-                decrease the currentFocus variable:*/
-                currentFocus--;
-                /*and and make the current item more visible:*/
-                addActive(x);
-            } else if (e.keyCode == 13) {
-                /*If the ENTER key is pressed, prevent the form from being submitted,*/
-                if (callback == null && x != null) {
-                    console.log("autocomplete: preventing default");
-                    e.preventDefault();
-                }
-                if (currentFocus > -1) {
-                /*and simulate a click on the "active" item:*/
-                    if (x) {
-                        console.log(x);
-                        x[currentFocus].click();
-                    }
-                }
-            }
-        });
-
-        function addActive(x) {
-            /*a function to classify an item as "active":*/
-            if (!x)
-                return false;
-            /*start by removing the "active" class on all items:*/
-            removeActive(x);
-            if (currentFocus >= x.length) currentFocus = 0;
-            if (currentFocus < 0) currentFocus = x.length - 1;
-            /*add class "autocomplete-active":*/
-            x[currentFocus].classList.add("autocomplete-active");
-        }
-
-        function removeActive(x) {
-            /*a function to remove the "active" class from all autocomplete items:*/
-            for (var i = 0; i < x.length; i++) {
-                x[i].classList.remove("autocomplete-active");
-            }
-        }
-
-        function closeAllLists(elmnt) {
-            /*close all autocomplete lists in the document,
-            except the one passed as an argument:*/
-            var x = document.getElementsByClassName("autocomplete-items");
-            for (var i = 0; i < x.length; i++) {
-                if (elmnt != x[i] && elmnt != inp) {
-                    x[i].parentNode.removeChild(x[i]);
-                }
-            }
-        }
-
-        /*execute a function when someone clicks in the document:*/
-        document.addEventListener("click", function (e) {
-            // console.log("click detected");
-            // listenerBuildBibString();
-            closeAllLists(e.target);
-        });
-    }
-
     listenerBuildBibString();
 </script>
 {% endblock content %}

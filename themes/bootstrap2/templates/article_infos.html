@@ -67,6 +67,7 @@
         {% endif %}
         <!-- <a href="{{ SITEURL }}/{{ article.bibfile }}">[bib]</a> -->
         <a href="{{ GITHUB_EDIT_URL }}/{{ article.bibfile }}" target="_blank">[edit]</a>
+        <a href="{{ GITHUB_RAW_URL }}/{{ article.bibfile }}" target="_blank" id="github_bib">[raw]</a>
 {% if article.tags %}
         <span class="label">Tags</span>
                 {% for tag in article.tags %}
@@ -83,4 +84,97 @@
         <a href="{{ GITHUB_EDIT_URL }}/{{ article.rootfolder }}" id="article_rootfolder" target="_blank">[edit]</a>
 <span class="label">FILES</span>
         <a href="http://172.28.1.15:4444/filebrowser/files/Media/Library/bibliographer/{{ article.rootfolder }}" id="article_filebrowser" target="_blank">[open]</a>
+<br>
+<form id="editEntryForm" autocomplete="off">
+        <span class="label">Tags</span>
+        <div class="autocomplete keywords-field">
+                <input type="text" id="keywords" name="keywords" autocomplete="off" class="chip-input" placeholder="Keywords"/>
+                <div class="chips"></div>
+                <div class="progress-bar" id="keywords-progress"></div>
+        </div>
+        <input type="submit" value="Save" id="save">
+</form>
 </footer>
+<script type="module">
+        import {statusAppend, getWebPage, getXmlHttp, lowerize} from 'https://lclem.github.io/librarian/theme/js/util.js';
+        import {getWebPageAdvanced, loadTextArray, changeEvent, keyEnterEvent, preventDefaults} from '/theme/js/util.js';
+        import {autocomplete} from '/theme/js/autocomplete.js';
+        import {addChipListener, chips2string, initialiseChips} from '/theme/js/chips.js';
+        // import {openGitHub, uploadFile} from 'https://lclem.github.io/librarian/theme/js/github.js';
+        import {uploadFileToGitHub} from '/theme/js/github.js';
+
+        var keywords = [];
+        var bibJSON = null;
+
+        const keywordsProgressBar = document.getElementById("keywords-progress");
+        const inputKeywords = document.getElementById('keywords');
+        const saveButton = document.getElementById('save');
+        const form = document.getElementById('editEntryForm');
+
+        // async function openBibFileGitHub(repository, fullFileName, bibStr) {
+        //         var url = "https://github.com/lclem/" + repository + "/new/main/";
+        //         url += "?filename=" + fullFileName + "&value=";
+        //         url += encodeURIComponent(bibStr);
+        //         // statusAppend("openGitHub, repo: " + repository + ", key: " + sanitisedKey + ", fileName: " + fileName + ", bibStr: " + bibStr + " = " + url);
+        //         window.open(url, "_blank");
+        //         return url;
+        // }
+
+        form.addEventListener('submit', preventDefaults, false);
+        form.addEventListener('submit', event => {
+                if (bibJSON) {
+                        const bibStr = bibtexParse.toBibtex([bibJSON], false).trim();
+                        const key = bibJSON.citationKey;
+                        console.log(bibStr);
+                        uploadFileToGitHub("bibliographer", "{{ article.bibfile }}", "{{ article.BibFileName }}", bibStr);
+                }
+        }, false);
+
+        loadTextArray("/keywords.txt", entries => {
+                keywords = entries;
+                autocomplete(inputKeywords, keywords, keyword => {
+                        addKeyword(inputKeywords, keyword);
+                        inputKeywords.value = '';
+                });
+        }, keywordsProgressBar);
+
+        function keywordsHaveChanged() {
+                // update the list of keywords
+                const keywordsStr = chips2string(inputKeywords);
+                bibJSON.entryTags["keywords"] = keywordsStr;
+        }
+
+        addChipListener(inputKeywords);
+        initialiseChips(keywordsHaveChanged);
+
+        const bibA = document.getElementById('github_bib');
+        const bibHref = bibA.href;
+        console.log("bib href: " + bibHref);
+
+        getWebPage(bibHref, bibStr => {
+                console.log("bibStr: " + bibStr);
+                try {
+                        var bibJSONs = bibtexParse.toJSON(bibStr);
+
+                        if (bibJSONs.length == 0)
+                                return;
+
+                        bibJSON = bibJSONs[0];
+                        var tags = lowerize(bibJSON.entryTags);
+                        console.log("tags: " + JSON.stringify(tags));
+
+                        var keywordsStr = tags["keywords"];
+                        var keywords = keywordsStr.replaceAll(", ", " and ").split(" and ");
+                        console.log("keywords: " + keywords);
+
+                        for (const keyword of keywords) {
+                                inputKeywords.value = keyword;
+                                inputKeywords.dispatchEvent(changeEvent);
+                                inputKeywords.dispatchEvent(keyEnterEvent);
+                        }
+                }
+                catch (err) {
+                        console.error('Failed to parse bib: ', err);
+                }
+        });
+</script>
