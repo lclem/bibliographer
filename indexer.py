@@ -180,8 +180,13 @@ def parsebib(bibFile):
         for i in range(0, len(authors)):
             authors[i] = normalise_names_order(authors[i])
 
-        keywords = getValue(fields, "keywords", "")
-        keywords = keywords.split(" and ")
+        keywordsOrig = getValue(fields, "keywords", "")
+        keywords = set()
+        for keyword in keywordsOrig.replace(", ", " and ").split(" and "):
+            # cut long keywords
+            if len(keyword) > 200:
+                keyword = keyword[:200]
+            keywords.add(keyword)
 
         date_added = getValue(fields, 'date-added', "")
         date_modified = getValue(fields, 'date-modified', "")
