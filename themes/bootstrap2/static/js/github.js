@@ -7,23 +7,27 @@ const octokit2 = new Octokit({ auth: pat });
 // window.octokit = octokit;
 console.log("Octokit2 loaded");
 
-export async function uploadFileToGitHub(repository, pathFileName, fileName, fileContents) {
+export async function uploadFileToGitHub(repository, path, fileName, fileContents) {
 
     // const blob = new Blob([fileContents], { type : 'plain/text' });
     // const contents = await toBase64(blob);
 
     const contents = btoa(String.fromCodePoint(...new TextEncoder().encode(fileContents)));
 
-    const url = '/repos/lclem/' + repository + '/contents/' + pathFileName;
+    fileName = encodeURIComponent(fileName);
+
+    const url = '/repos/lclem/' + repository + '/contents/' + path + '/' + fileName;
     const putRequest = 'PUT ' + url;
     const getRequest = 'GET ' + url;
 
-    statusAppend("put request: " + putRequest);
+    console.log(`path: ${path}, fileName: ${fileName}`);
 
+    console.log(getRequest);
     const result1 = await octokit2.request(getRequest, {
       owner: 'lclem',
       repo: repository,
-      file_path: pathFileName,
+      // file_path: pathFileName,
+      path: fileName,
       branch: "main"
     });
 

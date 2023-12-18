@@ -126,7 +126,7 @@
                         const bibStr = bibtexParse.toBibtex([bibJSON], false).trim();
                         const key = bibJSON.citationKey;
                         console.log(bibStr);
-                        uploadFileToGitHub("bibliographer", "{{ article.bibfile }}", "{{ article.BibFileName }}", bibStr);
+                        uploadFileToGitHub("bibliographer", "{{ article.rootfolder }}", "{{ article.bibfilename }}", bibStr);
                 }
         }, false);
 
