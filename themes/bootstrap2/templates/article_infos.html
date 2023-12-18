@@ -164,6 +164,10 @@
                         console.log("tags: " + JSON.stringify(tags));
 
                         var keywordsStr = tags["keywords"];
+
+                        if (!keywordsStr)
+                                keywordsStr = "";
+                        
                         var keywords = keywordsStr.replaceAll(", ", " and ").split(" and ");
                         console.log("keywords: " + keywords);
 
