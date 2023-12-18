@@ -130,7 +130,7 @@
                 }
         }, false);
 
-        loadTextArray("/keywords.txt", entries => {
+        loadTextArray("{{ SITEURL }}/keywords.txt", entries => {
                 keywords = entries;
                 autocomplete(inputKeywords, keywords, keyword => {
                         addKeyword(inputKeywords, keyword);
