@@ -182,7 +182,7 @@ def parsebib(bibFile):
 
 # quantum-physics-quant-ph-15a69-20d15-representation-theory-mathrt-algebraic-geometry-mathag-fos-mathematics-fos-computer-17b99-fos-physical-sciences-68q15-information-sciences-16s50-15a72-68q25-15a21-16g99-17a40-15a63-20f40-computational-complexity-cscc-16g60-16z05-17a42-group-theory-mathgr-f13§
 
-computational-complexity_finite-variable-logics_equivalence_polynomial-time_finite-structures_first-order-logic_graph-isomorphism-problem_complexity-theoretic-difficulties_quantifier-free-reductions_completeness-result_counting-quantifiers_logic_polynomia
+# computational-complexity_finite-variable-logics_equivalence_polynomial-time_finite-structures_first-order-logic_graph-isomorphism-problem_complexity-theoretic-difficulties_quantifier-free-reductions_completeness-result_counting-quantifiers_logic_polynomia
 
         keywordsOrig = getValue(fields, "keywords", "")
         keywords = set()
