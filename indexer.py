@@ -184,9 +184,10 @@ def parsebib(bibFile):
         keywords = set()
         for keyword in keywordsOrig.replace(", ", " and ").split(" and "):
             # cut long keywords
-            if len(keyword) > 200:
-                keyword = keyword[:200]
-            keywords.add(keyword)
+            keywordToAdd = keyword
+            if len(keywordToAdd) > 200:
+                keywordToAdd = keywordToAdd[:200]
+            keywords.add(keywordToAdd)
 
         date_added = getValue(fields, 'date-added', "")
         date_modified = getValue(fields, 'date-modified', "")
