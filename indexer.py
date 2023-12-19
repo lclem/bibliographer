@@ -180,14 +180,22 @@ def parsebib(bibFile):
         for i in range(0, len(authors)):
             authors[i] = normalise_names_order(authors[i])
 
+# quantum-physics-quant-ph-15a69-20d15-representation-theory-mathrt-algebraic-geometry-mathag-fos-mathematics-fos-computer-17b99-fos-physical-sciences-68q15-information-sciences-16s50-15a72-68q25-15a21-16g99-17a40-15a63-20f40-computational-complexity-cscc-16g60-16z05-17a42-group-theory-mathgr-f13§
+
         keywordsOrig = getValue(fields, "keywords", "")
         keywords = set()
-        for keyword in keywordsOrig.replace(", ", " and ").split(" and "):
+        for keyword in keywordsOrig.replace(", ", " and ").replace("; ", " and ").split(" and "):
             # cut long keywords
-            keywordToAdd = keyword
-            if len(keywordToAdd) > 200:
-                keywordToAdd = keywordToAdd[:200]
-            keywords.add(keywordToAdd)
+            keywordToAdd = keyword.strip()
+
+            if len(keywordToAdd) > 255:
+                keywordToAdd = keywordToAdd[:255]
+
+            # never include a semicolon in a keyword, it will interpreted as the keyword separator
+            keywordToAdd = keywordToAdd.replace(";", "_")
+
+            if len(keywordToAdd) > 0:
+                keywords.add(keywordToAdd)
 
         date_added = getValue(fields, 'date-added', "")
         date_modified = getValue(fields, 'date-modified', "")
