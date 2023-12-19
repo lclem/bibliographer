@@ -142,6 +142,7 @@
                 // update the list of keywords
                 const keywordsStr = chips2string(inputKeywords);
                 bibJSON.entryTags["keywords"] = keywordsStr;
+                console.log("keywordsHaveChanged: " + bibJSON.entryTags["keywords"]);
         }
 
         addChipListener(inputKeywords);
