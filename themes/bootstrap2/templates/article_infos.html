@@ -181,5 +181,8 @@
                 catch (err) {
                         console.error('Failed to parse bib: ', err);
                 }
+        }, e => {
+                console.log("callback1 was called, with event");
+                console.log(e);
         });
 </script>
