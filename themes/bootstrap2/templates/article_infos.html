@@ -149,7 +149,7 @@
         initialiseChips(keywordsHaveChanged);
 
         const bibA = document.getElementById('github_bib');
-        const bibHref = bibA.href;
+        const bibHref = bibA.href + "?cache_booster=" + (Math.random() * 1e16).toString(16); // cache busting
         console.log("bib href: " + bibHref);
 
         getWebPage(bibHref, bibStr => {
