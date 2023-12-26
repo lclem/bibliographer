@@ -15,13 +15,13 @@ OUTPUT_PATH = 'docs'
 PATH = 'library'
 
 # can be useful in development, but set to False when you're ready to publish
-# RELATIVE_URLS = True
-RELATIVE_URLS = False
+RELATIVE_URLS = True
+# RELATIVE_URLS = False
 
 STORK_INPUT_OPTIONS = {
     "html_selector": "nobr",
-    # "url_prefix" : ""
-    "url_prefix": "/bibliographer"
+    "url_prefix" : ""
+    # "url_prefix": "/bibliographer"
 }
 
 LOAD_CONTENT_CACHE = False
